@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peptide Protocol Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #1a1816;
+  --bg-card: #232020;
+  --bg-card-elevated: #2c2826;
+  --bg-input: #1f1c1a;
+  --border: #3a3531;
+  --border-soft: #2e2a26;
+  --text-primary: #f0e8db;
+  --text-secondary: #b8ad9c;
+  --text-muted: #7a7268;
+  --accent-amber: #d4a574;
+  --accent-amber-bright: #e8b984;
+  --accent-sage: #8ba888;
+  --accent-coral: #e87461;
+  --accent-rust: #c66b4a;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+  --radius: 6px;
+  --radius-lg: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at top left, rgba(212, 165, 116, 0.04), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(139, 168, 136, 0.03), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ============ HEADER ============ */
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 44px;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+h1 .accent {
+  color: var(--accent-amber);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.actions-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.user-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card);
+  padding: 4px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.user-tab {
+  padding: 10px 18px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.user-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-elevated);
+}
+
+.user-tab.active {
+  background: var(--accent-amber);
+  color: var(--bg-deep);
+  font-weight: 600;
+}
+
+.user-tab.add {
+  color: var(--accent-sage);
+  font-weight: 600;
+}
+
+.btn {
+  padding: 11px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn:hover {
+  background: var(--bg-card-elevated);
+  border-color: var(--accent-amber);
+}
+
+.btn-primary {
+  background: var(--accent-amber);
+  color: var(--bg-deep);
+  border-color: var(--accent-amber);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--accent-amber-bright);
+  border-color: var(--accent-amber-bright);
+}
+
+.btn-danger {
+  color: var(--accent-coral);
+}
+
+.btn-danger:hover {
+  background: rgba(232, 116, 97, 0.1);
+  border-color: var(--accent-coral);
+}
+
+/* ============ USER INFO BAR ============ */
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.user-info-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-name {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent-amber);
+}
+
+.user-stats {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.user-stats .stat strong {
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  margin-right: 4px;
+  font-size: 16px;
+}
+
+/* ============ PEPTIDE GRID ============ */
+.peptide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+}
+
+.empty-state h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.peptide-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.peptide-card:hover {
+  border-color: var(--border);
+}
+
+.peptide-card.expanded {
+  border-color: var(--accent-amber);
+}
+
+.peptide-card.cycle-on { border-left: 3px solid var(--accent-sage); }
+.peptide-card.cycle-off { border-left: 3px solid var(--text-muted); }
+.peptide-card.cycle-asneeded { border-left: 3px solid var(--accent-amber); }
+.peptide-card.cycle-future { border-left: 3px solid var(--accent-rust); opacity: 0.85; }
+
+.peptide-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr auto;
+  gap: 16px;
+  padding: 14px 18px;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.peptide-header:hover {
+  background: var(--bg-card-elevated);
+}
+
+.peptide-name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.peptide-name {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.peptide-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.summary-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.summary-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 17px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.summary-value.highlight {
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+.summary-value.warn {
+  color: var(--accent-coral);
+}
+
+.cycle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Manrope', sans-serif;
+}
+
+.cycle-badge.on {
+  background: rgba(139, 168, 136, 0.15);
+  color: var(--accent-sage);
+}
+
+.cycle-badge.off {
+  background: rgba(122, 114, 104, 0.15);
+  color: var(--text-muted);
+}
+
+.cycle-badge.asneeded {
+  background: rgba(212, 165, 116, 0.15);
+  color: var(--accent-amber);
+}
+
+.cycle-badge.future {
+  background: rgba(198, 107, 74, 0.15);
+  color: var(--accent-rust);
+}
+
+.expand-icon {
+  font-size: 22px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  width: 28px;
+  text-align: center;
+}
+
+.peptide-card.expanded .expand-icon {
+  transform: rotate(90deg);
+  color: var(--accent-amber);
+}
+
+/* ============ EXPANDED CONTENT ============ */
+.peptide-body {
+  display: none;
+  padding: 0 18px 18px 18px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.peptide-card.expanded .peptide-body {
+  display: block;
+}
+
+.body-section {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.body-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent-amber);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.input-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  border-radius: 4px;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.field textarea {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 70px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent-amber);
+}
+
+.field select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23d4a574' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+.compound-input {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 6px;
+}
+
+/* ============ CALCULATION OUTPUT ============ */
+.calc-output {
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.calc-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calc-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+
+.calc-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.calc-value .unit {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+.calc-value.featured {
+  color: var(--accent-amber);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.calc-value.warn { color: var(--accent-coral); }
+
+.calc-formula {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============ NOTES SECTION ============ */
+.notes-display {
+  background: var(--bg-input);
+  border-left: 3px solid var(--accent-sage);
+  padding: 14px 16px;
+  border-radius: 4px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+/* ============ FOOTER ACTIONS ============ */
+.row-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.add-peptide {
+  margin-top: 16px;
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--accent-sage);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.add-peptide:hover {
+  border-color: var(--accent-sage);
+  background: rgba(139, 168, 136, 0.05);
+}
+
+/* ============ MODAL ============ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: var(--accent-amber);
+}
+
+.modal p {
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+  font-size: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* ============ TOAST ============ */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--bg-card-elevated);
+  border: 1px solid var(--accent-sage);
+  border-left: 4px solid var(--accent-sage);
+  color: var(--text-primary);
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  font-size: 15px;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: var(--shadow-md);
+}
+
+.toast.show { opacity: 1; transform: translateY(0); }
+
+.toast.error { border-color: var(--accent-coral); border-left-color: var(--accent-coral); }
+
+/* ============ REFERENCE LINKS ============ */
+.ref-section {
+  margin-top: 32px;
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+}
+
+.ref-section h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent-amber);
+  margin-bottom: 14px;
+}
+
+.ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+
+.ref-link {
+  display: block;
+  padding: 12px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s;
+}
+
+.ref-link:hover {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
+}
+
+/* ============ MOBILE ============ */
+@media (max-width: 900px) {
+  .peptide-header {
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+  }
+  .summary-cell:nth-child(n+4) { display: none; }
+}
+
+@media (max-width: 600px) {
+  .app { padding: 14px; }
+  h1 { font-size: 32px; }
+  .peptide-header {
+    grid-template-columns: 1fr auto auto;
+    padding: 14px;
+  }
+  .summary-cell:not(:first-child) { display: none; }
+  .calc-grid { grid-template-columns: repeat(2, 1fr); }
+  .input-grid { grid-template-columns: 1fr 1fr; }
+  .input-grid.cols-2 { grid-template-columns: 1fr; }
+  .calc-value { font-size: 20px; }
+  .calc-value.featured { font-size: 24px; }
+  .peptide-name { font-size: 18px; }
+}
+
+/* ============ PRINT MODE ============ */
+@media print {
+  body { background: white; color: black; }
+  .actions-bar, .add-peptide, .ref-section, .row-actions, .expand-icon { display: none !important; }
+  .peptide-card { border-color: #ccc !important; page-break-inside: avoid; margin-bottom: 12px; }
+  .peptide-body { display: block !important; }
+  * { color: black !important; background: white !important; }
+}
+
+body.print-mode .actions-bar,
+body.print-mode .add-peptide,
+body.print-mode .row-actions,
+body.print-mode .expand-icon { display: none; }
+
+body.print-mode .peptide-body { display: block !important; }
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<header>
+  <div class="title-row">
+    <div>
+      <h1>Peptide <span class="accent">Protocol</span></h1>
+      <div class="subtitle">Personal Dosage & Cycle Manager</div>
+    </div>
+    <div class="actions-bar">
+      <button class="btn" onclick="togglePrint()">Print View</button>
+      <button class="btn" onclick="exportData()">Export JSON</button>
+      <button class="btn" onclick="importData()">Import</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+    </div>
+  </div>
+
+  <div class="user-tabs" id="userTabs"></div>
+</header>
+
+<div class="user-info">
+  <div class="user-info-left">
+    <div class="user-name" id="currentUserName">Rodrigo</div>
+    <div class="user-stats">
+      <div class="stat"><strong id="statTotal">0</strong>peptides</div>
+      <div class="stat"><strong id="statActive">0</strong>active</div>
+      <div class="stat"><strong id="statCost">$0</strong>vials value</div>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-danger" onclick="deleteCurrentUser()" id="deleteUserBtn">Remove User</button>
+  </div>
+</div>
+
+<div class="peptide-list" id="peptideList"></div>
+
+<button class="add-peptide" onclick="addPeptide()">+ Add Peptide / Hormone</button>
+
+<div class="ref-section">
+  <h3>Calculator References</h3>
+  <div class="ref-grid">
+    <a class="ref-link" href="https://cellgenic.com/peptide-calculator/" target="_blank">cellgenic.com</a>
+    <a class="ref-link" href="https://peptidespower.com/hcg-dosage-calculator/" target="_blank">peptidespower.com (HCG)</a>
+    <a class="ref-link" href="https://primepeptides.co/peptide-calculator/" target="_blank">primepeptides.co</a>
+    <a class="ref-link" href="https://particlepeptides.com/en/content/48-peptide-calculator" target="_blank">particlepeptides.com</a>
+  </div>
+</div>
+
+</div>
+
+<!-- Add User Modal -->
+<div class="modal-overlay" id="userModal">
+  <div class="modal">
+    <h2>Add New User</h2>
+    <p>Each user has their own peptide protocol with private dosage data.</p>
+    <div class="field">
+      <label>User Name</label>
+      <input type="text" id="newUserName" placeholder="e.g., Marcus" maxlength="30">
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeUserModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmAddUser()">Create User</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal">
+    <h2 id="confirmTitle">Confirm</h2>
+    <p id="confirmMessage"></p>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeConfirmModal()">Cancel</button>
+      <button class="btn btn-danger" id="confirmBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===================== STATE & DEFAULTS =====================
+
+const STORAGE_KEY = 'peptide-protocol-v1';
+
+const RODRIGO_DEFAULT_PEPTIDES = [
+  {
+    id: 'p1', name: 'HGH', type: 'HGH',
+    vialSize: 36, vialUnit: 'IU', bacWater: 3, syringe: 'U-100',
+    dose: 1, doseUnit: 'IU', frequency: 7,
+    cost: 60, cycle: 'on', dateOpened: '',
+    notes: 'Recommendation based in Via: 36IU, Bac.Water: 3mL, Defauld Dose: 1 IU, Frequency: 7days /week, Cycle: Active (on). Before using please consult with your doctor.'
+  },
+  {
+    id: 'p2', name: 'KLOW Blend', type: 'Peptide',
+    vialSize: 80, vialUnit: 'mg', bacWater: 3, syringe: 'U-100',
+    dose: 4, doseUnit: 'mg', frequency: 7,
+    cost: 50, cycle: 'on', dateOpened: '',
+    notes: 'Blend: TB-500 10mg + BPC-157 10mg + GHK-Cu + KPV. Titration schedule: Wk 1-2 = 7.5u (2mg), Wk 3-4 = 15u (4mg), Wk 5-8 = 22.5u (6mg). Take morning. Supports tissue repair, gut, anti-inflammatory, anti-aging.'
+  },
+  {
+    id: 'p3', name: 'Retatrutide (10mg)', type: 'Peptide',
+    vialSize: 10, vialUnit: 'mg', bacWater: 1, syringe: 'U-100',
+    dose: 2, doseUnit: 'mg', frequency: 1,
+    cost: 50, cycle: 'on', dateOpened: '',
+    notes: 'Triple agonist (GLP-1/GIP/Glucagon) for fat loss & metabolic health. 1x/week subQ. If not feeling effects after 2 wks, increase to 3mg (30 units). Helps reduce visceral fat which can lower aromatase / estradiol conversion.'
+  },
+  {
+    id: 'p4', name: 'Retatrutide (30mg)', type: 'Peptide',
+    vialSize: 30, vialUnit: 'mg', bacWater: 3, syringe: 'U-100',
+    dose: 2, doseUnit: 'mg', frequency: 1,
+    cost: 100, cycle: 'off', dateOpened: '',
+    notes: 'Same dosing as 10mg vial when reconstituted with 3mL (concentration matches at 10mg/mL). Use one vial OR the other, not both. More cost-efficient per dose.'
+  },
+  {
+    id: 'p5', name: 'HCG', type: 'Hormone-IU',
+    vialSize: 5000, vialUnit: 'IU', bacWater: 1, syringe: 'U-100',
+    dose: 500, doseUnit: 'IU', frequency: 3,
+    cost: 40, cycle: 'on', dateOpened: '',
+    notes: 'Supports natural testosterone production & testicular function. SubQ injection. First 2 weeks: 1000 IU (20u) 1x/week. Week 3+: 500 IU (10u) 3x/week morning. Important when on TRT to maintain fertility / testicle size.'
+  },
+  {
+    id: 'p6', name: 'PT-141 (Bremelanotide)', type: 'Peptide',
+    vialSize: 10, vialUnit: 'mg', bacWater: 1, syringe: 'U-100',
+    dose: 0.4, doseUnit: 'mg', frequency: 2,
+    cost: 0, cycle: 'asneeded', dateOpened: '',
+    notes: 'Libido & arousal support via melanocortin receptors. Take 4 units (0.4mg) 2 hours before sex (Metalanssa). Test dose to assess tolerance first. Max 1 dose per 24 hr. Side effects: nausea, flushing.'
+  },
+  {
+    id: 'p7', name: 'Testosterone Cypionate', type: 'Hormone-Oil',
+    vialSize: 200, vialUnit: 'mg/mL', bacWater: 0, syringe: 'IM-3mL-25g',
+    dose: 100, doseUnit: 'mg', frequency: 1,
+    cost: 0, cycle: 'on', dateOpened: '',
+    notes: 'TRT - 200mg/mL concentration (oil-based, no reconstitution). IM injection with 25g needle. Adjust mg/mL field to match your brand/concentration. Monitor estradiol. If you run high E2 (above 30 pg/mL), HCG + DIM + zinc are important supports.'
+  },
+  {
+    id: 'p12', name: 'NMN (NAD+ Precursor)', type: 'Peptide',
+    vialSize: 100, vialUnit: 'mg', bacWater: 0, syringe: 'oral',
+    dose: 500, doseUnit: 'mg', frequency: 7,
+    cost: 0, cycle: 'future', dateOpened: '',
+    notes: 'Cellular energy, longevity, mitochondrial support. Typically taken orally, 500-1000mg daily. NAD+ IV cycles also an option. Inject form available but oral is more practical.'
+  }
+];
+
+let state = {
+  users: {
+    'Rodrigo': { peptides: RODRIGO_DEFAULT_PEPTIDES },
+    'Flaviana': { peptides: [] }
+  },
+  currentUser: 'Rodrigo',
+  expandedId: null
+};
+
+// ===================== PERSISTENCE =====================
+
+async function loadState() {
+  try {
+    if (window.storage && window.storage.get) {
+      const result = await window.storage.get(STORAGE_KEY);
+      if (result && result.value) {
+        const loaded = JSON.parse(result.value);
+        if (loaded.users && Object.keys(loaded.users).length > 0) {
+          state = loaded;
+        }
+      }
+    }
+  } catch (e) {
+    console.log('No saved state, using defaults');
+  }
+  render();
+}
+
+async function saveState() {
+  try {
+    if (window.storage && window.storage.set) {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(state));
+    }
+  } catch (e) {
+    console.error('Save failed:', e);
+    showToast('Save failed: ' + e.message, true);
+  }
+}
+
+// ===================== CALCULATIONS =====================
+
+function calculatePeptide(p) {
+  const result = {
+    concentration: 0,
+    concentrationUnit: '',
+    volumeML: 0,
+    syringeUnits: 0,
+    dosesPerVial: 0,
+    daysSupply: 0,
+    costPerDose: 0,
+    daysOpened: null,
+    daysUntilExpiry: null,
+    formula: '',
+    error: null
+  };
+
+  if (!p.vialSize || !p.dose || p.dose <= 0) {
+    result.error = 'Enter vial size and dose';
+    return result;
+  }
+
+  // Hormone-Oil (Testosterone): no bac water
+  if (p.type === 'Hormone-Oil') {
+    // vialSize is mg/mL concentration directly
+    result.concentration = p.vialSize;
+    result.concentrationUnit = 'mg/mL';
+    result.volumeML = p.dose / p.vialSize;
+    result.syringeUnits = result.volumeML; // for IM, we display in mL
+    result.dosesPerVial = '—';
+    result.formula = `${p.dose}mg ÷ ${p.vialSize}mg/mL = ${result.volumeML.toFixed(3)} mL`;
+    result.daysSupply = '—';
+    if (p.cost && p.dose) {
+      // can't calculate without vial volume; skip
+      result.costPerDose = '—';
+    }
+    return result;
+  }
+
+  // Oral
+  if (p.syringe === 'oral') {
+    result.concentration = '—';
+    result.formula = `Oral dose: ${p.dose} ${p.doseUnit}`;
+    result.dosesPerVial = '—';
+    return result;
+  }
+
+  if (!p.bacWater || p.bacWater <= 0) {
+    result.error = 'Enter bacteriostatic water amount';
+    return result;
+  }
+
+  // Convert dose to vial unit
+  let doseInVialUnit = p.dose;
+  if (p.doseUnit === 'mcg' && p.vialUnit === 'mg') {
+    doseInVialUnit = p.dose / 1000;
+  } else if (p.doseUnit === 'mg' && p.vialUnit === 'IU') {
+    result.error = 'Cannot convert mg to IU automatically';
+    return result;
+  }
+
+  // concentration in vial-unit per mL
+  result.concentration = p.vialSize / p.bacWater;
+  result.concentrationUnit = `${p.vialUnit}/mL`;
+
+  // volume to draw
+  result.volumeML = doseInVialUnit / result.concentration;
+
+  // syringe units (assumes U-100 scale = 100 units per 1mL)
+  // U-100, U-50, U-30 all use 100u = 1mL scale; barrel size differs
+  if (p.syringe.startsWith('U-')) {
+    result.syringeUnits = result.volumeML * 100;
+  } else if (p.syringe.startsWith('IM')) {
+    result.syringeUnits = result.volumeML; // mL display
+  }
+
+  // doses per vial
+  result.dosesPerVial = p.vialSize / doseInVialUnit;
+
+  // days supply (frequency = doses per week)
+  if (p.frequency > 0) {
+    result.daysSupply = (result.dosesPerVial / p.frequency) * 7;
+  }
+
+  // cost per dose
+  if (p.cost && result.dosesPerVial > 0) {
+    result.costPerDose = p.cost / result.dosesPerVial;
+  }
+
+  // expiration tracking
+  if (p.dateOpened) {
+    const opened = new Date(p.dateOpened);
+    const now = new Date();
+    result.daysOpened = Math.floor((now - opened) / (1000 * 60 * 60 * 24));
+    result.daysUntilExpiry = 28 - result.daysOpened;
+  }
+
+  result.formula = `${p.dose}${p.doseUnit} ÷ ${result.concentration.toFixed(2)}${result.concentrationUnit} = ${result.volumeML.toFixed(4)}mL`;
+
+  return result;
+}
+
+// ===================== RENDER =====================
+
+function render() {
+  renderUserTabs();
+  renderUserInfo();
+  renderPeptideList();
+}
+
+function renderUserTabs() {
+  const tabs = document.getElementById('userTabs');
+  tabs.innerHTML = '';
+  Object.keys(state.users).forEach(name => {
+    const btn = document.createElement('button');
+    btn.className = 'user-tab' + (name === state.currentUser ? ' active' : '');
+    btn.textContent = name;
+    btn.onclick = () => switchUser(name);
+    tabs.appendChild(btn);
+  });
+  const addBtn = document.createElement('button');
+  addBtn.className = 'user-tab add';
+  addBtn.textContent = '+ Add User';
+  addBtn.onclick = openUserModal;
+  tabs.appendChild(addBtn);
+}
+
+function renderUserInfo() {
+  const user = state.users[state.currentUser];
+  const peptides = user.peptides || [];
+  document.getElementById('currentUserName').textContent = state.currentUser;
+  document.getElementById('statTotal').textContent = peptides.length;
+  document.getElementById('statActive').textContent = peptides.filter(p => p.cycle === 'on').length;
+  const totalCost = peptides.reduce((sum, p) => sum + (parseFloat(p.cost) || 0), 0);
+  document.getElementById('statCost').textContent = '$' + totalCost.toFixed(0);
+  document.getElementById('deleteUserBtn').style.display = Object.keys(state.users).length > 1 ? 'inline-flex' : 'none';
+}
+
+function renderPeptideList() {
+  const list = document.getElementById('peptideList');
+  list.innerHTML = '';
+  const peptides = state.users[state.currentUser].peptides || [];
+
+  if (peptides.length === 0) {
+    list.innerHTML = `
+      <div class="empty-state">
+        <h3>No peptides yet</h3>
+        <p>Click "+ Add Peptide / Hormone" below to start building a protocol for ${state.currentUser}.</p>
+      </div>`;
+    return;
+  }
+
+  peptides.forEach(p => list.appendChild(renderPeptideCard(p)));
+}
+
+function renderPeptideCard(p) {
+  const calc = calculatePeptide(p);
+  const isExpanded = state.expandedId === p.id;
+  
+  const card = document.createElement('div');
+  card.className = 'peptide-card cycle-' + p.cycle + (isExpanded ? ' expanded' : '');
+
+  const cycleLabels = { on: 'Active', off: 'Off-cycle', asneeded: 'As Needed', future: 'Future' };
+
+  // Format syringe display
+  let syringeDisplay = '—';
+  if (calc.syringeUnits !== undefined && !calc.error) {
+    if (p.syringe.startsWith('U-')) {
+      syringeDisplay = calc.syringeUnits.toFixed(2) + ' u';
+    } else if (p.syringe.startsWith('IM')) {
+      syringeDisplay = calc.syringeUnits.toFixed(3) + ' mL';
+    } else if (p.syringe === 'oral') {
+      syringeDisplay = p.dose + ' ' + p.doseUnit;
+    }
+  }
+
+  const expiryStatus = calc.daysUntilExpiry !== null
+    ? (calc.daysUntilExpiry < 0 ? `Expired ${Math.abs(calc.daysUntilExpiry)}d ago` 
+       : calc.daysUntilExpiry <= 7 ? `${calc.daysUntilExpiry}d left` 
+       : `${calc.daysUntilExpiry}d left`)
+    : 'Not opened';
+
+  const expiryClass = calc.daysUntilExpiry !== null && calc.daysUntilExpiry <= 7 ? 'warn' : '';
+
+  card.innerHTML = `
+    <div class="peptide-header" onclick="toggleExpand('${p.id}')">
+      <div class="peptide-name-cell">
+        <div class="peptide-name">${escapeHtml(p.name)}</div>
+        <div class="peptide-meta">${p.vialSize}${p.vialUnit} · ${p.type}</div>
+      </div>
+      <div class="summary-cell">
+        <span class="summary-label">Dose</span>
+        <span class="summary-value">${p.dose} ${p.doseUnit}</span>
+      </div>
+      <div class="summary-cell">
+        <span class="summary-label">Draw</span>
+        <span class="summary-value highlight">${syringeDisplay}</span>
+      </div>
+      <div class="summary-cell">
+        <span class="summary-label">Frequency</span>
+        <span class="summary-value">${p.frequency}×/wk</span>
+      </div>
+      <div class="summary-cell">
+        <span class="summary-label">Vial Status</span>
+        <span class="summary-value ${expiryClass}">${expiryStatus}</span>
+      </div>
+      <div class="summary-cell">
+        <span class="summary-label">Status</span>
+        <span class="cycle-badge ${p.cycle}">${cycleLabels[p.cycle] || p.cycle}</span>
+      </div>
+      <div class="expand-icon">›</div>
+    </div>
+    <div class="peptide-body">
+      ${renderPeptideBody(p, calc)}
+    </div>
+  `;
+  return card;
+}
+
+function renderPeptideBody(p, calc) {
+  return `
+    <div class="body-section">
+      <div class="section-title">Vial & Reconstitution</div>
+      <div class="input-grid">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" value="${escapeAttr(p.name)}" onchange="updatePeptide('${p.id}', 'name', this.value)">
+        </div>
+        <div class="field">
+          <label>Type</label>
+          <select onchange="updatePeptide('${p.id}', 'type', this.value)">
+            <option value="Peptide" ${p.type==='Peptide'?'selected':''}>Peptide (mg)</option>
+            <option value="HGH" ${p.type==='HGH'?'selected':''}>HGH (IU)</option>
+            <option value="Hormone-IU" ${p.type==='Hormone-IU'?'selected':''}>Hormone (IU - HCG)</option>
+            <option value="Hormone-Oil" ${p.type==='Hormone-Oil'?'selected':''}>Hormone (Oil - TRT)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Vial Size ${p.type==='Hormone-Oil' ? '(concentration)' : ''}</label>
+          <div class="compound-input">
+            <input type="number" step="any" value="${p.vialSize}" onchange="updatePeptide('${p.id}', 'vialSize', parseFloat(this.value))">
+            <select onchange="updatePeptide('${p.id}', 'vialUnit', this.value)">
+              <option value="mg" ${p.vialUnit==='mg'?'selected':''}>mg</option>
+              <option value="IU" ${p.vialUnit==='IU'?'selected':''}>IU</option>
+              <option value="mcg" ${p.vialUnit==='mcg'?'selected':''}>mcg</option>
+              <option value="mg/mL" ${p.vialUnit==='mg/mL'?'selected':''}>mg/mL</option>
+            </select>
+          </div>
+        </div>
+        ${p.type !== 'Hormone-Oil' && p.syringe !== 'oral' ? `
+        <div class="field">
+          <label>Bac Water (mL)</label>
+          <input type="number" step="0.1" value="${p.bacWater}" onchange="updatePeptide('${p.id}', 'bacWater', parseFloat(this.value))">
+        </div>` : ''}
+        <div class="field">
+          <label>Syringe</label>
+          <select onchange="updatePeptide('${p.id}', 'syringe', this.value)">
+            <option value="U-100" ${p.syringe==='U-100'?'selected':''}>U-100 Insulin (1mL)</option>
+            <option value="U-50" ${p.syringe==='U-50'?'selected':''}>U-100 Insulin (0.5mL)</option>
+            <option value="U-30" ${p.syringe==='U-30'?'selected':''}>U-100 Insulin (0.3mL)</option>
+            <option value="IM-1mL-23g" ${p.syringe==='IM-1mL-23g'?'selected':''}>IM 1mL · 23g</option>
+            <option value="IM-3mL-22g" ${p.syringe==='IM-3mL-22g'?'selected':''}>IM 3mL · 22g</option>
+            <option value="IM-3mL-23g" ${p.syringe==='IM-3mL-23g'?'selected':''}>IM 3mL · 23g</option>
+            <option value="IM-3mL-25g" ${p.syringe==='IM-3mL-25g'?'selected':''}>IM 3mL · 25g</option>
+            <option value="oral" ${p.syringe==='oral'?'selected':''}>Oral (capsule/tab)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-section">
+      <div class="section-title">Dose & Frequency</div>
+      <div class="input-grid">
+        <div class="field">
+          <label>Desired Dose</label>
+          <div class="compound-input">
+            <input type="number" step="any" value="${p.dose}" onchange="updatePeptide('${p.id}', 'dose', parseFloat(this.value))">
+            <select onchange="updatePeptide('${p.id}', 'doseUnit', this.value)">
+              <option value="mg" ${p.doseUnit==='mg'?'selected':''}>mg</option>
+              <option value="mcg" ${p.doseUnit==='mcg'?'selected':''}>mcg</option>
+              <option value="IU" ${p.doseUnit==='IU'?'selected':''}>IU</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Frequency (×/week)</label>
+          <input type="number" step="1" min="0" value="${p.frequency}" onchange="updatePeptide('${p.id}', 'frequency', parseFloat(this.value))">
+        </div>
+        <div class="field">
+          <label>Cycle Status</label>
+          <select onchange="updatePeptide('${p.id}', 'cycle', this.value)">
+            <option value="on" ${p.cycle==='on'?'selected':''}>Active (On)</option>
+            <option value="off" ${p.cycle==='off'?'selected':''}>Off Cycle</option>
+            <option value="asneeded" ${p.cycle==='asneeded'?'selected':''}>As Needed</option>
+            <option value="future" ${p.cycle==='future'?'selected':''}>Future / Considering</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Vial Cost ($)</label>
+          <input type="number" step="0.01" value="${p.cost}" onchange="updatePeptide('${p.id}', 'cost', parseFloat(this.value))">
+        </div>
+        <div class="field">
+          <label>Date Opened (Reconstituted)</label>
+          <input type="date" value="${p.dateOpened || ''}" onchange="updatePeptide('${p.id}', 'dateOpened', this.value)">
+        </div>
+      </div>
+    </div>
+
+    <div class="body-section">
+      <div class="section-title">Calculated Output</div>
+      ${calc.error ? `<div class="calc-output" style="border-color: var(--accent-coral);"><div style="color: var(--accent-coral); font-size: 13px;">⚠ ${calc.error}</div></div>` : `
+      <div class="calc-output">
+        <div class="calc-grid">
+          <div class="calc-item">
+            <span class="calc-label">Concentration</span>
+            <span class="calc-value">${typeof calc.concentration === 'number' ? calc.concentration.toFixed(2) : calc.concentration}<span class="unit">${calc.concentrationUnit || ''}</span></span>
+          </div>
+          <div class="calc-item">
+            <span class="calc-label">Volume to Draw</span>
+            <span class="calc-value">${calc.volumeML ? calc.volumeML.toFixed(4) : '—'}<span class="unit">mL</span></span>
+          </div>
+          <div class="calc-item">
+            <span class="calc-label">${p.syringe.startsWith('IM') ? 'Syringe (mL)' : p.syringe === 'oral' ? 'Oral Dose' : 'Syringe Units'}</span>
+            <span class="calc-value featured">${
+              p.syringe === 'oral' ? p.dose + ' ' + p.doseUnit :
+              p.syringe.startsWith('IM') ? calc.syringeUnits.toFixed(3) + ' mL' :
+              calc.syringeUnits.toFixed(2) + ' u'
+            }</span>
+          </div>
+          <div class="calc-item">
+            <span class="calc-label">Doses per Vial</span>
+            <span class="calc-value">${typeof calc.dosesPerVial === 'number' ? calc.dosesPerVial.toFixed(1) : calc.dosesPerVial}</span>
+          </div>
+          <div class="calc-item">
+            <span class="calc-label">Days Supply</span>
+            <span class="calc-value">${typeof calc.daysSupply === 'number' ? calc.daysSupply.toFixed(0) : calc.daysSupply}<span class="unit">days</span></span>
+          </div>
+          <div class="calc-item">
+            <span class="calc-label">Cost per Dose</span>
+            <span class="calc-value">${typeof calc.costPerDose === 'number' ? '$' + calc.costPerDose.toFixed(2) : calc.costPerDose}</span>
+          </div>
+          ${calc.daysUntilExpiry !== null ? `
+          <div class="calc-item">
+            <span class="calc-label">Vial Expiry (28d)</span>
+            <span class="calc-value ${calc.daysUntilExpiry <= 7 ? 'warn' : ''}">${calc.daysUntilExpiry < 0 ? 'EXPIRED' : calc.daysUntilExpiry + ' days left'}</span>
+          </div>` : ''}
+        </div>
+        <div class="calc-formula">${calc.formula}</div>
+      </div>`}
+    </div>
+
+    <div class="body-section">
+      <div class="section-title">Notes & Goals</div>
+      <div class="field">
+        <textarea oninput="updatePeptide('${p.id}', 'notes', this.value)" placeholder="What this peptide supports, cycle protocol, observations...">${escapeHtml(p.notes || '')}</textarea>
+      </div>
+    </div>
+
+    <div class="row-actions">
+      <button class="btn" onclick="duplicatePeptide('${p.id}')">Duplicate</button>
+      <button class="btn btn-danger" onclick="deletePeptide('${p.id}')">Delete</button>
+    </div>
+  `;
+}
+
+// ===================== ACTIONS =====================
+
+function toggleExpand(id) {
+  state.expandedId = state.expandedId === id ? null : id;
+  render();
+}
+
+function switchUser(name) {
+  state.currentUser = name;
+  state.expandedId = null;
+  saveState();
+  render();
+}
+
+function openUserModal() {
+  document.getElementById('userModal').classList.add('active');
+  document.getElementById('newUserName').value = '';
+  setTimeout(() => document.getElementById('newUserName').focus(), 50);
+}
+
+function closeUserModal() {
+  document.getElementById('userModal').classList.remove('active');
+}
+
+function confirmAddUser() {
+  const name = document.getElementById('newUserName').value.trim();
+  if (!name) { showToast('Enter a name', true); return; }
+  if (state.users[name]) { showToast('User already exists', true); return; }
+  state.users[name] = { peptides: [] };
+  state.currentUser = name;
+  closeUserModal();
+  saveState();
+  render();
+  showToast(`User "${name}" created`);
+}
+
+function deleteCurrentUser() {
+  if (Object.keys(state.users).length <= 1) {
+    showToast('Cannot delete the only user', true);
+    return;
+  }
+  showConfirm('Remove User', `Delete ${state.currentUser} and all their peptide data? This cannot be undone.`, () => {
+    delete state.users[state.currentUser];
+    state.currentUser = Object.keys(state.users)[0];
+    saveState();
+    render();
+    showToast('User removed');
+  });
+}
+
+function addPeptide() {
+  const newP = {
+    id: 'p_' + Date.now(),
+    name: 'New Peptide',
+    type: 'Peptide',
+    vialSize: 5, vialUnit: 'mg',
+    bacWater: 2, syringe: 'U-100',
+    dose: 0.25, doseUnit: 'mg', frequency: 7,
+    cost: 0, cycle: 'on', dateOpened: '',
+    notes: ''
+  };
+  state.users[state.currentUser].peptides.push(newP);
+  state.expandedId = newP.id;
+  saveState();
+  render();
+}
+
+function updatePeptide(id, field, value) {
+  const peptides = state.users[state.currentUser].peptides;
+  const p = peptides.find(x => x.id === id);
+  if (!p) return;
+  p[field] = value;
+  
+  // Re-render only the affected card to preserve focus on text inputs
+  if (field === 'notes') {
+    // for textarea, just save and update stats, don't re-render
+    saveState();
+    renderUserInfo();
+    return;
+  }
+  
+  saveState();
+  render();
+}
+
+function duplicatePeptide(id) {
+  const peptides = state.users[state.currentUser].peptides;
+  const p = peptides.find(x => x.id === id);
+  if (!p) return;
+  const copy = JSON.parse(JSON.stringify(p));
+  copy.id = 'p_' + Date.now();
+  copy.name = p.name + ' (copy)';
+  peptides.push(copy);
+  state.expandedId = copy.id;
+  saveState();
+  render();
+  showToast('Peptide duplicated');
+}
+
+function deletePeptide(id) {
+  const peptides = state.users[state.currentUser].peptides;
+  const p = peptides.find(x => x.id === id);
+  if (!p) return;
+  showConfirm('Delete Peptide', `Remove "${p.name}" from ${state.currentUser}'s protocol?`, () => {
+    state.users[state.currentUser].peptides = peptides.filter(x => x.id !== id);
+    if (state.expandedId === id) state.expandedId = null;
+    saveState();
+    render();
+    showToast('Peptide deleted');
+  });
+}
+
+function showConfirm(title, message, callback) {
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmMessage').textContent = message;
+  const btn = document.getElementById('confirmBtn');
+  btn.textContent = 'Confirm';
+  btn.className = 'btn btn-danger';
+  btn.onclick = () => { closeConfirmModal(); callback(); };
+  document.getElementById('confirmModal').classList.add('active');
+}
+
+function closeConfirmModal() {
+  document.getElementById('confirmModal').classList.remove('active');
+}
+
+function togglePrint() {
+  document.body.classList.toggle('print-mode');
+  // Expand all
+  document.querySelectorAll('.peptide-card').forEach(c => c.classList.add('expanded'));
+  setTimeout(() => window.print(), 200);
+}
+
+function exportData() {
+  const dataStr = JSON.stringify(state, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `peptide-protocol-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data exported');
+}
+
+function importData() {
+  document.getElementById('importFile').click();
+}
+
+function handleImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (imported.users) {
+        state = imported;
+        if (!state.users[state.currentUser]) {
+          state.currentUser = Object.keys(state.users)[0];
+        }
+        saveState();
+        render();
+        showToast('Data imported successfully');
+      } else {
+        showToast('Invalid file format', true);
+      }
+    } catch (err) {
+      showToast('Failed to parse file', true);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function showToast(message, isError = false) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => toast.className = 'toast', 2500);
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function escapeAttr(s) {
+  return escapeHtml(s);
+}
+
+// Init
+loadState();
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', (e) => {
+    if (e.target === m) m.classList.remove('active');
+  });
+});
+</script>
+
+</body>
+</html>
