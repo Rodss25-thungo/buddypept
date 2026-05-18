@@ -1,0 +1,39 @@
+# Workspace metadata (Claude Code per-session data — keep local only)
+.claude/
+
+# Local environment / secrets — NEVER commit these
+.env
+.env.local
+.env*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies (Next.js will use these when scaffolded)
+node_modules/
+
+# Next.js build output (when scaffolded)
+.next/
+out/
+build/
+
+# Vercel
+.vercel/
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
