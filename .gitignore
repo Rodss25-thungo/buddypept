@@ -53,7 +53,12 @@ Thumbs.db
 desktop.ini
 *.pem
 
-# === Claude Code workspace metadata ===
-# Per-machine workspace data, NOT for version control.
-# Contains research PDFs from prior Claude Code sessions — keep local only.
-.claude/
+# === Claude Code workspace data ===
+# Per-machine overrides (personal prefs, secrets) — never commit
+.claude/settings.local.json
+# Research artifacts shouldn't live in workspace metadata anyway (move to BUSINESSES folder)
+.claude/*.pdf
+.claude/*.xlsx
+.claude/*.docx
+# Project-level files in .claude/ (settings.json, hooks.json, rules/, agents/, skills/) ARE committed
+# — this lets the project share Claude Code configuration with collaborators / other machines

@@ -1,8 +1,10 @@
 # BuddyPept
 
-## Project context for AI agents (Claude Code, Cursor, etc.)
+## Project context for Claude Code
 
-This file is read by AI assistants every session. Read it first before suggesting any change to BuddyPept.
+This file is read by Claude Code every session. Read it first before suggesting any change to BuddyPept.
+
+**See also `AGENTS.md`** — same project context formatted as the universal AI agent context file (works for any AI tool: Cursor, Codex, Cody, etc.). CLAUDE.md is the Claude-specific layer with Claude Code workflow notes; AGENTS.md is the universal layer with the same brand spine and hard rules. Both files MUST stay aligned on locked decisions.
 
 ---
 

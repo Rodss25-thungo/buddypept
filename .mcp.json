@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.modelcontextprotocol.org/mcp.json",
+  "_comment": "MCP (Model Context Protocol) servers for BuddyPept. Configured but inactive until SUPABASE_ACCESS_TOKEN is added to .env.local. To activate: (1) Go to https://supabase.com/dashboard/account/tokens and create a Personal Access Token. (2) Add SUPABASE_ACCESS_TOKEN=sbp_... to .env.local. (3) Restart Claude Code. The Supabase MCP server is set to --read-only by default for safety; remove that flag when you need write access for migrations.",
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--read-only",
+        "--project-ref=fbvvqjyqtihkqhhasvxq"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
