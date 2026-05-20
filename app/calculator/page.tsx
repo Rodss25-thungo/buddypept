@@ -37,7 +37,10 @@ export default function CalculatorPage() {
   const [peptideSlug, setPeptideSlug] = useState<string>(PEPTIDES[0].slug);
   const [vialAmount, setVialAmount] = useState<number>(PEPTIDES[0].commonVialSizes[0]);
   const [waterMl, setWaterMl] = useState<number>(2);
-  const [targetDose, setTargetDose] = useState<number>(PEPTIDES[0].typicalDose);
+  // Dose is INTENTIONALLY not pre-filled. Brand hard rule from CLAUDE.md:
+  // "Never recommend a dose. Show only the math the user inputs."
+  // The user enters their dose; we do the math.
+  const [targetDose, setTargetDose] = useState<number>(NaN);
   const [targetDoseUnit, setTargetDoseUnit] = useState<DoseUnit>(PEPTIDES[0].typicalDoseUnit);
   const [syringeType, setSyringeType] = useState<SyringeType>('U-100');
   const [showMath, setShowMath] = useState(false);
@@ -49,7 +52,10 @@ export default function CalculatorPage() {
     const p = getPeptideBySlug(slug);
     if (p) {
       setVialAmount(p.commonVialSizes[0]);
-      setTargetDose(p.typicalDose);
+      // Clear dose on peptide switch — user must enter their own dose for
+      // the new peptide. We update the unit (mg vs mcg) because that's a
+      // factual property of the peptide, not a dose recommendation.
+      setTargetDose(NaN);
       setTargetDoseUnit(p.typicalDoseUnit);
     }
   }
@@ -159,13 +165,13 @@ export default function CalculatorPage() {
           </p>
           <dl className="mt-4 grid grid-cols-1 gap-2 text-xs sm:grid-cols-3">
             <div>
-              <dt className="text-zinc-500">Typical dose</dt>
+              <dt className="text-zinc-500">Reference dose (from studies)</dt>
               <dd className="font-medium">
                 {peptide.typicalDose} {peptide.typicalDoseUnit}
               </dd>
             </div>
             <div>
-              <dt className="text-zinc-500">Typical pattern</dt>
+              <dt className="text-zinc-500">Reference pattern</dt>
               <dd className="font-medium">{peptide.dosingPattern}</dd>
             </div>
             <div>
@@ -173,6 +179,12 @@ export default function CalculatorPage() {
               <dd className="font-medium">{legalStatusLabel(peptide.legalStatus)}</dd>
             </div>
           </dl>
+          <p className="mt-3 text-xs italic leading-relaxed text-zinc-500 dark:text-zinc-400">
+            Reference values reflect doses studied in published research or
+            commonly cited in protocols. They are <strong>informational, not a
+            recommendation for you</strong>. Decisions about your dose belong
+            with your healthcare provider.
+          </p>
           <p className="mt-3 text-[10px] uppercase tracking-wide text-zinc-400">
             Legal status last reviewed: {peptide.legalStatusLastUpdated}
           </p>
@@ -321,6 +333,7 @@ function FieldTargetDose({
           min={0}
           value={Number.isFinite(targetDose) ? targetDose : ''}
           onChange={(e) => onDoseChange(parseFloat(e.target.value))}
+          placeholder="Enter your dose"
           className="flex-1 rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
         />
         <select
@@ -333,6 +346,9 @@ function FieldTargetDose({
           <option value="IU">IU</option>
         </select>
       </div>
+      <p className="mt-1 text-xs text-zinc-500">
+        Decided by you and your healthcare provider — never by BuddyPept.
+      </p>
     </div>
   );
 }
