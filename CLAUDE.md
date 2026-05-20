@@ -181,6 +181,35 @@ These are explicitly NOT part of MVP. Do not build them until launch + real user
 
 ---
 
+## Disclaimer & Legal Placement Map (Phase 7)
+
+BuddyPept's stake is education, not medical advice or prescribing. Disclaimers must appear at every surface where a user could mistake content for medical guidance. Final copy is lawyer-reviewed at Phase 7. Below is the placement architecture only.
+
+Surfaces requiring disclaimers:
+
+1. First-time entry / onboarding gate — one-time acknowledgment before app use.
+2. Persistent site-wide footer — short disclaimer on every page.
+3. Calculator — two placements: above inputs, and attached to results output. The result number is the moment of highest action risk; disclaimer must sit near the number, not buried.
+4. Each peptide library entry — top of every peptide page.
+5. Legal status content — every peptide page touching legal/regulatory status needs a "last updated" timestamp and a note that laws change. Library must distinguish prescription peptides (semaglutide, tirzepatide) from "research chemical" peptides (BPC-157, TB-500, GHK-Cu, etc.) without endorsing the research-use framing.
+6. Email / account signup — terms acceptance checkbox referencing medical disclaimer and terms of service.
+7. Standalone pages — medical disclaimer page, terms of service, privacy policy. Linked from footer and signup.
+
+Positioning rules the app must hold to keep the "educate, don't prescribe" stake credible:
+- Never recommend a dose. Show only the math the user inputs.
+- Never tell someone to take a peptide. Explain what peptides do.
+- Never link to a supplier (already a hard rule).
+- Always direct users back to a healthcare professional for decisions.
+
+Implementation note for Phase 5 (current): when building calculator UI and peptide library components, leave placeholder slots (e.g., `[MEDICAL_DISCLAIMER_TOP]`, `[MEDICAL_DISCLAIMER_RESULTS]`, `[PEPTIDE_LEGAL_STATUS_TIMESTAMP]`) in the components. Phase 7 fills them with reviewed copy.
+
+Pre-launch checklist additions for Phase 7:
+- Retain legal review for all disclaimer copy, terms of service, and privacy policy before any public users hit the app.
+- Verify "last updated" timestamps are live on legal-status content.
+- Confirm onboarding acknowledgment gate fires on first session.
+
+---
+
 ## Founder
 
 Rod — solo founder, marketing background, non-technical. Building with AI assistance. The origin story: Rod was the confused beginner trying to figure out dosing math and built the tool he wished existed. That story lives on the About page.
