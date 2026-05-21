@@ -104,6 +104,11 @@ const PLACEHOLDER_DISCLAIMER_TOP =
 const PLACEHOLDER_DISCLAIMER_RESULTS =
   '[MEDICAL_DISCLAIMER_RESULTS — pending Phase 7 legal review]';
 
+// Common vial sizes (mg) for quick-pick buttons. These are the amounts
+// vendors most often sell. Users can still type any custom value or
+// fine-tune with the input's up/down arrows.
+const COMMON_VIAL_MG = [5, 10, 30, 50, 80];
+
 // ─────────────────────────────────────────────────────────────
 // Main component
 // ─────────────────────────────────────────────────────────────
@@ -536,24 +541,25 @@ function FieldVialAmount({
         The amount of peptide powder — the number on your vial label (e.g.,
         5 mg, 10 mg). <strong>Not</strong> the size of the glass container.
       </p>
-      {peptide && peptide.commonVialSizes.length > 1 && (
-        <div className="mt-2 flex flex-wrap gap-1.5">
-          {peptide.commonVialSizes.map((size) => (
-            <button
-              key={size}
-              type="button"
-              onClick={() => onChange(size)}
-              className={`rounded-md border px-2 py-1 text-xs ${
-                value === size
-                  ? 'border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
-                  : 'border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
-              }`}
-            >
-              {size} {unit}
-            </button>
-          ))}
-        </div>
-      )}
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {COMMON_VIAL_MG.map((size) => (
+          <button
+            key={size}
+            type="button"
+            onClick={() => onChange(size)}
+            className={`rounded-md border px-2 py-1 text-xs ${
+              value === size
+                ? 'border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
+                : 'border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+            }`}
+          >
+            {size} mg
+          </button>
+        ))}
+      </div>
+      <p className="mt-1 text-xs text-zinc-500">
+        Pick a common size, then fine-tune with the arrows or by typing.
+      </p>
     </div>
   );
 }
