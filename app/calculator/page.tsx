@@ -109,6 +109,14 @@ const PLACEHOLDER_DISCLAIMER_RESULTS =
 // fine-tune with the input's up/down arrows.
 const COMMON_VIAL_MG = [5, 10, 30, 50, 80];
 
+// Sentinel value for the "Other / not listed" dropdown option. When the
+// user picks this, they type their own peptide name and the calculator
+// works the same (the math is peptide-agnostic). We have no library data
+// for custom peptides, so the About section shows a neutral message.
+// FUTURE (deferred): auto-research reputable info for custom peptides —
+// requires backend + AI + content safety + legal review (see memory).
+const CUSTOM_PEPTIDE_VALUE = '__other__';
+
 // ─────────────────────────────────────────────────────────────
 // Main component
 // ─────────────────────────────────────────────────────────────
@@ -125,9 +133,13 @@ export default function CalculatorPage() {
   const [barrelId, setBarrelId] = useState<SyringeBarrelId>('insulin-1.0');
   const [showMath, setShowMath] = useState(false);
   const [showHowItWorks, setShowHowItWorks] = useState(false);
+  const [customPeptideName, setCustomPeptideName] = useState('');
 
+  const isCustomPeptide = peptideSlug === CUSTOM_PEPTIDE_VALUE;
   const peptide = getPeptideBySlug(peptideSlug);
   const barrel = getBarrel(barrelId);
+  // Vial unit: from the library peptide, or default to mg for custom peptides.
+  const vialUnit = peptide?.vialUnit ?? 'mg';
 
   // Concentration math — requires vial + water to be valid
   const haveReconstitution =
@@ -148,11 +160,13 @@ export default function CalculatorPage() {
 
   function handlePeptideChange(slug: string) {
     setPeptideSlug(slug);
+    // Clear dose on every peptide switch (brand rule). For library peptides,
+    // also reset the vial to a sensible default. For custom, keep the current
+    // vial amount so the user doesn't lose it.
+    setDoseMg(NaN);
     const p = getPeptideBySlug(slug);
     if (p) {
       setVialAmount(p.commonVialSizes[0]);
-      // Clear dose on peptide switch (brand rule)
-      setDoseMg(NaN);
     }
   }
 
@@ -187,13 +201,15 @@ export default function CalculatorPage() {
   const isValidInput = haveReconstitution && Number.isFinite(doseMg) && doseMg > 0;
 
   const computation = useMemo(() => {
-    if (!isValidInput || !peptide) {
+    // No peptide requirement — the math is peptide-agnostic, so custom
+    // (not-in-library) peptides calculate exactly the same.
+    if (!isValidInput) {
       return { result: null, error: null as string | null };
     }
     try {
       const result = calculateDose({
         vialAmount,
-        vialUnit: peptide.vialUnit,
+        vialUnit,
         waterMl,
         targetDose: doseMg,
         targetDoseUnit: 'mg',
@@ -204,7 +220,7 @@ export default function CalculatorPage() {
       const msg = e instanceof Error ? e.message : 'Invalid input';
       return { result: null, error: msg };
     }
-  }, [isValidInput, peptide, vialAmount, waterMl, doseMg, barrel.scale]);
+  }, [isValidInput, vialUnit, vialAmount, waterMl, doseMg, barrel.scale]);
 
   const { result, error } = computation;
 
@@ -244,7 +260,12 @@ export default function CalculatorPage() {
 
       {/* Inputs */}
       <section className="mt-6 space-y-5 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-        <FieldPeptide value={peptideSlug} onChange={handlePeptideChange} />
+        <FieldPeptide
+          value={peptideSlug}
+          customName={customPeptideName}
+          onChange={handlePeptideChange}
+          onCustomNameChange={setCustomPeptideName}
+        />
         <FieldVialAmount
           peptide={peptide}
           value={vialAmount}
@@ -328,6 +349,24 @@ export default function CalculatorPage() {
           </p>
           <p className="mt-3 text-[10px] uppercase tracking-wide text-zinc-400">
             Legal status last reviewed: {peptide.legalStatusLastUpdated}
+          </p>
+        </section>
+      )}
+
+      {/* Custom (not-in-library) peptide — neutral message, no auto-generated info */}
+      {isCustomPeptide && customPeptideName.trim() !== '' && (
+        <section className="mt-8 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+          <h2 className="text-lg font-semibold">About {customPeptideName.trim()}</h2>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+            This peptide isn&rsquo;t in our library yet, so we don&rsquo;t have
+            verified information to show for it. The calculator above works
+            exactly the same — enter your vial amount, bacteriostatic water,
+            and dose, and it will do the math.
+          </p>
+          <p className="mt-3 text-xs italic leading-relaxed text-zinc-500 dark:text-zinc-400">
+            Always confirm dosing and whether a peptide is right for you with a
+            healthcare provider. BuddyPept does the math; it does not give
+            medical advice.
           </p>
         </section>
       )}
@@ -487,11 +526,16 @@ function Step({ n, title, body }: { n: number; title: string; body: string }) {
 
 function FieldPeptide({
   value,
+  customName,
   onChange,
+  onCustomNameChange,
 }: {
   value: string;
+  customName: string;
   onChange: (slug: string) => void;
+  onCustomNameChange: (name: string) => void;
 }) {
+  const isOther = value === CUSTOM_PEPTIDE_VALUE;
   return (
     <div>
       <label htmlFor="peptide" className="mb-1 block text-sm font-medium">
@@ -508,7 +552,24 @@ function FieldPeptide({
             {p.name}
           </option>
         ))}
+        <option value={CUSTOM_PEPTIDE_VALUE}>Other / not listed…</option>
       </select>
+      {isOther && (
+        <div className="mt-2">
+          <input
+            type="text"
+            value={customName}
+            onChange={(e) => onCustomNameChange(e.target.value)}
+            placeholder="Type your peptide name (e.g., Tesamorelin)"
+            className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
+          />
+          <p className="mt-1 text-xs text-zinc-500">
+            We don&rsquo;t have library info for peptides outside our list yet —
+            but the calculator works exactly the same. Just enter your vial
+            amount, water, and dose below.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
