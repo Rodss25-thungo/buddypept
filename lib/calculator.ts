@@ -27,7 +27,18 @@ export type DoseUnit = z.infer<typeof DoseUnitSchema>;
 export const VialUnitSchema = z.enum(['mg', 'mcg', 'IU']);
 export type VialUnit = z.infer<typeof VialUnitSchema>;
 
-export const SyringeTypeSchema = z.enum(['U-100', 'U-40', 'U-50', 'IM']);
+/**
+ * Syringe scale. Only two real scales exist in practical use:
+ * - 'U-100': standard insulin syringe, 100 units = 1 mL (~99% of peptide users).
+ *   Barrel sizes (0.3 mL / 0.5 mL / 1 mL) are UI concerns, not math concerns —
+ *   they all share the same U-100 scale.
+ * - 'IM': intramuscular oil syringes, graduated in mL only (no unit markings).
+ *
+ * The earlier U-40 / U-50 enum values were based on a misunderstanding — in the
+ * real world, what people call a "U-50 syringe" is a U-100-scale syringe with
+ * a 0.5 mL barrel. Removed to prevent incorrect math.
+ */
+export const SyringeTypeSchema = z.enum(['U-100', 'IM']);
 export type SyringeType = z.infer<typeof SyringeTypeSchema>;
 
 export const ReconstitutionInputSchema = z.object({
@@ -131,20 +142,19 @@ function toMg(amount: number, unit: VialUnit | DoseUnit): number {
 /**
  * Get the units-per-mL scale for a given syringe type.
  *
- * U-100 (the standard insulin syringe) is what 95%+ of peptide users use.
- * U-40 is rarer (mostly veterinary insulin). U-50 is a specialty barrel size.
- * IM (intramuscular) syringes don't use unit graduations — they display in mL.
+ * U-100 is the only insulin-syringe scale in practical peptide use — 100 units
+ * equals 1 mL. Barrel size (0.3 / 0.5 / 1.0 mL) is a separate UI concern
+ * about capacity, not about scale.
+ *
+ * IM (intramuscular oil) syringes don't use unit graduations — they're marked
+ * in mL only — so we return 1 (i.e., 1 "unit" = 1 mL) as a passthrough.
  */
 function unitsPerMl(syringeType: SyringeType): number {
   switch (syringeType) {
     case 'U-100':
       return 100;
-    case 'U-40':
-      return 40;
-    case 'U-50':
-      return 50;
     case 'IM':
-      return 1; // IM syringes are graduated in mL, not units
+      return 1;
   }
 }
 

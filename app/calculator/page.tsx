@@ -3,12 +3,17 @@
 /**
  * BuddyPept Calculator UI
  * ───────────────────────
- * Uses lib/calculator.ts for the math and data/peptides.ts for the library.
+ * Three-field dose converter (mcg ↔ mg ↔ units), all bidirectionally linked.
+ * Plus a barrel-size syringe selector and a collapsible "How this works"
+ * educational section.
  *
  * Per the Phase 7 Disclaimer & Legal Placement Map in CLAUDE.md, this page
  * contains placeholder slots for lawyer-reviewed copy:
  *   - [MEDICAL_DISCLAIMER_TOP]     — above inputs
  *   - [MEDICAL_DISCLAIMER_RESULTS] — adjacent to result number
+ *
+ * Hard brand rule respected: dose fields are NEVER pre-filled — the user
+ * enters their own dose. typicalDose in data/peptides.ts is reference-only.
  *
  * Styling: minimal Tailwind. Final design pass happens in Phase 6.
  */
@@ -21,79 +26,201 @@ import {
 } from '@/data/peptides';
 import {
   calculateDose,
-  type DoseUnit,
   type SyringeType,
   type Warning as CalcWarning,
 } from '@/lib/calculator';
 
-// Phase 7 placeholder strings — visible in UI as "pending legal review" so
-// they don't get accidentally shipped to production.
+// ─────────────────────────────────────────────────────────────
+// Syringe barrels (UI concern — math library only knows U-100 vs IM)
+// ─────────────────────────────────────────────────────────────
+
+type SyringeBarrelId =
+  | 'insulin-0.3'
+  | 'insulin-0.5'
+  | 'insulin-1.0'
+  | 'im-1.0'
+  | 'im-3.0';
+
+interface SyringeBarrel {
+  id: SyringeBarrelId;
+  /** UI label for the dropdown option */
+  optionLabel: string;
+  /** Short label for inline references like "your 0.5 mL syringe" */
+  shortLabel: string;
+  /** Max liquid capacity in mL */
+  maxMl: number;
+  /** Scale passed to the math library */
+  scale: SyringeType;
+}
+
+const BARRELS: SyringeBarrel[] = [
+  {
+    id: 'insulin-0.3',
+    optionLabel: '0.3 mL insulin syringe — max 30 units',
+    shortLabel: '0.3 mL insulin',
+    maxMl: 0.3,
+    scale: 'U-100',
+  },
+  {
+    id: 'insulin-0.5',
+    optionLabel: '0.5 mL insulin syringe — max 50 units',
+    shortLabel: '0.5 mL insulin',
+    maxMl: 0.5,
+    scale: 'U-100',
+  },
+  {
+    id: 'insulin-1.0',
+    optionLabel: '1.0 mL insulin syringe — max 100 units',
+    shortLabel: '1 mL insulin',
+    maxMl: 1.0,
+    scale: 'U-100',
+  },
+  {
+    id: 'im-1.0',
+    optionLabel: 'IM 1 mL syringe (oil-based, mL graduations)',
+    shortLabel: 'IM 1 mL',
+    maxMl: 1.0,
+    scale: 'IM',
+  },
+  {
+    id: 'im-3.0',
+    optionLabel: 'IM 3 mL syringe (oil-based, mL graduations)',
+    shortLabel: 'IM 3 mL',
+    maxMl: 3.0,
+    scale: 'IM',
+  },
+];
+
+function getBarrel(id: SyringeBarrelId): SyringeBarrel {
+  return BARRELS.find((b) => b.id === id) ?? BARRELS[2]; // default to 1 mL insulin
+}
+
+// ─────────────────────────────────────────────────────────────
+// Phase 7 placeholders
+// ─────────────────────────────────────────────────────────────
+
 const PLACEHOLDER_DISCLAIMER_TOP =
   '[MEDICAL_DISCLAIMER_TOP — pending Phase 7 legal review]';
 const PLACEHOLDER_DISCLAIMER_RESULTS =
   '[MEDICAL_DISCLAIMER_RESULTS — pending Phase 7 legal review]';
 
+// ─────────────────────────────────────────────────────────────
+// Main component
+// ─────────────────────────────────────────────────────────────
+
 export default function CalculatorPage() {
   const [peptideSlug, setPeptideSlug] = useState<string>(PEPTIDES[0].slug);
   const [vialAmount, setVialAmount] = useState<number>(PEPTIDES[0].commonVialSizes[0]);
   const [waterMl, setWaterMl] = useState<number>(2);
-  // Dose is INTENTIONALLY not pre-filled. Brand hard rule from CLAUDE.md:
-  // "Never recommend a dose. Show only the math the user inputs."
-  // The user enters their dose; we do the math.
-  const [targetDose, setTargetDose] = useState<number>(NaN);
-  const [targetDoseUnit, setTargetDoseUnit] = useState<DoseUnit>(PEPTIDES[0].typicalDoseUnit);
-  const [syringeType, setSyringeType] = useState<SyringeType>('U-100');
+
+  // Single source of truth for dose: mg. mcg and units are derived.
+  // Brand hard rule: dose is NOT pre-filled — user must enter.
+  const [doseMg, setDoseMg] = useState<number>(NaN);
+
+  const [barrelId, setBarrelId] = useState<SyringeBarrelId>('insulin-1.0');
   const [showMath, setShowMath] = useState(false);
+  const [showHowItWorks, setShowHowItWorks] = useState(false);
 
   const peptide = getPeptideBySlug(peptideSlug);
+  const barrel = getBarrel(barrelId);
+
+  // Concentration math — requires vial + water to be valid
+  const haveReconstitution =
+    Number.isFinite(vialAmount) &&
+    vialAmount > 0 &&
+    Number.isFinite(waterMl) &&
+    waterMl > 0;
+  const concentrationMgPerMl = haveReconstitution ? vialAmount / waterMl : NaN;
+
+  // Derived dose values from doseMg + barrel + concentration
+  const doseMcg = Number.isFinite(doseMg) ? doseMg * 1000 : NaN;
+  const doseSyringeAmount = computeSyringeAmount(doseMg, barrel.scale, concentrationMgPerMl);
+
+  // What the third field is called — "units" for U-100, "mL" for IM
+  const thirdFieldUnit = barrel.scale === 'IM' ? 'mL' : 'units';
+
+  // ───── handlers ─────
 
   function handlePeptideChange(slug: string) {
     setPeptideSlug(slug);
     const p = getPeptideBySlug(slug);
     if (p) {
       setVialAmount(p.commonVialSizes[0]);
-      // Clear dose on peptide switch — user must enter their own dose for
-      // the new peptide. We update the unit (mg vs mcg) because that's a
-      // factual property of the peptide, not a dose recommendation.
-      setTargetDose(NaN);
-      setTargetDoseUnit(p.typicalDoseUnit);
+      // Clear dose on peptide switch (brand rule)
+      setDoseMg(NaN);
     }
   }
 
-  // Compute result. Only run when all inputs are valid positive numbers
-  // (otherwise we'd show Zod errors mid-typing, which is jarring).
-  const isValidInput =
-    Number.isFinite(vialAmount) &&
-    vialAmount > 0 &&
-    Number.isFinite(waterMl) &&
-    waterMl > 0 &&
-    Number.isFinite(targetDose) &&
-    targetDose > 0;
+  function handleMcgChange(mcg: number) {
+    if (!Number.isFinite(mcg) || mcg < 0) {
+      setDoseMg(NaN);
+    } else {
+      setDoseMg(mcg / 1000);
+    }
+  }
+
+  function handleMgChange(mg: number) {
+    setDoseMg(mg);
+  }
+
+  function handleSyringeAmountChange(amount: number) {
+    if (!Number.isFinite(amount) || amount < 0 || !haveReconstitution) {
+      setDoseMg(NaN);
+      return;
+    }
+    if (barrel.scale === 'U-100') {
+      // amount is units. mg = units × (concentration / 100)
+      setDoseMg(amount * (concentrationMgPerMl / 100));
+    } else {
+      // amount is mL. mg = mL × concentration
+      setDoseMg(amount * concentrationMgPerMl);
+    }
+  }
+
+  // ───── result computation ─────
+
+  const isValidInput = haveReconstitution && Number.isFinite(doseMg) && doseMg > 0;
 
   const computation = useMemo(() => {
-    if (!isValidInput || !peptide) return { result: null, error: null };
+    if (!isValidInput || !peptide) {
+      return { result: null, error: null as string | null };
+    }
     try {
       const result = calculateDose({
         vialAmount,
         vialUnit: peptide.vialUnit,
         waterMl,
-        targetDose,
-        targetDoseUnit,
-        syringeType,
+        targetDose: doseMg,
+        targetDoseUnit: 'mg',
+        syringeType: barrel.scale,
       });
       return { result, error: null as string | null };
     } catch (e) {
       const msg = e instanceof Error ? e.message : 'Invalid input';
       return { result: null, error: msg };
     }
-  }, [isValidInput, peptide, vialAmount, waterMl, targetDose, targetDoseUnit, syringeType]);
+  }, [isValidInput, peptide, vialAmount, waterMl, doseMg, barrel.scale]);
 
   const { result, error } = computation;
+
+  // Additional capacity warning (specific to barrel)
+  const capacityWarning: CalcWarning | null =
+    result && result.volumeMl > barrel.maxMl
+      ? {
+          level: 'caution',
+          message: `Your dose volume (${formatNum(result.volumeMl, 3)} mL) is larger than the ${barrel.shortLabel} can hold (${barrel.maxMl} mL). Pick a larger syringe, or reconstitute with more bacteriostatic water for a lower concentration.`,
+        }
+      : null;
+
+  const allWarnings: CalcWarning[] = [
+    ...(result?.warnings ?? []),
+    ...(capacityWarning ? [capacityWarning] : []),
+  ];
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-8 sm:py-12">
       {/* Header */}
-      <header className="mb-8">
+      <header className="mb-6">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Peptide dosing calculator
         </h1>
@@ -102,11 +229,16 @@ export default function CalculatorPage() {
         </p>
       </header>
 
+      {/* How this works — collapsible educational content */}
+      <HowThisWorks open={showHowItWorks} onToggle={() => setShowHowItWorks((s) => !s)} />
+
       {/* Placeholder: medical disclaimer at top of calculator */}
-      <DisclaimerSlot text={PLACEHOLDER_DISCLAIMER_TOP} />
+      <div className="mt-6">
+        <DisclaimerSlot text={PLACEHOLDER_DISCLAIMER_TOP} />
+      </div>
 
       {/* Inputs */}
-      <section className="mt-8 space-y-5 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="mt-6 space-y-5 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
         <FieldPeptide value={peptideSlug} onChange={handlePeptideChange} />
         <FieldVialAmount
           peptide={peptide}
@@ -121,13 +253,17 @@ export default function CalculatorPage() {
           step={0.1}
           min={0.1}
         />
-        <FieldTargetDose
-          targetDose={targetDose}
-          targetDoseUnit={targetDoseUnit}
-          onDoseChange={setTargetDose}
-          onUnitChange={setTargetDoseUnit}
+        <FieldSyringeBarrel value={barrelId} onChange={setBarrelId} />
+        <FieldThreeWayDose
+          doseMcg={doseMcg}
+          doseMg={doseMg}
+          doseSyringeAmount={doseSyringeAmount}
+          thirdFieldUnit={thirdFieldUnit}
+          haveReconstitution={haveReconstitution}
+          onMcgChange={handleMcgChange}
+          onMgChange={handleMgChange}
+          onSyringeAmountChange={handleSyringeAmountChange}
         />
-        <FieldSyringe value={syringeType} onChange={setSyringeType} />
       </section>
 
       {/* Result */}
@@ -139,14 +275,16 @@ export default function CalculatorPage() {
         ) : result ? (
           <ResultDisplay
             result={result}
-            peptide={peptide}
-            inputs={{ vialAmount, waterMl, targetDose, targetDoseUnit, syringeType }}
+            warnings={allWarnings}
+            barrel={barrel}
+            doseMg={doseMg}
+            doseMcg={doseMcg}
             showMath={showMath}
             onToggleMath={() => setShowMath((s) => !s)}
           />
         ) : (
           <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-            Fill in vial amount, bacteriostatic water, and your target dose to see the result.
+            Fill in the vial size, bacteriostatic water, and your dose to see the result. All three dose fields above stay in sync as you type.
           </div>
         )}
       </section>
@@ -156,7 +294,7 @@ export default function CalculatorPage() {
         <section className="mt-8 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
           <h2 className="text-lg font-semibold">About {peptide.name}</h2>
           {peptide.aliases && peptide.aliases.length > 0 && (
-            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-500">
+            <p className="mt-1 text-xs text-zinc-500">
               Also known as: {peptide.aliases.join(', ')}
             </p>
           )}
@@ -166,9 +304,7 @@ export default function CalculatorPage() {
           <dl className="mt-4 grid grid-cols-1 gap-2 text-xs sm:grid-cols-3">
             <div>
               <dt className="text-zinc-500">Reference dose (from studies)</dt>
-              <dd className="font-medium">
-                {peptide.typicalDose} {peptide.typicalDoseUnit}
-              </dd>
+              <dd className="font-medium">{formatReferenceDose(peptide.typicalDose, peptide.typicalDoseUnit)}</dd>
             </div>
             <div>
               <dt className="text-zinc-500">Reference pattern</dt>
@@ -181,9 +317,9 @@ export default function CalculatorPage() {
           </dl>
           <p className="mt-3 text-xs italic leading-relaxed text-zinc-500 dark:text-zinc-400">
             Reference values reflect doses studied in published research or
-            commonly cited in protocols. They are <strong>informational, not a
-            recommendation for you</strong>. Decisions about your dose belong
-            with your healthcare provider.
+            commonly cited in protocols. They are{' '}
+            <strong>informational, not a recommendation for you</strong>.
+            Decisions about your dose belong with your healthcare provider.
           </p>
           <p className="mt-3 text-[10px] uppercase tracking-wide text-zinc-400">
             Legal status last reviewed: {peptide.legalStatusLastUpdated}
@@ -195,13 +331,151 @@ export default function CalculatorPage() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Subcomponents (local, not exported)
+// Subcomponents
 // ─────────────────────────────────────────────────────────────
 
 function DisclaimerSlot({ text }: { text: string }) {
   return (
     <div className="rounded-lg border border-dashed border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
       {text}
+    </div>
+  );
+}
+
+function HowThisWorks({
+  open,
+  onToggle,
+}: {
+  open: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+      <button
+        type="button"
+        onClick={onToggle}
+        className="flex w-full items-center justify-between text-left"
+        aria-expanded={open}
+      >
+        <span className="text-base font-semibold">
+          How peptide reconstitution works
+        </span>
+        <span className="ml-2 text-zinc-500" aria-hidden>
+          {open ? '▾' : '▸'}
+        </span>
+      </button>
+      {!open && (
+        <p className="mt-1 text-xs text-zinc-500">
+          New to peptides or confused by mcg vs mg vs units? Open this section first.
+        </p>
+      )}
+      {open && (
+        <div className="mt-5 space-y-5 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          <Step
+            n={1}
+            title="What's in the vial"
+            body="Peptides come as a freeze-dried white powder sealed in a small glass vial. The vial label tells you the total mass of peptide inside (for example, 5 mg or 10 mg). You can't inject the powder directly — it has to be dissolved in liquid first."
+          />
+          <Step
+            n={2}
+            title="What bacteriostatic water does"
+            body="Bacteriostatic water (bac water) is sterile water with a tiny amount of preservative added. When you add it to the vial, the peptide powder dissolves and becomes injectable. The preservative keeps the solution sterile in the fridge for about 28 days — bacteria can't grow."
+          />
+          <div>
+            <h3 className="font-medium text-zinc-900 dark:text-zinc-100">
+              3. What &ldquo;concentration&rdquo; means
+            </h3>
+            <p className="mt-1">
+              Concentration is how much peptide is in each mL of liquid.
+            </p>
+            <p className="mt-2 rounded bg-zinc-100 px-3 py-2 font-mono text-xs dark:bg-zinc-800">
+              concentration (mg/mL) = vial peptide (mg) ÷ water (mL)
+            </p>
+            <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+              Same vial dissolved in <em>less</em> water gives a stronger
+              concentration — each drop contains more peptide. Example:
+              5 mg vial + 2 mL water = 2.5 mg/mL. 5 mg + 1 mL = 5 mg/mL
+              (twice as strong).
+            </p>
+          </div>
+          <div>
+            <h3 className="font-medium text-zinc-900 dark:text-zinc-100">
+              4. How an insulin syringe is marked
+            </h3>
+            <p className="mt-1">
+              A U-100 insulin syringe has markings called &ldquo;units.&rdquo;
+              100 units always equals 1 mL of liquid. So 1 unit = 0.01 mL.
+            </p>
+            <p className="mt-2">Insulin syringes come in three common barrel sizes:</p>
+            <ul className="mt-1 list-disc space-y-0.5 pl-5 text-zinc-600 dark:text-zinc-400">
+              <li>
+                <strong>0.3 mL barrel</strong> — markings up to 30 units
+              </li>
+              <li>
+                <strong>0.5 mL barrel</strong> — markings up to 50 units
+              </li>
+              <li>
+                <strong>1.0 mL barrel</strong> — markings up to 100 units
+              </li>
+            </ul>
+            <p className="mt-2">
+              All three have the <em>same scale</em> (100 units per mL).
+              Smaller barrel just means less total capacity. Pick the one
+              that fits your dose comfortably.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-medium text-zinc-900 dark:text-zinc-100">
+              5. Why mg and mcg are both used
+            </h3>
+            <p className="mt-1">
+              <strong>1 mg = 1,000 mcg.</strong> They&rsquo;re the same unit
+              measured at different scales — like inches vs. feet.
+            </p>
+            <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+              Some peptides (semaglutide, tirzepatide) are commonly written in{' '}
+              <strong>mg</strong> because typical doses are between 0.25 mg
+              and 15 mg. Others (BPC-157, TB-500, GHK-Cu) are usually written
+              in <strong>mcg</strong> because typical doses are 100–500 mcg,
+              which sounds more natural than &ldquo;0.1–0.5 mg.&rdquo; The
+              math is identical — just bigger or smaller numbers on paper.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-medium text-zinc-900 dark:text-zinc-100">
+              6. Your dose vs. your draw
+            </h3>
+            <p className="mt-1">Two different things, often confused:</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5 text-zinc-600 dark:text-zinc-400">
+              <li>
+                <strong>Your dose</strong> = how much peptide (the drug
+                itself). Expressed in mg or mcg.
+              </li>
+              <li>
+                <strong>Your draw</strong> = the mark on your syringe (the
+                diluted solution). Expressed in units (insulin syringe) or
+                mL (IM syringe).
+              </li>
+            </ul>
+            <p className="mt-2">
+              They&rsquo;re <em>not the same number</em> — but they describe
+              the same injection. The calculator below shows all three views
+              side-by-side so you can see how they connect.
+            </p>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function Step({ n, title, body }: { n: number; title: string; body: string }) {
+  return (
+    <div>
+      <h3 className="font-medium text-zinc-900 dark:text-zinc-100">
+        {n}. {title}
+      </h3>
+      <p className="mt-1">{body}</p>
     </div>
   );
 }
@@ -312,139 +586,191 @@ function FieldNumber({
   );
 }
 
-function FieldTargetDose({
-  targetDose,
-  targetDoseUnit,
-  onDoseChange,
-  onUnitChange,
+function FieldSyringeBarrel({
+  value,
+  onChange,
 }: {
-  targetDose: number;
-  targetDoseUnit: DoseUnit;
-  onDoseChange: (n: number) => void;
-  onUnitChange: (u: DoseUnit) => void;
+  value: SyringeBarrelId;
+  onChange: (b: SyringeBarrelId) => void;
+}) {
+  return (
+    <div>
+      <label htmlFor="barrel" className="mb-1 block text-sm font-medium">
+        Syringe you have
+      </label>
+      <select
+        id="barrel"
+        value={value}
+        onChange={(e) => onChange(e.target.value as SyringeBarrelId)}
+        className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
+      >
+        <optgroup label="Insulin syringes (U-100 scale — 100 units = 1 mL)">
+          <option value="insulin-0.3">0.3 mL — max 30 units</option>
+          <option value="insulin-0.5">0.5 mL — max 50 units</option>
+          <option value="insulin-1.0">1.0 mL — max 100 units</option>
+        </optgroup>
+        <optgroup label="IM (oil) syringes — mL graduations, no unit markings">
+          <option value="im-1.0">IM 1 mL</option>
+          <option value="im-3.0">IM 3 mL</option>
+        </optgroup>
+      </select>
+      <p className="mt-1 text-xs text-zinc-500">
+        All insulin syringes share the same scale (100 units = 1 mL). A smaller barrel just holds less liquid — it&rsquo;s not a different scale.
+      </p>
+    </div>
+  );
+}
+
+function FieldThreeWayDose({
+  doseMcg,
+  doseMg,
+  doseSyringeAmount,
+  thirdFieldUnit,
+  haveReconstitution,
+  onMcgChange,
+  onMgChange,
+  onSyringeAmountChange,
+}: {
+  doseMcg: number;
+  doseMg: number;
+  doseSyringeAmount: number;
+  thirdFieldUnit: 'units' | 'mL';
+  haveReconstitution: boolean;
+  onMcgChange: (n: number) => void;
+  onMgChange: (n: number) => void;
+  onSyringeAmountChange: (n: number) => void;
 }) {
   return (
     <div>
       <label className="mb-1 block text-sm font-medium">Your dose</label>
-      <div className="flex gap-2">
-        <input
-          type="number"
-          step="any"
-          min={0}
-          value={Number.isFinite(targetDose) ? targetDose : ''}
-          onChange={(e) => onDoseChange(parseFloat(e.target.value))}
-          placeholder="Enter your dose"
-          className="flex-1 rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
+      <p className="mb-2 text-xs text-zinc-500">
+        These three fields all represent the same injection. Edit any one — the other two update.
+      </p>
+      <div className="grid grid-cols-3 gap-2">
+        <DoseField
+          label={`mcg`}
+          sublabel="of peptide"
+          placeholder="e.g. 250"
+          value={doseMcg}
+          onChange={onMcgChange}
         />
-        <select
-          value={targetDoseUnit}
-          onChange={(e) => onUnitChange(e.target.value as DoseUnit)}
-          className="rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
-        >
-          <option value="mg">mg</option>
-          <option value="mcg">mcg</option>
-          <option value="IU">IU</option>
-        </select>
+        <DoseField
+          label={`mg`}
+          sublabel="of peptide"
+          placeholder="e.g. 0.25"
+          value={doseMg}
+          onChange={onMgChange}
+        />
+        <DoseField
+          label={thirdFieldUnit}
+          sublabel="on your syringe"
+          placeholder={haveReconstitution ? (thirdFieldUnit === 'units' ? 'e.g. 25' : 'e.g. 0.25') : 'enter vial + water first'}
+          value={doseSyringeAmount}
+          onChange={onSyringeAmountChange}
+          disabled={!haveReconstitution}
+        />
       </div>
-      <p className="mt-1 text-xs text-zinc-500">
+      <p className="mt-2 text-xs leading-relaxed text-zinc-500">
+        <strong>mcg</strong> = same drug, smaller units.{' '}
+        <strong>mg</strong> = the drug itself.{' '}
+        <strong>{thirdFieldUnit}</strong> = the mark on your syringe (peptide already mixed with the water). These three always match.
+      </p>
+      <p className="mt-1 text-xs italic text-zinc-500">
         Decided by you and your healthcare provider — never by BuddyPept.
       </p>
     </div>
   );
 }
 
-function FieldSyringe({
+function DoseField({
+  label,
+  sublabel,
+  placeholder,
   value,
   onChange,
+  disabled,
 }: {
-  value: SyringeType;
-  onChange: (s: SyringeType) => void;
+  label: string;
+  sublabel: string;
+  placeholder: string;
+  value: number;
+  onChange: (n: number) => void;
+  disabled?: boolean;
 }) {
   return (
     <div>
-      <label htmlFor="syringe" className="mb-1 block text-sm font-medium">
-        Syringe type
+      <label className="mb-1 block text-xs">
+        <span className="font-medium">{label}</span>{' '}
+        <span className="text-zinc-500">{sublabel}</span>
       </label>
-      <select
-        id="syringe"
-        value={value}
-        onChange={(e) => onChange(e.target.value as SyringeType)}
-        className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
-      >
-        <option value="U-100">U-100 insulin syringe (units)</option>
-        <option value="U-40">U-40 insulin syringe (units)</option>
-        <option value="U-50">U-50 insulin syringe (units)</option>
-        <option value="IM">IM syringe (mL only)</option>
-      </select>
-      <p className="mt-1 text-xs text-zinc-500">
-        Both mL and units are shown in the result — read whichever matches your syringe.
-      </p>
+      <input
+        type="number"
+        step="any"
+        min={0}
+        value={Number.isFinite(value) ? formatForInput(value) : ''}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        placeholder={placeholder}
+        disabled={disabled}
+        className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm tabular-nums disabled:cursor-not-allowed disabled:bg-zinc-100 disabled:text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:disabled:bg-zinc-900"
+      />
     </div>
   );
 }
 
 function ResultDisplay({
   result,
-  peptide,
-  inputs,
+  warnings,
+  barrel,
+  doseMg,
+  doseMcg,
   showMath,
   onToggleMath,
 }: {
   result: NonNullable<ReturnType<typeof calculateDose>>;
-  peptide: ReturnType<typeof getPeptideBySlug>;
-  inputs: {
-    vialAmount: number;
-    waterMl: number;
-    targetDose: number;
-    targetDoseUnit: DoseUnit;
-    syringeType: SyringeType;
-  };
+  warnings: CalcWarning[];
+  barrel: SyringeBarrel;
+  doseMg: number;
+  doseMcg: number;
   showMath: boolean;
   onToggleMath: () => void;
 }) {
-  const unitsPerMl =
-    inputs.syringeType === 'U-100'
-      ? 100
-      : inputs.syringeType === 'U-40'
-        ? 40
-        : inputs.syringeType === 'U-50'
-          ? 50
-          : 1;
-  const isIM = inputs.syringeType === 'IM';
+  const isIM = barrel.scale === 'IM';
+  // Display values
+  const volumeMl = result.volumeMl;
+  const syringeUnits = result.syringeUnits;
 
   return (
     <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-      {/* Result numbers — both mL and units shown */}
       <div className="space-y-1">
         <div className="text-xs uppercase tracking-wide text-zinc-500">Draw</div>
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span className="text-3xl font-bold tabular-nums sm:text-4xl">
-            {formatVolume(result.volumeMl)} mL
+            {formatNum(volumeMl, 3)} mL
           </span>
           {!isIM && (
             <span className="text-zinc-500">
               or{' '}
               <span className="text-2xl font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
-                {formatUnits(result.syringeUnits)}
+                {formatNum(syringeUnits, 2)}
               </span>{' '}
-              units on a {inputs.syringeType} syringe
+              units on a U-100 insulin syringe
             </span>
           )}
         </div>
         <div className="text-xs text-zinc-500">
-          Concentration: {formatNum(result.concentrationMgPerMl, 3)} mg/mL
+          Your dose: {formatNum(doseMcg, 2)} mcg = {formatNum(doseMg, 4)} mg ·
+          Concentration: {formatNum(result.concentrationMgPerMl, 3)} mg/mL ·
+          Syringe: {barrel.shortLabel}
         </div>
       </div>
 
-      {/* Placeholder: medical disclaimer near the result number */}
       <div className="mt-4">
         <DisclaimerSlot text={PLACEHOLDER_DISCLAIMER_RESULTS} />
       </div>
 
-      {/* Warnings */}
-      {result.warnings.length > 0 && (
+      {warnings.length > 0 && (
         <ul className="mt-4 space-y-2">
-          {result.warnings.map((w, i) => (
+          {warnings.map((w, i) => (
             <li key={i}>
               <WarningCard warning={w} />
             </li>
@@ -452,7 +778,6 @@ function ResultDisplay({
         </ul>
       )}
 
-      {/* Show the math (expandable transparency) */}
       <div className="mt-5 border-t border-zinc-200 pt-4 dark:border-zinc-800">
         <button
           type="button"
@@ -468,22 +793,23 @@ function ResultDisplay({
             <p>
               <strong>Step 1 — Reconstitution:</strong>
               <br />
-              {inputs.vialAmount} {peptide?.vialUnit ?? 'mg'} ÷ {inputs.waterMl} mL ={' '}
-              {formatNum(result.concentrationMgPerMl, 3)} mg/mL concentration
+              Vial mg ÷ water mL = {formatNum(result.concentrationMgPerMl, 3)} mg/mL concentration
             </p>
             <p>
-              <strong>Step 2 — Volume to draw:</strong>
+              <strong>Step 2 — Same dose, three views:</strong>
               <br />
-              {inputs.targetDose} {inputs.targetDoseUnit} ÷{' '}
-              {formatNum(result.concentrationMgPerMl, 3)} mg/mL ={' '}
-              {formatVolume(result.volumeMl)} mL
+              {formatNum(doseMcg, 2)} mcg = {formatNum(doseMg, 4)} mg (÷ 1000 = mg ↔ mcg)
+            </p>
+            <p>
+              <strong>Step 3 — Volume to draw:</strong>
+              <br />
+              {formatNum(doseMg, 4)} mg ÷ {formatNum(result.concentrationMgPerMl, 3)} mg/mL = {formatNum(volumeMl, 3)} mL
             </p>
             {!isIM && (
               <p>
-                <strong>Step 3 — Syringe units:</strong>
+                <strong>Step 4 — Syringe units:</strong>
                 <br />
-                {formatVolume(result.volumeMl)} mL × {unitsPerMl} units/mL ={' '}
-                {formatUnits(result.syringeUnits)} units
+                {formatNum(volumeMl, 3)} mL × 100 units/mL = {formatNum(syringeUnits, 2)} units (U-100 scale)
               </p>
             )}
           </div>
@@ -509,21 +835,54 @@ function WarningCard({ warning }: { warning: CalcWarning }) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Formatting helpers (presentation-only, never affect math)
+// Math + formatting helpers (presentation-only, never affect the
+// canonical math in lib/calculator.ts)
 // ─────────────────────────────────────────────────────────────
 
+/**
+ * Compute the syringe-amount field value from the canonical doseMg.
+ * For U-100 insulin: returns units (= doseMg ÷ mgPerUnit).
+ * For IM: returns mL (= doseMg ÷ concentration).
+ * Returns NaN if reconstitution data is missing.
+ */
+function computeSyringeAmount(
+  doseMg: number,
+  scale: SyringeType,
+  concentrationMgPerMl: number
+): number {
+  if (!Number.isFinite(doseMg) || !Number.isFinite(concentrationMgPerMl)) {
+    return NaN;
+  }
+  if (scale === 'U-100') {
+    const mgPerUnit = concentrationMgPerMl / 100;
+    if (mgPerUnit === 0) return NaN;
+    return doseMg / mgPerUnit;
+  }
+  // IM: the third field is mL
+  if (concentrationMgPerMl === 0) return NaN;
+  return doseMg / concentrationMgPerMl;
+}
+
 function formatNum(n: number, decimals: number): string {
+  if (!Number.isFinite(n)) return '—';
   return Number(n.toFixed(decimals)).toString();
 }
 
-function formatVolume(mL: number): string {
-  // 3-decimal precision shows useful detail without being noisy
-  return formatNum(mL, 3);
+/**
+ * Format a number for use as the `value` of a controlled input.
+ * Hides floating-point noise like 20.000000000001 → 20.
+ */
+function formatForInput(n: number): string {
+  if (!Number.isFinite(n)) return '';
+  // Round to 6 decimal places of precision, then strip trailing zeros
+  return Number(n.toFixed(6)).toString();
 }
 
-function formatUnits(units: number): string {
-  // Round display to nearest 0.5 (matches typical syringe graduations)
-  // but only for the display — the underlying value is preserved.
-  const rounded = Math.round(units * 2) / 2;
-  return rounded.toString();
+function formatReferenceDose(value: number, unit: 'mg' | 'mcg' | 'IU'): string {
+  if (unit === 'IU') return `${value} IU`;
+  if (unit === 'mg') {
+    return `${value} mg = ${value * 1000} mcg`;
+  }
+  // mcg
+  return `${value} mcg = ${value / 1000} mg`;
 }
