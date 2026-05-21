@@ -521,7 +521,7 @@ function FieldVialAmount({
   return (
     <div>
       <label htmlFor="vialAmount" className="mb-1 block text-sm font-medium">
-        Vial size <span className="text-zinc-500">({unit})</span>
+        Peptide in the vial <span className="text-zinc-500">({unit})</span>
       </label>
       <input
         id="vialAmount"
@@ -532,6 +532,10 @@ function FieldVialAmount({
         onChange={(e) => onChange(parseFloat(e.target.value))}
         className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
       />
+      <p className="mt-1 text-xs text-zinc-500">
+        The amount of peptide powder — the number on your vial label (e.g.,
+        5 mg, 10 mg). <strong>Not</strong> the size of the glass container.
+      </p>
       {peptide && peptide.commonVialSizes.length > 1 && (
         <div className="mt-2 flex flex-wrap gap-1.5">
           {peptide.commonVialSizes.map((size) => (
