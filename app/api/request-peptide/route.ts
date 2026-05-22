@@ -49,16 +49,19 @@ export async function POST(request: Request) {
     });
     if (error) {
       console.error('Supabase insert error:', error.message);
+      // TEMPORARY DEBUG: expose the real error to diagnose setup. Revert after.
       return NextResponse.json(
-        { error: 'We could not save your request. Please try again.' },
+        { error: `DEBUG (database said): ${error.message}` },
         { status: 500 }
       );
     }
     return NextResponse.json({ ok: true });
   } catch (e) {
-    console.error('request-peptide route error:', e);
+    const detail = e instanceof Error ? e.message : String(e);
+    console.error('request-peptide route error:', detail);
+    // TEMPORARY DEBUG: expose the real error to diagnose setup. Revert after.
     return NextResponse.json(
-      { error: 'Server error. Please try again in a moment.' },
+      { error: `DEBUG (server said): ${detail}` },
       { status: 500 }
     );
   }
