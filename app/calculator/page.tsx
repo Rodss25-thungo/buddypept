@@ -29,6 +29,7 @@ import {
   type SyringeType,
   type Warning as CalcWarning,
 } from '@/lib/calculator';
+import { RequestPeptideForm } from './request-peptide-form';
 
 // ─────────────────────────────────────────────────────────────
 // Syringe barrels (UI concern — math library only knows U-100 vs IM)
@@ -368,6 +369,19 @@ export default function CalculatorPage() {
             healthcare provider. BuddyPept does the math; it does not give
             medical advice.
           </p>
+
+          {/* Request-a-peptide form (email capture + roadmap signal) */}
+          <div className="mt-6 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+            <h3 className="text-base font-semibold">
+              Want {customPeptideName.trim()} added to the library?
+            </h3>
+            <p className="mt-1 mb-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              We&rsquo;re adding more peptides — including ones measured in IU
+              (like HGH) and special strengths (like HCG). Tell us which one you
+              want and we&rsquo;ll email you the moment it&rsquo;s ready.
+            </p>
+            <RequestPeptideForm defaultPeptide={customPeptideName.trim()} />
+          </div>
         </section>
       )}
     </main>
