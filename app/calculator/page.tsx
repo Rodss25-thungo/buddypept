@@ -915,7 +915,7 @@ function SyringeDiagram({
                   y="72"
                   textAnchor="middle"
                   className="fill-zinc-400"
-                  fontSize="8"
+                  fontSize="9"
                 >
                   {t.label}
                 </text>

@@ -48,6 +48,16 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
+/* On phones, force form controls to 16px. Below 16px, iOS Safari auto-zooms
+   the page when a field is tapped, which feels janky. Also more legible. */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* Friendly teal focus glow on every input, so the form feels responsive and
    guided rather than cold. */
 input:focus-visible,

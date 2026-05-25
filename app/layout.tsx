@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
@@ -18,6 +18,14 @@ export const metadata: Metadata = {
   title: "BuddyPept: Free Peptide Dosing Calculator",
   description:
     "Turn peptide-curious into peptide-confident. A free, plain-English peptide dosing calculator and guide. No selling, no data harvest, just the math.",
+};
+
+// Mobile-first: proper scaling on phones, plus a teal browser bar to match the
+// brand on mobile.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0d9488",
 };
 
 export default function RootLayout({
