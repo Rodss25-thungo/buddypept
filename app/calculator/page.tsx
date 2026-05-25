@@ -30,6 +30,7 @@ import {
   type Warning as CalcWarning,
 } from '@/lib/calculator';
 import { RequestPeptideForm } from './request-peptide-form';
+import { Buddy } from '@/components/buddy';
 
 // ─────────────────────────────────────────────────────────────
 // Syringe barrels (UI concern; math library only knows U-100 vs IM)
@@ -245,13 +246,16 @@ export default function CalculatorPage() {
   return (
     <main className="mx-auto max-w-2xl px-4 py-8 sm:py-12">
       {/* Header */}
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Peptide dosing calculator
-        </h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-          The math, free forever. No paywall, no data harvest.
-        </p>
+      <header className="mb-6 flex items-center gap-3">
+        <Buddy className="h-12 w-auto flex-shrink-0 drop-shadow-sm" />
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Peptide dosing calculator
+          </h1>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            The math, free forever. No paywall, no data harvest.
+          </p>
+        </div>
       </header>
 
       {/* How this works: collapsible educational content */}
@@ -263,7 +267,7 @@ export default function CalculatorPage() {
       </div>
 
       {/* Inputs */}
-      <section className="mt-6 space-y-5 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+      <section className="mt-6 space-y-5 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
         <FieldPeptide
           value={peptideSlug}
           customName={customPeptideName}
@@ -828,11 +832,13 @@ function ResultDisplay({
   const syringeUnits = result.syringeUnits;
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="space-y-1">
-        <div className="text-xs uppercase tracking-wide text-zinc-500">Draw</div>
+    <div className="rounded-2xl border border-brand-200 bg-brand-50 p-5 shadow-sm dark:border-brand-900 dark:bg-brand-950/30">
+      <div className="flex items-start gap-3">
+        <Buddy className="hidden h-10 w-auto flex-shrink-0 drop-shadow-sm sm:block" />
+        <div className="space-y-1">
+        <div className="text-xs font-medium uppercase tracking-wide text-brand-700 dark:text-brand-300">Here&rsquo;s your draw</div>
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="text-3xl font-bold tabular-nums text-brand-700 sm:text-4xl dark:text-brand-400">
+          <span className="text-3xl font-bold tabular-nums text-brand-700 sm:text-4xl dark:text-brand-300">
             {formatNum(volumeMl, 3)} mL
           </span>
           {!isIM && (
@@ -849,6 +855,7 @@ function ResultDisplay({
           Your dose: {formatNum(doseMcg, 2)} mcg = {formatNum(doseMg, 4)} mg ·
           Concentration: {formatNum(result.concentrationMgPerMl, 3)} mg/mL ·
           Syringe: {barrel.shortLabel}
+        </div>
         </div>
       </div>
 

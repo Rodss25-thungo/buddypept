@@ -47,3 +47,21 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Friendly teal focus glow on every input, so the form feels responsive and
+   guided rather than cold. */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 3px var(--color-brand-100);
+}
+
+@media (prefers-color-scheme: dark) {
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand-500) 30%, transparent);
+  }
+}

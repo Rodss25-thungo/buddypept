@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Buddy } from '@/components/buddy';
 
 /**
  * BuddyPept homepage.
@@ -19,7 +20,9 @@ export default function HomePage() {
     <div className="flex min-h-full flex-1 flex-col">
       <main className="flex-1">
         {/* ───── Hero ───── */}
-        <section className="mx-auto max-w-3xl px-4 pt-16 pb-12 text-center sm:pt-24 sm:pb-16">
+        <section className="border-b border-zinc-200/70 bg-gradient-to-b from-brand-50 to-background dark:border-zinc-800 dark:from-brand-950/30 dark:to-background">
+          <div className="mx-auto max-w-3xl px-4 pt-14 pb-14 text-center sm:pt-20 sm:pb-20">
+          <Buddy className="mx-auto mb-6 h-24 w-auto drop-shadow-sm" />
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
             Peptide-curious? Meet your Buddy.
           </h1>
@@ -37,10 +40,11 @@ export default function HomePage() {
               <span aria-hidden>→</span>
             </Link>
           </div>
+          </div>
         </section>
 
         {/* ───── The problem ───── */}
-        <section className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/40">
+        <section className="bg-brand-50/50 dark:bg-brand-950/15">
           <div className="mx-auto max-w-2xl px-4 py-12 sm:py-16">
             <h2 className="text-2xl font-semibold tracking-tight">
               The vial is open. Now what?
@@ -68,7 +72,7 @@ export default function HomePage() {
         </section>
 
         {/* ───── How it works ───── */}
-        <section className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/40">
+        <section className="bg-brand-50/50 dark:bg-brand-950/15">
           <div className="mx-auto max-w-2xl px-4 py-12 sm:py-16">
             <h2 className="text-2xl font-semibold tracking-tight">
               How it works
