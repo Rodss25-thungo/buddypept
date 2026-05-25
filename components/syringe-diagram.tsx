@@ -39,7 +39,7 @@ export function SyringeDiagram({
   return (
     <div className="rounded-xl bg-zinc-900 p-4 shadow-sm">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-medium text-zinc-300">Your syringe</span>
+        <span className="text-xs font-medium text-zinc-300">Syringe</span>
         <span className="text-xs text-zinc-400">{shortLabel}</span>
       </div>
       <svg
@@ -134,17 +134,17 @@ export function SyringeDiagram({
       <p className="mt-2 text-center text-sm text-zinc-300">
         {hasDraw ? (
           over ? (
-            <>Your dose is bigger than this {shortLabel} holds. Pick a larger syringe.</>
+            <>This dose is bigger than the {shortLabel} holds. Pick a larger syringe.</>
           ) : (
             <>
-              Fill to{' '}
+              Marked at{' '}
               <span className="font-semibold text-brand-300">
                 {formatNum(drawAmount, 2)} {unitLabel}
               </span>
             </>
           )
         ) : (
-          <>Buddy will mark where to fill once you enter your dose.</>
+          <>Enter a dose to see where it lands on the syringe.</>
         )}
       </p>
     </div>

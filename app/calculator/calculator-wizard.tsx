@@ -267,8 +267,8 @@ export function CalculatorWizard() {
       <div className="mt-6 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:p-7">
         {STEPS[stepIndex] === 'peptide' && (
           <Step
-            question="Which peptide are you using?"
-            subtitle="Pick yours from the list. Not there? Choose “I don't see it here.”"
+            question="Pick a peptide"
+            subtitle="Select one from the list. Not there? Choose “I don't see it here.”"
           >
             <select
               value={peptideSlug}
@@ -294,7 +294,7 @@ export function CalculatorWizard() {
 
         {STEPS[stepIndex] === 'vial' && (
           <Step
-            question={`How many mg are in your ${peptideLabel} vial?`}
+            question={`How many mg are in the ${peptideLabel} vial?`}
             subtitle="The amount of peptide powder, printed on the vial label. Not the size of the glass container."
           >
             <BigNumberInput value={vialAmount} onChange={setVialAmount} unit="mg" placeholder="e.g. 5" />
@@ -304,8 +304,8 @@ export function CalculatorWizard() {
 
         {STEPS[stepIndex] === 'water' && (
           <Step
-            question="How much bacteriostatic water are you mixing in?"
-            subtitle="The sterile liquid you add to the vial to dissolve the powder."
+            question="How much bacteriostatic water is added?"
+            subtitle="The sterile liquid added to the vial to dissolve the powder."
           >
             <BigNumberInput value={waterMl} onChange={setWaterMl} unit="mL" placeholder="e.g. 2" />
             <QuickPicks options={COMMON_WATER_ML} suffix="mL" value={waterMl} onPick={setWaterMl} />
@@ -313,7 +313,7 @@ export function CalculatorWizard() {
         )}
 
         {STEPS[stepIndex] === 'syringe' && (
-          <Step question="What syringe do you have?" subtitle="We'll mark exactly where to fill it.">
+          <Step question="Pick a syringe" subtitle="We'll show where the dose lands on it.">
             <div className="space-y-2">
               {BARRELS.map((b) => (
                 <ChoiceButton
@@ -329,8 +329,8 @@ export function CalculatorWizard() {
 
         {STEPS[stepIndex] === 'dose' && (
           <Step
-            question="What dose are you taking?"
-            subtitle={`Enter it in mg or mcg. Don't know it that way? Switch to ${thirdLabel} and enter what you plan to draw. BuddyPept never picks this for you.`}
+            question="What dose do you want to calculate?"
+            subtitle={`Enter it in mg or mcg. Don't have it that way? Switch to ${thirdLabel} and enter the amount to draw. BuddyPept never picks a dose for you.`}
           >
             <BigNumberInput
               value={doseFieldValue}
@@ -352,8 +352,8 @@ export function CalculatorWizard() {
             {peptide && (
               <p className="mt-3 text-sm text-zinc-500">
                 For reference only, research often cites around {peptide.typicalDose}{' '}
-                {peptide.typicalDoseUnit} for {peptide.name}. Your dose is up to
-                you and your provider.
+                {peptide.typicalDoseUnit} for {peptide.name}. Any dose is a
+                decision for you and your provider.
               </p>
             )}
           </Step>
@@ -443,7 +443,7 @@ function ResultScreen({
       ? [
           {
             level: 'caution' as const,
-            message: `Your dose needs ${formatNum(result.volumeMl, 3)} mL, more than the ${barrel.shortLabel} holds (${barrel.maxMl} mL). Use a larger syringe, or mix with more water for a weaker concentration.`,
+            message: `This dose needs ${formatNum(result.volumeMl, 3)} mL, more than the ${barrel.shortLabel} holds (${barrel.maxMl} mL). Use a larger syringe, or mix with more water for a weaker concentration.`,
           },
         ]
       : []),
@@ -454,7 +454,7 @@ function ResultScreen({
       <div className="text-center">
         <Buddy className="mx-auto h-16 w-auto drop-shadow-sm" />
         <p className="mt-3 text-sm font-medium uppercase tracking-wide text-brand-700 dark:text-brand-300">
-          Here&rsquo;s your draw
+          Calculated draw
         </p>
         <div className="mt-1 text-5xl font-bold tabular-nums text-brand-700 dark:text-brand-300">
           {isInsulin ? formatNum(result.syringeUnits, 1) : formatNum(result.volumeMl, 3)}
@@ -508,7 +508,7 @@ function ResultScreen({
       </div>
 
       <div className="mt-3 rounded-lg bg-zinc-50 p-3 text-xs text-zinc-500 dark:bg-zinc-900">
-        Your dose: {formatNum(doseMg * 1000, 0)} mcg = {formatNum(doseMg, 4)} mg ·
+        Dose: {formatNum(doseMg * 1000, 0)} mcg = {formatNum(doseMg, 4)} mg ·
         Concentration: {formatNum(result.concentrationMgPerMl, 3)} mg/mL · Syringe: {barrel.shortLabel}
       </div>
 
