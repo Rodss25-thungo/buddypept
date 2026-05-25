@@ -27,9 +27,9 @@ export default function HomePage() {
             Peptide-curious? Meet your Buddy.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Free, clear answers to the question nobody wants to ask out loud:{' '}
-            <em>how much do I actually draw?</em> No sales pitch. No sign-up
-            wall. Just the math.
+            Free, clear answers to the question beginners find hardest:{' '}
+            <em>how does the dosing math actually work?</em> No sales pitch. No
+            sign-up wall. Just the math.
           </p>
           <div className="mt-8">
             <Link
@@ -47,13 +47,14 @@ export default function HomePage() {
         <section className="bg-brand-50/50 dark:bg-brand-950/15">
           <div className="mx-auto max-w-2xl px-4 py-12 sm:py-16">
             <h2 className="text-2xl font-semibold tracking-tight">
-              The vial is open. Now what?
+              mg, mcg, units. Where it gets confusing.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
-              You&rsquo;ve got a vial, some bacteriostatic water, and a syringe,
-              and no idea how the three fit together. mg? mcg? units? The
-              internet is full of bro-science, sketchy vendors, and people
-              trying to sell you something. You just want a straight answer.
+              A vial, some bacteriostatic water, a syringe, and a pile of
+              numbers that don&rsquo;t obviously fit together. mg? mcg? units?
+              The internet is full of bro-science, sketchy vendors, and people
+              trying to sell something. BuddyPept just explains the math,
+              clearly.
             </p>
           </div>
         </section>
@@ -65,9 +66,9 @@ export default function HomePage() {
           </h2>
           <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
             BuddyPept is a free calculator and plain-English guide for people
-            new to peptides. Tell it what&rsquo;s in your vial and the dose you
-            want, and it shows exactly how much to draw, in whatever unit your
-            syringe uses. That&rsquo;s the whole thing.
+            new to peptides. Enter what&rsquo;s in a vial and a dose, and it
+            shows exactly how much that works out to, in whatever unit a syringe
+            uses. That&rsquo;s the whole thing.
           </p>
         </section>
 
@@ -80,15 +81,15 @@ export default function HomePage() {
             <ol className="mt-6 space-y-5">
               <HowStep
                 n={1}
-                text="Pick your peptide, or type your own if it's not on the list."
+                text="Pick a peptide, or request one that's not listed yet."
               />
               <HowStep
                 n={2}
-                text="Enter your vial amount, your bacteriostatic water, and your dose."
+                text="Enter the vial amount, the bacteriostatic water, and a dose."
               />
               <HowStep
                 n={3}
-                text="See it in mcg, mg, and syringe units, all at once, always in sync."
+                text="See it in mcg, mg, and syringe units, clearly explained."
               />
             </ol>
           </div>
@@ -101,9 +102,9 @@ export default function HomePage() {
           </h2>
           <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
             Everyone else in peptides is selling something. We&rsquo;re not. The
-            math stays free, forever. We don&rsquo;t harvest your health data.
-            We don&rsquo;t tell you what to take. That&rsquo;s between you and
-            your doctor. We just make the numbers make sense.
+            math stays free, forever. We don&rsquo;t harvest health data. We
+            don&rsquo;t tell anyone what to take. That&rsquo;s a conversation for
+            a person and their doctor. We just make the numbers make sense.
           </p>
           <p className="mt-6 text-lg font-semibold italic text-brand-700 dark:text-brand-400">
             The math doesn&rsquo;t lie.
