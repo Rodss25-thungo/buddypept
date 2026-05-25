@@ -110,7 +110,7 @@ export function RequestPeptideForm({
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-700 disabled:opacity-60 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+        className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Notify me when it’s ready'}
       </button>

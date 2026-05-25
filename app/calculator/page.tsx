@@ -627,7 +627,7 @@ function FieldVialAmount({
             onClick={() => onChange(size)}
             className={`rounded-md border px-2 py-1 text-xs ${
               value === size
-                ? 'border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
+                ? 'border-brand-600 bg-brand-600 text-white'
                 : 'border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
             }`}
           >
@@ -832,7 +832,7 @@ function ResultDisplay({
       <div className="space-y-1">
         <div className="text-xs uppercase tracking-wide text-zinc-500">Draw</div>
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="text-3xl font-bold tabular-nums sm:text-4xl">
+          <span className="text-3xl font-bold tabular-nums text-brand-700 sm:text-4xl dark:text-brand-400">
             {formatNum(volumeMl, 3)} mL
           </span>
           {!isIM && (

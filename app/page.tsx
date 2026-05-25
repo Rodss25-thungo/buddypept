@@ -31,7 +31,7 @@ export default function HomePage() {
           <div className="mt-8">
             <Link
               href="/calculator"
-              className="inline-flex items-center gap-2 rounded-lg bg-zinc-900 px-6 py-3 text-base font-semibold text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700"
             >
               Open the calculator
               <span aria-hidden>→</span>
@@ -101,7 +101,7 @@ export default function HomePage() {
             We don&rsquo;t tell you what to take. That&rsquo;s between you and
             your doctor. We just make the numbers make sense.
           </p>
-          <p className="mt-6 text-lg font-medium italic text-zinc-900 dark:text-zinc-100">
+          <p className="mt-6 text-lg font-semibold italic text-brand-700 dark:text-brand-400">
             The math doesn&rsquo;t lie.
           </p>
         </section>
@@ -115,7 +115,7 @@ export default function HomePage() {
             <div className="mt-8">
               <Link
                 href="/calculator"
-                className="inline-flex items-center gap-2 rounded-lg bg-zinc-900 px-6 py-3 text-base font-semibold text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700"
               >
                 Open the calculator
                 <span aria-hidden>→</span>
@@ -131,7 +131,7 @@ export default function HomePage() {
 function HowStep({ n, text }: { n: number; text: string }) {
   return (
     <li className="flex gap-4">
-      <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-zinc-900 text-sm font-semibold text-white dark:bg-zinc-100 dark:text-zinc-900">
+      <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-semibold text-white">
         {n}
       </span>
       <span className="pt-1 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
