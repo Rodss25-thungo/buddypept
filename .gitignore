@@ -54,11 +54,11 @@ desktop.ini
 *.pem
 
 # === Claude Code workspace data ===
-# Per-machine overrides (personal prefs, secrets) — never commit
+# Per-machine overrides (personal prefs, secrets): never commit
 .claude/settings.local.json
 # Research artifacts shouldn't live in workspace metadata anyway (move to BUSINESSES folder)
 .claude/*.pdf
 .claude/*.xlsx
 .claude/*.docx
-# Project-level files in .claude/ (settings.json, hooks.json, rules/, agents/, skills/) ARE committed
-# — this lets the project share Claude Code configuration with collaborators / other machines
+# Project-level files in .claude/ (settings.json, hooks.json, rules/, agents/, skills/) ARE committed.
+# This lets the project share Claude Code configuration with collaborators / other machines

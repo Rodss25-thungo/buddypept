@@ -6,7 +6,7 @@ import { useState } from 'react';
  * "Request a peptide" form. Captures name + email + which peptide the user
  * wants added, and POSTs to /api/request-peptide (which saves to Supabase).
  *
- * This is BuddyPept's email sign-up — framed as a helpful "we'll notify you"
+ * This is BuddyPept's email sign-up, framed as a helpful "we'll notify you"
  * rather than a sales pitch. On-brand: useful to the user, useful to us
  * (lead + roadmap signal), never extractive.
  */
@@ -52,7 +52,7 @@ export function RequestPeptideForm({
         <p className="font-medium">Thanks! Your request is in. 🎉</p>
         <p className="mt-1">
           We&rsquo;ll email you when {peptide.trim() || 'your peptide'} is added to
-          the library. No spam — just that one heads-up.
+          the library. No spam, just that one heads-up.
         </p>
       </div>
     );

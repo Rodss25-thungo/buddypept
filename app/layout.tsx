@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BuddyPept — Free Peptide Dosing Calculator",
+  title: "BuddyPept: Free Peptide Dosing Calculator",
   description:
-    "Turn peptide-curious into peptide-confident. A free, plain-English peptide dosing calculator and guide. No selling, no data harvest — just the math.",
+    "Turn peptide-curious into peptide-confident. A free, plain-English peptide dosing calculator and guide. No selling, no data harvest, just the math.",
 };
 
 export default function RootLayout({

@@ -8,15 +8,15 @@
  * legal copy.
  *
  * Voice rules:
- *   - "Studied for X" — never "treats X" or "cures X"
- *   - State regulatory status factually — never endorse "research use only"
+ *   - "Studied for X", never "treats X" or "cures X"
+ *   - State regulatory status factually; never endorse "research use only"
  *     as a framing or imply users should take a peptide
- *   - Mention brand names where relevant — helps users recognize what they
+ *   - Mention brand names where relevant. It helps users recognize what they
  *     have if they came in via a prescription
  *
  * To add a new peptide: append a new entry to PEPTIDES.
  * The conditional rule .claude/rules/calculator-precision.md fires on this
- * file — verify all dose data against authoritative sources.
+ * file. Verify all dose data against authoritative sources.
  */
 
 import type { VialUnit, DoseUnit } from '@/lib/calculator';
@@ -93,13 +93,13 @@ export interface Peptide {
   shortDescription: string;
 
   /**
-   * Phase 7 placeholder — medical disclaimer at top of peptide page.
+   * Phase 7 placeholder: medical disclaimer at top of peptide page.
    * Filled with lawyer-reviewed copy before launch.
    */
   medicalDisclaimerTop?: string;
 
   /**
-   * Phase 7 placeholder — note about legal/regulatory status.
+   * Phase 7 placeholder: note about legal/regulatory status.
    * Filled with lawyer-reviewed copy before launch.
    */
   legalStatusNote?: string;

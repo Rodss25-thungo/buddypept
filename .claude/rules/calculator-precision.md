@@ -1,6 +1,6 @@
 ---
 name: calculator-precision
-description: Enforces precision and verification when editing calculator math — the brand's trust foundation
+description: Enforces precision and verification when editing calculator math, the brand's trust foundation
 when: file_matches
 match:
   - "lib/calculator.ts"
@@ -33,7 +33,7 @@ Calculator math lives in `lib/calculator.ts` as **pure TypeScript functions** wi
 
 ## 4. Type safety at all unit boundaries
 
-Use branded types or Zod schemas to keep units separate. mg, mL, mcg, IU, and "syringe units" are different conceptual types — never let a function accept a raw `number` where the unit is ambiguous.
+Use branded types or Zod schemas to keep units separate. mg, mL, mcg, IU, and "syringe units" are different conceptual types. Never let a function accept a raw `number` where the unit is ambiguous.
 
 Good pattern:
 ```ts

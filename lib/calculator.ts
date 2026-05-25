@@ -3,7 +3,7 @@
  * ─────────────────────────────
  * Pure functions for peptide reconstitution and dosing calculations.
  *
- * "The math doesn't lie" — every function here is verified against
+ * "The math doesn't lie": every function here is verified against
  * known reconstitution examples. See `.claude/rules/calculator-precision.md`
  * for the full verification standards.
  *
@@ -12,7 +12,7 @@
  * - All functions are pure (no I/O, no side effects).
  * - Internal math normalizes to milligrams (mg) for consistency.
  * - User-facing units (mg, mcg, IU) are converted at the input boundary.
- * - IU (International Units) cannot be auto-converted to mass — surfaces a warning.
+ * - IU (International Units) cannot be auto-converted to mass; surfaces a warning.
  */
 
 import { z } from 'zod';
@@ -30,11 +30,11 @@ export type VialUnit = z.infer<typeof VialUnitSchema>;
 /**
  * Syringe scale. Only two real scales exist in practical use:
  * - 'U-100': standard insulin syringe, 100 units = 1 mL (~99% of peptide users).
- *   Barrel sizes (0.3 mL / 0.5 mL / 1 mL) are UI concerns, not math concerns —
- *   they all share the same U-100 scale.
+ *   Barrel sizes (0.3 mL / 0.5 mL / 1 mL) are UI concerns, not math concerns.
+ *   They all share the same U-100 scale.
  * - 'IM': intramuscular oil syringes, graduated in mL only (no unit markings).
  *
- * The earlier U-40 / U-50 enum values were based on a misunderstanding — in the
+ * The earlier U-40 / U-50 enum values were based on a misunderstanding. In the
  * real world, what people call a "U-50 syringe" is a U-100-scale syringe with
  * a 0.5 mL barrel. Removed to prevent incorrect math.
  */
@@ -95,7 +95,7 @@ export interface Warning {
 export interface DoseResult {
   volumeMl: number;
   syringeUnits: number;
-  /** Rounded to the nearest 0.5 unit — typical syringe graduation precision */
+  /** Rounded to the nearest 0.5 unit: typical syringe graduation precision */
   syringeUnitsRounded: number;
   concentrationMgPerMl: number;
   warnings: Warning[];
@@ -142,12 +142,12 @@ function toMg(amount: number, unit: VialUnit | DoseUnit): number {
 /**
  * Get the units-per-mL scale for a given syringe type.
  *
- * U-100 is the only insulin-syringe scale in practical peptide use — 100 units
+ * U-100 is the only insulin-syringe scale in practical peptide use. 100 units
  * equals 1 mL. Barrel size (0.3 / 0.5 / 1.0 mL) is a separate UI concern
  * about capacity, not about scale.
  *
- * IM (intramuscular oil) syringes don't use unit graduations — they're marked
- * in mL only — so we return 1 (i.e., 1 "unit" = 1 mL) as a passthrough.
+ * IM (intramuscular oil) syringes don't use unit graduations. They're marked
+ * in mL only, so we return 1 (i.e., 1 "unit" = 1 mL) as a passthrough.
  */
 function unitsPerMl(syringeType: SyringeType): number {
   switch (syringeType) {
@@ -252,7 +252,7 @@ export function calculateDose(input: z.input<typeof DoseInputSchema>): DoseResul
     warnings.push({
       level: 'caution',
       message:
-        'Dose is less than 1 syringe unit — measurement accuracy is poor at this scale. Consider reconstituting with less bacteriostatic water for a higher concentration.',
+        'Dose is less than 1 syringe unit, so measurement accuracy is poor at this scale. Consider reconstituting with less bacteriostatic water for a higher concentration.',
     });
   }
 
@@ -340,7 +340,7 @@ export function calculateCostPerDose(input: z.input<typeof CostInputSchema>): Co
  * Calculate days until a reconstituted vial expires.
  *
  * Standard guidance for reconstituted peptides: 28 days refrigerated.
- * (Some peptides have shorter or longer windows — adjust if needed.)
+ * (Some peptides have shorter or longer windows; adjust if needed.)
  *
  * @returns number of days until expiry. Positive if not yet expired,
  *          zero if expiring today, negative if already expired.

@@ -4,7 +4,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
  * Server-side Supabase client (uses the secret service-role key).
  *
  * ⚠️ NEVER import this into a client component. The service-role key has full
- * database access and must stay server-side — API routes / server code only.
+ * database access and must stay server-side: API routes / server code only.
  *
  * Environment variables are read INSIDE the function (not at module load) so
  * the production build succeeds even before the keys are configured. Only an

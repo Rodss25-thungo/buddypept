@@ -9,10 +9,10 @@
  *
  * Per the Phase 7 Disclaimer & Legal Placement Map in CLAUDE.md, this page
  * contains placeholder slots for lawyer-reviewed copy:
- *   - [MEDICAL_DISCLAIMER_TOP]     — above inputs
- *   - [MEDICAL_DISCLAIMER_RESULTS] — adjacent to result number
+ *   - [MEDICAL_DISCLAIMER_TOP]     (above inputs)
+ *   - [MEDICAL_DISCLAIMER_RESULTS] (adjacent to result number)
  *
- * Hard brand rule respected: dose fields are NEVER pre-filled — the user
+ * Hard brand rule respected: dose fields are NEVER pre-filled. The user
  * enters their own dose. typicalDose in data/peptides.ts is reference-only.
  *
  * Styling: minimal Tailwind. Final design pass happens in Phase 6.
@@ -32,7 +32,7 @@ import {
 import { RequestPeptideForm } from './request-peptide-form';
 
 // ─────────────────────────────────────────────────────────────
-// Syringe barrels (UI concern — math library only knows U-100 vs IM)
+// Syringe barrels (UI concern; math library only knows U-100 vs IM)
 // ─────────────────────────────────────────────────────────────
 
 type SyringeBarrelId =
@@ -57,21 +57,21 @@ interface SyringeBarrel {
 const BARRELS: SyringeBarrel[] = [
   {
     id: 'insulin-0.3',
-    optionLabel: '0.3 mL insulin syringe — max 30 units',
+    optionLabel: '0.3 mL insulin syringe (max 30 units)',
     shortLabel: '0.3 mL insulin',
     maxMl: 0.3,
     scale: 'U-100',
   },
   {
     id: 'insulin-0.5',
-    optionLabel: '0.5 mL insulin syringe — max 50 units',
+    optionLabel: '0.5 mL insulin syringe (max 50 units)',
     shortLabel: '0.5 mL insulin',
     maxMl: 0.5,
     scale: 'U-100',
   },
   {
     id: 'insulin-1.0',
-    optionLabel: '1.0 mL insulin syringe — max 100 units',
+    optionLabel: '1.0 mL insulin syringe (max 100 units)',
     shortLabel: '1 mL insulin',
     maxMl: 1.0,
     scale: 'U-100',
@@ -101,9 +101,9 @@ function getBarrel(id: SyringeBarrelId): SyringeBarrel {
 // ─────────────────────────────────────────────────────────────
 
 const PLACEHOLDER_DISCLAIMER_TOP =
-  '[MEDICAL_DISCLAIMER_TOP — pending Phase 7 legal review]';
+  '[MEDICAL_DISCLAIMER_TOP (pending Phase 7 legal review)]';
 const PLACEHOLDER_DISCLAIMER_RESULTS =
-  '[MEDICAL_DISCLAIMER_RESULTS — pending Phase 7 legal review]';
+  '[MEDICAL_DISCLAIMER_RESULTS (pending Phase 7 legal review)]';
 
 // Common vial sizes (mg) for quick-pick buttons. These are the amounts
 // vendors most often sell. Users can still type any custom value or
@@ -114,8 +114,8 @@ const COMMON_VIAL_MG = [5, 10, 30, 50, 80];
 // user picks this, they type their own peptide name and the calculator
 // works the same (the math is peptide-agnostic). We have no library data
 // for custom peptides, so the About section shows a neutral message.
-// FUTURE (deferred): auto-research reputable info for custom peptides —
-// requires backend + AI + content safety + legal review (see memory).
+// FUTURE (deferred): auto-research reputable info for custom peptides.
+// This requires backend + AI + content safety + legal review (see memory).
 const CUSTOM_PEPTIDE_VALUE = '__other__';
 
 // ─────────────────────────────────────────────────────────────
@@ -128,7 +128,7 @@ export default function CalculatorPage() {
   const [waterMl, setWaterMl] = useState<number>(2);
 
   // Single source of truth for dose: mg. mcg and units are derived.
-  // Brand hard rule: dose is NOT pre-filled — user must enter.
+  // Brand hard rule: dose is NOT pre-filled. User must enter it.
   const [doseMg, setDoseMg] = useState<number>(NaN);
 
   const [barrelId, setBarrelId] = useState<SyringeBarrelId>('insulin-1.0');
@@ -142,7 +142,7 @@ export default function CalculatorPage() {
   // Vial unit: from the library peptide, or default to mg for custom peptides.
   const vialUnit = peptide?.vialUnit ?? 'mg';
 
-  // Concentration math — requires vial + water to be valid
+  // Concentration math: requires vial + water to be valid
   const haveReconstitution =
     Number.isFinite(vialAmount) &&
     vialAmount > 0 &&
@@ -154,7 +154,7 @@ export default function CalculatorPage() {
   const doseMcg = Number.isFinite(doseMg) ? doseMg * 1000 : NaN;
   const doseSyringeAmount = computeSyringeAmount(doseMg, barrel.scale, concentrationMgPerMl);
 
-  // What the third field is called — "units" for U-100, "mL" for IM
+  // What the third field is called: "units" for U-100, "mL" for IM
   const thirdFieldUnit = barrel.scale === 'IM' ? 'mL' : 'units';
 
   // ───── handlers ─────
@@ -202,7 +202,7 @@ export default function CalculatorPage() {
   const isValidInput = haveReconstitution && Number.isFinite(doseMg) && doseMg > 0;
 
   const computation = useMemo(() => {
-    // No peptide requirement — the math is peptide-agnostic, so custom
+    // No peptide requirement: the math is peptide-agnostic, so custom
     // (not-in-library) peptides calculate exactly the same.
     if (!isValidInput) {
       return { result: null, error: null as string | null };
@@ -251,7 +251,7 @@ export default function CalculatorPage() {
         </p>
       </header>
 
-      {/* How this works — collapsible educational content */}
+      {/* How this works: collapsible educational content */}
       <HowThisWorks open={showHowItWorks} onToggle={() => setShowHowItWorks((s) => !s)} />
 
       {/* Placeholder: medical disclaimer at top of calculator */}
@@ -354,14 +354,14 @@ export default function CalculatorPage() {
         </section>
       )}
 
-      {/* Custom (not-in-library) peptide — neutral message, no auto-generated info */}
+      {/* Custom (not-in-library) peptide: neutral message, no auto-generated info */}
       {isCustomPeptide && customPeptideName.trim() !== '' && (
         <section className="mt-8 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
           <h2 className="text-lg font-semibold">About {customPeptideName.trim()}</h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
             This peptide isn&rsquo;t in our library yet, so we don&rsquo;t have
             verified information to show for it. The calculator above works
-            exactly the same — enter your vial amount, bacteriostatic water,
+            exactly the same. Enter your vial amount, bacteriostatic water,
             and dose, and it will do the math.
           </p>
           <p className="mt-3 text-xs italic leading-relaxed text-zinc-500 dark:text-zinc-400">
@@ -376,7 +376,7 @@ export default function CalculatorPage() {
               Want {customPeptideName.trim()} added to the library?
             </h3>
             <p className="mt-1 mb-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              We&rsquo;re adding more peptides — including ones measured in IU
+              We&rsquo;re adding more peptides, including ones measured in IU
               (like HGH) and special strengths (like HCG). Tell us which one you
               want and we&rsquo;ll email you the moment it&rsquo;s ready.
             </p>
@@ -432,12 +432,12 @@ function HowThisWorks({
           <Step
             n={1}
             title="What's in the vial"
-            body="Peptides come as a freeze-dried white powder sealed in a small glass vial. The vial label tells you the total mass of peptide inside (for example, 5 mg or 10 mg). You can't inject the powder directly — it has to be dissolved in liquid first."
+            body="Peptides come as a freeze-dried white powder sealed in a small glass vial. The vial label tells you the total mass of peptide inside (for example, 5 mg or 10 mg). You can't inject the powder directly. It has to be dissolved in liquid first."
           />
           <Step
             n={2}
             title="What bacteriostatic water does"
-            body="Bacteriostatic water (bac water) is sterile water with a tiny amount of preservative added. When you add it to the vial, the peptide powder dissolves and becomes injectable. The preservative keeps the solution sterile in the fridge for about 28 days — bacteria can't grow."
+            body="Bacteriostatic water (bac water) is sterile water with a tiny amount of preservative added. When you add it to the vial, the peptide powder dissolves and becomes injectable. The preservative keeps the solution sterile in the fridge for about 28 days, because bacteria can't grow."
           />
           <div>
             <h3 className="font-medium text-zinc-900 dark:text-zinc-100">
@@ -451,7 +451,7 @@ function HowThisWorks({
             </p>
             <p className="mt-2 text-zinc-600 dark:text-zinc-400">
               Same vial dissolved in <em>less</em> water gives a stronger
-              concentration — each drop contains more peptide. Example:
+              concentration, because each drop contains more peptide. Example:
               5 mg vial + 2 mL water = 2.5 mg/mL. 5 mg + 1 mL = 5 mg/mL
               (twice as strong).
             </p>
@@ -467,13 +467,13 @@ function HowThisWorks({
             <p className="mt-2">Insulin syringes come in three common barrel sizes:</p>
             <ul className="mt-1 list-disc space-y-0.5 pl-5 text-zinc-600 dark:text-zinc-400">
               <li>
-                <strong>0.3 mL barrel</strong> — markings up to 30 units
+                <strong>0.3 mL barrel</strong>: markings up to 30 units
               </li>
               <li>
-                <strong>0.5 mL barrel</strong> — markings up to 50 units
+                <strong>0.5 mL barrel</strong>: markings up to 50 units
               </li>
               <li>
-                <strong>1.0 mL barrel</strong> — markings up to 100 units
+                <strong>1.0 mL barrel</strong>: markings up to 100 units
               </li>
             </ul>
             <p className="mt-2">
@@ -488,15 +488,15 @@ function HowThisWorks({
             </h3>
             <p className="mt-1">
               <strong>1 mg = 1,000 mcg.</strong> They&rsquo;re the same unit
-              measured at different scales — like inches vs. feet.
+              measured at different scales, like inches vs. feet.
             </p>
             <p className="mt-2 text-zinc-600 dark:text-zinc-400">
               Some peptides (semaglutide, tirzepatide) are commonly written in{' '}
               <strong>mg</strong> because typical doses are between 0.25 mg
               and 15 mg. Others (BPC-157, TB-500, GHK-Cu) are usually written
-              in <strong>mcg</strong> because typical doses are 100–500 mcg,
-              which sounds more natural than &ldquo;0.1–0.5 mg.&rdquo; The
-              math is identical — just bigger or smaller numbers on paper.
+              in <strong>mcg</strong> because typical doses are 100 to 500 mcg,
+              which sounds more natural than &ldquo;0.1 to 0.5 mg.&rdquo; The
+              math is identical, just bigger or smaller numbers on paper.
             </p>
           </div>
           <div>
@@ -516,7 +516,7 @@ function HowThisWorks({
               </li>
             </ul>
             <p className="mt-2">
-              They&rsquo;re <em>not the same number</em> — but they describe
+              They&rsquo;re <em>not the same number</em>, but they describe
               the same injection. The calculator below shows all three views
               side-by-side so you can see how they connect.
             </p>
@@ -578,7 +578,7 @@ function FieldPeptide({
             className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
           />
           <p className="mt-1 text-xs text-zinc-500">
-            We don&rsquo;t have library info for peptides outside our list yet —
+            We don&rsquo;t have library info for peptides outside our list yet,
             but the calculator works exactly the same. Just enter your vial
             amount, water, and dose below.
           </p>
@@ -613,7 +613,7 @@ function FieldVialAmount({
         className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
       />
       <p className="mt-1 text-xs text-zinc-500">
-        The amount of peptide powder — the number on your vial label (e.g.,
+        The amount of peptide powder, the number on your vial label (e.g.,
         5 mg, 10 mg). <strong>Not</strong> the size of the glass container.
       </p>
       <div className="mt-2 flex flex-wrap gap-1.5">
@@ -689,18 +689,18 @@ function FieldSyringeBarrel({
         onChange={(e) => onChange(e.target.value as SyringeBarrelId)}
         className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
       >
-        <optgroup label="Insulin syringes (U-100 scale — 100 units = 1 mL)">
-          <option value="insulin-0.3">0.3 mL — max 30 units</option>
-          <option value="insulin-0.5">0.5 mL — max 50 units</option>
-          <option value="insulin-1.0">1.0 mL — max 100 units</option>
+        <optgroup label="Insulin syringes (U-100 scale, 100 units = 1 mL)">
+          <option value="insulin-0.3">0.3 mL (max 30 units)</option>
+          <option value="insulin-0.5">0.5 mL (max 50 units)</option>
+          <option value="insulin-1.0">1.0 mL (max 100 units)</option>
         </optgroup>
-        <optgroup label="IM (oil) syringes — mL graduations, no unit markings">
+        <optgroup label="IM (oil) syringes: mL graduations, no unit markings">
           <option value="im-1.0">IM 1 mL</option>
           <option value="im-3.0">IM 3 mL</option>
         </optgroup>
       </select>
       <p className="mt-1 text-xs text-zinc-500">
-        All insulin syringes share the same scale (100 units = 1 mL). A smaller barrel just holds less liquid — it&rsquo;s not a different scale.
+        All insulin syringes share the same scale (100 units = 1 mL). A smaller barrel just holds less liquid. It&rsquo;s not a different scale.
       </p>
     </div>
   );
@@ -729,7 +729,7 @@ function FieldThreeWayDose({
     <div>
       <label className="mb-1 block text-sm font-medium">Your dose</label>
       <p className="mb-2 text-xs text-zinc-500">
-        These three fields all represent the same injection. Edit any one — the other two update.
+        These three fields all represent the same injection. Edit any one, and the other two update.
       </p>
       <div className="grid grid-cols-3 gap-2">
         <DoseField
@@ -761,7 +761,7 @@ function FieldThreeWayDose({
         <strong>{thirdFieldUnit}</strong> = the mark on your syringe (peptide already mixed with the water). These three always match.
       </p>
       <p className="mt-1 text-xs italic text-zinc-500">
-        Decided by you and your healthcare provider — never by BuddyPept.
+        Decided by you and your healthcare provider, never by BuddyPept.
       </p>
     </div>
   );
@@ -876,23 +876,23 @@ function ResultDisplay({
         {showMath && (
           <div className="mt-3 space-y-2 rounded-md bg-zinc-50 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:bg-zinc-950 dark:text-zinc-300">
             <p>
-              <strong>Step 1 — Reconstitution:</strong>
+              <strong>Step 1, Reconstitution:</strong>
               <br />
               Vial mg ÷ water mL = {formatNum(result.concentrationMgPerMl, 3)} mg/mL concentration
             </p>
             <p>
-              <strong>Step 2 — Same dose, three views:</strong>
+              <strong>Step 2, Same dose, three views:</strong>
               <br />
               {formatNum(doseMcg, 2)} mcg = {formatNum(doseMg, 4)} mg (÷ 1000 = mg ↔ mcg)
             </p>
             <p>
-              <strong>Step 3 — Volume to draw:</strong>
+              <strong>Step 3, Volume to draw:</strong>
               <br />
               {formatNum(doseMg, 4)} mg ÷ {formatNum(result.concentrationMgPerMl, 3)} mg/mL = {formatNum(volumeMl, 3)} mL
             </p>
             {!isIM && (
               <p>
-                <strong>Step 4 — Syringe units:</strong>
+                <strong>Step 4, Syringe units:</strong>
                 <br />
                 {formatNum(volumeMl, 3)} mL × 100 units/mL = {formatNum(syringeUnits, 2)} units (U-100 scale)
               </p>
@@ -949,7 +949,7 @@ function computeSyringeAmount(
 }
 
 function formatNum(n: number, decimals: number): string {
-  if (!Number.isFinite(n)) return '—';
+  if (!Number.isFinite(n)) return '-';
   return Number(n.toFixed(decimals)).toString();
 }
 

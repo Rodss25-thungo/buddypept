@@ -4,7 +4,7 @@
 
 This file is read by Claude Code every session. Read it first before suggesting any change to BuddyPept.
 
-**See also `AGENTS.md`** — same project context formatted as the universal AI agent context file (works for any AI tool: Cursor, Codex, Cody, etc.). CLAUDE.md is the Claude-specific layer with Claude Code workflow notes; AGENTS.md is the universal layer with the same brand spine and hard rules. Both files MUST stay aligned on locked decisions.
+**See also `AGENTS.md`**, the same project context formatted as the universal AI agent context file (works for any AI tool: Cursor, Codex, Cody, etc.). CLAUDE.md is the Claude-specific layer with Claude Code workflow notes; AGENTS.md is the universal layer with the same brand spine and hard rules. Both files MUST stay aligned on locked decisions.
 
 ---
 
@@ -12,20 +12,20 @@ This file is read by Claude Code every session. Read it first before suggesting 
 
 BuddyPept is a free mobile-first Progressive Web App (PWA) that helps peptide newcomers calculate dosing math (mg → IU → mL → units), reconstitute peptides correctly (bacteriostatic water + mg peptide → correct concentration), and understand what they're putting in their body.
 
-**Audience:** "The confused beginner" — anyone entering the peptide world unsure how to dose. Cuts across GLP-1 patients (semaglutide, tirzepatide), recovery users (BPC-157, TB-500), biohackers, and aesthetic users. Focused by *moment* (the first time someone receives a vial), not by demographic.
+**Audience:** "The confused beginner," anyone entering the peptide world unsure how to dose. Cuts across GLP-1 patients (semaglutide, tirzepatide), recovery users (BPC-157, TB-500), biohackers, and aesthetic users. Focused by *moment* (the first time someone receives a vial), not by demographic.
 
-**Business model:** Free for users forever. Email + name capture at entry. Downstream monetization via affiliate links to supplies (syringes, needles) and eventual brand partnerships — never via paywall, never via data harvest.
+**Business model:** Free for users forever. Email + name capture at entry. Downstream monetization via affiliate links to supplies (syringes, needles) and eventual brand partnerships, never via paywall, never via data harvest.
 
 ---
 
-## Brand spine — DO NOT VIOLATE THESE
+## Brand spine: DO NOT VIOLATE THESE
 
-- **Mission:** "Turn peptide-curious into peptide-confident — for free, forever."
+- **Mission:** "Turn peptide-curious into peptide-confident. For free, forever."
 - **Stake in the ground:** "The math stays free. Forever."
 - **Zag:** "Everyone else in peptides is selling. We give."
 - **Trueline:** "The math doesn't lie."
 - **Voice:** Calm, kind, precise. Anti-hype. Anti-bro-science. Anti-disclaimer-fest. Treats users as smart adults.
-- **Character:** Illustrated character named "Buddy" — calm, science-teacher friend, Khan Academy / Headspace warmth.
+- **Character:** Illustrated character named "Buddy," a calm, science-teacher friend, Khan Academy / Headspace warmth.
 
 ### Hard rules that override any other suggestion
 
@@ -49,7 +49,7 @@ BuddyPept is a free mobile-first Progressive Web App (PWA) that helps peptide ne
 - **Analytics:** Vercel Analytics (privacy-first, cookie-free)
 - **Error tracking:** Sentry (free tier)
 - **Primary domain:** buddypept.app (when registered), buddypept.com (when registered)
-- **Defensive redirect holds (already owned):** peptbuddy.com, peptbuddy.app — these redirect to the primary domains and block copycats
+- **Defensive redirect holds (already owned):** peptbuddy.com, peptbuddy.app. These redirect to the primary domains and block copycats
 
 ---
 
@@ -57,7 +57,7 @@ BuddyPept is a free mobile-first Progressive Web App (PWA) that helps peptide ne
 
 ```
 buddypept/
-├── CLAUDE.md                    # This file — read every session
+├── CLAUDE.md                    # This file, read every session
 ├── README.md                    # Human-readable docs
 ├── .env.local                   # SECRETS (gitignored, copy from .env.local.example)
 ├── .env.local.example           # Template for env vars
@@ -66,7 +66,7 @@ buddypept/
 ├── next.config.js
 ├── tailwind.config.ts
 ├── .gitignore
-├── index.html                   # PRIOR ART — pre-Brand-Squad calculator (reference only)
+├── index.html                   # PRIOR ART, pre-Brand-Squad calculator (reference only)
 │
 ├── app/                         # Next.js App Router
 │   ├── layout.tsx               # Root layout
@@ -121,7 +121,7 @@ buddypept/
 - **Environment variables:** all secrets in `.env.local` (gitignored). Public env vars prefixed `NEXT_PUBLIC_`.
 - **Type safety:** Zod for runtime validation at API boundaries.
 - **No premature abstractions.** Don't build a custom hook for something used once. Inline first; abstract at 3+ uses.
-- **`.claude/` directory:** Workspace metadata for Claude Code — must be gitignored.
+- **`.claude/` directory:** Workspace metadata for Claude Code. Must be gitignored.
 
 ---
 
@@ -145,7 +145,7 @@ buddypept/
 
 ### Updating the calculator math
 
-The math lives in `lib/calculator.ts` as pure functions. The math is the brand's trust foundation — any change must be triple-checked against known peptide reconstitution examples. Add test cases for any new edge case.
+The math lives in `lib/calculator.ts` as pure functions. The math is the brand's trust foundation. Any change must be triple-checked against known peptide reconstitution examples. Add test cases for any new edge case.
 
 ### Deploying
 
@@ -164,11 +164,11 @@ npm run dev
 
 ## Prior art
 
-`index.html` at the project root is the pre-existing v0 calculator built by Rod in May 2026, before the formal Brand Squad and architecture work. It's a single-file HTML/JS implementation. When implementing the new Next.js calculator in `lib/calculator.ts` and `app/calculator/page.tsx`, treat `index.html` as the *reference* for the math logic and UX patterns — extract the dosing formulas, then re-implement in TypeScript with proper types and tests. Don't reference `index.html` from the running app; it stays as historical reference and will be removed when the new calculator ships.
+`index.html` at the project root is the pre-existing v0 calculator built by Rod in May 2026, before the formal Brand Squad and architecture work. It's a single-file HTML/JS implementation. When implementing the new Next.js calculator in `lib/calculator.ts` and `app/calculator/page.tsx`, treat `index.html` as the *reference* for the math logic and UX patterns. Extract the dosing formulas, then re-implement in TypeScript with proper types and tests. Don't reference `index.html` from the running app; it stays as historical reference and will be removed when the new calculator ships.
 
 ---
 
-## What's deferred — do NOT build these yet
+## What's deferred: do NOT build these yet
 
 These are explicitly NOT part of MVP. Do not build them until launch + real user feedback:
 
@@ -187,13 +187,13 @@ BuddyPept's stake is education, not medical advice or prescribing. Disclaimers m
 
 Surfaces requiring disclaimers:
 
-1. First-time entry / onboarding gate — one-time acknowledgment before app use.
-2. Persistent site-wide footer — short disclaimer on every page.
-3. Calculator — two placements: above inputs, and attached to results output. The result number is the moment of highest action risk; disclaimer must sit near the number, not buried.
-4. Each peptide library entry — top of every peptide page.
-5. Legal status content — every peptide page touching legal/regulatory status needs a "last updated" timestamp and a note that laws change. Library must distinguish prescription peptides (semaglutide, tirzepatide) from "research chemical" peptides (BPC-157, TB-500, GHK-Cu, etc.) without endorsing the research-use framing.
-6. Email / account signup — terms acceptance checkbox referencing medical disclaimer and terms of service.
-7. Standalone pages — medical disclaimer page, terms of service, privacy policy. Linked from footer and signup.
+1. First-time entry / onboarding gate: one-time acknowledgment before app use.
+2. Persistent site-wide footer: short disclaimer on every page.
+3. Calculator, two placements: above inputs, and attached to results output. The result number is the moment of highest action risk; disclaimer must sit near the number, not buried.
+4. Each peptide library entry: top of every peptide page.
+5. Legal status content: every peptide page touching legal/regulatory status needs a "last updated" timestamp and a note that laws change. Library must distinguish prescription peptides (semaglutide, tirzepatide) from "research chemical" peptides (BPC-157, TB-500, GHK-Cu, etc.) without endorsing the research-use framing.
+6. Email / account signup: terms acceptance checkbox referencing medical disclaimer and terms of service.
+7. Standalone pages: medical disclaimer page, terms of service, privacy policy. Linked from footer and signup.
 
 Positioning rules the app must hold to keep the "educate, don't prescribe" stake credible:
 - Never recommend a dose. Show only the math the user inputs.
@@ -212,7 +212,7 @@ Pre-launch checklist additions for Phase 7:
 
 ## Founder
 
-Rod — solo founder, marketing background, non-technical. Building with AI assistance. The origin story: Rod was the confused beginner trying to figure out dosing math and built the tool he wished existed. That story lives on the About page.
+Rod: solo founder, marketing background, non-technical. Building with AI assistance. The origin story: Rod was the confused beginner trying to figure out dosing math and built the tool he wished existed. That story lives on the About page.
 
 ---
 

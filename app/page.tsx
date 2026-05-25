@@ -3,7 +3,7 @@ import Link from 'next/link';
 /**
  * BuddyPept homepage.
  *
- * Brand-aligned marketing copy (calm, kind, precise — no medical claims, no
+ * Brand-aligned marketing copy (calm, kind, precise; no medical claims, no
  * dose recommendations, no selling). Carries the mission, the "we give, they
  * sell" zag, and the "the math doesn't lie" trueline.
  *
@@ -15,7 +15,7 @@ import Link from 'next/link';
  */
 
 const PLACEHOLDER_DISCLAIMER_FOOTER =
-  '[MEDICAL_DISCLAIMER_FOOTER — pending Phase 7 legal review]';
+  '[MEDICAL_DISCLAIMER_FOOTER (pending Phase 7 legal review)]';
 
 export default function HomePage() {
   return (
@@ -49,8 +49,8 @@ export default function HomePage() {
               The vial is open. Now what?
             </h2>
             <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
-              You&rsquo;ve got a vial, some bacteriostatic water, and a syringe
-              — and no idea how the three fit together. mg? mcg? units? The
+              You&rsquo;ve got a vial, some bacteriostatic water, and a syringe,
+              and no idea how the three fit together. mg? mcg? units? The
               internet is full of bro-science, sketchy vendors, and people
               trying to sell you something. You just want a straight answer.
             </p>
@@ -65,7 +65,7 @@ export default function HomePage() {
           <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
             BuddyPept is a free calculator and plain-English guide for people
             new to peptides. Tell it what&rsquo;s in your vial and the dose you
-            want — it shows exactly how much to draw, in whatever unit your
+            want, and it shows exactly how much to draw, in whatever unit your
             syringe uses. That&rsquo;s the whole thing.
           </p>
         </section>
@@ -79,7 +79,7 @@ export default function HomePage() {
             <ol className="mt-6 space-y-5">
               <HowStep
                 n={1}
-                text="Pick your peptide — or type your own if it's not on the list."
+                text="Pick your peptide, or type your own if it's not on the list."
               />
               <HowStep
                 n={2}
@@ -87,7 +87,7 @@ export default function HomePage() {
               />
               <HowStep
                 n={3}
-                text="See it in mcg, mg, and syringe units — all at once, always in sync."
+                text="See it in mcg, mg, and syringe units, all at once, always in sync."
               />
             </ol>
           </div>
@@ -101,7 +101,7 @@ export default function HomePage() {
           <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
             Everyone else in peptides is selling something. We&rsquo;re not. The
             math stays free, forever. We don&rsquo;t harvest your health data.
-            We don&rsquo;t tell you what to take — that&rsquo;s between you and
+            We don&rsquo;t tell you what to take. That&rsquo;s between you and
             your doctor. We just make the numbers make sense.
           </p>
           <p className="mt-6 text-lg font-medium italic text-zinc-900 dark:text-zinc-100">
@@ -135,7 +135,7 @@ export default function HomePage() {
             {PLACEHOLDER_DISCLAIMER_FOOTER}
           </div>
           <p className="mt-4 text-center text-xs text-zinc-500">
-            BuddyPept — the math, free forever. © {new Date().getFullYear()}
+            BuddyPept. The math, free forever. © {new Date().getFullYear()}
           </p>
         </div>
       </footer>

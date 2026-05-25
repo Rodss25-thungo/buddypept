@@ -1,12 +1,12 @@
 # BuddyPept
 
-> Turn peptide-curious into peptide-confident — for free, forever.
+> Turn peptide-curious into peptide-confident. For free, forever.
 
 The free, no-paywall, no-data-harvest peptide dosing calculator and education app.
 
 ## What this is
 
-A Progressive Web App (PWA) that helps peptide newcomers calculate IU, mL, and syringe units for reconstitution and dosing — without paywalls, data harvesting, or sales pitches.
+A Progressive Web App (PWA) that helps peptide newcomers calculate IU, mL, and syringe units for reconstitution and dosing, without paywalls, data harvesting, or sales pitches.
 
 The math stays free. Forever.
 
@@ -40,4 +40,4 @@ See [`CLAUDE.md`](./CLAUDE.md) for full project context, brand rules, and conven
 
 ## License
 
-Proprietary — © Rod 2026. All rights reserved.
+Proprietary. © Rod 2026. All rights reserved.

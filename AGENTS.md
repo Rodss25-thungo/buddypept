@@ -1,12 +1,12 @@
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
-This version (16.2.6) has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+This version (16.2.6) has breaking changes. APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
 ---
 
-# BuddyPept — Universal AI Agent Context
+# BuddyPept: Universal AI Agent Context
 
 This file is the **universal** AI agent context. Read it at the start of every session, regardless of which AI tool you are (Claude Code, Cursor, Codex, Cody, GitHub Copilot Chat, etc.). For Claude-specific workflow notes, also see `CLAUDE.md`.
 
@@ -16,18 +16,18 @@ A free mobile-first Progressive Web App (PWA) that helps peptide newcomers calcu
 
 **Audience:** "The confused beginner" entering the peptide world unsure how to dose. Cuts across GLP-1 patients (semaglutide, tirzepatide), recovery users (BPC-157, TB-500), biohackers, aesthetic users. Focused by *moment* (first time receiving a vial), not by demographic.
 
-**Business model:** Free for users forever. Email + name capture at entry. Downstream monetization via affiliate links to supplies + eventual brand partnerships — never via paywall, never via data harvest.
+**Business model:** Free for users forever. Email + name capture at entry. Downstream monetization via affiliate links to supplies + eventual brand partnerships, never via paywall, never via data harvest.
 
-## Brand spine — DO NOT VIOLATE
+## Brand spine: DO NOT VIOLATE
 
-- **Mission:** *"To turn peptide-curious into peptide-confident — for free, forever."*
+- **Mission:** *"To turn peptide-curious into peptide-confident. For free, forever."*
 - **Stake in the ground:** *"The math stays free. Forever."*
 - **Zag:** *"Everyone else in peptides is selling. We give."* The brand never extracts from users.
 - **Trueline (cornerstone phrase):** *"The math doesn't lie."*
 - **Voice:** Calm, kind, precise. Anti-hype. Anti-bro-science. Anti-disclaimer-fest. Treats users as smart adults.
-- **Character:** Illustrated mascot named "Buddy" (or "Bud") — calm, science-teacher friend. Mood: Khan Academy / Headspace / DuckDuckGo warmth.
+- **Character:** Illustrated mascot named "Buddy" (or "Bud"), a calm, science-teacher friend. Mood: Khan Academy / Headspace / DuckDuckGo warmth.
 
-## Hard rules — NEVER violate these
+## Hard rules: NEVER violate these
 
 1. **Never paywall the calculator or education content.** The math is free forever. Structural, not negotiable.
 2. **Never collect user data beyond name + email.** No height, weight, age, gender, health conditions. Brand differentiator.
@@ -48,7 +48,7 @@ If a code suggestion would violate any of these, refuse or warn before producing
 - **Hosting:** Vercel (Hobby/free tier)
 - **Validation:** Zod (runtime type validation at API boundaries)
 - **Dev tooling:** Turbopack, ESLint, Node.js v24.15.0 LTS
-- **Build approach:** PWA — installable on iOS/Android home screen, Capacitor wrap deferred to Phase 3
+- **Build approach:** PWA, installable on iOS/Android home screen, Capacitor wrap deferred to Phase 3
 
 ## Code conventions
 
@@ -76,7 +76,7 @@ buddypept/
 ├── next.config.ts
 ├── tailwind / postcss configs
 ├── .gitignore
-├── index.html           ← PRIOR ART — pre-Brand-Squad calculator, reference only
+├── index.html           ← PRIOR ART, pre-Brand-Squad calculator, reference only
 │
 ├── app/                 ← Next.js App Router
 │   ├── layout.tsx
@@ -112,7 +112,7 @@ buddypept/
 3. Peptide auto-appears in library and calculator
 
 ### Updating the calculator math
-Math lives in `lib/calculator.ts` as pure functions. **Any change must be triple-checked against known peptide reconstitution examples.** The math is the brand's trust foundation — *"the math doesn't lie."* Add test cases for any new edge case.
+Math lives in `lib/calculator.ts` as pure functions. **Any change must be triple-checked against known peptide reconstitution examples.** The math is the brand's trust foundation: *"the math doesn't lie."* Add test cases for any new edge case.
 
 ### Deploying
 `git push origin main` → Vercel auto-deploys. Domain `buddypept.app` points to production once registered.
@@ -125,7 +125,7 @@ npm run dev
 # open http://localhost:3000
 ```
 
-## What's deferred — do NOT build these yet
+## What's deferred: do NOT build these yet
 
 - Saved calculations history (requires user accounts beyond email)
 - Expanded peptide library beyond initial 5-10
@@ -140,4 +140,4 @@ npm run dev
 
 ## Founder
 
-Rod — solo founder, marketing background, **non-technical**. Builds with AI assistance. Origin story: he was the confused beginner trying to figure out dosing math and built the tool he wished existed. That story lives on the About page.
+Rod: solo founder, marketing background, **non-technical**. Builds with AI assistance. Origin story: he was the confused beginner trying to figure out dosing math and built the tool he wished existed. That story lives on the About page.

@@ -1,5 +1,5 @@
 -- ───────────────────────────────────────────────────────────────
--- BuddyPept — database setup
+-- BuddyPept: database setup
 -- ───────────────────────────────────────────────────────────────
 -- Run this ONCE in the Supabase SQL Editor:
 --   Supabase dashboard → SQL Editor → New query → paste this → Run
