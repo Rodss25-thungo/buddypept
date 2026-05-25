@@ -100,10 +100,13 @@ function getBarrel(id: SyringeBarrelId): SyringeBarrel {
 // Phase 7 placeholders
 // ─────────────────────────────────────────────────────────────
 
-const PLACEHOLDER_DISCLAIMER_TOP =
-  '[MEDICAL_DISCLAIMER_TOP (pending Phase 7 legal review)]';
-const PLACEHOLDER_DISCLAIMER_RESULTS =
-  '[MEDICAL_DISCLAIMER_RESULTS (pending Phase 7 legal review)]';
+// Calculator disclaimers. Draft wording, still pending lawyer review before
+// public launch (CLAUDE.md Phase 7). Educational framing: the tool does math,
+// never recommends a dose or tells anyone to take a peptide.
+const DISCLAIMER_TOP =
+  'This calculator does the math you enter. It does not tell you what to take, how much, or whether a peptide is safe or right for you. Those decisions belong with you and a licensed healthcare provider.';
+const DISCLAIMER_RESULTS =
+  'This is math, not medical advice. Check it against your vial label and your provider’s guidance before drawing any dose.';
 
 // Common vial sizes (mg) for quick-pick buttons. These are the amounts
 // vendors most often sell. Users can still type any custom value or
@@ -256,7 +259,7 @@ export default function CalculatorPage() {
 
       {/* Placeholder: medical disclaimer at top of calculator */}
       <div className="mt-6">
-        <DisclaimerSlot text={PLACEHOLDER_DISCLAIMER_TOP} />
+        <DisclaimerSlot text={DISCLAIMER_TOP} />
       </div>
 
       {/* Inputs */}
@@ -394,7 +397,7 @@ export default function CalculatorPage() {
 
 function DisclaimerSlot({ text }: { text: string }) {
   return (
-    <div className="rounded-lg border border-dashed border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
+    <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-xs leading-relaxed text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
       {text}
     </div>
   );
@@ -850,7 +853,7 @@ function ResultDisplay({
       </div>
 
       <div className="mt-4">
-        <DisclaimerSlot text={PLACEHOLDER_DISCLAIMER_RESULTS} />
+        <DisclaimerSlot text={DISCLAIMER_RESULTS} />
       </div>
 
       {warnings.length > 0 && (

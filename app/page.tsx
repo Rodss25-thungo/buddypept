@@ -14,8 +14,12 @@ import Link from 'next/link';
  * Phase 6 (Wheeler / Archetype).
  */
 
-const PLACEHOLDER_DISCLAIMER_FOOTER =
-  '[MEDICAL_DISCLAIMER_FOOTER (pending Phase 7 legal review)]';
+// Site-wide medical disclaimer. Draft wording modeled on standard
+// educational-health-tool disclaimers (informational only, no doctor-patient
+// relationship, consult a provider, limitation of liability, use at own risk).
+// Final copy still needs a lawyer review before public launch (CLAUDE.md Phase 7).
+const DISCLAIMER_FOOTER =
+  'BuddyPept is an educational tool, not medical advice. It does the dosing math you enter; it does not diagnose, treat, prescribe, or recommend that you take any peptide. Using this site does not create a doctor-patient relationship. Peptides carry real risks and many are not approved for human use, so always consult a licensed healthcare provider before acting on anything here. You use this information at your own risk.';
 
 export default function HomePage() {
   return (
@@ -131,9 +135,9 @@ export default function HomePage() {
       {/* ───── Footer (site-wide disclaimer placeholder) ───── */}
       <footer className="border-t border-zinc-200 dark:border-zinc-800">
         <div className="mx-auto max-w-2xl px-4 py-8">
-          <div className="rounded-lg border border-dashed border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
-            {PLACEHOLDER_DISCLAIMER_FOOTER}
-          </div>
+          <p className="text-xs leading-relaxed text-zinc-500">
+            {DISCLAIMER_FOOTER}
+          </p>
           <p className="mt-4 text-center text-xs text-zinc-500">
             BuddyPept. The math, free forever. © {new Date().getFullYear()}
           </p>
