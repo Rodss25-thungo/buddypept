@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   title: "BuddyPept: Free Peptide Dosing Calculator",
   description:
     "Turn peptide-curious into peptide-confident. A free, plain-English peptide dosing calculator and guide. No selling, no data harvest, just the math.",
+  appleWebApp: {
+    capable: true,
+    title: "BuddyPept",
+    statusBarStyle: "default",
+  },
 };
 
 // Mobile-first: proper scaling on phones, plus a teal browser bar to match the
