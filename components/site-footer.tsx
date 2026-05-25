@@ -9,7 +9,7 @@ import Link from 'next/link';
  */
 
 const DISCLAIMER_FOOTER =
-  'BuddyPept is an educational tool, not medical advice. It does the dosing math you enter; it does not diagnose, treat, prescribe, or recommend that you take any peptide. Using this site does not create a doctor-patient relationship. Peptides carry real risks and many are not approved for human use, so always consult a licensed healthcare provider before acting on anything here. You use this information at your own risk.';
+  'BuddyPept is an educational tool, not medical advice. It does the dosing math you enter; it does not diagnose, treat, prescribe, or recommend that you take any peptide. We do not sell peptides and are not affiliated with any company that does. Many peptides are not approved for human use and are sold by others only as research compounds, so always consult a licensed healthcare provider before acting on anything here. You use this information at your own risk, and you are responsible for following the laws that apply to you.';
 
 export function SiteFooter() {
   return (

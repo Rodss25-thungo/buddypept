@@ -51,13 +51,34 @@ export default function DisclaimerPage() {
           associated with it. We are not your healthcare provider.
         </Section>
 
+        <Section title="Not evaluated by the FDA">
+          The statements on this website have not been evaluated by the U.S.
+          Food and Drug Administration. Nothing on BuddyPept is intended to
+          diagnose, treat, cure, or prevent any disease.
+        </Section>
+
+        <Section title="We don't sell peptides">
+          BuddyPept is not a pharmacy, a compounding facility (as defined under
+          Section 503A of the Federal Food, Drug, and Cosmetic Act), an
+          outsourcing facility (Section 503B), or a peptide seller of any kind.
+          We do not sell, supply, or ship any product, and we are not affiliated
+          with any company that does. We do not endorse, recommend, or link to
+          any seller. If you obtain a peptide somewhere else, that is between you
+          and that seller, and we are not responsible for it or for its quality,
+          legality, or safety.
+        </Section>
+
         <Section title="About peptides specifically">
-          Many peptides are not approved by the FDA (or your local regulator)
-          for human use, and their legal status varies by country and over time.
-          Some are available only by prescription. BuddyPept describes peptides
-          factually and does not encourage you to take any of them. Whether a
-          peptide is legal, safe, or right for you is a decision for you and a
-          qualified professional.
+          Many peptides are not approved by the FDA or other regulators for
+          human use, and their legal status varies by country and over time.
+          Companies that sell them often do so strictly as research compounds,
+          labeled &ldquo;for research use only&rdquo; and &ldquo;not for human
+          consumption.&rdquo; BuddyPept explains the math and the science. It
+          does not sell these compounds, does not encourage anyone to use them
+          in a person, and does not tell you that doing so is safe or legal.
+          Whether a peptide is legal where you live, and whether any use is right
+          for you, is for you and a licensed professional to decide. You are
+          responsible for following the laws that apply to you.
         </Section>
 
         <Section title="Accuracy and your responsibility">
