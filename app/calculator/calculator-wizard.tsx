@@ -4,8 +4,8 @@
  * BuddyPept calculator, as a guided step-by-step flow.
  *
  * One big question per screen, large tap targets, Buddy guiding, and a result
- * reveal with the live syringe. Designed to feel like an app and to be easy to
- * read for a 40+ audience.
+ * reveal with the live syringe and an inline editor. Designed to feel like an
+ * app and be easy to read for a 40+ audience.
  *
  * The math is unchanged: it reuses calculateDose() from lib/calculator. This
  * component only changes how the questions are presented and answered.
@@ -14,7 +14,7 @@
  */
 
 import { useMemo, useState } from 'react';
-import { PEPTIDES, getPeptideBySlug } from '@/data/peptides';
+import { getPeptideBySlug, type Peptide } from '@/data/peptides';
 import {
   calculateDose,
   type SyringeType,
@@ -52,71 +52,102 @@ function getBarrel(id: SyringeBarrelId): SyringeBarrel {
   return BARRELS.find((b) => b.id === id) ?? BARRELS[2];
 }
 
-const CUSTOM_PEPTIDE_VALUE = '__other__';
+// Curated picker list (slugs that exist in data/peptides.ts). Others use the
+// "I don't see it here" path, which captures a request instead.
+const WIZARD_PEPTIDE_SLUGS = [
+  'bpc-157',
+  'tb-500',
+  'ghk-cu',
+  'ipamorelin',
+  'cjc-1295',
+  'sermorelin',
+  'retatrutide',
+];
+const WIZARD_PEPTIDES = WIZARD_PEPTIDE_SLUGS.map((s) => getPeptideBySlug(s)).filter(
+  (p): p is Peptide => Boolean(p)
+);
+
+const NOT_LISTED = '__not_listed__';
 const COMMON_VIAL_MG = [5, 10, 30, 50];
 const COMMON_WATER_ML = [1, 2, 3, 5];
 
 const DISCLAIMER_RESULTS =
   'This is math, not medical advice. Check it against your vial label and your provider’s guidance before drawing any dose.';
 
-type DoseUnit = 'mg' | 'mcg';
+type DoseEntryUnit = 'mg' | 'mcg' | 'syringe';
 
 const STEPS = ['peptide', 'vial', 'water', 'syringe', 'dose'] as const;
 
 export function CalculatorWizard() {
   const [stepIndex, setStepIndex] = useState(0); // 0..4 inputs, 5 = result
+  const [showRequest, setShowRequest] = useState(false);
   const [peptideSlug, setPeptideSlug] = useState('');
-  const [customPeptideName, setCustomPeptideName] = useState('');
   const [vialAmount, setVialAmount] = useState<number>(NaN);
   const [waterMl, setWaterMl] = useState<number>(NaN);
   const [barrelId, setBarrelId] = useState<SyringeBarrelId>('insulin-1.0');
-  const [doseValue, setDoseValue] = useState<number>(NaN);
-  const [doseUnit, setDoseUnit] = useState<DoseUnit>('mg');
+  const [doseMg, setDoseMg] = useState<number>(NaN); // canonical dose
+  const [doseEntryUnit, setDoseEntryUnit] = useState<DoseEntryUnit>('mg');
   const [showMath, setShowMath] = useState(false);
 
-  const isCustom = peptideSlug === CUSTOM_PEPTIDE_VALUE;
-  const peptide = isCustom ? undefined : getPeptideBySlug(peptideSlug);
+  const isNotListed = peptideSlug === NOT_LISTED;
+  const peptide = isNotListed ? undefined : getPeptideBySlug(peptideSlug);
   const barrel = getBarrel(barrelId);
   const vialUnit = peptide?.vialUnit ?? 'mg';
-  const peptideLabel = isCustom
-    ? customPeptideName.trim() || 'your peptide'
-    : peptide?.name ?? 'your peptide';
+  const peptideLabel = peptide?.name ?? 'your peptide';
+  const thirdLabel = barrel.scale === 'U-100' ? 'units' : 'mL';
+
+  const concentrationMgPerMl =
+    Number.isFinite(vialAmount) && vialAmount > 0 && Number.isFinite(waterMl) && waterMl > 0
+      ? vialAmount / waterMl
+      : NaN;
+
+  // dose <-> syringe-draw conversions (presentation only)
+  const drawFromMg = (mg: number) => {
+    if (!Number.isFinite(mg) || !Number.isFinite(concentrationMgPerMl)) return NaN;
+    return barrel.scale === 'U-100'
+      ? mg / (concentrationMgPerMl / 100)
+      : mg / concentrationMgPerMl;
+  };
+  const mgFromDraw = (draw: number) => {
+    if (!Number.isFinite(draw) || !Number.isFinite(concentrationMgPerMl)) return NaN;
+    return barrel.scale === 'U-100'
+      ? draw * (concentrationMgPerMl / 100)
+      : draw * concentrationMgPerMl;
+  };
 
   const isResult = stepIndex >= STEPS.length;
 
   const computation = useMemo(() => {
-    const doseMg = doseUnit === 'mcg' ? doseValue / 1000 : doseValue;
     const ok =
       Number.isFinite(vialAmount) &&
       vialAmount > 0 &&
       Number.isFinite(waterMl) &&
       waterMl > 0 &&
-      Number.isFinite(doseValue) &&
-      doseValue > 0;
-    if (!ok) return { result: null, error: null as string | null, doseMg };
+      Number.isFinite(doseMg) &&
+      doseMg > 0;
+    if (!ok) return { result: null, error: null as string | null };
     try {
       const result = calculateDose({
         vialAmount,
         vialUnit,
         waterMl,
-        targetDose: doseValue,
-        targetDoseUnit: doseUnit,
+        targetDose: doseMg,
+        targetDoseUnit: 'mg',
         syringeType: barrel.scale,
       });
-      return { result, error: null as string | null, doseMg };
+      return { result, error: null as string | null };
     } catch (e) {
       return {
         result: null,
         error: e instanceof Error ? e.message : 'Something looks off with those numbers.',
-        doseMg,
       };
     }
-  }, [vialAmount, vialUnit, waterMl, doseValue, doseUnit, barrel.scale]);
+  }, [vialAmount, vialUnit, waterMl, doseMg, barrel.scale]);
 
   function stepValid(i: number): boolean {
     switch (STEPS[i]) {
       case 'peptide':
-        return peptideSlug !== '' && (!isCustom || customPeptideName.trim() !== '');
+        return peptideSlug !== '';
       case 'vial':
         return Number.isFinite(vialAmount) && vialAmount > 0;
       case 'water':
@@ -124,7 +155,7 @@ export function CalculatorWizard() {
       case 'syringe':
         return true;
       case 'dose':
-        return Number.isFinite(doseValue) && doseValue > 0;
+        return Number.isFinite(doseMg) && doseMg > 0;
       default:
         return false;
     }
@@ -134,42 +165,99 @@ export function CalculatorWizard() {
   const isLastInput = stepIndex === STEPS.length - 1;
 
   function next() {
-    if (canContinue) setStepIndex((s) => s + 1);
+    if (!canContinue) return;
+    // "I don't see it here" branches to the request screen, not the calculation.
+    if (STEPS[stepIndex] === 'peptide' && isNotListed) {
+      setShowRequest(true);
+      return;
+    }
+    setStepIndex((s) => s + 1);
   }
   function back() {
     setStepIndex((s) => Math.max(0, s - 1));
   }
   function restart() {
     setStepIndex(0);
+    setShowRequest(false);
     setPeptideSlug('');
-    setCustomPeptideName('');
     setVialAmount(NaN);
     setWaterMl(NaN);
     setBarrelId('insulin-1.0');
-    setDoseValue(NaN);
-    setDoseUnit('mg');
+    setDoseMg(NaN);
+    setDoseEntryUnit('mg');
     setShowMath(false);
   }
 
+  // ── Request screen ("I don't see it here") ──
+  if (showRequest) {
+    return (
+      <main className="mx-auto max-w-xl px-4 py-6 sm:py-10">
+        <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:p-7">
+          <div className="mb-5 flex items-start gap-3">
+            <Buddy className="h-12 w-auto flex-shrink-0 drop-shadow-sm" />
+            <div>
+              <h1 className="text-xl font-bold leading-snug tracking-tight sm:text-2xl">
+                Which peptide do you need?
+              </h1>
+              <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                Tell us the one you want and your email. We&rsquo;ll build it
+                into the calculator and let you know when it&rsquo;s ready.
+              </p>
+            </div>
+          </div>
+          <RequestPeptideForm defaultPeptide="" />
+        </div>
+        <div className="mt-5">
+          <button
+            type="button"
+            onClick={() => setShowRequest(false)}
+            className="rounded-lg px-3 py-2 text-base font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+          >
+            ← Back
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  // ── Result screen ──
   if (isResult) {
     return (
       <main className="mx-auto max-w-xl px-4 py-6 sm:py-10">
         <ResultScreen
           result={computation.result}
           error={computation.error}
-          doseMg={computation.doseMg}
-          doseUnit={doseUnit}
-          doseValue={doseValue}
+          doseMg={doseMg}
           barrel={barrel}
           peptideLabel={peptideLabel}
-          isCustom={isCustom}
+          drawFromMg={drawFromMg}
+          mgFromDraw={mgFromDraw}
+          onChangeDoseMg={setDoseMg}
           showMath={showMath}
           onToggleMath={() => setShowMath((s) => !s)}
-          onEditDose={() => setStepIndex(STEPS.length - 1)}
+          onEditSteps={() => setStepIndex(STEPS.length - 1)}
           onRestart={restart}
         />
       </main>
     );
+  }
+
+  // dose field display value, derived from canonical doseMg
+  const doseFieldValue =
+    doseEntryUnit === 'mg'
+      ? doseMg
+      : doseEntryUnit === 'mcg'
+        ? (Number.isFinite(doseMg) ? doseMg * 1000 : NaN)
+        : drawFromMg(doseMg);
+
+  function handleDoseFieldChange(raw: number) {
+    if (!Number.isFinite(raw)) {
+      setDoseMg(NaN);
+      return;
+    }
+    if (doseEntryUnit === 'mg') setDoseMg(raw);
+    else if (doseEntryUnit === 'mcg') setDoseMg(raw / 1000);
+    else setDoseMg(mgFromDraw(raw));
   }
 
   return (
@@ -180,55 +268,37 @@ export function CalculatorWizard() {
         {STEPS[stepIndex] === 'peptide' && (
           <Step
             question="Which peptide are you using?"
-            subtitle="Pick one from the list, or add your own."
+            subtitle="Pick yours from the list. Not there? Choose “I don't see it here.”"
           >
-            <div className="space-y-2">
-              {PEPTIDES.map((p) => (
-                <ChoiceButton
-                  key={p.slug}
-                  selected={peptideSlug === p.slug}
-                  title={p.name}
-                  subtitle={p.aliases?.length ? p.aliases.join(', ') : undefined}
-                  onClick={() => setPeptideSlug(p.slug)}
-                />
+            <select
+              value={peptideSlug}
+              onChange={(e) => setPeptideSlug(e.target.value)}
+              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3.5 text-lg dark:border-zinc-700 dark:bg-zinc-800"
+            >
+              <option value="">Choose your peptide…</option>
+              {WIZARD_PEPTIDES.map((p) => (
+                <option key={p.slug} value={p.slug}>
+                  {p.name}
+                </option>
               ))}
-              <ChoiceButton
-                selected={isCustom}
-                title="Other / not listed"
-                subtitle="Type your own peptide name"
-                onClick={() => setPeptideSlug(CUSTOM_PEPTIDE_VALUE)}
-              />
-              {isCustom && (
-                <input
-                  type="text"
-                  autoFocus
-                  value={customPeptideName}
-                  onChange={(e) => setCustomPeptideName(e.target.value)}
-                  placeholder="e.g., Tesamorelin"
-                  className="mt-1 w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-lg dark:border-zinc-700 dark:bg-zinc-800"
-                />
-              )}
-            </div>
+              <option value={NOT_LISTED}>I don&rsquo;t see it here</option>
+            </select>
+            {isNotListed && (
+              <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                No problem. Tap Continue and we&rsquo;ll ask which one you need so
+                we can add it.
+              </p>
+            )}
           </Step>
         )}
 
         {STEPS[stepIndex] === 'vial' && (
           <Step
             question={`How many mg are in your ${peptideLabel} vial?`}
-            subtitle="This is the amount of peptide powder, printed on the vial label. Not the size of the glass container."
+            subtitle="The amount of peptide powder, printed on the vial label. Not the size of the glass container."
           >
-            <BigNumberInput
-              value={vialAmount}
-              onChange={setVialAmount}
-              unit="mg"
-              placeholder="e.g. 5"
-            />
-            <QuickPicks
-              options={COMMON_VIAL_MG}
-              suffix="mg"
-              value={vialAmount}
-              onPick={setVialAmount}
-            />
+            <BigNumberInput value={vialAmount} onChange={setVialAmount} unit="mg" placeholder="e.g. 5" />
+            <QuickPicks options={COMMON_VIAL_MG} suffix="mg" value={vialAmount} onPick={setVialAmount} />
           </Step>
         )}
 
@@ -237,26 +307,13 @@ export function CalculatorWizard() {
             question="How much bacteriostatic water are you mixing in?"
             subtitle="The sterile liquid you add to the vial to dissolve the powder."
           >
-            <BigNumberInput
-              value={waterMl}
-              onChange={setWaterMl}
-              unit="mL"
-              placeholder="e.g. 2"
-            />
-            <QuickPicks
-              options={COMMON_WATER_ML}
-              suffix="mL"
-              value={waterMl}
-              onPick={setWaterMl}
-            />
+            <BigNumberInput value={waterMl} onChange={setWaterMl} unit="mL" placeholder="e.g. 2" />
+            <QuickPicks options={COMMON_WATER_ML} suffix="mL" value={waterMl} onPick={setWaterMl} />
           </Step>
         )}
 
         {STEPS[stepIndex] === 'syringe' && (
-          <Step
-            question="What syringe do you have?"
-            subtitle="We'll mark exactly where to fill it."
-          >
+          <Step question="What syringe do you have?" subtitle="We'll mark exactly where to fill it.">
             <div className="space-y-2">
               {BARRELS.map((b) => (
                 <ChoiceButton
@@ -273,23 +330,30 @@ export function CalculatorWizard() {
         {STEPS[stepIndex] === 'dose' && (
           <Step
             question="What dose are you taking?"
-            subtitle="The amount your provider told you. BuddyPept never picks this for you."
+            subtitle={`Enter it in mg or mcg. Don't know it that way? Switch to ${thirdLabel} and enter what you plan to draw. BuddyPept never picks this for you.`}
           >
             <BigNumberInput
-              value={doseValue}
-              onChange={setDoseValue}
-              unit={doseUnit}
-              placeholder={doseUnit === 'mg' ? 'e.g. 0.25' : 'e.g. 250'}
+              value={doseFieldValue}
+              onChange={handleDoseFieldChange}
+              unit={doseEntryUnit === 'syringe' ? thirdLabel : doseEntryUnit}
+              placeholder={
+                doseEntryUnit === 'mg' ? 'e.g. 0.25' : doseEntryUnit === 'mcg' ? 'e.g. 250' : 'e.g. 25'
+              }
             />
             <div className="mt-3 flex gap-2">
-              <UnitToggle label="mg" active={doseUnit === 'mg'} onClick={() => setDoseUnit('mg')} />
-              <UnitToggle label="mcg" active={doseUnit === 'mcg'} onClick={() => setDoseUnit('mcg')} />
+              <UnitToggle label="mg" active={doseEntryUnit === 'mg'} onClick={() => setDoseEntryUnit('mg')} />
+              <UnitToggle label="mcg" active={doseEntryUnit === 'mcg'} onClick={() => setDoseEntryUnit('mcg')} />
+              <UnitToggle
+                label={thirdLabel}
+                active={doseEntryUnit === 'syringe'}
+                onClick={() => setDoseEntryUnit('syringe')}
+              />
             </div>
             {peptide && (
               <p className="mt-3 text-sm text-zinc-500">
-                For reference only, research often cites around{' '}
-                {peptide.typicalDose} {peptide.typicalDoseUnit} for {peptide.name}.
-                Your dose is up to you and your provider.
+                For reference only, research often cites around {peptide.typicalDose}{' '}
+                {peptide.typicalDoseUnit} for {peptide.name}. Your dose is up to
+                you and your provider.
               </p>
             )}
           </Step>
@@ -314,7 +378,7 @@ export function CalculatorWizard() {
           disabled={!canContinue}
           className="flex-1 rounded-xl bg-brand-600 px-6 py-4 text-lg font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-none"
         >
-          {isLastInput ? 'Calculate' : 'Continue'} →
+          {isNotListed ? 'Continue' : isLastInput ? 'Calculate' : 'Continue'} →
         </button>
       </div>
     </main>
@@ -327,30 +391,31 @@ function ResultScreen({
   result,
   error,
   doseMg,
-  doseUnit,
-  doseValue,
   barrel,
   peptideLabel,
-  isCustom,
+  drawFromMg,
+  mgFromDraw,
+  onChangeDoseMg,
   showMath,
   onToggleMath,
-  onEditDose,
+  onEditSteps,
   onRestart,
 }: {
   result: ReturnType<typeof calculateDose> | null;
   error: string | null;
   doseMg: number;
-  doseUnit: DoseUnit;
-  doseValue: number;
   barrel: SyringeBarrel;
   peptideLabel: string;
-  isCustom: boolean;
+  drawFromMg: (mg: number) => number;
+  mgFromDraw: (draw: number) => number;
+  onChangeDoseMg: (mg: number) => void;
   showMath: boolean;
   onToggleMath: () => void;
-  onEditDose: () => void;
+  onEditSteps: () => void;
   onRestart: () => void;
 }) {
   const isInsulin = barrel.scale === 'U-100';
+  const thirdLabel = isInsulin ? 'units' : 'mL';
 
   if (error || !result) {
     return (
@@ -360,7 +425,7 @@ function ResultScreen({
         </p>
         <button
           type="button"
-          onClick={onEditDose}
+          onClick={onEditSteps}
           className="mt-4 rounded-xl bg-brand-600 px-5 py-3 text-base font-semibold text-white hover:bg-brand-700"
         >
           ← Go back
@@ -393,14 +458,10 @@ function ResultScreen({
         </p>
         <div className="mt-1 text-5xl font-bold tabular-nums text-brand-700 dark:text-brand-300">
           {isInsulin ? formatNum(result.syringeUnits, 1) : formatNum(result.volumeMl, 3)}
-          <span className="ml-2 text-2xl font-semibold text-zinc-500">
-            {isInsulin ? 'units' : 'mL'}
-          </span>
+          <span className="ml-2 text-2xl font-semibold text-zinc-500">{thirdLabel}</span>
         </div>
         <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
-          {isInsulin
-            ? `that's ${formatNum(result.volumeMl, 3)} mL of ${peptideLabel}`
-            : `of ${peptideLabel}`}
+          {isInsulin ? `that's ${formatNum(result.volumeMl, 3)} mL of ${peptideLabel}` : `of ${peptideLabel}`}
         </p>
       </div>
 
@@ -411,6 +472,25 @@ function ResultScreen({
           shortLabel={barrel.shortLabel}
           drawAmount={drawAmount}
         />
+      </div>
+
+      {/* Inline editor: change units or mg here and the syringe updates live. */}
+      <div className="mt-4 rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+        <p className="mb-2 text-xs font-medium uppercase tracking-wide text-zinc-500">
+          Adjust without going back
+        </p>
+        <div className="grid grid-cols-2 gap-3">
+          <EditField
+            label={thirdLabel}
+            value={drawFromMg(doseMg)}
+            onChange={(v) => onChangeDoseMg(mgFromDraw(v))}
+          />
+          <EditField
+            label="mg"
+            value={doseMg}
+            onChange={(v) => onChangeDoseMg(v)}
+          />
+        </div>
       </div>
 
       {warnings.length > 0 && (
@@ -427,12 +507,9 @@ function ResultScreen({
         {DISCLAIMER_RESULTS}
       </div>
 
-      <div className="mt-4 rounded-lg bg-zinc-50 p-3 text-xs text-zinc-500 dark:bg-zinc-900">
-        Your dose: {formatNum(doseUnit === 'mcg' ? doseValue : doseMg * 1000, 0)} mcg
-        {' = '}
-        {formatNum(doseMg, 4)} mg · Concentration:{' '}
-        {formatNum(result.concentrationMgPerMl, 3)} mg/mL · Syringe:{' '}
-        {barrel.shortLabel}
+      <div className="mt-3 rounded-lg bg-zinc-50 p-3 text-xs text-zinc-500 dark:bg-zinc-900">
+        Your dose: {formatNum(doseMg * 1000, 0)} mcg = {formatNum(doseMg, 4)} mg ·
+        Concentration: {formatNum(result.concentrationMgPerMl, 3)} mg/mL · Syringe: {barrel.shortLabel}
       </div>
 
       <div className="mt-3">
@@ -447,13 +524,9 @@ function ResultScreen({
         </button>
         {showMath && (
           <div className="mt-3 space-y-2 rounded-md bg-zinc-50 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:bg-zinc-950 dark:text-zinc-300">
+            <p>Vial mg ÷ water mL = {formatNum(result.concentrationMgPerMl, 3)} mg/mL</p>
             <p>
-              Vial mg ÷ water mL = {formatNum(result.concentrationMgPerMl, 3)}{' '}
-              mg/mL concentration
-            </p>
-            <p>
-              {formatNum(doseMg, 4)} mg ÷{' '}
-              {formatNum(result.concentrationMgPerMl, 3)} mg/mL ={' '}
+              {formatNum(doseMg, 4)} mg ÷ {formatNum(result.concentrationMgPerMl, 3)} mg/mL ={' '}
               {formatNum(result.volumeMl, 3)} mL
             </p>
             {isInsulin && (
@@ -469,10 +542,10 @@ function ResultScreen({
       <div className="mt-6 flex gap-3">
         <button
           type="button"
-          onClick={onEditDose}
+          onClick={onEditSteps}
           className="flex-1 rounded-xl border border-zinc-300 px-4 py-3 text-base font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
-          Change a number
+          Change a step
         </button>
         <button
           type="button"
@@ -482,19 +555,6 @@ function ResultScreen({
           Start over
         </button>
       </div>
-
-      {isCustom && (
-        <div className="mt-8 rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-          <h2 className="text-base font-semibold">
-            Want {peptideLabel} added to the library?
-          </h2>
-          <p className="mt-1 mb-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            We&rsquo;re adding more peptides. Tell us which one you want and
-            we&rsquo;ll email you the moment it&rsquo;s ready.
-          </p>
-          <RequestPeptideForm defaultPeptide={isCustom ? peptideLabel : ''} />
-        </div>
-      )}
     </div>
   );
 }
@@ -508,9 +568,7 @@ function Progress({ current, total }: { current: number; total: number }) {
         {Array.from({ length: total }).map((_, i) => (
           <div
             key={i}
-            className={`h-1.5 flex-1 rounded-full ${
-              i <= current ? 'bg-brand-600' : 'bg-zinc-200 dark:bg-zinc-700'
-            }`}
+            className={`h-1.5 flex-1 rounded-full ${i <= current ? 'bg-brand-600' : 'bg-zinc-200 dark:bg-zinc-700'}`}
           />
         ))}
       </div>
@@ -535,13 +593,9 @@ function Step({
       <div className="mb-5 flex items-start gap-3">
         <Buddy className="h-12 w-auto flex-shrink-0 drop-shadow-sm" />
         <div>
-          <h1 className="text-xl font-bold leading-snug tracking-tight sm:text-2xl">
-            {question}
-          </h1>
+          <h1 className="text-xl font-bold leading-snug tracking-tight sm:text-2xl">{question}</h1>
           {subtitle && (
-            <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              {subtitle}
-            </p>
+            <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{subtitle}</p>
           )}
         </div>
       </div>
@@ -573,9 +627,7 @@ function ChoiceButton({
     >
       <span>
         <span className="block text-base font-medium">{title}</span>
-        {subtitle && (
-          <span className="mt-0.5 block text-sm text-zinc-500">{subtitle}</span>
-        )}
+        {subtitle && <span className="mt-0.5 block text-sm text-zinc-500">{subtitle}</span>}
       </span>
       <span
         className={`ml-3 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 ${
@@ -607,13 +659,40 @@ function BigNumberInput({
         step="any"
         min={0}
         autoFocus
-        value={Number.isFinite(value) ? value : ''}
+        value={Number.isFinite(value) ? formatForInput(value) : ''}
         onChange={(e) => onChange(parseFloat(e.target.value))}
         placeholder={placeholder}
         className="w-full rounded-xl border border-zinc-300 bg-white py-4 pl-5 pr-16 text-2xl font-semibold tabular-nums dark:border-zinc-700 dark:bg-zinc-800"
       />
       <span className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-lg font-medium text-zinc-400">
         {unit}
+      </span>
+    </div>
+  );
+}
+
+function EditField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  onChange: (n: number) => void;
+}) {
+  return (
+    <div className="relative">
+      <input
+        type="number"
+        inputMode="decimal"
+        step="any"
+        min={0}
+        value={Number.isFinite(value) ? formatForInput(value) : ''}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        className="w-full rounded-lg border border-zinc-300 bg-white py-2.5 pl-3 pr-12 text-lg font-semibold tabular-nums dark:border-zinc-700 dark:bg-zinc-800"
+      />
+      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-zinc-400">
+        {label}
       </span>
     </div>
   );
@@ -692,4 +771,9 @@ function WarningCard({ warning }: { warning: CalcWarning }) {
 function formatNum(n: number, decimals: number): string {
   if (!Number.isFinite(n)) return '-';
   return Number(n.toFixed(decimals)).toString();
+}
+
+function formatForInput(n: number): string {
+  if (!Number.isFinite(n)) return '';
+  return Number(n.toFixed(6)).toString();
 }

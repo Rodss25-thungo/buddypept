@@ -26,9 +26,13 @@ export function SyringeDiagram({
 
   const innerX = 30;
   const innerW = 256;
+  const innerRight = innerX + innerW; // needle side, where the 0 mark sits
   const fillW = innerW * fraction;
-  const markerX = innerX + fillW;
-  const xFor = (v: number) => innerX + innerW * (v / maxValue);
+  // 0 is at the needle (right); numbers increase toward the plunger (left).
+  const xFor = (v: number) => innerRight - innerW * (v / maxValue);
+  // Liquid fills from the needle end (right) leftward to the dose mark.
+  const fillX = innerRight - fillW;
+  const markerX = innerRight - fillW;
 
   const ticks = buildSyringeTicks(isInsulin, maxValue, maxMl);
 
@@ -57,7 +61,7 @@ export function SyringeDiagram({
         />
         {fraction > 0 && (
           <rect
-            x={innerX}
+            x={fillX}
             y="28"
             width={fillW}
             height="24"
