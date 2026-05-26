@@ -18,6 +18,16 @@ export interface PeptideEducation {
 }
 
 export const PEPTIDE_EDUCATION: Record<string, PeptideEducation> = {
+  semaglutide: {
+    teaser: 'An FDA-approved GLP-1 medicine for diabetes and weight.',
+    whatItIs: 'A GLP-1 receptor agonist.',
+    studiedFor:
+      'FDA-approved for type 2 diabetes (Ozempic) and weight management (Wegovy), and studied in large clinical trials. Rybelsus is an oral form for diabetes.',
+    howSold:
+      'By prescription as a pre-filled pen or vial (Ozempic, Wegovy) or tablets (Rybelsus). It is also sold by gray-market vendors as a research powder, which is not the approved product.',
+    bottomLine:
+      'Semaglutide is an FDA-approved prescription medicine. The approved product comes through a licensed provider and pharmacy, and decisions about it belong with them.',
+  },
   'bpc-157': {
     teaser: 'A lab-made peptide studied in animals for tissue repair.',
     whatItIs:
@@ -131,6 +141,7 @@ export const PEPTIDE_EDUCATION: Record<string, PeptideEducation> = {
 
 /** Slugs that have an education entry, in the order to show in the library. */
 export const LEARN_SLUGS = [
+  'semaglutide',
   'tirzepatide',
   'retatrutide',
   'bpc-157',

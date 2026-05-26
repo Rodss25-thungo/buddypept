@@ -56,6 +56,7 @@ function getBarrel(id: SyringeBarrelId): SyringeBarrel {
 
 // Curated picker list (slugs in data/peptides.ts). Order shown in the dropdown.
 const WIZARD_PEPTIDE_SLUGS = [
+  'semaglutide',
   'tirzepatide',
   'bpc-157',
   'tb-500',
