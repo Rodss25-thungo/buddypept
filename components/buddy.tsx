@@ -1,8 +1,8 @@
 /**
- * Buddy: BuddyPept's friendly helper character, built from the logo water
- * droplet. Calm, warm, and approachable (the opposite of the cold/clinical or
- * bro-aggressive peptide category). Used as a greeter in the hero and to
- * "hand over" the calculator result.
+ * Buddy: BuddyPept's helper character, built from the logo water droplet.
+ * Calm and competent (simple dot eyes, a gentle understated smile), warm but
+ * not cutesy, to match the seriousness of dose math. Used as a greeter in the
+ * hero and to "hand over" the calculator result.
  *
  * Pure SVG in brand colors, so it scales crisply at any size. A fuller
  * illustrated version can replace this later.
@@ -28,19 +28,14 @@ export function Buddy({ className }: { className?: string }) {
         strokeLinecap="round"
         className="stroke-white/40"
       />
-      {/* Warm cheeks */}
-      <circle cx="33" cy="93" r="5" className="fill-accent-400" opacity="0.7" />
-      <circle cx="67" cy="93" r="5" className="fill-accent-400" opacity="0.7" />
-      {/* Eyes */}
-      <circle cx="40" cy="83" r="7" className="fill-white" />
-      <circle cx="60" cy="83" r="7" className="fill-white" />
-      <circle cx="41.5" cy="84" r="3.4" className="fill-brand-950" />
-      <circle cx="61.5" cy="84" r="3.4" className="fill-brand-950" />
-      {/* Smile */}
+      {/* Calm eyes (simple, competent, not cartoonish) */}
+      <circle cx="41" cy="82" r="2.8" className="fill-brand-950" />
+      <circle cx="59" cy="82" r="2.8" className="fill-brand-950" />
+      {/* Gentle, understated smile */}
       <path
-        d="M42 100q8 7 16 0"
+        d="M44 95q6 3.5 12 0"
         fill="none"
-        strokeWidth="3"
+        strokeWidth="2.6"
         strokeLinecap="round"
         className="stroke-brand-950"
       />
