@@ -417,37 +417,42 @@ function ResultScreen({
   const isInsulin = barrel.scale === 'U-100';
   const thirdLabel = isInsulin ? 'units' : 'mL';
 
-  if (error || !result) {
-    return (
-      <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center dark:border-red-900 dark:bg-red-950">
-        <p className="text-base text-red-900 dark:text-red-100">
-          {error ?? 'We could not work that out. Please check your numbers.'}
-        </p>
-        <button
-          type="button"
-          onClick={onEditSteps}
-          className="mt-4 rounded-xl bg-brand-600 px-5 py-3 text-base font-semibold text-white hover:bg-brand-700"
-        >
-          ← Go back
-        </button>
-      </div>
-    );
-  }
+  // The screen stays put while the dose is being retyped. Numbers show only
+  // when there is a valid result; otherwise we show a gentle placeholder and
+  // keep the editor fields live so the user can type by hand.
+  const ready = Boolean(result) && !error;
 
-  const drawAmount = isInsulin ? result.syringeUnits : result.volumeMl;
-  const overCapacity = result.volumeMl > barrel.maxMl;
+  const drawAmount = ready
+    ? isInsulin
+      ? result!.syringeUnits
+      : result!.volumeMl
+    : drawFromMg(doseMg);
 
-  const warnings: CalcWarning[] = [
-    ...result.warnings,
-    ...(overCapacity
-      ? [
-          {
-            level: 'caution' as const,
-            message: `This dose needs ${formatNum(result.volumeMl, 3)} mL, more than the ${barrel.shortLabel} holds (${barrel.maxMl} mL). Use a larger syringe, or mix with more water for a weaker concentration.`,
-          },
-        ]
-      : []),
-  ];
+  const bigValue = ready
+    ? isInsulin
+      ? formatNum(result!.syringeUnits, 1)
+      : formatNum(result!.volumeMl, 3)
+    : '—';
+
+  const subline = ready
+    ? isInsulin
+      ? `that's ${formatNum(result!.volumeMl, 3)} mL of ${peptideLabel}`
+      : `of ${peptideLabel}`
+    : 'Type a dose below to see the draw.';
+
+  const warnings: CalcWarning[] = ready
+    ? [
+        ...result!.warnings,
+        ...(result!.volumeMl > barrel.maxMl
+          ? [
+              {
+                level: 'caution' as const,
+                message: `This dose needs ${formatNum(result!.volumeMl, 3)} mL, more than the ${barrel.shortLabel} holds (${barrel.maxMl} mL). Use a larger syringe, or mix with more water for a weaker concentration.`,
+              },
+            ]
+          : []),
+      ]
+    : [];
 
   return (
     <div>
@@ -457,12 +462,10 @@ function ResultScreen({
           Calculated draw
         </p>
         <div className="mt-1 text-5xl font-bold tabular-nums text-brand-700 dark:text-brand-300">
-          {isInsulin ? formatNum(result.syringeUnits, 1) : formatNum(result.volumeMl, 3)}
+          {bigValue}
           <span className="ml-2 text-2xl font-semibold text-zinc-500">{thirdLabel}</span>
         </div>
-        <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
-          {isInsulin ? `that's ${formatNum(result.volumeMl, 3)} mL of ${peptideLabel}` : `of ${peptideLabel}`}
-        </p>
+        <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">{subline}</p>
       </div>
 
       <div className="mt-6">
@@ -473,6 +476,12 @@ function ResultScreen({
           drawAmount={drawAmount}
         />
       </div>
+
+      {error && (
+        <div className="mt-4">
+          <WarningCard warning={{ level: 'serious', message: error }} />
+        </div>
+      )}
 
       {/* Inline editor: change units or mg here and the syringe updates live. */}
       <div className="mt-4 rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
@@ -507,37 +516,41 @@ function ResultScreen({
         {DISCLAIMER_RESULTS}
       </div>
 
-      <div className="mt-3 rounded-lg bg-zinc-50 p-3 text-xs text-zinc-500 dark:bg-zinc-900">
-        Dose: {formatNum(doseMg * 1000, 0)} mcg = {formatNum(doseMg, 4)} mg ·
-        Concentration: {formatNum(result.concentrationMgPerMl, 3)} mg/mL · Syringe: {barrel.shortLabel}
-      </div>
+      {ready && (
+        <div className="mt-3 rounded-lg bg-zinc-50 p-3 text-xs text-zinc-500 dark:bg-zinc-900">
+          Dose: {formatNum(doseMg * 1000, 0)} mcg = {formatNum(doseMg, 4)} mg ·
+          Concentration: {formatNum(result!.concentrationMgPerMl, 3)} mg/mL · Syringe: {barrel.shortLabel}
+        </div>
+      )}
 
-      <div className="mt-3">
-        <button
-          type="button"
-          onClick={onToggleMath}
-          className="flex items-center gap-1.5 text-sm font-medium text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-          aria-expanded={showMath}
-        >
-          <span aria-hidden>{showMath ? '▾' : '▸'}</span>
-          {showMath ? 'Hide the math' : 'Show the math'}
-        </button>
-        {showMath && (
-          <div className="mt-3 space-y-2 rounded-md bg-zinc-50 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:bg-zinc-950 dark:text-zinc-300">
-            <p>Vial mg ÷ water mL = {formatNum(result.concentrationMgPerMl, 3)} mg/mL</p>
-            <p>
-              {formatNum(doseMg, 4)} mg ÷ {formatNum(result.concentrationMgPerMl, 3)} mg/mL ={' '}
-              {formatNum(result.volumeMl, 3)} mL
-            </p>
-            {isInsulin && (
+      {ready && (
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={onToggleMath}
+            className="flex items-center gap-1.5 text-sm font-medium text-zinc-700 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
+            aria-expanded={showMath}
+          >
+            <span aria-hidden>{showMath ? '▾' : '▸'}</span>
+            {showMath ? 'Hide the math' : 'Show the math'}
+          </button>
+          {showMath && (
+            <div className="mt-3 space-y-2 rounded-md bg-zinc-50 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:bg-zinc-950 dark:text-zinc-300">
+              <p>Vial mg ÷ water mL = {formatNum(result!.concentrationMgPerMl, 3)} mg/mL</p>
               <p>
-                {formatNum(result.volumeMl, 3)} mL × 100 units/mL ={' '}
-                {formatNum(result.syringeUnits, 2)} units
+                {formatNum(doseMg, 4)} mg ÷ {formatNum(result!.concentrationMgPerMl, 3)} mg/mL ={' '}
+                {formatNum(result!.volumeMl, 3)} mL
               </p>
-            )}
-          </div>
-        )}
-      </div>
+              {isInsulin && (
+                <p>
+                  {formatNum(result!.volumeMl, 3)} mL × 100 units/mL ={' '}
+                  {formatNum(result!.syringeUnits, 2)} units
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="mt-6 flex gap-3">
         <button
