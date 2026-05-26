@@ -3,14 +3,19 @@
 /**
  * BuddyPept calculator, as a guided step-by-step flow.
  *
- * One big question per screen, large tap targets, Buddy guiding, and a result
- * reveal with the live syringe and an inline editor. Designed to feel like an
- * app and be easy to read for a 40+ audience.
+ * One big question per screen, large tap targets, Buddy guiding, a result
+ * reveal with the live syringe, and an inline editor. Built to feel like an app
+ * and read clearly for a 40+ audience. Educational framing only: it never
+ * assumes anyone is using a peptide and never recommends a dose.
  *
- * The math is unchanged: it reuses calculateDose() from lib/calculator. This
- * component only changes how the questions are presented and answered.
+ * The math is unchanged: it reuses calculateDose() from lib/calculator, which
+ * is unit-agnostic. The vial's unit (mg or IU) is chosen by the peptide and
+ * stays consistent through every step. Peptides sold in IU (HGH, HCG) are
+ * calculated entirely in IU; we never convert IU to mass.
  *
- * Hard brand rule respected: the dose is NEVER pre-filled. The user enters it.
+ * Two reconstitution paths:
+ *  - powder: amount + bacteriostatic water added -> strength
+ *  - already liquid: amount + total liquid already in the vial -> strength
  */
 
 import { useMemo, useState } from 'react';
@@ -18,6 +23,7 @@ import { getPeptideBySlug, type Peptide } from '@/data/peptides';
 import {
   calculateDose,
   type SyringeType,
+  type VialUnit,
   type Warning as CalcWarning,
 } from '@/lib/calculator';
 import { RequestPeptideForm } from './request-peptide-form';
@@ -25,12 +31,7 @@ import { Buddy } from '@/components/buddy';
 import { SyringeDiagram } from '@/components/syringe-diagram';
 
 // ───── Syringe barrels ─────
-type SyringeBarrelId =
-  | 'insulin-0.3'
-  | 'insulin-0.5'
-  | 'insulin-1.0'
-  | 'im-1.0'
-  | 'im-3.0';
+type SyringeBarrelId = 'insulin-0.3' | 'insulin-0.5' | 'insulin-1.0' | 'im-1.0' | 'im-3.0';
 
 interface SyringeBarrel {
   id: SyringeBarrelId;
@@ -52,9 +53,9 @@ function getBarrel(id: SyringeBarrelId): SyringeBarrel {
   return BARRELS.find((b) => b.id === id) ?? BARRELS[2];
 }
 
-// Curated picker list (slugs that exist in data/peptides.ts). Others use the
-// "I don't see it here" path, which captures a request instead.
+// Curated picker list (slugs in data/peptides.ts). Order shown in the dropdown.
 const WIZARD_PEPTIDE_SLUGS = [
+  'tirzepatide',
   'bpc-157',
   'tb-500',
   'ghk-cu',
@@ -62,57 +63,56 @@ const WIZARD_PEPTIDE_SLUGS = [
   'cjc-1295',
   'sermorelin',
   'retatrutide',
+  'hgh',
+  'hcg',
 ];
 const WIZARD_PEPTIDES = WIZARD_PEPTIDE_SLUGS.map((s) => getPeptideBySlug(s)).filter(
   (p): p is Peptide => Boolean(p)
 );
 
 const NOT_LISTED = '__not_listed__';
-const COMMON_VIAL_MG = [5, 10, 30, 50];
 const COMMON_WATER_ML = [1, 2, 3, 5];
 
 const DISCLAIMER_RESULTS =
   'This is math, not medical advice. Check it against your vial label and your provider’s guidance before drawing any dose.';
 
-type DoseEntryUnit = 'mg' | 'mcg' | 'syringe';
+type DoseEntryUnit = 'mg' | 'mcg' | 'native' | 'draw';
+type Form = 'powder' | 'liquid';
 
-const STEPS = ['peptide', 'vial', 'water', 'syringe', 'dose'] as const;
+const STEPS = ['peptide', 'form', 'amount', 'volume', 'syringe', 'dose'] as const;
 
 export function CalculatorWizard() {
-  const [stepIndex, setStepIndex] = useState(0); // 0..4 inputs, 5 = result
+  const [stepIndex, setStepIndex] = useState(0);
   const [showRequest, setShowRequest] = useState(false);
   const [peptideSlug, setPeptideSlug] = useState('');
+  const [form, setForm] = useState<Form>('powder');
   const [vialAmount, setVialAmount] = useState<number>(NaN);
   const [waterMl, setWaterMl] = useState<number>(NaN);
   const [barrelId, setBarrelId] = useState<SyringeBarrelId>('insulin-1.0');
-  const [doseMg, setDoseMg] = useState<number>(NaN); // canonical dose
+  const [doseNative, setDoseNative] = useState<number>(NaN);
   const [doseEntryUnit, setDoseEntryUnit] = useState<DoseEntryUnit>('mg');
   const [showMath, setShowMath] = useState(false);
 
   const isNotListed = peptideSlug === NOT_LISTED;
   const peptide = isNotListed ? undefined : getPeptideBySlug(peptideSlug);
   const barrel = getBarrel(barrelId);
-  const vialUnit = peptide?.vialUnit ?? 'mg';
+  const vialUnit: VialUnit = peptide?.vialUnit ?? 'mg';
+  const isIU = vialUnit === 'IU';
   const peptideLabel = peptide?.name ?? 'your peptide';
   const thirdLabel = barrel.scale === 'U-100' ? 'units' : 'mL';
 
-  const concentrationMgPerMl =
+  const concPerMl =
     Number.isFinite(vialAmount) && vialAmount > 0 && Number.isFinite(waterMl) && waterMl > 0
       ? vialAmount / waterMl
       : NaN;
 
-  // dose <-> syringe-draw conversions (presentation only)
-  const drawFromMg = (mg: number) => {
-    if (!Number.isFinite(mg) || !Number.isFinite(concentrationMgPerMl)) return NaN;
-    return barrel.scale === 'U-100'
-      ? mg / (concentrationMgPerMl / 100)
-      : mg / concentrationMgPerMl;
+  const drawFromNative = (native: number) => {
+    if (!Number.isFinite(native) || !Number.isFinite(concPerMl)) return NaN;
+    return barrel.scale === 'U-100' ? native / (concPerMl / 100) : native / concPerMl;
   };
-  const mgFromDraw = (draw: number) => {
-    if (!Number.isFinite(draw) || !Number.isFinite(concentrationMgPerMl)) return NaN;
-    return barrel.scale === 'U-100'
-      ? draw * (concentrationMgPerMl / 100)
-      : draw * concentrationMgPerMl;
+  const nativeFromDraw = (draw: number) => {
+    if (!Number.isFinite(draw) || !Number.isFinite(concPerMl)) return NaN;
+    return barrel.scale === 'U-100' ? draw * (concPerMl / 100) : draw * concPerMl;
   };
 
   const isResult = stepIndex >= STEPS.length;
@@ -123,16 +123,16 @@ export function CalculatorWizard() {
       vialAmount > 0 &&
       Number.isFinite(waterMl) &&
       waterMl > 0 &&
-      Number.isFinite(doseMg) &&
-      doseMg > 0;
+      Number.isFinite(doseNative) &&
+      doseNative > 0;
     if (!ok) return { result: null, error: null as string | null };
     try {
       const result = calculateDose({
         vialAmount,
         vialUnit,
         waterMl,
-        targetDose: doseMg,
-        targetDoseUnit: 'mg',
+        targetDose: doseNative,
+        targetDoseUnit: vialUnit,
         syringeType: barrel.scale,
       });
       return { result, error: null as string | null };
@@ -142,20 +142,22 @@ export function CalculatorWizard() {
         error: e instanceof Error ? e.message : 'Something looks off with those numbers.',
       };
     }
-  }, [vialAmount, vialUnit, waterMl, doseMg, barrel.scale]);
+  }, [vialAmount, vialUnit, waterMl, doseNative, barrel.scale]);
 
   function stepValid(i: number): boolean {
     switch (STEPS[i]) {
       case 'peptide':
         return peptideSlug !== '';
-      case 'vial':
+      case 'form':
+        return true;
+      case 'amount':
         return Number.isFinite(vialAmount) && vialAmount > 0;
-      case 'water':
+      case 'volume':
         return Number.isFinite(waterMl) && waterMl > 0;
       case 'syringe':
         return true;
       case 'dose':
-        return Number.isFinite(doseMg) && doseMg > 0;
+        return Number.isFinite(doseNative) && doseNative > 0;
       default:
         return false;
     }
@@ -164,9 +166,16 @@ export function CalculatorWizard() {
   const canContinue = !isResult && stepValid(stepIndex);
   const isLastInput = stepIndex === STEPS.length - 1;
 
+  function handlePeptideChange(slug: string) {
+    setPeptideSlug(slug);
+    setVialAmount(NaN);
+    setDoseNative(NaN);
+    const p = getPeptideBySlug(slug);
+    setDoseEntryUnit(p?.vialUnit === 'IU' ? 'native' : 'mg');
+  }
+
   function next() {
     if (!canContinue) return;
-    // "I don't see it here" branches to the request screen, not the calculation.
     if (STEPS[stepIndex] === 'peptide' && isNotListed) {
       setShowRequest(true);
       return;
@@ -180,10 +189,11 @@ export function CalculatorWizard() {
     setStepIndex(0);
     setShowRequest(false);
     setPeptideSlug('');
+    setForm('powder');
     setVialAmount(NaN);
     setWaterMl(NaN);
     setBarrelId('insulin-1.0');
-    setDoseMg(NaN);
+    setDoseNative(NaN);
     setDoseEntryUnit('mg');
     setShowMath(false);
   }
@@ -227,12 +237,13 @@ export function CalculatorWizard() {
         <ResultScreen
           result={computation.result}
           error={computation.error}
-          doseMg={doseMg}
+          doseNative={doseNative}
+          vialUnit={vialUnit}
           barrel={barrel}
           peptideLabel={peptideLabel}
-          drawFromMg={drawFromMg}
-          mgFromDraw={mgFromDraw}
-          onChangeDoseMg={setDoseMg}
+          drawFromNative={drawFromNative}
+          nativeFromDraw={nativeFromDraw}
+          onChangeDoseNative={setDoseNative}
           showMath={showMath}
           onToggleMath={() => setShowMath((s) => !s)}
           onEditSteps={() => setStepIndex(STEPS.length - 1)}
@@ -242,23 +253,36 @@ export function CalculatorWizard() {
     );
   }
 
-  // dose field display value, derived from canonical doseMg
+  // dose field value derived from canonical doseNative
   const doseFieldValue =
     doseEntryUnit === 'mg'
-      ? doseMg
+      ? doseNative
       : doseEntryUnit === 'mcg'
-        ? (Number.isFinite(doseMg) ? doseMg * 1000 : NaN)
-        : drawFromMg(doseMg);
+        ? Number.isFinite(doseNative)
+          ? doseNative * 1000
+          : NaN
+        : doseEntryUnit === 'native'
+          ? doseNative
+          : drawFromNative(doseNative);
 
   function handleDoseFieldChange(raw: number) {
     if (!Number.isFinite(raw)) {
-      setDoseMg(NaN);
+      setDoseNative(NaN);
       return;
     }
-    if (doseEntryUnit === 'mg') setDoseMg(raw);
-    else if (doseEntryUnit === 'mcg') setDoseMg(raw / 1000);
-    else setDoseMg(mgFromDraw(raw));
+    if (doseEntryUnit === 'mg' || doseEntryUnit === 'native') setDoseNative(raw);
+    else if (doseEntryUnit === 'mcg') setDoseNative(raw / 1000);
+    else setDoseNative(nativeFromDraw(raw));
   }
+
+  const doseFieldUnit =
+    doseEntryUnit === 'mg'
+      ? 'mg'
+      : doseEntryUnit === 'mcg'
+        ? 'mcg'
+        : doseEntryUnit === 'native'
+          ? vialUnit
+          : thirdLabel;
 
   return (
     <main className="mx-auto max-w-xl px-4 py-6 sm:py-10">
@@ -272,7 +296,7 @@ export function CalculatorWizard() {
           >
             <select
               value={peptideSlug}
-              onChange={(e) => setPeptideSlug(e.target.value)}
+              onChange={(e) => handlePeptideChange(e.target.value)}
               className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3.5 text-lg dark:border-zinc-700 dark:bg-zinc-800"
             >
               <option value="">Choose your peptide…</option>
@@ -289,39 +313,74 @@ export function CalculatorWizard() {
                 we can add it.
               </p>
             )}
+            {peptide && (
+              <p className="mt-3 text-sm text-zinc-500">
+                {peptide.name} is measured in{' '}
+                <strong>{isIU ? 'international units (IU)' : 'milligrams (mg)'}</strong>,
+                so the whole calculation will stay in {isIU ? 'IU' : 'mg'}.
+              </p>
+            )}
           </Step>
         )}
 
-        {STEPS[stepIndex] === 'vial' && (
+        {STEPS[stepIndex] === 'form' && (
           <Step
-            question={`How many mg are in the ${peptideLabel} vial?`}
-            subtitle="The amount of peptide powder, printed on the vial label. Not the size of the glass container."
+            question={`Is the ${peptideLabel} a powder or already a liquid?`}
+            subtitle="Freeze-dried powder needs mixing. An already-liquid vial does not."
           >
-            <BigNumberInput value={vialAmount} onChange={setVialAmount} unit="mg" placeholder="e.g. 5" />
-            <QuickPicks options={COMMON_VIAL_MG} suffix="mg" value={vialAmount} onPick={setVialAmount} />
+            <div className="space-y-2">
+              <ChoiceButton
+                selected={form === 'powder'}
+                title="A powder I mix"
+                subtitle="Freeze-dried, needs bacteriostatic water"
+                onClick={() => setForm('powder')}
+              />
+              <ChoiceButton
+                selected={form === 'liquid'}
+                title="Already a liquid"
+                subtitle="Pre-mixed in the vial, no water to add"
+                onClick={() => setForm('liquid')}
+              />
+            </div>
           </Step>
         )}
 
-        {STEPS[stepIndex] === 'water' && (
+        {STEPS[stepIndex] === 'amount' && (
           <Step
-            question="How much bacteriostatic water is added?"
-            subtitle="The sterile liquid added to the vial to dissolve the powder."
+            question={`How many ${vialUnit} are in the ${peptideLabel} vial?`}
+            subtitle={`The total amount of ${peptideLabel}, printed on the vial label. Not the size of the glass container.`}
           >
-            <BigNumberInput value={waterMl} onChange={setWaterMl} unit="mL" placeholder="e.g. 2" />
-            <QuickPicks options={COMMON_WATER_ML} suffix="mL" value={waterMl} onPick={setWaterMl} />
+            <BigNumberInput value={vialAmount} onChange={setVialAmount} unit={vialUnit} placeholder={isIU ? 'e.g. 5000' : 'e.g. 5'} />
+            {peptide && peptide.commonVialSizes.length > 0 && (
+              <QuickPicks options={peptide.commonVialSizes} suffix={vialUnit} value={vialAmount} onPick={setVialAmount} />
+            )}
           </Step>
         )}
+
+        {STEPS[stepIndex] === 'volume' &&
+          (form === 'powder' ? (
+            <Step
+              question="How much bacteriostatic water is added?"
+              subtitle="The sterile liquid added to the vial to dissolve the powder."
+            >
+              <BigNumberInput value={waterMl} onChange={setWaterMl} unit="mL" placeholder="e.g. 2" />
+              <QuickPicks options={COMMON_WATER_ML} suffix="mL" value={waterMl} onPick={setWaterMl} />
+            </Step>
+          ) : (
+            <Step
+              question="How much total liquid is in the vial?"
+              subtitle="The full volume already in the vial. Check the label (for example, the mL it came in)."
+            >
+              <BigNumberInput value={waterMl} onChange={setWaterMl} unit="mL" placeholder="e.g. 1" />
+              <QuickPicks options={COMMON_WATER_ML} suffix="mL" value={waterMl} onPick={setWaterMl} />
+            </Step>
+          ))}
 
         {STEPS[stepIndex] === 'syringe' && (
           <Step question="Pick a syringe" subtitle="We'll show where the dose lands on it.">
             <div className="space-y-2">
               {BARRELS.map((b) => (
-                <ChoiceButton
-                  key={b.id}
-                  selected={barrelId === b.id}
-                  title={b.label}
-                  onClick={() => setBarrelId(b.id)}
-                />
+                <ChoiceButton key={b.id} selected={barrelId === b.id} title={b.label} onClick={() => setBarrelId(b.id)} />
               ))}
             </div>
           </Step>
@@ -330,24 +389,32 @@ export function CalculatorWizard() {
         {STEPS[stepIndex] === 'dose' && (
           <Step
             question="What dose do you want to calculate?"
-            subtitle={`Enter it in mg or mcg. Don't have it that way? Switch to ${thirdLabel} and enter the amount to draw. BuddyPept never picks a dose for you.`}
+            subtitle={`Enter it in ${isIU ? 'IU' : 'mg or mcg'}. Don't have it that way? Switch to ${thirdLabel} and enter the amount to draw. BuddyPept never picks a dose for you.`}
           >
             <BigNumberInput
               value={doseFieldValue}
               onChange={handleDoseFieldChange}
-              unit={doseEntryUnit === 'syringe' ? thirdLabel : doseEntryUnit}
+              unit={doseFieldUnit}
               placeholder={
-                doseEntryUnit === 'mg' ? 'e.g. 0.25' : doseEntryUnit === 'mcg' ? 'e.g. 250' : 'e.g. 25'
+                doseEntryUnit === 'mg'
+                  ? 'e.g. 0.25'
+                  : doseEntryUnit === 'mcg'
+                    ? 'e.g. 250'
+                    : doseEntryUnit === 'native'
+                      ? 'e.g. 500'
+                      : 'e.g. 25'
               }
             />
             <div className="mt-3 flex gap-2">
-              <UnitToggle label="mg" active={doseEntryUnit === 'mg'} onClick={() => setDoseEntryUnit('mg')} />
-              <UnitToggle label="mcg" active={doseEntryUnit === 'mcg'} onClick={() => setDoseEntryUnit('mcg')} />
-              <UnitToggle
-                label={thirdLabel}
-                active={doseEntryUnit === 'syringe'}
-                onClick={() => setDoseEntryUnit('syringe')}
-              />
+              {isIU ? (
+                <UnitToggle label="IU" active={doseEntryUnit === 'native'} onClick={() => setDoseEntryUnit('native')} />
+              ) : (
+                <>
+                  <UnitToggle label="mg" active={doseEntryUnit === 'mg'} onClick={() => setDoseEntryUnit('mg')} />
+                  <UnitToggle label="mcg" active={doseEntryUnit === 'mcg'} onClick={() => setDoseEntryUnit('mcg')} />
+                </>
+              )}
+              <UnitToggle label={thirdLabel} active={doseEntryUnit === 'draw'} onClick={() => setDoseEntryUnit('draw')} />
             </div>
             {peptide && (
               <p className="mt-3 text-sm text-zinc-500">
@@ -390,12 +457,13 @@ export function CalculatorWizard() {
 function ResultScreen({
   result,
   error,
-  doseMg,
+  doseNative,
+  vialUnit,
   barrel,
   peptideLabel,
-  drawFromMg,
-  mgFromDraw,
-  onChangeDoseMg,
+  drawFromNative,
+  nativeFromDraw,
+  onChangeDoseNative,
   showMath,
   onToggleMath,
   onEditSteps,
@@ -403,12 +471,13 @@ function ResultScreen({
 }: {
   result: ReturnType<typeof calculateDose> | null;
   error: string | null;
-  doseMg: number;
+  doseNative: number;
+  vialUnit: VialUnit;
   barrel: SyringeBarrel;
   peptideLabel: string;
-  drawFromMg: (mg: number) => number;
-  mgFromDraw: (draw: number) => number;
-  onChangeDoseMg: (mg: number) => void;
+  drawFromNative: (n: number) => number;
+  nativeFromDraw: (draw: number) => number;
+  onChangeDoseNative: (n: number) => void;
   showMath: boolean;
   onToggleMath: () => void;
   onEditSteps: () => void;
@@ -416,17 +485,15 @@ function ResultScreen({
 }) {
   const isInsulin = barrel.scale === 'U-100';
   const thirdLabel = isInsulin ? 'units' : 'mL';
-
-  // The screen stays put while the dose is being retyped. Numbers show only
-  // when there is a valid result; otherwise we show a gentle placeholder and
-  // keep the editor fields live so the user can type by hand.
+  const isIU = vialUnit === 'IU';
+  const concUnit = isIU ? 'IU/mL' : 'mg/mL';
   const ready = Boolean(result) && !error;
 
   const drawAmount = ready
     ? isInsulin
       ? result!.syringeUnits
       : result!.volumeMl
-    : drawFromMg(doseMg);
+    : drawFromNative(doseNative);
 
   const bigValue = ready
     ? isInsulin
@@ -440,9 +507,16 @@ function ResultScreen({
       : `of ${peptideLabel}`
     : 'Type a dose below to see the draw.';
 
+  // Drop the lib's "IU cannot convert to mass" caution: we stay entirely in IU,
+  // so it does not apply and would only confuse.
+  const baseWarnings = ready
+    ? isIU
+      ? result!.warnings.filter((w) => !w.message.includes('International Units'))
+      : result!.warnings
+    : [];
   const warnings: CalcWarning[] = ready
     ? [
-        ...result!.warnings,
+        ...baseWarnings,
         ...(result!.volumeMl > barrel.maxMl
           ? [
               {
@@ -469,12 +543,7 @@ function ResultScreen({
       </div>
 
       <div className="mt-6">
-        <SyringeDiagram
-          scale={barrel.scale}
-          maxMl={barrel.maxMl}
-          shortLabel={barrel.shortLabel}
-          drawAmount={drawAmount}
-        />
+        <SyringeDiagram scale={barrel.scale} maxMl={barrel.maxMl} shortLabel={barrel.shortLabel} drawAmount={drawAmount} />
       </div>
 
       {error && (
@@ -483,22 +552,14 @@ function ResultScreen({
         </div>
       )}
 
-      {/* Inline editor: change units or mg here and the syringe updates live. */}
+      {/* Inline editor: change the draw or the dose here and the syringe updates live. */}
       <div className="mt-4 rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
         <p className="mb-2 text-xs font-medium uppercase tracking-wide text-zinc-500">
           Adjust without going back
         </p>
         <div className="grid grid-cols-2 gap-3">
-          <EditField
-            label={thirdLabel}
-            value={drawFromMg(doseMg)}
-            onChange={(v) => onChangeDoseMg(mgFromDraw(v))}
-          />
-          <EditField
-            label="mg"
-            value={doseMg}
-            onChange={(v) => onChangeDoseMg(v)}
-          />
+          <EditField label={thirdLabel} value={drawFromNative(doseNative)} onChange={(v) => onChangeDoseNative(nativeFromDraw(v))} />
+          <EditField label={vialUnit} value={doseNative} onChange={(v) => onChangeDoseNative(v)} />
         </div>
       </div>
 
@@ -518,8 +579,12 @@ function ResultScreen({
 
       {ready && (
         <div className="mt-3 rounded-lg bg-zinc-50 p-3 text-xs text-zinc-500 dark:bg-zinc-900">
-          Dose: {formatNum(doseMg * 1000, 0)} mcg = {formatNum(doseMg, 4)} mg ·
-          Concentration: {formatNum(result!.concentrationMgPerMl, 3)} mg/mL · Syringe: {barrel.shortLabel}
+          {isIU ? (
+            <>Dose: {formatNum(doseNative, 2)} IU · </>
+          ) : (
+            <>Dose: {formatNum(doseNative * 1000, 0)} mcg = {formatNum(doseNative, 4)} mg · </>
+          )}
+          Concentration: {formatNum(result!.concentrationMgPerMl, 3)} {concUnit} · Syringe: {barrel.shortLabel}
         </div>
       )}
 
@@ -536,15 +601,14 @@ function ResultScreen({
           </button>
           {showMath && (
             <div className="mt-3 space-y-2 rounded-md bg-zinc-50 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:bg-zinc-950 dark:text-zinc-300">
-              <p>Vial mg ÷ water mL = {formatNum(result!.concentrationMgPerMl, 3)} mg/mL</p>
+              <p>Vial {vialUnit} ÷ liquid mL = {formatNum(result!.concentrationMgPerMl, 3)} {concUnit}</p>
               <p>
-                {formatNum(doseMg, 4)} mg ÷ {formatNum(result!.concentrationMgPerMl, 3)} mg/mL ={' '}
+                {formatNum(doseNative, 4)} {vialUnit} ÷ {formatNum(result!.concentrationMgPerMl, 3)} {concUnit} ={' '}
                 {formatNum(result!.volumeMl, 3)} mL
               </p>
               {isInsulin && (
                 <p>
-                  {formatNum(result!.volumeMl, 3)} mL × 100 units/mL ={' '}
-                  {formatNum(result!.syringeUnits, 2)} units
+                  {formatNum(result!.volumeMl, 3)} mL × 100 units/mL = {formatNum(result!.syringeUnits, 2)} units
                 </p>
               )}
             </div>
@@ -607,9 +671,7 @@ function Step({
         <Buddy className="h-12 w-auto flex-shrink-0 drop-shadow-sm" />
         <div>
           <h1 className="text-xl font-bold leading-snug tracking-tight sm:text-2xl">{question}</h1>
-          {subtitle && (
-            <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{subtitle}</p>
-          )}
+          {subtitle && <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{subtitle}</p>}
         </div>
       </div>
       {children}
@@ -702,7 +764,7 @@ function EditField({
         min={0}
         value={Number.isFinite(value) ? formatForInput(value) : ''}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full rounded-lg border border-zinc-300 bg-white py-2.5 pl-3 pr-12 text-lg font-semibold tabular-nums dark:border-zinc-700 dark:bg-zinc-800"
+        className="w-full rounded-lg border border-zinc-300 bg-white py-2.5 pl-3 pr-14 text-lg font-semibold tabular-nums dark:border-zinc-700 dark:bg-zinc-800"
       />
       <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-zinc-400">
         {label}
@@ -771,8 +833,7 @@ function WarningCard({ warning }: { warning: CalcWarning }) {
     info: 'border-zinc-300 bg-zinc-50 text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200',
     caution:
       'border-yellow-300 bg-yellow-50 text-yellow-900 dark:border-yellow-700 dark:bg-yellow-950 dark:text-yellow-200',
-    serious:
-      'border-red-300 bg-red-50 text-red-900 dark:border-red-700 dark:bg-red-950 dark:text-red-200',
+    serious: 'border-red-300 bg-red-50 text-red-900 dark:border-red-700 dark:bg-red-950 dark:text-red-200',
   } as const;
   return (
     <div className={`rounded-md border px-3 py-2 text-sm leading-relaxed ${styles[warning.level]}`}>

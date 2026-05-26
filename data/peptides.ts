@@ -277,6 +277,40 @@ export const PEPTIDES: Peptide[] = [
     shortDescription:
       'A melanocortin receptor agonist. Marketed in the US under the brand name Vyleesi (FDA-approved for hypoactive sexual desire disorder in premenopausal women). Used off-label by other populations.',
   },
+
+  // ───────── Measured in international units (IU) ─────────
+  {
+    slug: 'hgh',
+    name: 'HGH (Somatropin)',
+    aliases: ['Somatropin', 'Human Growth Hormone'],
+    category: 'growth-hormone',
+    legalStatus: 'prescription',
+    legalStatusLastUpdated: '2026-05-25',
+    commonVialSizes: [10, 12, 36],
+    vialUnit: 'IU',
+    typicalDose: 2,
+    typicalDoseUnit: 'IU',
+    typicalDosesPerWeek: 7,
+    dosingPattern: '1× daily (subcutaneous)',
+    shortDescription:
+      'A recombinant form of human growth hormone. FDA-approved by prescription for specific growth hormone deficiencies and related conditions. Measured and dosed in international units (IU).',
+  },
+  {
+    slug: 'hcg',
+    name: 'HCG',
+    aliases: ['Human Chorionic Gonadotropin'],
+    category: 'other',
+    legalStatus: 'prescription',
+    legalStatusLastUpdated: '2026-05-25',
+    commonVialSizes: [5000, 10000],
+    vialUnit: 'IU',
+    typicalDose: 500,
+    typicalDoseUnit: 'IU',
+    typicalDosesPerWeek: 3,
+    dosingPattern: 'Varies; often a few times per week (subcutaneous or intramuscular)',
+    shortDescription:
+      'A hormone (human chorionic gonadotropin) used in fertility treatment and prescribed in some hormone protocols. Sold and dosed in international units (IU).',
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
