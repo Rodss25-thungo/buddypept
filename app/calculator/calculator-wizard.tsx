@@ -348,7 +348,11 @@ export function CalculatorWizard() {
         {STEPS[stepIndex] === 'amount' && (
           <Step
             question={`How many ${vialUnit} are in the ${peptideLabel} vial?`}
-            subtitle={`The total amount of ${peptideLabel}, printed on the vial label. Not the size of the glass container.`}
+            subtitle={
+              form === 'powder'
+                ? `Peptides come as a freeze-dried powder sealed in a glass vial. Enter the total amount on the label, not the size of the glass.`
+                : `Enter the total amount of ${peptideLabel} in the vial, printed on the label. Not the size of the glass.`
+            }
           >
             <BigNumberInput value={vialAmount} onChange={setVialAmount} unit={vialUnit} placeholder={isIU ? 'e.g. 5000' : 'e.g. 5'} />
             {peptide && peptide.commonVialSizes.length > 0 && (
@@ -360,8 +364,8 @@ export function CalculatorWizard() {
         {STEPS[stepIndex] === 'volume' &&
           (form === 'powder' ? (
             <Step
-              question="How much bacteriostatic water is added?"
-              subtitle="The sterile liquid added to the vial to dissolve the powder."
+              question="How much bacteriostatic water goes in?"
+              subtitle={`Powder is a two-part mix: the ${peptideLabel} plus bacteriostatic water to dissolve it. Enter the amount of water added to the vial.`}
             >
               <BigNumberInput value={waterMl} onChange={setWaterMl} unit="mL" placeholder="e.g. 2" />
               <QuickPicks options={COMMON_WATER_ML} suffix="mL" value={waterMl} onPick={setWaterMl} />
@@ -377,7 +381,10 @@ export function CalculatorWizard() {
           ))}
 
         {STEPS[stepIndex] === 'syringe' && (
-          <Step question="Pick a syringe" subtitle="We'll show where the dose lands on it.">
+          <Step
+            question="Pick a syringe"
+            subtitle="Most people use an insulin syringe. The mL is how much it holds; the units are the marks along the barrel. We'll show where the dose lands on it."
+          >
             <div className="space-y-2">
               {BARRELS.map((b) => (
                 <ChoiceButton key={b.id} selected={barrelId === b.id} title={b.label} onClick={() => setBarrelId(b.id)} />
@@ -389,7 +396,7 @@ export function CalculatorWizard() {
         {STEPS[stepIndex] === 'dose' && (
           <Step
             question="What dose do you want to calculate?"
-            subtitle={`Enter it in ${isIU ? 'IU' : 'mg or mcg'}. Don't have it that way? Switch to ${thirdLabel} and enter the amount to draw. BuddyPept never picks a dose for you.`}
+            subtitle={`Enter it in ${isIU ? 'IU' : 'mg or mcg'}. Only know how many ${thirdLabel} to draw? Switch the unit below.`}
           >
             <BigNumberInput
               value={doseFieldValue}
@@ -416,13 +423,10 @@ export function CalculatorWizard() {
               )}
               <UnitToggle label={thirdLabel} active={doseEntryUnit === 'draw'} onClick={() => setDoseEntryUnit('draw')} />
             </div>
-            {peptide && (
-              <p className="mt-3 text-sm text-zinc-500">
-                For reference only, research often cites around {peptide.typicalDose}{' '}
-                {peptide.typicalDoseUnit} for {peptide.name}. Any dose is a
-                decision for you and your provider.
-              </p>
-            )}
+            <p className="mt-3 text-sm text-zinc-500">
+              BuddyPept never suggests a dose. It just does the math for the
+              number you enter. Dosing is a decision for you and your provider.
+            </p>
           </Step>
         )}
       </div>

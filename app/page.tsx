@@ -24,12 +24,12 @@ export default function HomePage() {
           <div className="mx-auto max-w-3xl px-4 pt-14 pb-14 text-center sm:pt-20 sm:pb-20">
           <Buddy className="mx-auto mb-6 h-24 w-auto drop-shadow-sm" />
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Peptide-curious? Meet your Buddy.
+            Your dose, converted to the exact amount to draw.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Free, clear answers to the question beginners find hardest:{' '}
-            <em>how does the dosing math actually work?</em> No sales pitch. No
-            sign-up wall. Just the math.
+            A free calculator for people new to peptides. Enter what&rsquo;s in
+            the vial and the dose, and see the exact amount to draw on your
+            syringe, in mcg, mg, or units. No sign-up. Just the math.
           </p>
           <div className="mt-8">
             <Link
@@ -70,6 +70,9 @@ export default function HomePage() {
             shows exactly how much that works out to, in whatever unit a syringe
             uses. That&rsquo;s the whole thing.
           </p>
+          <p className="mt-6 text-lg font-semibold italic text-brand-700 dark:text-brand-400">
+            The math doesn&rsquo;t lie.
+          </p>
         </section>
 
         {/* ───── How it works ───── */}
@@ -93,22 +96,6 @@ export default function HomePage() {
               />
             </ol>
           </div>
-        </section>
-
-        {/* ───── Why different ───── */}
-        <section className="mx-auto max-w-2xl px-4 py-12 sm:py-16">
-          <h2 className="text-2xl font-semibold tracking-tight">
-            Why we&rsquo;re different
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
-            Everyone else in peptides is selling something. We&rsquo;re not. The
-            math stays free, forever. We don&rsquo;t harvest health data. We
-            don&rsquo;t tell anyone what to take. That&rsquo;s a conversation for
-            a person and their doctor. We just make the numbers make sense.
-          </p>
-          <p className="mt-6 text-lg font-semibold italic text-brand-700 dark:text-brand-400">
-            The math doesn&rsquo;t lie.
-          </p>
         </section>
 
         {/* ───── Bottom CTA ───── */}
