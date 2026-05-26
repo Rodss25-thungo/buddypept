@@ -25,6 +25,9 @@ export function SiteFooter() {
           <Link href="/calculator" className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
             Calculator
           </Link>
+          <Link href="/learn" className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+            Learn
+          </Link>
           <Link href="/disclaimer" className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
             Medical Disclaimer
           </Link>

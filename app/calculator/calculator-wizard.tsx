@@ -26,6 +26,7 @@ import {
   type VialUnit,
   type Warning as CalcWarning,
 } from '@/lib/calculator';
+import Link from 'next/link';
 import { RequestPeptideForm } from './request-peptide-form';
 import { Buddy } from '@/components/buddy';
 import { SyringeDiagram } from '@/components/syringe-diagram';
@@ -635,6 +636,21 @@ function ResultScreen({
         >
           Start over
         </button>
+      </div>
+
+      {/* Offer: the gated education library (lead engine) */}
+      <div className="mt-8 rounded-2xl border border-brand-200 bg-brand-50 p-5 text-center dark:border-brand-900 dark:bg-brand-950/30">
+        <p className="text-base font-semibold">Want to understand the peptides themselves?</p>
+        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          Free, plain-English guides: what each one is, what it has been studied
+          for, how it is sold, and its legal status.
+        </p>
+        <Link
+          href="/learn"
+          className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
+        >
+          Learn about peptides <span aria-hidden>→</span>
+        </Link>
       </div>
     </div>
   );
