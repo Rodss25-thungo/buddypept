@@ -18,8 +18,6 @@ const LAST_UPDATED = 'May 25, 2026';
 export default function PrivacyPage() {
   return (
     <main className="mx-auto max-w-2xl px-4 py-10 sm:py-14">
-      <DraftNotice />
-
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
         Privacy Policy
       </h1>
@@ -109,11 +107,3 @@ function Section({
   );
 }
 
-function DraftNotice() {
-  return (
-    <div className="mb-8 rounded-lg border border-amber-300 bg-amber-50 p-3 text-xs leading-relaxed text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200">
-      Draft for internal review. This wording has not yet been reviewed by a
-      lawyer and should be finalized before public launch.
-    </div>
-  );
-}
