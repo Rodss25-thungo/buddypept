@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getPeptideBySlug } from '@/data/peptides';
 import { PEPTIDE_EDUCATION, LEARN_SLUGS } from '@/data/peptide-education';
+import { LearnGate } from '@/components/learn-gate';
 
 export const metadata: Metadata = {
   title: 'Learn about peptides | BuddyPept',
@@ -27,24 +28,28 @@ export default function LearnIndexPage() {
         medical advice, and never a recommendation to use anything.
       </p>
 
-      <ul className="mt-8 space-y-3">
-        {entries.map(({ slug, peptide, edu }) => (
-          <li key={slug}>
-            <Link
-              href={`/learn/${slug}`}
-              className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-4 py-4 transition hover:border-brand-300 hover:bg-brand-50/40 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-brand-800"
-            >
-              <span>
-                <span className="block text-base font-semibold">{peptide!.name}</span>
-                <span className="mt-0.5 block text-sm text-zinc-500">{edu!.teaser}</span>
-              </span>
-              <span aria-hidden className="ml-3 text-brand-600">
-                →
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-8">
+        <LearnGate source="library">
+          <ul className="space-y-3">
+            {entries.map(({ slug, peptide, edu }) => (
+              <li key={slug}>
+                <Link
+                  href={`/learn/${slug}`}
+                  className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-4 py-4 transition hover:border-brand-300 hover:bg-brand-50/40 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-brand-800"
+                >
+                  <span>
+                    <span className="block text-base font-semibold">{peptide!.name}</span>
+                    <span className="mt-0.5 block text-sm text-zinc-500">{edu!.teaser}</span>
+                  </span>
+                  <span aria-hidden className="ml-3 text-brand-600">
+                    →
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </LearnGate>
+      </div>
 
       <div className="mt-10 rounded-xl border border-zinc-200 bg-brand-50/50 p-5 text-center dark:border-zinc-800 dark:bg-brand-950/20">
         <p className="text-base font-medium">Need the dosing math?</p>
