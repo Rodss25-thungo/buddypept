@@ -30,6 +30,7 @@ import Link from 'next/link';
 import { RequestPeptideForm } from './request-peptide-form';
 import { Buddy } from '@/components/buddy';
 import { SyringeDiagram } from '@/components/syringe-diagram';
+import { LearnPopup } from '@/components/learn-popup';
 
 // ───── Syringe barrels ─────
 type SyringeBarrelId = 'insulin-0.3' | 'insulin-0.5' | 'insulin-1.0' | 'im-1.0' | 'im-3.0';
@@ -653,6 +654,8 @@ function ResultScreen({
           Learn about peptides <span aria-hidden>→</span>
         </Link>
       </div>
+
+      <LearnPopup />
     </div>
   );
 }
