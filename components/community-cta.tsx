@@ -1,28 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Buddy } from './buddy';
 
 /**
  * Homepage "Join the community" box + pop-up. For readers who want in without
  * using the calculator. Clicking "I want in" opens a friendly modal with the
- * name + email form. Submitting saves the lead (source "homepage"), unlocks the
- * library, and welcomes them into the guides.
- *
- * Self-contained on purpose, so it never touches the calculator's pop-up.
- * Honest framing: a community we are building; nothing implies peptide use.
+ * name + email form. Submitting saves the lead as pending (source "homepage")
+ * and sends a confirmation email (double opt-in); the modal then shows a
+ * "check your email" message. Real signups confirm; fakes never do.
  */
 
-const UNLOCK_KEY = 'bp_learn_unlocked';
-
 export function CommunityCTA() {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error' | 'sent'>(
+    'idle'
+  );
   const [errorMsg, setErrorMsg] = useState('');
+
+  function close() {
+    setOpen(false);
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -40,13 +40,7 @@ export function CommunityCTA() {
         setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
         return;
       }
-      try {
-        localStorage.setItem(UNLOCK_KEY, '1');
-      } catch {
-        // ignore storage errors
-      }
-      setOpen(false);
-      router.push('/learn');
+      setStatus('sent');
     } catch {
       setStatus('error');
       setErrorMsg('Network error. Please try again.');
@@ -81,7 +75,7 @@ export function CommunityCTA() {
       {open && (
         <div
           className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 p-4 sm:items-center"
-          onClick={() => setOpen(false)}
+          onClick={close}
         >
           <div
             className="relative w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
@@ -89,7 +83,7 @@ export function CommunityCTA() {
           >
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={close}
               aria-label="Close"
               className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800"
             >
@@ -97,50 +91,79 @@ export function CommunityCTA() {
             </button>
 
             <Buddy className="h-12 w-auto drop-shadow-sm" />
-            <h2 className="mt-3 text-xl font-bold tracking-tight">
-              Let&rsquo;s learn together
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Add your name and email and we&rsquo;ll welcome you in and keep you
-              posted as the community grows.
-            </p>
 
-            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                placeholder="First name"
-                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
-              />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="you@example.com"
-                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
-              />
-              {status === 'error' && (
-                <p className="text-sm text-red-600 dark:text-red-400">{errorMsg}</p>
-              )}
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                className="w-full rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
-              >
-                {status === 'submitting' ? 'Joining…' : 'Count me in'}
-              </button>
-            </form>
+            {status === 'sent' ? (
+              <>
+                <p className="mt-3 text-3xl" aria-hidden>
+                  📬
+                </p>
+                <h2 className="mt-1 text-xl font-bold tracking-tight">
+                  Check your email
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  We sent a confirmation link to{' '}
+                  <span className="font-semibold">{email}</span>. Click it
+                  within 24 hours to finish joining. Didn&rsquo;t get it? Check
+                  your spam folder.
+                </p>
+                <button
+                  type="button"
+                  onClick={close}
+                  className="mt-5 w-full rounded-xl border border-zinc-300 px-6 py-3 text-base font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                >
+                  Got it
+                </button>
+              </>
+            ) : (
+              <>
+                <h2 className="mt-3 text-xl font-bold tracking-tight">
+                  Let&rsquo;s learn together
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  Add your name and email and we&rsquo;ll welcome you in and
+                  keep you posted as the community grows.
+                </p>
 
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="mt-3 w-full text-center text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
-            >
-              Maybe later
-            </button>
+                <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    placeholder="First name"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
+                  />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="you@example.com"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
+                  />
+                  {status === 'error' && (
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      {errorMsg}
+                    </p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={status === 'submitting'}
+                    className="w-full rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
+                  >
+                    {status === 'submitting' ? 'Sending the link…' : 'Count me in'}
+                  </button>
+                </form>
+
+                <button
+                  type="button"
+                  onClick={close}
+                  className="mt-3 w-full text-center text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+                >
+                  Maybe later
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

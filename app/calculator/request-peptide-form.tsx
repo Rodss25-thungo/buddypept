@@ -48,12 +48,15 @@ export function RequestPeptideForm({
 
   if (status === 'success') {
     return (
-      <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-4 text-sm text-emerald-900 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-200">
-        <p className="font-medium">Thanks! Your request is in. 🎉</p>
+      <div className="rounded-lg border border-brand-300 bg-brand-50 p-4 text-sm text-brand-900 dark:border-brand-700 dark:bg-brand-950 dark:text-brand-100">
+        <p className="font-medium">📬 Check your email</p>
         <p className="mt-1">
-          We&rsquo;ll email you when {peptide.trim() || 'the peptide'} is added to
-          the library. No spam, just that one heads-up.
+          We sent a confirmation link to{' '}
+          <span className="font-semibold">{email}</span>. Click it within 24
+          hours and we&rsquo;ll email you when{' '}
+          {peptide.trim() || 'the peptide'} is added.
         </p>
+        <p className="mt-2 text-xs">Didn&rsquo;t get it? Check your spam folder.</p>
       </div>
     );
   }

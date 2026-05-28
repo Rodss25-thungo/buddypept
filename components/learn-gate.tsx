@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Soft email gate for the "Learn about peptides" library. The first time, the
- * visitor enters name + email to unlock; after that the unlock is remembered
- * on their device, so every entry is open. This is lead capture, not security:
- * the goal is to build the email list, not to lock down the content.
+ * Soft email gate for the "Learn about peptides" library with double opt-in.
+ * The first time someone visits, they submit name + email; we save it as
+ * pending and send a confirmation email. They click the link in the email and
+ * the /confirm page sets the unlock flag for this device, so future visits
+ * skip the gate. Real signups go through, fakes never confirm.
  */
 
 const UNLOCK_KEY = 'bp_learn_unlocked';
@@ -21,7 +22,9 @@ export function LearnGate({
   const [{ checked, unlocked }, setGate] = useState({ checked: false, unlocked: false });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error' | 'sent'>(
+    'idle'
+  );
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
@@ -51,12 +54,7 @@ export function LearnGate({
         setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
         return;
       }
-      try {
-        localStorage.setItem(UNLOCK_KEY, '1');
-      } catch {
-        // ignore
-      }
-      setGate({ checked: true, unlocked: true });
+      setStatus('sent');
     } catch {
       setStatus('error');
       setErrorMsg('Network error. Please try again.');
@@ -68,6 +66,25 @@ export function LearnGate({
 
   if (unlocked) return <>{children}</>;
 
+  if (status === 'sent') {
+    return (
+      <div className="rounded-2xl border border-brand-200 bg-brand-50 p-5 text-center shadow-sm dark:border-brand-900 dark:bg-brand-950/30 sm:p-6">
+        <p className="text-3xl" aria-hidden>
+          📬
+        </p>
+        <h2 className="mt-2 text-lg font-semibold">Check your email</h2>
+        <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+          We sent a confirmation link to{' '}
+          <span className="font-semibold">{email}</span>. Click it within 24
+          hours to unlock the library.
+        </p>
+        <p className="mt-3 text-xs text-zinc-500">
+          Didn&rsquo;t get it? Check your spam folder.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -75,8 +92,8 @@ export function LearnGate({
     >
       <h2 className="text-lg font-semibold">Read the full guide, free</h2>
       <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-        Pop in your name and email to unlock the full peptide library. One time,
-        and the rest open up too. No spam, just the education.
+        Pop in your name and email to unlock the full peptide library. We send
+        one confirmation email; click the link and you&rsquo;re in.
       </p>
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <input
@@ -104,7 +121,7 @@ export function LearnGate({
         disabled={status === 'submitting'}
         className="mt-4 w-full rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
       >
-        {status === 'submitting' ? 'Unlocking…' : 'Unlock the library'}
+        {status === 'submitting' ? 'Sending the link…' : 'Send me the link'}
       </button>
       <p className="mt-3 text-xs text-zinc-500">
         We use your email only to share peptide education and occasional

@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { randomUUID } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabase';
+import { sendConfirmationEmail } from '@/lib/email';
 
 /**
  * POST /api/learn-signup
  *
- * Captures name + email when someone unlocks the "Learn about peptides"
- * library. Stored in the same `peptide_requests` table (so it shows in /admin)
- * with a "Learn:" marker in the requested_peptide column, which avoids needing
- * a new Supabase table. Brand rule: only name + email, never health data.
+ * Double opt-in: saves the signup as PENDING (confirmed_at = null) with a
+ * one-time confirmation token, then sends a confirmation email via Brevo. The
+ * lead only counts as "confirmed" in /admin after the user clicks the link in
+ * the email, which fakes/typos cannot do.
  */
 
 const SignupSchema = z.object({
@@ -16,6 +18,8 @@ const SignupSchema = z.object({
   email: z.string().trim().email('Please enter a valid email address.').max(200),
   source: z.string().trim().max(120).optional(),
 });
+
+const SITE_URL = 'https://buddypept.com';
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -33,20 +37,41 @@ export async function POST(request: Request) {
     );
   }
 
+  const token = randomUUID();
+
   try {
     const supabase = getSupabaseAdmin();
-    const { error } = await supabase.from('peptide_requests').insert({
+    const { error: insertError } = await supabase.from('peptide_requests').insert({
       name: parsed.data.name,
       email: parsed.data.email,
       requested_peptide: `Learn: ${parsed.data.source ?? 'library'}`,
+      confirmation_token: token,
     });
-    if (error) {
-      console.error('learn-signup insert error:', error.message);
+    if (insertError) {
+      console.error('learn-signup insert error:', insertError.message);
       return NextResponse.json(
         { error: 'We could not save that. Please try again.' },
         { status: 500 }
       );
     }
+
+    try {
+      await sendConfirmationEmail({
+        to: parsed.data.email,
+        toName: parsed.data.name,
+        confirmUrl: `${SITE_URL}/confirm?token=${token}`,
+      });
+    } catch (emailError) {
+      console.error('learn-signup email send error:', emailError);
+      return NextResponse.json(
+        {
+          error:
+            'We saved your details but could not send the confirmation email. Please try again in a minute.',
+        },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error('learn-signup route error:', e);

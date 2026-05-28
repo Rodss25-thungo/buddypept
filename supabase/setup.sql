@@ -9,11 +9,15 @@
 -- ───────────────────────────────────────────────────────────────
 
 create table if not exists public.peptide_requests (
-  id                uuid primary key default gen_random_uuid(),
-  name              text not null,
-  email             text not null,
-  requested_peptide text not null,
-  created_at        timestamptz not null default now()
+  id                  uuid primary key default gen_random_uuid(),
+  name                text not null,
+  email               text not null,
+  requested_peptide   text not null,
+  -- Double opt-in: token sent in the confirmation email; confirmed_at is
+  -- set when the user clicks the confirm link. NULL = pending.
+  confirmation_token  uuid not null default gen_random_uuid(),
+  confirmed_at        timestamptz,
+  created_at          timestamptz not null default now()
 );
 
 -- Keep the table private. With Row Level Security ON and no public policies,

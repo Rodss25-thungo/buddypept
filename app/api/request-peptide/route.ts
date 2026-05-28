@@ -1,17 +1,18 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { randomUUID } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabase';
+import { sendConfirmationEmail } from '@/lib/email';
 
 /**
  * POST /api/request-peptide
  *
- * Saves a "request a peptide" submission (name + email + desired peptide) to
- * the Supabase `peptide_requests` table. This is BuddyPept's lead-capture +
- * roadmap-signal mechanism: people tell us which peptide they want next, and
- * we get their email to notify them.
+ * Saves a "request a peptide" submission (name + email + desired peptide) as
+ * PENDING and sends a confirmation email via Brevo. The lead is only counted
+ * as confirmed in /admin once the user clicks the confirm link.
  *
- * Brand rule: we collect ONLY name + email + the requested peptide. No health
- * data, no tracking. The secret key stays server-side; the browser never sees it.
+ * Brand rule: collect only name + email + the requested peptide. No health
+ * data, no tracking.
  */
 
 const RequestSchema = z.object({
@@ -23,6 +24,8 @@ const RequestSchema = z.object({
     .min(1, 'Please enter the peptide name.')
     .max(200),
 });
+
+const SITE_URL = 'https://buddypept.com';
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -40,12 +43,15 @@ export async function POST(request: Request) {
     );
   }
 
+  const token = randomUUID();
+
   try {
     const supabase = getSupabaseAdmin();
     const { error } = await supabase.from('peptide_requests').insert({
       name: parsed.data.name,
       email: parsed.data.email,
       requested_peptide: parsed.data.requestedPeptide,
+      confirmation_token: token,
     });
     if (error) {
       console.error('Supabase insert error:', error.message);
@@ -54,6 +60,24 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    try {
+      await sendConfirmationEmail({
+        to: parsed.data.email,
+        toName: parsed.data.name,
+        confirmUrl: `${SITE_URL}/confirm?token=${token}`,
+      });
+    } catch (emailError) {
+      console.error('request-peptide email send error:', emailError);
+      return NextResponse.json(
+        {
+          error:
+            'We saved your request but could not send the confirmation email. Please try again in a minute.',
+        },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error('request-peptide route error:', e);

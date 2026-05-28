@@ -1,28 +1,27 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Buddy } from './buddy';
 
 /**
  * "Learn more" pop-up. Appears once, a few seconds after someone gets their
  * calculator result (the highest-intent moment), inviting them into the gated
- * education library. The email form is inside the modal, so subscribing is one
- * step. Shows once per visitor; easy to dismiss ("Maybe later" / X / backdrop).
- *
- * Honest community framing: invites people to be an EARLY member of a community
- * we are building, never claims a peer-sharing feature that does not exist yet.
+ * education library. The email form is inside the modal; submitting it sends
+ * a confirmation email (double opt-in). The modal then shows a "check your
+ * email" message and stays put until dismissed. Real signups confirm; fakes
+ * never do.
  */
 
 const POPUP_KEY = 'bp_popup_seen';
 const UNLOCK_KEY = 'bp_learn_unlocked';
 
 export function LearnPopup() {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error' | 'sent'>(
+    'idle'
+  );
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
@@ -65,13 +64,11 @@ export function LearnPopup() {
         return;
       }
       try {
-        localStorage.setItem(UNLOCK_KEY, '1');
         localStorage.setItem(POPUP_KEY, '1');
       } catch {
         // ignore
       }
-      setOpen(false);
-      router.push('/learn');
+      setStatus('sent');
     } catch {
       setStatus('error');
       setErrorMsg('Network error. Please try again.');
@@ -99,57 +96,84 @@ export function LearnPopup() {
         </button>
 
         <Buddy className="h-12 w-auto drop-shadow-sm" />
-        <h2 className="mt-3 text-xl font-bold tracking-tight">
-          You&rsquo;re a genius! 🎉
-        </h2>
-        <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          The mg-to-units math trips up almost everyone, and you just cracked it.
-        </p>
-        <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          We&rsquo;re building a community for people learning about peptides.
-          Want in? Add your name and email and we&rsquo;ll keep you posted as it
-          grows.
-        </p>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            placeholder="First name"
-            className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
-          />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="you@example.com"
-            className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
-          />
-          {status === 'error' && (
-            <p className="text-sm text-red-600 dark:text-red-400">{errorMsg}</p>
-          )}
-          <button
-            type="submit"
-            disabled={status === 'submitting'}
-            className="w-full rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
-          >
-            {status === 'submitting' ? 'Unlocking…' : 'Unlock the library'}
-          </button>
-        </form>
+        {status === 'sent' ? (
+          <>
+            <p className="mt-3 text-3xl" aria-hidden>
+              📬
+            </p>
+            <h2 className="mt-1 text-xl font-bold tracking-tight">
+              Check your email
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              We sent a confirmation link to{' '}
+              <span className="font-semibold">{email}</span>. Click it within 24
+              hours to finish joining. Didn&rsquo;t get it? Check your spam
+              folder.
+            </p>
+            <button
+              type="button"
+              onClick={dismiss}
+              className="mt-5 w-full rounded-xl border border-zinc-300 px-6 py-3 text-base font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            >
+              Got it
+            </button>
+          </>
+        ) : (
+          <>
+            <h2 className="mt-3 text-xl font-bold tracking-tight">
+              You&rsquo;re a genius! 🎉
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              The mg-to-units math trips up almost everyone, and you just
+              cracked it.
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              We&rsquo;re building a community for people learning about
+              peptides. Want in? Add your name and email and we&rsquo;ll keep
+              you posted as it grows.
+            </p>
 
-        <button
-          type="button"
-          onClick={dismiss}
-          className="mt-3 w-full text-center text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
-        >
-          Maybe later
-        </button>
-        <p className="mt-3 text-center text-xs text-zinc-400">
-          Just your name and email. No spam, and we never sell your data.
-        </p>
+            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                placeholder="First name"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="you@example.com"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
+              />
+              {status === 'error' && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  {errorMsg}
+                </p>
+              )}
+              <button
+                type="submit"
+                disabled={status === 'submitting'}
+                className="w-full rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
+              >
+                {status === 'submitting' ? 'Sending the link…' : 'Count me in'}
+              </button>
+            </form>
+
+            <button
+              type="button"
+              onClick={dismiss}
+              className="mt-3 w-full text-center text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+            >
+              Maybe later
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
