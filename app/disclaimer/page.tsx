@@ -37,7 +37,7 @@ export default function DisclaimerPage() {
 
         <Section title="We do not recommend doses">
           The calculator does only the math you ask it to do. You enter the
-          amounts (what is in your vial, how much water, the dose you intend),
+          amounts (what is in the vial, how much water, the intended dose),
           and it converts those numbers between units. It never suggests a dose,
           a frequency, or a protocol. Any dose you enter is one you decided on
           with your healthcare provider, not one BuddyPept chose for you.
@@ -82,8 +82,8 @@ export default function DisclaimerPage() {
         <Section title="Accuracy and your responsibility">
           We work hard to keep the math correct, but we cannot guarantee that
           any result is accurate or appropriate for your specific situation.
-          Always double-check any result against your vial label and your
-          provider&rsquo;s guidance before acting on it. You are responsible for
+          Always double-check any result against the vial label and a
+          licensed provider&rsquo;s guidance before acting on it. You are responsible for
           verifying the numbers you enter and the numbers you act on.
         </Section>
 

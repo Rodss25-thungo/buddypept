@@ -92,7 +92,7 @@ export const PEPTIDE_EDUCATION: Record<string, PeptideEducation> = {
     howSold:
       'By prescription, including from compounding pharmacies, as a powder for reconstitution (commonly 2 to 15 mg vials).',
     bottomLine:
-      'Sermorelin is a prescription medication. Whether it is right for you is a decision for you and a licensed healthcare provider.',
+      'Sermorelin is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider.',
   },
   retatrutide: {
     teaser: 'An investigational metabolic peptide, still in clinical trials.',
@@ -135,7 +135,7 @@ export const PEPTIDE_EDUCATION: Record<string, PeptideEducation> = {
     howSold:
       'By prescription as a powder for reconstitution, in IU strengths (commonly 5,000 or 10,000 IU).',
     bottomLine:
-      'HCG is a prescription medication. Whether it is right for you is a decision for you and a licensed healthcare provider.',
+      'HCG is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider.',
   },
 };
 

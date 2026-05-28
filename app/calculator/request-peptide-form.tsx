@@ -51,7 +51,7 @@ export function RequestPeptideForm({
       <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-4 text-sm text-emerald-900 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-200">
         <p className="font-medium">Thanks! Your request is in. 🎉</p>
         <p className="mt-1">
-          We&rsquo;ll email you when {peptide.trim() || 'your peptide'} is added to
+          We&rsquo;ll email you when {peptide.trim() || 'the peptide'} is added to
           the library. No spam, just that one heads-up.
         </p>
       </div>

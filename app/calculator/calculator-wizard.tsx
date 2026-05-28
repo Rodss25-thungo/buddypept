@@ -77,7 +77,7 @@ const NOT_LISTED = '__not_listed__';
 const COMMON_WATER_ML = [1, 2, 3, 5];
 
 const DISCLAIMER_RESULTS =
-  'This is math, not medical advice. Check it against your vial label and your provider’s guidance before drawing any dose.';
+  'This is math, not medical advice. Check it against the vial label and a licensed provider’s guidance before drawing any dose.';
 
 type DoseEntryUnit = 'mg' | 'mcg' | 'native' | 'draw';
 type Form = 'powder' | 'liquid';
@@ -101,7 +101,7 @@ export function CalculatorWizard() {
   const barrel = getBarrel(barrelId);
   const vialUnit: VialUnit = peptide?.vialUnit ?? 'mg';
   const isIU = vialUnit === 'IU';
-  const peptideLabel = peptide?.name ?? 'your peptide';
+  const peptideLabel = peptide?.name ?? 'the peptide';
   const thirdLabel = barrel.scale === 'U-100' ? 'units' : 'mL';
 
   const concPerMl =
@@ -302,7 +302,7 @@ export function CalculatorWizard() {
               onChange={(e) => handlePeptideChange(e.target.value)}
               className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3.5 text-lg dark:border-zinc-700 dark:bg-zinc-800"
             >
-              <option value="">Choose your peptide…</option>
+              <option value="">Choose a peptide…</option>
               {WIZARD_PEPTIDES.map((p) => (
                 <option key={p.slug} value={p.slug}>
                   {p.name}

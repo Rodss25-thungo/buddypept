@@ -46,7 +46,7 @@ export function SyringeDiagram({
         viewBox="0 0 320 92"
         className="h-auto w-full"
         role="img"
-        aria-label={`${shortLabel} filled to your dose`}
+        aria-label={`${shortLabel} filled to the dose`}
       >
         <rect x="0" y="22" width="7" height="36" rx="2" className="fill-zinc-500" />
         <rect x="7" y="37" width="21" height="6" className="fill-zinc-500" />

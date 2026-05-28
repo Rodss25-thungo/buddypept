@@ -24,11 +24,11 @@ export default function HomePage() {
           <div className="mx-auto max-w-3xl px-4 pt-14 pb-14 text-center sm:pt-20 sm:pb-20">
           <Buddy className="mx-auto mb-6 h-24 w-auto drop-shadow-sm" />
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Your dose, converted to the exact amount to draw.
+            Turn any dose into the exact amount to draw.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
             A free calculator for people new to peptides. Enter what&rsquo;s in
-            the vial and the dose, and see the exact amount to draw on your
+            the vial and the dose, and see the exact amount to draw on the
             syringe, in mcg, mg, or units. No sign-up. Just the math.
           </p>
           <div className="mt-8">

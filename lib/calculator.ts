@@ -261,7 +261,7 @@ export function calculateDose(input: z.input<typeof DoseInputSchema>): DoseResul
     warnings.push({
       level: 'caution',
       message:
-        'Dose exceeds 100 units (1 mL on a U-100 syringe). You may need multiple injections, or reconstitute with more bacteriostatic water for a lower concentration per injection.',
+        'Dose exceeds 100 units (1 mL on a U-100 syringe), more than a single 1 mL syringe holds. Reconstitute with more bacteriostatic water for a lower concentration.',
     });
   }
 
