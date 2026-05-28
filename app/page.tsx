@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Buddy } from '@/components/buddy';
+import { CommunityCTA } from '@/components/community-cta';
 
 /**
  * BuddyPept homepage.
@@ -115,6 +116,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        <CommunityCTA />
       </main>
     </div>
   );
