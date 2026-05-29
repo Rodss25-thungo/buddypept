@@ -74,7 +74,11 @@ const WIZARD_PEPTIDES = WIZARD_PEPTIDE_SLUGS.map((s) => getPeptideBySlug(s)).fil
 );
 
 const NOT_LISTED = '__not_listed__';
+const OTHER_PEPTIDE = '__other__';
 const COMMON_WATER_ML = [1, 2, 3, 5];
+// Generic vial size quick-picks used when "Other peptide" is selected (no
+// library data to fall back on). Common research-vial sizes in mg.
+const COMMON_GENERIC_VIAL_MG = [5, 10, 30, 50];
 
 const DISCLAIMER_RESULTS =
   'This is math, not medical advice. Check it against the vial label and a licensed provider’s guidance before drawing any dose.';
@@ -97,7 +101,9 @@ export function CalculatorWizard() {
   const [showMath, setShowMath] = useState(false);
 
   const isNotListed = peptideSlug === NOT_LISTED;
-  const peptide = isNotListed ? undefined : getPeptideBySlug(peptideSlug);
+  const isOther = peptideSlug === OTHER_PEPTIDE;
+  const peptide =
+    isNotListed || isOther ? undefined : getPeptideBySlug(peptideSlug);
   const barrel = getBarrel(barrelId);
   const vialUnit: VialUnit = peptide?.vialUnit ?? 'mg';
   const isIU = vialUnit === 'IU';
@@ -295,7 +301,7 @@ export function CalculatorWizard() {
         {STEPS[stepIndex] === 'peptide' && (
           <Step
             question="Pick a peptide"
-            subtitle="Select one from the list. Not there? Choose “I don't see it here.”"
+            subtitle="Select one from the list. For anything not listed, “Other peptide” still does the math."
           >
             <select
               value={peptideSlug}
@@ -303,6 +309,7 @@ export function CalculatorWizard() {
               className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3.5 text-lg dark:border-zinc-700 dark:bg-zinc-800"
             >
               <option value="">Choose a peptide…</option>
+              <option value={OTHER_PEPTIDE}>Other peptide</option>
               {WIZARD_PEPTIDES.map((p) => (
                 <option key={p.slug} value={p.slug}>
                   {p.name}
@@ -314,6 +321,13 @@ export function CalculatorWizard() {
               <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                 No problem. Tap Continue and we&rsquo;ll ask which one you need so
                 we can add it.
+              </p>
+            )}
+            {isOther && (
+              <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                The math works for any peptide. We&rsquo;ll do it in{' '}
+                <strong>milligrams (mg)</strong>. Just enter the strength on the
+                vial and a dose to see the exact amount to draw.
               </p>
             )}
             {peptide && (
@@ -328,7 +342,7 @@ export function CalculatorWizard() {
 
         {STEPS[stepIndex] === 'form' && (
           <Step
-            question={`Is the ${peptideLabel} a powder or already a liquid?`}
+            question={`Is the ${peptide?.name ?? 'peptide'} a powder or already a liquid?`}
             subtitle="Freeze-dried powder needs mixing. An already-liquid vial does not."
           >
             <div className="space-y-2">
@@ -350,7 +364,7 @@ export function CalculatorWizard() {
 
         {STEPS[stepIndex] === 'amount' && (
           <Step
-            question={`How many ${vialUnit} are in the ${peptideLabel} vial?`}
+            question={`How many ${vialUnit} are in the ${peptide?.name ?? 'peptide'} vial?`}
             subtitle={
               form === 'powder'
                 ? `Peptides come as a freeze-dried powder sealed in a glass vial. Enter the total amount on the label, not the size of the glass.`
@@ -358,9 +372,11 @@ export function CalculatorWizard() {
             }
           >
             <BigNumberInput value={vialAmount} onChange={setVialAmount} unit={vialUnit} placeholder={isIU ? 'e.g. 5000' : 'e.g. 5'} />
-            {peptide && peptide.commonVialSizes.length > 0 && (
+            {peptide && peptide.commonVialSizes.length > 0 ? (
               <QuickPicks options={peptide.commonVialSizes} suffix={vialUnit} value={vialAmount} onPick={setVialAmount} />
-            )}
+            ) : isOther ? (
+              <QuickPicks options={COMMON_GENERIC_VIAL_MG} suffix="mg" value={vialAmount} onPick={setVialAmount} />
+            ) : null}
           </Step>
         )}
 
@@ -368,7 +384,7 @@ export function CalculatorWizard() {
           (form === 'powder' ? (
             <Step
               question="How much bacteriostatic water goes in?"
-              subtitle={`Powder is a two-part mix: the ${peptideLabel} plus bacteriostatic water to dissolve it. Enter the amount of water added to the vial.`}
+              subtitle={`Powder is a two-part mix: the ${peptide?.name ?? 'peptide'} plus bacteriostatic water to dissolve it. Enter the amount of water added to the vial.`}
             >
               <BigNumberInput value={waterMl} onChange={setWaterMl} unit="mL" placeholder="e.g. 2" />
               <QuickPicks options={COMMON_WATER_ML} suffix="mL" value={waterMl} onPick={setWaterMl} />
