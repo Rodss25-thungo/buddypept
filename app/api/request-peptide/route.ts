@@ -2,14 +2,22 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { randomUUID } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabase';
-import { sendConfirmationEmail } from '@/lib/email';
+import {
+  isNonPeptideRequest,
+  sendConfirmationEmail,
+  sendNonPeptideAutoReply,
+  sendOwnerNotification,
+} from '@/lib/email';
 
 /**
  * POST /api/request-peptide
  *
- * Saves a "request a peptide" submission (name + email + desired peptide) as
- * PENDING and sends a confirmation email via Brevo. The lead is only counted
- * as confirmed in /admin once the user clicks the confirm link.
+ * Saves a "request a peptide" submission (name + email + desired peptide) and:
+ *   - For peptide requests: sends a confirmation email (double opt-in) and
+ *     notifies the owner.
+ *   - For non-peptide requests (testosterone, steroids): sends a polite
+ *     auto-reply explaining we only cover peptides, and notifies the owner
+ *     with a flag so they see the attempt.
  *
  * Brand rule: collect only name + email + the requested peptide. No health
  * data, no tracking.
@@ -43,6 +51,7 @@ export async function POST(request: Request) {
     );
   }
 
+  const isNonPeptide = isNonPeptideRequest(parsed.data.requestedPeptide);
   const token = randomUUID();
 
   try {
@@ -62,20 +71,42 @@ export async function POST(request: Request) {
     }
 
     try {
-      await sendConfirmationEmail({
-        to: parsed.data.email,
-        toName: parsed.data.name,
-        confirmUrl: `${SITE_URL}/confirm?token=${token}`,
-      });
+      if (isNonPeptide) {
+        // Send the polite auto-reply instead of a confirmation. They are not
+        // asked to confirm because we are not adding the requested item.
+        await sendNonPeptideAutoReply({
+          to: parsed.data.email,
+          toName: parsed.data.name,
+          requested: parsed.data.requestedPeptide,
+        });
+      } else {
+        await sendConfirmationEmail({
+          to: parsed.data.email,
+          toName: parsed.data.name,
+          confirmUrl: `${SITE_URL}/confirm?token=${token}`,
+        });
+      }
     } catch (emailError) {
       console.error('request-peptide email send error:', emailError);
       return NextResponse.json(
         {
           error:
-            'We saved your request but could not send the confirmation email. Please try again in a minute.',
+            'We saved your request but could not send the email. Please try again in a minute.',
         },
         { status: 500 }
       );
+    }
+
+    // Owner notification (non-fatal if it fails).
+    try {
+      await sendOwnerNotification({
+        type: isNonPeptide ? 'non-peptide-request' : 'peptide-request',
+        name: parsed.data.name,
+        email: parsed.data.email,
+        detail: parsed.data.requestedPeptide,
+      });
+    } catch (ownerError) {
+      console.error('request-peptide owner notification error:', ownerError);
     }
 
     return NextResponse.json({ ok: true });

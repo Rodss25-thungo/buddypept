@@ -2,15 +2,14 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { randomUUID } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabase';
-import { sendConfirmationEmail } from '@/lib/email';
+import { sendConfirmationEmail, sendOwnerNotification } from '@/lib/email';
 
 /**
  * POST /api/learn-signup
  *
  * Double opt-in: saves the signup as PENDING (confirmed_at = null) with a
- * one-time confirmation token, then sends a confirmation email via Brevo. The
- * lead only counts as "confirmed" in /admin after the user clicks the link in
- * the email, which fakes/typos cannot do.
+ * one-time confirmation token, sends a confirmation email to the user, and
+ * fires a notification email to the owner (buddypept@gmail.com).
  */
 
 const SignupSchema = z.object({
@@ -70,6 +69,19 @@ export async function POST(request: Request) {
         },
         { status: 500 }
       );
+    }
+
+    // Notify the owner. Errors here are non-fatal: we still want the user to
+    // get their flow even if the owner notification fails.
+    try {
+      await sendOwnerNotification({
+        type: 'library-signup',
+        name: parsed.data.name,
+        email: parsed.data.email,
+        detail: parsed.data.source ?? 'library',
+      });
+    } catch (ownerError) {
+      console.error('learn-signup owner notification error:', ownerError);
     }
 
     return NextResponse.json({ ok: true });
