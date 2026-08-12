@@ -65,7 +65,18 @@ export interface Peptide {
    */
   legalStatusLastUpdated: string;
 
-  /** Common vial sizes in `vialUnit` (e.g., [5, 10] for 5 mg or 10 mg vials). */
+  /**
+   * Common vial sizes in `vialUnit` (e.g., [5, 10] for 5 mg or 10 mg vials),
+   * ascending. These become the calculator's quick-pick buttons.
+   *
+   * Include a size only if it is stocked by several independent sellers.
+   * One-off and custom strengths stay out: the picker is a shortcut, not a
+   * catalog, and past six or so buttons it is slower than typing. Anything
+   * not listed here is still fully usable, the calculator's vial input takes
+   * any number by hand. Note the sourcing in a comment on the entry, and keep
+   * the sizes real rather than a tidy ladder; strengths cluster differently
+   * per compound (MOTS-c jumps 10 to 40, NAD+ runs in the hundreds).
+   */
   commonVialSizes: number[];
 
   /** Unit for vial sizes. */
@@ -118,7 +129,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'glp-1',
     legalStatus: 'prescription',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [2, 5, 10],
+    // 2, 3, 5, and 10 mg are the standard compounded sizes; 15 and 20 mg show
+    // up as concentrated vials from a smaller set of sellers.
+    commonVialSizes: [2, 3, 5, 10, 15, 20],
     vialUnit: 'mg',
     typicalDose: 0.25,
     typicalDoseUnit: 'mg',
@@ -134,7 +147,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'glp-1',
     legalStatus: 'prescription',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [10, 30, 60],
+    // 5, 10, 15, 30, and 60 mg are the sizes sold across most sellers. 20 and
+    // 100 mg exist but are single-vendor enough to leave to hand entry.
+    commonVialSizes: [5, 10, 15, 30, 60],
     vialUnit: 'mg',
     typicalDose: 2.5,
     typicalDoseUnit: 'mg',
@@ -149,7 +164,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'glp-1',
     legalStatus: 'research-chemical',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [10, 30],
+    // Sold in a clean 5/10/15/20/30 ladder. 10, 20, and 30 mg are the volume
+    // sizes; 15 mg is thinner but common enough to keep.
+    commonVialSizes: [5, 10, 15, 20, 30],
     vialUnit: 'mg',
     typicalDose: 2,
     typicalDoseUnit: 'mg',
@@ -167,7 +184,10 @@ export const PEPTIDES: Peptide[] = [
     category: 'recovery',
     legalStatus: 'research-chemical',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [5, 10],
+    // 5 mg is the base size nearly every seller carries; 10, 15, and 20 mg are
+    // widely stocked, and 2 mg appears at a handful. 1 and 50 mg exist but are
+    // rare enough to leave to hand entry.
+    commonVialSizes: [2, 5, 10, 15, 20],
     vialUnit: 'mg',
     typicalDose: 250,
     typicalDoseUnit: 'mcg',
@@ -183,7 +203,8 @@ export const PEPTIDES: Peptide[] = [
     category: 'recovery',
     legalStatus: 'research-chemical',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [5, 10],
+    // 5 and 10 mg are the standard sizes; 2 mg is carried by a minority.
+    commonVialSizes: [2, 5, 10],
     vialUnit: 'mg',
     typicalDose: 2,
     typicalDoseUnit: 'mg',
@@ -201,7 +222,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'aesthetic',
     legalStatus: 'research-chemical',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [50, 100],
+    // 50 mg is the most common size and 100 mg the economy size. 200 mg is the
+    // bulk option and 10 mg the small one; both are less widely stocked.
+    commonVialSizes: [10, 50, 100, 200],
     vialUnit: 'mg',
     typicalDose: 2,
     typicalDoseUnit: 'mg',
@@ -234,7 +257,8 @@ export const PEPTIDES: Peptide[] = [
     category: 'growth-hormone',
     legalStatus: 'research-chemical',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [2, 5],
+    // The DAC form is sold as 2 and 5 mg, the no-DAC form as 5 and 10 mg.
+    commonVialSizes: [2, 5, 10],
     vialUnit: 'mg',
     typicalDose: 100,
     typicalDoseUnit: 'mcg',
@@ -250,7 +274,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'growth-hormone',
     legalStatus: 'prescription',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [2, 3, 5, 15],
+    // 2 and 5 mg are the research-supplier sizes; compounding pharmacies add
+    // 3, 6, 9, and 15 mg.
+    commonVialSizes: [2, 3, 5, 6, 9, 15],
     vialUnit: 'mg',
     typicalDose: 200,
     typicalDoseUnit: 'mcg',
@@ -276,7 +302,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'longevity',
     legalStatus: 'research-chemical',
     legalStatusLastUpdated: '2026-08-11',
-    commonVialSizes: [500, 1000],
+    // 500 and 1000 mg are the common sizes; 100, 250, and 750 mg also circulate
+    // and appear throughout published reconstitution charts.
+    commonVialSizes: [100, 250, 500, 750, 1000],
     vialUnit: 'mg',
     typicalDose: 100,
     typicalDoseUnit: 'mg',
@@ -311,7 +339,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'longevity',
     legalStatus: 'research-chemical',
     legalStatusLastUpdated: '2026-08-11',
-    commonVialSizes: [5, 10],
+    // 10 mg is the standard size and 40 mg the bulk one, with a real gap
+    // between them. 20 mg is carried by fewer sellers, 5 mg by fewer still.
+    commonVialSizes: [5, 10, 20, 40],
     vialUnit: 'mg',
     typicalDose: 5,
     typicalDoseUnit: 'mg',
@@ -329,7 +359,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'libido',
     legalStatus: 'prescription',
     legalStatusLastUpdated: '2026-05-18',
-    commonVialSizes: [10],
+    // 10 mg is the common size; 5 mg is widely available at a higher per-mg
+    // cost. 20 mg exists but is uncommon.
+    commonVialSizes: [5, 10],
     vialUnit: 'mg',
     typicalDose: 1.25,
     typicalDoseUnit: 'mg',
@@ -347,7 +379,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'growth-hormone',
     legalStatus: 'prescription',
     legalStatusLastUpdated: '2026-05-25',
-    commonVialSizes: [10, 12, 36],
+    // Somatropin pens and vials run 4 to 36 IU. 10 and 12 IU are the everyday
+    // sizes; 16, 24, and 36 IU cover the larger vials.
+    commonVialSizes: [10, 12, 16, 24, 36],
     vialUnit: 'IU',
     typicalDose: 2,
     typicalDoseUnit: 'IU',
@@ -363,7 +397,9 @@ export const PEPTIDES: Peptide[] = [
     category: 'other',
     legalStatus: 'prescription',
     legalStatusLastUpdated: '2026-05-25',
-    commonVialSizes: [5000, 10000],
+    // 5000 and 10000 IU are the standard vials; 1000 and 2000 IU are the
+    // smaller repeat-dose sizes.
+    commonVialSizes: [1000, 2000, 5000, 10000],
     vialUnit: 'IU',
     typicalDose: 500,
     typicalDoseUnit: 'IU',

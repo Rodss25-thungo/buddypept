@@ -85,7 +85,7 @@ const OTHER_PEPTIDE = '__other__';
 const COMMON_WATER_ML = [1, 2, 3, 5];
 // Generic vial size quick-picks used when "Other peptide" is selected (no
 // library data to fall back on). Common research-vial sizes in mg.
-const COMMON_GENERIC_VIAL_MG = [5, 10, 30, 50];
+const COMMON_GENERIC_VIAL_MG = [5, 10, 15, 20, 30];
 
 const DISCLAIMER_RESULTS =
   'This is math, not medical advice. Check it against the vial label and a licensed provider’s guidance before drawing any dose.';
@@ -399,9 +399,21 @@ export function CalculatorWizard({
           >
             <BigNumberInput value={vialAmount} onChange={setVialAmount} unit={vialUnit} placeholder={isIU ? 'e.g. 5000' : 'e.g. 5'} />
             {peptide && peptide.commonVialSizes.length > 0 ? (
-              <QuickPicks options={peptide.commonVialSizes} suffix={vialUnit} value={vialAmount} onPick={setVialAmount} />
+              <QuickPicks
+                options={peptide.commonVialSizes}
+                suffix={vialUnit}
+                value={vialAmount}
+                onPick={setVialAmount}
+                hint={`Different strength? Type it in the box above in ${vialUnit}.`}
+              />
             ) : isOther ? (
-              <QuickPicks options={COMMON_GENERIC_VIAL_MG} suffix="mg" value={vialAmount} onPick={setVialAmount} />
+              <QuickPicks
+                options={COMMON_GENERIC_VIAL_MG}
+                suffix="mg"
+                value={vialAmount}
+                onPick={setVialAmount}
+                hint="Different strength? Type it in the box above in mg."
+              />
             ) : null}
           </Step>
         )}
@@ -844,29 +856,36 @@ function QuickPicks({
   suffix,
   value,
   onPick,
+  hint,
 }: {
   options: number[];
   suffix: string;
   value: number;
   onPick: (n: number) => void;
+  hint?: string;
 }) {
   return (
-    <div className="mt-3 flex flex-wrap gap-2">
-      {options.map((o) => (
-        <button
-          key={o}
-          type="button"
-          onClick={() => onPick(o)}
-          className={`rounded-xl border px-4 py-2.5 text-base font-medium transition ${
-            value === o
-              ? 'border-brand-600 bg-brand-600 text-white'
-              : 'border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200'
-          }`}
-        >
-          {o} {suffix}
-        </button>
-      ))}
-    </div>
+    <>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {options.map((o) => (
+          <button
+            key={o}
+            type="button"
+            onClick={() => onPick(o)}
+            className={`rounded-xl border px-4 py-2.5 text-base font-medium transition ${
+              value === o
+                ? 'border-brand-600 bg-brand-600 text-white'
+                : 'border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200'
+            }`}
+          >
+            {o} {suffix}
+          </button>
+        ))}
+      </div>
+      {hint ? (
+        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">{hint}</p>
+      ) : null}
+    </>
   );
 }
 
