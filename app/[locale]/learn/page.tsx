@@ -1,37 +1,52 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
+import { use } from 'react';
+import { Link } from '@/i18n/navigation';
 import { getPeptideBySlug } from '@/data/peptides';
-import { PEPTIDE_EDUCATION, LEARN_SLUGS } from '@/data/peptide-education';
+import { LEARN_SLUGS } from '@/data/peptide-education';
 import { LearnGate } from '@/components/learn-gate';
 
-export const metadata: Metadata = {
-  title: 'Learn about peptides | BuddyPept',
-  description:
-    'Plain-English, factual summaries of common peptides: what they are, what they have been studied for, how they are sold, and their legal status. Education only.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  return { title: t('learnTitle'), description: t('learnDescription') };
+}
 
-export default function LearnIndexPage() {
+export default function LearnIndexPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = use(params);
+  setRequestLocale(locale);
+  const t = useTranslations('learn');
+  // Teasers come from the catalog so the library index reads in the visitor's
+  // language; the peptide's name stays as-is, being a proper noun.
+  const edu = useTranslations('peptideEducation');
+
   const entries = LEARN_SLUGS.map((slug) => ({
     slug,
     peptide: getPeptideBySlug(slug),
-    edu: PEPTIDE_EDUCATION[slug],
-  })).filter((e) => e.peptide && e.edu);
+  })).filter((e) => e.peptide);
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-10 sm:py-14">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-        Learn about peptides
+        {t('title')}
       </h1>
       <p className="mt-3 text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-        Plain-English, factual summaries: what each peptide is, what it has been
-        studied for, how it is sold, and its legal status. Education only, never
-        medical advice, and never a recommendation to use anything.
+        {t('intro')}
       </p>
 
       <div className="mt-8">
         <LearnGate source="library">
           <ul className="space-y-3">
-            {entries.map(({ slug, peptide, edu }) => (
+            {entries.map(({ slug, peptide }) => (
               <li key={slug}>
                 <Link
                   href={`/learn/${slug}`}
@@ -39,7 +54,9 @@ export default function LearnIndexPage() {
                 >
                   <span>
                     <span className="block text-base font-semibold">{peptide!.name}</span>
-                    <span className="mt-0.5 block text-sm text-zinc-500">{edu!.teaser}</span>
+                    <span className="mt-0.5 block text-sm text-zinc-500">
+                      {edu(`${slug}.teaser`)}
+                    </span>
                   </span>
                   <span aria-hidden className="ml-3 text-brand-600">
                     →
@@ -52,15 +69,15 @@ export default function LearnIndexPage() {
       </div>
 
       <div className="mt-10 rounded-xl border border-zinc-200 bg-brand-50/50 p-5 text-center dark:border-zinc-800 dark:bg-brand-950/20">
-        <p className="text-base font-medium">Need the dosing math?</p>
+        <p className="text-base font-medium">{t('mathTitle')}</p>
         <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-          The calculator is free and needs no sign-up.
+          {t('mathBody')}
         </p>
         <Link
           href="/calculator"
           className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
         >
-          Open the calculator <span aria-hidden>→</span>
+          {t('openCalculator')} <span aria-hidden>→</span>
         </Link>
       </div>
     </main>

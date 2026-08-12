@@ -1,4 +1,6 @@
+import { useLocale, useTranslations } from 'next-intl';
 import type { SyringeType } from '@/lib/calculator';
+import { formatNum as fmt } from '@/lib/format';
 
 /**
  * Live syringe diagram. Re-scales when the barrel changes and fills to the
@@ -17,7 +19,10 @@ export function SyringeDiagram({
   drawAmount: number;
 }) {
   const isInsulin = scale === 'U-100';
-  const unitLabel = isInsulin ? 'units' : 'mL';
+  const t = useTranslations('syringe');
+  const locale = useLocale();
+  const formatNum = (n: number, decimals: number) => fmt(locale, n, decimals) || '-';
+  const unitLabel = isInsulin ? t('units') : 'mL';
   const maxValue = isInsulin ? Math.round(maxMl * 100) : maxMl;
 
   const hasDraw = Number.isFinite(drawAmount) && drawAmount > 0;
@@ -34,7 +39,12 @@ export function SyringeDiagram({
   const fillX = innerRight - fillW;
   const markerX = innerRight - fillW;
 
-  const ticks = buildSyringeTicks(isInsulin, maxValue, maxMl);
+  // The mL scale prints fractional tick labels (0.2, 0.4, …), so the barrel
+  // markings have to be written in the reader's notation too. A syringe drawn
+  // with "0.4" next to a result that reads "0,4" is worse than either alone.
+  const ticks = buildSyringeTicks(isInsulin, maxValue, maxMl, (v) =>
+    fmt(locale, v, 2)
+  );
 
   return (
     <div className="rounded-xl bg-zinc-900 p-4 shadow-sm">
@@ -134,17 +144,18 @@ export function SyringeDiagram({
       <p className="mt-2 text-center text-sm text-zinc-300">
         {hasDraw ? (
           over ? (
-            <>This dose is bigger than the {shortLabel} holds. Pick a larger syringe.</>
+            t('over', { syringe: shortLabel })
           ) : (
-            <>
-              Marked at{' '}
-              <span className="font-semibold text-brand-300">
-                {formatNum(drawAmount, 2)} {unitLabel}
-              </span>
-            </>
+            t.rich('markedAt', {
+              amount: formatNum(drawAmount, 2),
+              unit: unitLabel,
+              b: (chunks) => (
+                <span className="font-semibold text-brand-300">{chunks}</span>
+              ),
+            })
           )
         ) : (
-          <>Enter a dose to see where it lands on the syringe.</>
+          t('empty')
         )}
       </p>
     </div>
@@ -154,14 +165,15 @@ export function SyringeDiagram({
 function buildSyringeTicks(
   isInsulin: boolean,
   maxValue: number,
-  maxMl: number
+  maxMl: number,
+  label: (v: number) => string
 ): { value: number; major: boolean; label: string | null }[] {
   const ticks: { value: number; major: boolean; label: string | null }[] = [];
   if (isInsulin) {
     const minorStep = 5;
     for (let v = 0; v <= maxValue + 1e-9; v += minorStep) {
       const major = Math.abs(v % 10) < 1e-9;
-      ticks.push({ value: v, major, label: major ? String(v) : null });
+      ticks.push({ value: v, major, label: major ? label(v) : null });
     }
   } else {
     const majorStep = maxMl <= 1 ? 0.2 : 0.5;
@@ -170,13 +182,10 @@ function buildSyringeTicks(
     for (let i = 0; i <= steps; i++) {
       const v = Number((i * minorStep).toFixed(2));
       const major = Math.abs(v / majorStep - Math.round(v / majorStep)) < 1e-6;
-      ticks.push({ value: v, major, label: major ? String(v) : null });
+      ticks.push({ value: v, major, label: major ? label(v) : null });
     }
   }
   return ticks;
 }
 
-function formatNum(n: number, decimals: number): string {
-  if (!Number.isFinite(n)) return '-';
-  return Number(n.toFixed(decimals)).toString();
-}
+

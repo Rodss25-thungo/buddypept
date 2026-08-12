@@ -45,17 +45,28 @@ export default getRequestConfig(async ({ requestLocale }) => {
   };
 });
 
-type Json = { [key: string]: string | Json };
+type JsonValue = string | JsonValue[] | { [key: string]: JsonValue };
+type Json = { [key: string]: JsonValue };
 
-/** Overlays translated keys on top of English, so gaps fall back to English. */
+/**
+ * Overlays translated keys on top of English, so gaps fall back to English.
+ *
+ * Arrays are replaced wholesale rather than merged element by element. The
+ * legal pages store their sections as arrays, and a translator who merges two
+ * sections into one should get their shorter list, not their list padded back
+ * out with leftover English entries from the end of the English one.
+ */
 function deepMerge(base: Json, over: Json): Json {
   const out: Json = { ...base };
   for (const [key, value] of Object.entries(over)) {
     const prev = out[key];
-    out[key] =
-      typeof value === 'object' && typeof prev === 'object'
-        ? deepMerge(prev, value)
-        : value;
+    const mergeable =
+      isPlainObject(value) && isPlainObject(prev);
+    out[key] = mergeable ? deepMerge(prev, value) : value;
   }
   return out;
+}
+
+function isPlainObject(v: JsonValue | undefined): v is Json {
+  return typeof v === 'object' && v !== null && !Array.isArray(v);
 }

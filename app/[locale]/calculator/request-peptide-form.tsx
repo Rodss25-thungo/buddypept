@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 /**
  * "Request a peptide" form. Captures name + email + which peptide the user
@@ -15,6 +16,7 @@ export function RequestPeptideForm({
 }: {
   defaultPeptide?: string;
 }) {
+  const t = useTranslations('requestForm');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [peptide, setPeptide] = useState(defaultPeptide);
@@ -36,27 +38,28 @@ export function RequestPeptideForm({
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
         setStatus('error');
-        setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
+        setErrorMsg(data.error ?? t('genericError'));
         return;
       }
       setStatus('success');
     } catch {
       setStatus('error');
-      setErrorMsg('Network error. Please try again.');
+      setErrorMsg(t('networkError'));
     }
   }
 
   if (status === 'success') {
     return (
       <div className="rounded-lg border border-brand-300 bg-brand-50 p-4 text-sm text-brand-900 dark:border-brand-700 dark:bg-brand-950 dark:text-brand-100">
-        <p className="font-medium">📬 Check your email</p>
+        <p className="font-medium">{t('sentTitle')}</p>
         <p className="mt-1">
-          We sent a confirmation link to{' '}
-          <span className="font-semibold">{email}</span>. Click it within 24
-          hours and we&rsquo;ll email you when{' '}
-          {peptide.trim() || 'the peptide'} is added.
+          {t.rich('sentBody', {
+            email,
+            peptide: peptide.trim() || t('sentFallbackPeptide'),
+            b: (chunks) => <span className="font-semibold">{chunks}</span>,
+          })}
         </p>
-        <p className="mt-2 text-xs">Didn&rsquo;t get it? Check your spam folder.</p>
+        <p className="mt-2 text-xs">{t('sentSpam')}</p>
       </div>
     );
   }
@@ -66,7 +69,7 @@ export function RequestPeptideForm({
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label htmlFor="rp-name" className="mb-1 block text-xs font-medium">
-            Your name
+            {t('nameLabel')}
           </label>
           <input
             id="rp-name"
@@ -74,13 +77,13 @@ export function RequestPeptideForm({
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            placeholder="First name"
+            placeholder={t('firstName')}
             className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
           />
         </div>
         <div>
           <label htmlFor="rp-email" className="mb-1 block text-xs font-medium">
-            Your email
+            {t('emailLabel')}
           </label>
           <input
             id="rp-email"
@@ -88,14 +91,14 @@ export function RequestPeptideForm({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder="you@example.com"
+            placeholder={t('emailPlaceholder')}
             className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
           />
         </div>
       </div>
       <div>
         <label htmlFor="rp-peptide" className="mb-1 block text-xs font-medium">
-          Which peptide do you want added?
+          {t('peptideLabel')}
         </label>
         <input
           id="rp-peptide"
@@ -103,7 +106,7 @@ export function RequestPeptideForm({
           value={peptide}
           onChange={(e) => setPeptide(e.target.value)}
           required
-          placeholder="e.g., HGH, HCG, Tesamorelin"
+          placeholder={t('peptidePlaceholder')}
           className="w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
@@ -115,12 +118,9 @@ export function RequestPeptideForm({
         disabled={status === 'submitting'}
         className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60"
       >
-        {status === 'submitting' ? 'Sending…' : 'Notify me when it’s ready'}
+        {status === 'submitting' ? t('submitting') : t('submit')}
       </button>
-      <p className="text-xs text-zinc-500">
-        We use your email only to tell you when this peptide is added. No spam,
-        no selling your data.
-      </p>
+      <p className="text-xs text-zinc-500">{t('privacy')}</p>
     </form>
   );
 }

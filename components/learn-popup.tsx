@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Buddy } from './buddy';
 
 /**
@@ -16,6 +17,7 @@ const POPUP_KEY = 'bp_popup_seen';
 const UNLOCK_KEY = 'bp_learn_unlocked';
 
 export function LearnPopup() {
+  const tr = useTranslations('popup');
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -60,7 +62,7 @@ export function LearnPopup() {
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
         setStatus('error');
-        setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
+        setErrorMsg(data.error ?? tr('genericError'));
         return;
       }
       try {
@@ -71,7 +73,7 @@ export function LearnPopup() {
       setStatus('sent');
     } catch {
       setStatus('error');
-      setErrorMsg('Network error. Please try again.');
+      setErrorMsg(tr('networkError'));
     }
   }
 
@@ -89,7 +91,7 @@ export function LearnPopup() {
         <button
           type="button"
           onClick={dismiss}
-          aria-label="Close"
+          aria-label={tr('close')}
           className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800"
         >
           ✕
@@ -103,35 +105,32 @@ export function LearnPopup() {
               📬
             </p>
             <h2 className="mt-1 text-xl font-bold tracking-tight">
-              Check your email
+              {tr('sentTitle')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              We sent a confirmation link to{' '}
-              <span className="font-semibold">{email}</span>. Click it within 24
-              hours to finish joining. Didn&rsquo;t get it? Check your spam
-              folder.
+              {tr.rich('sentBody', {
+                email,
+                b: (chunks) => <span className="font-semibold">{chunks}</span>,
+              })}
             </p>
             <button
               type="button"
               onClick={dismiss}
               className="mt-5 w-full rounded-xl border border-zinc-300 px-6 py-3 text-base font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
             >
-              Got it
+              {tr('gotIt')}
             </button>
           </>
         ) : (
           <>
             <h2 className="mt-3 text-xl font-bold tracking-tight">
-              You&rsquo;re a genius! 🎉
+              {tr('title')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              The mg-to-units math trips up almost everyone, and you just
-              cracked it.
+              {tr('body1')}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              We&rsquo;re building a community for people learning about
-              peptides. Want in? Add your name and email and we&rsquo;ll keep
-              you posted as it grows.
+              {tr('body2')}
             </p>
 
             <form onSubmit={handleSubmit} className="mt-4 space-y-3">
@@ -140,7 +139,7 @@ export function LearnPopup() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                placeholder="First name"
+                placeholder={tr('firstName')}
                 className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
               />
               <input
@@ -148,7 +147,7 @@ export function LearnPopup() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="you@example.com"
+                placeholder={tr('emailPlaceholder')}
                 className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
               />
               {status === 'error' && (
@@ -161,7 +160,7 @@ export function LearnPopup() {
                 disabled={status === 'submitting'}
                 className="w-full rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
               >
-                {status === 'submitting' ? 'Sending the link…' : 'Count me in'}
+                {status === 'submitting' ? tr('submitting') : tr('submit')}
               </button>
             </form>
 
@@ -170,7 +169,7 @@ export function LearnPopup() {
               onClick={dismiss}
               className="mt-3 w-full text-center text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
             >
-              Maybe later
+              {tr('later')}
             </button>
           </>
         )}

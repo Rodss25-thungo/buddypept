@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 /**
  * Soft email gate for the "Learn about peptides" library with double opt-in.
@@ -19,6 +20,7 @@ export function LearnGate({
   source: string;
   children: React.ReactNode;
 }) {
+  const t = useTranslations('gate');
   const [{ checked, unlocked }, setGate] = useState({ checked: false, unlocked: false });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -51,13 +53,15 @@ export function LearnGate({
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
         setStatus('error');
-        setErrorMsg(data.error ?? 'Something went wrong. Please try again.');
+        // The API's own message is English-only. Show it when it is the
+        // only detail available, otherwise fall back to translated wording.
+        setErrorMsg(data.error ?? t('genericError'));
         return;
       }
       setStatus('sent');
     } catch {
       setStatus('error');
-      setErrorMsg('Network error. Please try again.');
+      setErrorMsg(t('networkError'));
     }
   }
 
@@ -72,15 +76,14 @@ export function LearnGate({
         <p className="text-3xl" aria-hidden>
           📬
         </p>
-        <h2 className="mt-2 text-lg font-semibold">Check your email</h2>
+        <h2 className="mt-2 text-lg font-semibold">{t('sentTitle')}</h2>
         <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-          We sent a confirmation link to{' '}
-          <span className="font-semibold">{email}</span>. Click it within 24
-          hours to unlock the library.
+          {t.rich('sentBody', {
+            email,
+            b: (chunks) => <span className="font-semibold">{chunks}</span>,
+          })}
         </p>
-        <p className="mt-3 text-xs text-zinc-500">
-          Didn&rsquo;t get it? Check your spam folder.
-        </p>
+        <p className="mt-3 text-xs text-zinc-500">{t('sentSpam')}</p>
       </div>
     );
   }
@@ -90,10 +93,9 @@ export function LearnGate({
       onSubmit={handleSubmit}
       className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
     >
-      <h2 className="text-lg font-semibold">Read the full guide, free</h2>
+      <h2 className="text-lg font-semibold">{t('title')}</h2>
       <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-        Pop in your name and email to unlock the full peptide library. We send
-        one confirmation email; click the link and you&rsquo;re in.
+        {t('body')}
       </p>
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <input
@@ -101,7 +103,7 @@ export function LearnGate({
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          placeholder="First name"
+          placeholder={t('firstName')}
           className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
         />
         <input
@@ -109,7 +111,7 @@ export function LearnGate({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          placeholder="you@example.com"
+          placeholder={t('emailPlaceholder')}
           className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
@@ -121,12 +123,9 @@ export function LearnGate({
         disabled={status === 'submitting'}
         className="mt-4 w-full rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
       >
-        {status === 'submitting' ? 'Sending the link…' : 'Send me the link'}
+        {status === 'submitting' ? t('submitting') : t('submit')}
       </button>
-      <p className="mt-3 text-xs text-zinc-500">
-        We use your email only to share peptide education and occasional
-        updates. We never sell your data.
-      </p>
+      <p className="mt-3 text-xs text-zinc-500">{t('privacy')}</p>
     </form>
   );
 }

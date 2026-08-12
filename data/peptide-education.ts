@@ -1,178 +1,40 @@
 /**
- * Educational summaries for the gated "Learn about peptides" library.
+ * Which peptides have an education entry in the "Learn about peptides" library.
+ *
+ * The prose itself lives in `peptideEducation.<slug>` in the message catalogs
+ * (messages/en.json and its translations), not here, so each entry can be
+ * written in every language the site speaks. This file is the index: it decides
+ * which peptides the library lists and which /learn/<slug> pages are built.
  *
  * Kept SEPARATE from data/peptides.ts so the calculator's data shape is never
  * affected. Content rules (locked with Rod): original neutral writing, no
  * copied text, NO health claims ("studied for", never "treats/cures"), and the
  * "not approved / research / for testing" framing where it applies. The legal
  * status and "last reviewed" date come from data/peptides.ts.
+ *
+ * Adding a peptide to the library takes three edits, per CLAUDE.md:
+ *   1. data/peptides.ts          the peptide itself
+ *   2. WIZARD_PEPTIDE_SLUGS      so it is selectable in the calculator
+ *   3. LEARN_SLUGS below, plus a `peptideEducation.<slug>` block in
+ *      messages/en.json holding teaser / whatItIs / studiedFor / howSold /
+ *      bottomLine. English is the source; other locales fall back to it until
+ *      translated.
  */
 
-export interface PeptideEducation {
-  /** One-line teaser shown before the email unlock. */
-  teaser: string;
-  whatItIs: string;
-  studiedFor: string;
-  howSold: string;
-  bottomLine: string;
-}
+/** The five fields every education entry provides, in render order. */
+export const EDUCATION_FIELDS = [
+  'whatItIs',
+  'studiedFor',
+  'howSold',
+  'bottomLine',
+] as const;
 
-export const PEPTIDE_EDUCATION: Record<string, PeptideEducation> = {
-  semaglutide: {
-    teaser: 'An FDA-approved GLP-1 medicine for diabetes and weight.',
-    whatItIs: 'A GLP-1 receptor agonist.',
-    studiedFor:
-      'FDA-approved for type 2 diabetes (Ozempic) and weight management (Wegovy), and studied in large clinical trials. Rybelsus is an oral form for diabetes.',
-    howSold:
-      'By prescription as a pre-filled pen or vial (Ozempic, Wegovy) or tablets (Rybelsus). It is also sold by gray-market vendors as a research powder, which is not the approved product.',
-    bottomLine:
-      'Semaglutide is an FDA-approved prescription medicine. The approved product comes through a licensed provider and pharmacy, and decisions about it belong with them.',
-  },
-  'bpc-157': {
-    teaser: 'A lab-made peptide studied in animals for tissue repair.',
-    whatItIs:
-      'A synthetic peptide, a short chain of amino acids based on a sequence found in a protein in gastric juice. It is made in a lab.',
-    studiedFor:
-      'In published preclinical work, mostly animal and laboratory studies, it has been examined for tissue repair, tendon and ligament healing, and gastrointestinal effects. These are early research findings, not proven results in people.',
-    howSold:
-      'As a freeze-dried powder in glass vials, commonly 5 mg or 10 mg, mixed with bacteriostatic water before use.',
-    bottomLine:
-      'The science is early and mostly preclinical. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-  'tb-500': {
-    teaser: 'A synthetic fragment of a natural protein, studied for repair.',
-    whatItIs:
-      'A synthetic version of a fragment of thymosin beta-4, a protein that occurs naturally in the body. It is made in a lab.',
-    studiedFor:
-      'Preclinical studies have looked at it for tissue repair, wound healing, and inflammation in animal and laboratory models. These are research findings, not proven effects in people.',
-    howSold:
-      'As a freeze-dried powder in glass vials, commonly 5 mg or 10 mg, reconstituted with bacteriostatic water.',
-    bottomLine:
-      'The evidence is largely preclinical. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-  'ghk-cu': {
-    teaser: 'A copper peptide common in skincare and studied for repair.',
-    whatItIs:
-      'A copper-binding peptide (copper tripeptide-1) that occurs naturally in human plasma, with levels that decline with age. It is produced synthetically for products.',
-    studiedFor:
-      'Studied for skin remodeling, hair, and wound healing. It is widely used in topical cosmetics and has been examined as an injectable in research settings.',
-    howSold:
-      'As a powder in vials (often 50 mg or 100 mg) for reconstitution, and in many topical skincare products.',
-    bottomLine:
-      'Topical cosmetic use is common; injectable use is research-stage. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-  ipamorelin: {
-    teaser: 'A peptide studied for how the body releases growth hormone.',
-    whatItIs:
-      'A synthetic peptide that signals the pituitary gland. It is classed as a growth hormone secretagogue.',
-    studiedFor:
-      'Researched for its effect on the body’s own growth hormone release, often discussed alongside CJC-1295. Findings are largely preclinical.',
-    howSold:
-      'As a powder in vials (commonly 2, 5, or 10 mg), reconstituted with bacteriostatic water. Often paired with CJC-1295.',
-    bottomLine:
-      'The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-  'cjc-1295': {
-    teaser: 'A growth-hormone-releasing-hormone analog studied in research.',
-    whatItIs:
-      'A synthetic analog of growth hormone releasing hormone (GHRH). It exists in two forms, with and without DAC, which differ in how long they last in the body.',
-    studiedFor:
-      'Examined for its influence on the body’s growth hormone release, and commonly studied together with ipamorelin. Findings are largely preclinical.',
-    howSold:
-      'As a powder in vials (commonly 2 or 5 mg), reconstituted with bacteriostatic water.',
-    bottomLine:
-      'The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-  sermorelin: {
-    teaser: 'A prescription GHRH analog used in some hormone protocols.',
-    whatItIs:
-      'A synthetic analog of growth hormone releasing hormone (GHRH).',
-    studiedFor:
-      'FDA-approved (as Geref) for diagnostic testing of pituitary function, and prescribed off-label in some anti-aging and hormone protocols.',
-    howSold:
-      'By prescription, including from compounding pharmacies, as a powder for reconstitution (commonly 2 to 15 mg vials).',
-    bottomLine:
-      'Sermorelin is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider.',
-  },
-  retatrutide: {
-    teaser: 'An investigational metabolic peptide, still in clinical trials.',
-    whatItIs:
-      'An investigational peptide that acts on three receptors (GLP-1, GIP, and glucagon).',
-    studiedFor:
-      'Being tested in clinical trials for metabolic conditions such as obesity and type 2 diabetes. It is not yet approved for any use in any country.',
-    howSold:
-      'Not approved or sold as a finished medicine. Gray-market vendors sell it as a research compound in powder vials (commonly 10 or 30 mg).',
-    bottomLine:
-      'Retatrutide is still investigational and not approved anywhere. Any use outside a clinical trial is unproven, and decisions belong with a licensed professional.',
-  },
-  tirzepatide: {
-    teaser: 'An FDA-approved dual-receptor medicine for diabetes and weight.',
-    whatItIs: 'A dual GLP-1 and GIP receptor agonist.',
-    studiedFor:
-      'FDA-approved for type 2 diabetes (Mounjaro) and weight management (Zepbound), and studied in large clinical trials.',
-    howSold:
-      'By prescription as a pre-filled pen or vial (Mounjaro, Zepbound). It is also sold by gray-market vendors as a research powder, which is not the approved product.',
-    bottomLine:
-      'Tirzepatide is an FDA-approved prescription medicine. The approved product comes through a licensed provider and pharmacy, and decisions about it belong with them.',
-  },
-  hgh: {
-    teaser: 'Prescription growth hormone, measured in international units.',
-    whatItIs:
-      'Recombinant human growth hormone (somatropin), a lab-made copy of a hormone the body produces.',
-    studiedFor:
-      'FDA-approved by prescription for specific growth hormone deficiencies and certain other conditions. It is measured in international units (IU).',
-    howSold:
-      'By prescription as a powder or pen for reconstitution. Vial strengths are given in IU.',
-    bottomLine:
-      'HGH is a prescription medication, and non-medical use is restricted by law in many places. Decisions belong with a licensed provider.',
-  },
-  hcg: {
-    teaser: 'A prescription hormone dosed in international units.',
-    whatItIs:
-      'Human chorionic gonadotropin, a hormone produced as a medicine. It is dosed in international units (IU).',
-    studiedFor:
-      'Used in fertility treatment and prescribed in some hormone protocols.',
-    howSold:
-      'By prescription as a powder for reconstitution, in IU strengths (commonly 5,000 or 10,000 IU).',
-    bottomLine:
-      'HCG is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider.',
-  },
-  'nad-plus': {
-    teaser: 'A coenzyme found in every living cell, sold as an injectable.',
-    whatItIs:
-      'Nicotinamide adenine dinucleotide, a coenzyme present in every living cell. It is not a peptide, though it is commonly sold and reconstituted alongside them. It takes part in energy metabolism and DNA repair, and levels decline with age.',
-    studiedFor:
-      'Studied for metabolic function, cellular energy, and the biology of aging. Most human research has used precursors taken by mouth, such as nicotinamide riboside and NMN, rather than injected NAD+. Evidence for the injectable form is thinner than the attention it receives.',
-    howSold:
-      'As a freeze-dried powder in vials, commonly 500 mg or 1000 mg, reconstituted with bacteriostatic water. Also offered as an IV infusion in clinics and through compounding pharmacies. Once reconstituted it keeps for roughly two weeks refrigerated, a shorter window than most peptides.',
-    bottomLine:
-      'Not FDA-approved as an injectable drug, and the human evidence for injection specifically is limited. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-  'ss-31': {
-    teaser: 'A mitochondria-targeting peptide, FDA-approved for one rare disease.',
-    whatItIs:
-      'A synthetic peptide, also called elamipretide, that concentrates in the inner mitochondrial membrane where it interacts with a lipid called cardiolipin.',
-    studiedFor:
-      'Studied for mitochondrial dysfunction. In September 2025 the FDA granted accelerated approval to elamipretide, under the brand name Forzinity, for Barth syndrome in patients weighing at least 30 kg. It was the first approved therapy for any mitochondrial disease. Work in other settings, including aging and heart and muscle function, remains investigational.',
-    howSold:
-      'As Forzinity by prescription for its approved use. Research suppliers also sell it as a powder in vials, commonly 10, 40, or 50 mg, which is not the approved product.',
-    bottomLine:
-      'Approved for one rare condition in one narrow population. Everything beyond that is off-label and still under study. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-  'mots-c': {
-    teaser: 'A peptide written into mitochondrial DNA, studied in metabolism.',
-    whatItIs:
-      'A short peptide, 16 amino acids long, encoded not by the cell nucleus but by mitochondrial DNA. Peptides of this kind are called mitochondrial-derived peptides.',
-    studiedFor:
-      'Examined for insulin sensitivity, metabolic regulation, and exercise biology, mostly in animal and laboratory work. The one human study published to date used intravenous administration, while nearly all circulating protocols describe subcutaneous injection. The dosing figures widely quoted online are therefore extrapolated rather than tested.',
-    howSold:
-      'As a freeze-dried powder in vials, commonly 5 mg or 10 mg, reconstituted with bacteriostatic water. Repeated freezing and thawing degrades it, so reconstituted solution is kept refrigerated rather than refrozen.',
-    bottomLine:
-      'Not FDA-approved for any use, and the human evidence is very limited. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
-  },
-};
+export type EducationField = (typeof EDUCATION_FIELDS)[number];
 
-/** Slugs that have an education entry, in the order to show in the library. */
+/**
+ * Slugs with an education entry. Order here is the order shown in the library
+ * index and the order the static /learn pages are generated in.
+ */
 export const LEARN_SLUGS = [
   'semaglutide',
   'tirzepatide',
@@ -188,4 +50,10 @@ export const LEARN_SLUGS = [
   'mots-c',
   'hgh',
   'hcg',
-];
+] as const;
+
+export type LearnSlug = (typeof LEARN_SLUGS)[number];
+
+export function isLearnSlug(slug: string): slug is LearnSlug {
+  return (LEARN_SLUGS as readonly string[]).includes(slug);
+}
