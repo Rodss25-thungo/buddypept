@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "siteTitle": "BuddyPept: Free Peptide Dosing Calculator",
+    "siteDescription": "Turn peptide-curious into peptide-confident. A free, plain-English peptide dosing calculator and guide. No selling, no data harvest, just the math.",
+    "manifestDescription": "A free, step-by-step peptide dosing calculator. The math, free forever.",
+    "calculatorTitle": "Peptide Dosing Calculator | BuddyPept",
+    "calculatorDescription": "A free, step-by-step peptide dosing calculator for education. Enter a vial strength and a dose to see exactly how much would be drawn."
+  },
+  "nav": {
+    "home": "Home",
+    "calculator": "Calculator",
+    "learn": "Learn",
+    "disclaimer": "Medical Disclaimer",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "languageLabel": "Language",
+    "chooseLanguage": "Choose a language"
+  },
+  "footer": {
+    "disclaimer": "BuddyPept is an educational tool, not medical advice. It does the dosing math you enter; it does not diagnose, treat, prescribe, or recommend that you take any peptide. We do not sell peptides and are not affiliated with any company that does. Many peptides are not approved for human use and are sold by others only as research compounds, so always consult a licensed healthcare provider before acting on anything here. You use this information at your own risk, and you are responsible for following the laws that apply to you.",
+    "colophon": "BuddyPept. The math, free forever. © {year}"
+  },
+  "home": {
+    "heroTitle": "Turn any dose into the exact amount to draw.",
+    "heroBody": "A free calculator for people new to peptides. Enter what’s in the vial and the dose, and see the exact amount to draw on the syringe, in mcg, mg, or units. No sign-up. Just the math.",
+    "openCalculator": "Open the calculator",
+    "problemTitle": "mg, mcg, units. Where it gets confusing.",
+    "problemBody": "A vial, some bacteriostatic water, a syringe, and a pile of numbers that don’t obviously fit together. mg? mcg? units? The internet is full of bro-science, sketchy vendors, and people trying to sell something. BuddyPept just explains the math, clearly.",
+    "whatTitle": "What BuddyPept is",
+    "whatBody": "BuddyPept is a free calculator and plain-English guide for people new to peptides. Enter what’s in a vial and a dose, and it shows exactly how much that works out to, in whatever unit a syringe uses. That’s the whole thing.",
+    "trueline": "The math doesn’t lie.",
+    "howTitle": "How it works",
+    "howStep1": "Pick a peptide, or request one that's not listed yet.",
+    "howStep2": "Enter the vial amount, the bacteriostatic water, and a dose.",
+    "howStep3": "See it in mcg, mg, and syringe units, clearly explained.",
+    "closingTitle": "Turn peptide-curious into peptide-confident."
+  },
+  "calculator": {
+    "request": {
+      "title": "Which peptide do you need?",
+      "body": "Tell us the one you want and your email. We’ll build it into the calculator and let you know when it’s ready."
+    },
+    "back": "Back",
+    "continue": "Continue",
+    "calculate": "Calculate",
+    "progress": "Step {current} of {total}",
+    "peptide": {
+      "question": "Pick a peptide",
+      "subtitle": "Select one from the list. For anything not listed, “Other peptide” still does the math.",
+      "placeholder": "Choose a peptide…",
+      "other": "Other peptide",
+      "notListed": "I don’t see it here",
+      "notListedHint": "No problem. Tap Continue and we’ll ask which one you need so we can add it.",
+      "otherHint": "The math works for any peptide. We’ll do it in <b>milligrams (mg)</b>. Just enter the strength on the vial and a dose to see the exact amount to draw.",
+      "measuredIn": "{name} is measured in <b>{unitLong}</b>, so the whole calculation will stay in {unitShort}."
+    },
+    "unit": {
+      "iuLong": "international units (IU)",
+      "mgLong": "milligrams (mg)"
+    },
+    "form": {
+      "question": "Is the {name} a powder or already a liquid?",
+      "subtitle": "Freeze-dried powder needs mixing. An already-liquid vial does not.",
+      "powderTitle": "A powder I mix",
+      "powderSubtitle": "Freeze-dried, needs bacteriostatic water",
+      "liquidTitle": "Already a liquid",
+      "liquidSubtitle": "Pre-mixed in the vial, no water to add",
+      "fallbackName": "peptide"
+    },
+    "amount": {
+      "question": "How many {unit} are in the {name} vial?",
+      "subtitlePowder": "Peptides come as a freeze-dried powder sealed in a glass vial. Enter the total amount on the label, not the size of the glass.",
+      "subtitleLiquid": "Enter the total amount of {name} in the vial, printed on the label. Not the size of the glass.",
+      "placeholderIU": "e.g. 5000",
+      "placeholderMg": "e.g. 5",
+      "hint": "Different strength? Type it in the box above in {unit}."
+    },
+    "volume": {
+      "powderQuestion": "How much bacteriostatic water goes in?",
+      "powderSubtitle": "Powder is a two-part mix: the {name} plus bacteriostatic water to dissolve it. Enter the amount of water added to the vial.",
+      "powderPlaceholder": "e.g. 2",
+      "liquidQuestion": "How much total liquid is in the vial?",
+      "liquidSubtitle": "The full volume already in the vial. Check the label (for example, the mL it came in).",
+      "liquidPlaceholder": "e.g. 1"
+    },
+    "syringe": {
+      "question": "Pick a syringe",
+      "subtitle": "Most people use an insulin syringe. The mL is how much it holds; the units are the marks along the barrel. We'll show where the dose lands on it."
+    },
+    "barrel": {
+      "insulin03": {
+        "label": "Insulin syringe, 0.3 mL (up to 30 units)",
+        "short": "0.3 mL insulin"
+      },
+      "insulin05": {
+        "label": "Insulin syringe, 0.5 mL (up to 50 units)",
+        "short": "0.5 mL insulin"
+      },
+      "insulin10": {
+        "label": "Insulin syringe, 1 mL (up to 100 units)",
+        "short": "1 mL insulin"
+      },
+      "im10": {
+        "label": "IM syringe, 1 mL (oil based, marked in mL)",
+        "short": "IM 1 mL"
+      },
+      "im30": {
+        "label": "IM syringe, 3 mL (oil based, marked in mL)",
+        "short": "IM 3 mL"
+      }
+    },
+    "dose": {
+      "question": "What dose do you want to calculate?",
+      "subtitle": "Enter it in {enterUnit}. Only know how many {drawUnit} to draw? Switch the unit below.",
+      "enterUnitIU": "IU",
+      "enterUnitMass": "mg or mcg",
+      "placeholderMg": "e.g. 0.25",
+      "placeholderMcg": "e.g. 250",
+      "placeholderNative": "e.g. 500",
+      "placeholderDraw": "e.g. 25",
+      "neverSuggests": "BuddyPept never suggests a dose. It just does the math for the number you enter. Dosing is a decision for you and your provider."
+    },
+    "units": "units",
+    "result": {
+      "label": "Calculated draw",
+      "empty": "—",
+      "prompt": "Type a dose below to see the draw.",
+      "sublineInsulin": "that's {ml} mL of {name}",
+      "sublineIM": "of {name}",
+      "peptideFallback": "the peptide",
+      "adjust": "Adjust without going back",
+      "draw": "Draw",
+      "dose": "Dose",
+      "bacWater": "Bacteriostatic water",
+      "liquidInVial": "Liquid in vial",
+      "vialStrength": "Vial strength",
+      "disclaimer": "This is math, not medical advice. Check it against the vial label and a licensed provider’s guidance before drawing any dose.",
+      "summaryIU": "Dose: {dose} IU · ",
+      "summaryMass": "Dose: {mcg} mcg = {mg} mg · ",
+      "summaryTail": "Concentration: {conc} {concUnit} · Syringe: {syringe}",
+      "showMath": "Show the math",
+      "hideMath": "Hide the math",
+      "mathLine1": "Vial {unit} ÷ liquid mL = {conc} {concUnit}",
+      "mathLine2": "{dose} {unit} ÷ {conc} {concUnit} = {ml} mL",
+      "mathLine3": "{ml} mL × 100 units/mL = {units} units",
+      "changeStep": "Change a step",
+      "startOver": "Start over",
+      "learnTitle": "Want to understand the peptides themselves?",
+      "learnBody": "Free, plain-English guides: what each one is, what it has been studied for, how it is sold, and its legal status.",
+      "learnCta": "Learn about peptides",
+      "genericError": "Something looks off with those numbers."
+    },
+    "warning": {
+      "doseBelowOneUnit": "Dose is less than 1 syringe unit, so measurement accuracy is poor at this scale. Consider reconstituting with less bacteriostatic water for a higher concentration.",
+      "doseAboveSyringeCapacity": "Dose exceeds 100 units (1 mL on a U-100 syringe), more than a single 1 mL syringe holds. Reconstitute with more bacteriostatic water for a lower concentration.",
+      "concentrationVeryHigh": "Very high peptide concentration. Double-check the vial fully dissolved and that the bacteriostatic water amount is correct.",
+      "iuNotConvertible": "IU (International Units) cannot be reliably converted to mass without substance-specific bioactivity data. Consult the peptide manufacturer or a healthcare professional for the correct IU-to-mass conversion for your specific compound.",
+      "exceedsBarrel": "This dose needs {ml} mL, more than the {syringe} holds ({max} mL). Use a larger syringe, or mix with more water for a weaker concentration."
+    }
+  }
+}

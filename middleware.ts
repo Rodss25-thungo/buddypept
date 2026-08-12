@@ -1,19 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
 /**
- * Password-protects the private /admin area with HTTP Basic Auth.
+ * Two jobs, in this order:
  *
- * The browser shows a native sign-in prompt. We check the password against the
- * ADMIN_PASSWORD environment variable (set in Vercel). The username can be
- * anything; only the password is checked. The /admin page lists peptide
- * requests, which include people's emails, so it must never be public.
+ * 1. Password-protect the private /admin area with HTTP Basic Auth.
+ * 2. Resolve the locale for every public page.
+ *
+ * The order matters. /admin lists peptide requests, which include people's
+ * emails, so the auth check runs first and /admin never reaches the locale
+ * middleware at all. Admin is a private internal tool; it stays English and
+ * stays unprefixed.
  */
 
 export const config = {
-  matcher: ['/admin', '/admin/:path*'],
+  // Every path except API routes, Next internals, and files with an extension
+  // (favicon.ico, icon.svg, images). Those must not be locale-prefixed.
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)'],
 };
 
+const intlMiddleware = createIntlMiddleware(routing);
+
 export function middleware(req: NextRequest) {
+  if (req.nextUrl.pathname.startsWith('/admin')) {
+    return adminAuth(req);
+  }
+  return intlMiddleware(req);
+}
+
+function adminAuth(req: NextRequest) {
   const expected = process.env.ADMIN_PASSWORD;
 
   // If no password is configured, refuse access rather than expose data.

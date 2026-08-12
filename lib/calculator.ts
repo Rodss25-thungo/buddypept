@@ -87,9 +87,26 @@ export interface ConcentrationResult {
   description: string;
 }
 
+/**
+ * Warning codes, not sentences.
+ *
+ * This file is pure math and must stay language-free, so it emits a code and
+ * the numbers behind it and lets the UI render the wording in the reader's
+ * language. Codes are also stable to compare against, which sentences are not:
+ * filtering warnings by matching on English text silently stops working the
+ * moment the text is translated.
+ */
+export type WarningCode =
+  | 'doseBelowOneUnit'
+  | 'doseAboveSyringeCapacity'
+  | 'concentrationVeryHigh'
+  | 'iuNotConvertible';
+
 export interface Warning {
   level: 'info' | 'caution' | 'serious';
-  message: string;
+  code: WarningCode;
+  /** Numbers the wording interpolates, formatted by the UI for its locale. */
+  values?: Record<string, number>;
 }
 
 export interface DoseResult {
@@ -193,6 +210,9 @@ export function calculateConcentration(
   return {
     concentrationMgPerMl: mgPerMl,
     concentrationMcgPerMl: mgPerMl * 1000,
+    // Diagnostic only. Always English, always a "." decimal separator, and
+    // deliberately not rendered anywhere in the UI. Use the numeric fields
+    // above with the locale-aware formatters in lib/format.ts for display.
     description: `${vialAmount} ${vialUnit} + ${waterMl} mL bac water = ${formatNumber(mgPerMl, 3)} mg/mL (${formatNumber(mgPerMl * 1000, 0)} mcg/mL)`,
   };
 }
@@ -249,38 +269,22 @@ export function calculateDose(input: z.input<typeof DoseInputSchema>): DoseResul
 
   // Warning: dose too small to measure accurately
   if (parsed.syringeType !== 'IM' && units < 1) {
-    warnings.push({
-      level: 'caution',
-      message:
-        'Dose is less than 1 syringe unit, so measurement accuracy is poor at this scale. Consider reconstituting with less bacteriostatic water for a higher concentration.',
-    });
+    warnings.push({ level: 'caution', code: 'doseBelowOneUnit' });
   }
 
   // Warning: dose exceeds single-injection capacity
   if (parsed.syringeType !== 'IM' && units > 100) {
-    warnings.push({
-      level: 'caution',
-      message:
-        'Dose exceeds 100 units (1 mL on a U-100 syringe), more than a single 1 mL syringe holds. Reconstitute with more bacteriostatic water for a lower concentration.',
-    });
+    warnings.push({ level: 'caution', code: 'doseAboveSyringeCapacity' });
   }
 
   // Warning: unusually high concentration (possible input error)
   if (concentrationMgPerMl > 10) {
-    warnings.push({
-      level: 'caution',
-      message:
-        'Very high peptide concentration. Double-check the vial fully dissolved and that the bacteriostatic water amount is correct.',
-    });
+    warnings.push({ level: 'caution', code: 'concentrationVeryHigh' });
   }
 
   // Warning: IU conversions are substance-specific
   if (parsed.targetDoseUnit === 'IU' || parsed.vialUnit === 'IU') {
-    warnings.push({
-      level: 'serious',
-      message:
-        'IU (International Units) cannot be reliably converted to mass without substance-specific bioactivity data. Consult the peptide manufacturer or a healthcare professional for the correct IU-to-mass conversion for your specific compound.',
-    });
+    warnings.push({ level: 'serious', code: 'iuNotConvertible' });
   }
 
   return {
