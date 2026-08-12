@@ -137,6 +137,39 @@ export const PEPTIDE_EDUCATION: Record<string, PeptideEducation> = {
     bottomLine:
       'HCG is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider.',
   },
+  'nad-plus': {
+    teaser: 'A coenzyme found in every living cell, sold as an injectable.',
+    whatItIs:
+      'Nicotinamide adenine dinucleotide, a coenzyme present in every living cell. It is not a peptide, though it is commonly sold and reconstituted alongside them. It takes part in energy metabolism and DNA repair, and levels decline with age.',
+    studiedFor:
+      'Studied for metabolic function, cellular energy, and the biology of aging. Most human research has used precursors taken by mouth, such as nicotinamide riboside and NMN, rather than injected NAD+. Evidence for the injectable form is thinner than the attention it receives.',
+    howSold:
+      'As a freeze-dried powder in vials, commonly 500 mg or 1000 mg, reconstituted with bacteriostatic water. Also offered as an IV infusion in clinics and through compounding pharmacies. Once reconstituted it keeps for roughly two weeks refrigerated, a shorter window than most peptides.',
+    bottomLine:
+      'Not FDA-approved as an injectable drug, and the human evidence for injection specifically is limited. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
+  },
+  'ss-31': {
+    teaser: 'A mitochondria-targeting peptide, FDA-approved for one rare disease.',
+    whatItIs:
+      'A synthetic peptide, also called elamipretide, that concentrates in the inner mitochondrial membrane where it interacts with a lipid called cardiolipin.',
+    studiedFor:
+      'Studied for mitochondrial dysfunction. In September 2025 the FDA granted accelerated approval to elamipretide, under the brand name Forzinity, for Barth syndrome in patients weighing at least 30 kg. It was the first approved therapy for any mitochondrial disease. Work in other settings, including aging and heart and muscle function, remains investigational.',
+    howSold:
+      'As Forzinity by prescription for its approved use. Research suppliers also sell it as a powder in vials, commonly 10, 40, or 50 mg, which is not the approved product.',
+    bottomLine:
+      'Approved for one rare condition in one narrow population. Everything beyond that is off-label and still under study. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
+  },
+  'mots-c': {
+    teaser: 'A peptide written into mitochondrial DNA, studied in metabolism.',
+    whatItIs:
+      'A short peptide, 16 amino acids long, encoded not by the cell nucleus but by mitochondrial DNA. Peptides of this kind are called mitochondrial-derived peptides.',
+    studiedFor:
+      'Examined for insulin sensitivity, metabolic regulation, and exercise biology, mostly in animal and laboratory work. The one human study published to date used intravenous administration, while nearly all circulating protocols describe subcutaneous injection. The dosing figures widely quoted online are therefore extrapolated rather than tested.',
+    howSold:
+      'As a freeze-dried powder in vials, commonly 5 mg or 10 mg, reconstituted with bacteriostatic water. Repeated freezing and thawing degrades it, so reconstituted solution is kept refrigerated rather than refrozen.',
+    bottomLine:
+      'Not FDA-approved for any use, and the human evidence is very limited. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider.',
+  },
 };
 
 /** Slugs that have an education entry, in the order to show in the library. */
@@ -150,6 +183,9 @@ export const LEARN_SLUGS = [
   'ipamorelin',
   'cjc-1295',
   'sermorelin',
+  'nad-plus',
+  'ss-31',
+  'mots-c',
   'hgh',
   'hcg',
 ];
