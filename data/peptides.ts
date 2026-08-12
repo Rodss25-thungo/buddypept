@@ -260,6 +260,24 @@ export const PEPTIDES: Peptide[] = [
       'A growth hormone releasing hormone (GHRH) analog. FDA-approved under the brand name Geref for diagnostic testing of pituitary function. Available from compounding pharmacies by prescription for off-label anti-aging protocols.',
   },
 
+  // ───────── Longevity & mitochondrial ─────────
+  {
+    slug: 'mots-c',
+    name: 'MOTS-c',
+    aliases: ['MOTSc', 'MOTS-C', 'Mitochondrial ORF of the 12S rRNA type-c'],
+    category: 'longevity',
+    legalStatus: 'research-chemical',
+    legalStatusLastUpdated: '2026-08-11',
+    commonVialSizes: [5, 10],
+    vialUnit: 'mg',
+    typicalDose: 5,
+    typicalDoseUnit: 'mg',
+    typicalDosesPerWeek: 5,
+    dosingPattern: '5 mg 5× weekly (subcutaneous) in commonly published protocols',
+    shortDescription:
+      'A 16-amino-acid peptide encoded by mitochondrial DNA, studied for its role in metabolic regulation and insulin sensitivity. Not FDA-approved for any use. Most published dosing comes from animal research rather than human trials; the single human study to date used intravenous, not subcutaneous, administration.',
+  },
+
   // ───────── Libido ─────────
   {
     slug: 'pt-141',
