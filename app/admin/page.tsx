@@ -35,7 +35,10 @@ type Filter = 'confirmed' | 'pending' | 'all';
 /** One row of public.peptide_demand. Newsletter signups are already excluded. */
 interface DemandRow {
   display_name: string;
+  /** Distinct people, not form submissions. */
   request_count: number;
+  /** Raw submissions. Higher than request_count when someone asked repeatedly. */
+  submission_count: number;
   awaiting_notification: number;
   matched_slug: string | null;
 }
@@ -61,7 +64,9 @@ export default async function AdminPage({
     // route cannot disagree about who is owed an email.
     const { data: demandData } = await supabase
       .from('peptide_demand')
-      .select('display_name, request_count, awaiting_notification, matched_slug');
+      .select(
+        'display_name, request_count, submission_count, awaiting_notification, matched_slug'
+      );
     demand = (demandData as DemandRow[]) ?? [];
 
     let query = supabase
@@ -98,15 +103,16 @@ export default async function AdminPage({
         <section className="mb-8">
           <h2 className="mb-1 text-lg font-semibold tracking-tight">Demand</h2>
           <p className="mb-3 text-sm text-zinc-500">
-            Confirmed requests only, newsletter signups excluded. This is the list
-            that decides what gets built next.
+            Confirmed requests only, newsletter signups excluded. Counts are
+            distinct people, not form submissions. This is the list that decides
+            what gets built next.
           </p>
           <div className="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
             <table className="w-full text-left text-sm">
               <thead className="bg-zinc-50 text-xs uppercase tracking-wide text-zinc-500 dark:bg-zinc-900">
                 <tr>
                   <th className="px-4 py-3 font-medium">Requested</th>
-                  <th className="px-4 py-3 font-medium">Asks</th>
+                  <th className="px-4 py-3 font-medium">People</th>
                   <th className="px-4 py-3 font-medium">In calculator</th>
                   <th className="px-4 py-3 font-medium">Owed an email</th>
                 </tr>
@@ -119,7 +125,17 @@ export default async function AdminPage({
                   return (
                     <tr key={i} className="align-top">
                       <td className="px-4 py-3 font-medium">{d.display_name}</td>
-                      <td className="px-4 py-3 tabular-nums">{d.request_count}</td>
+                      <td className="px-4 py-3 tabular-nums">
+                        {d.request_count}
+                        {d.submission_count > d.request_count && (
+                          <span
+                            className="ml-1 text-xs text-zinc-500"
+                            title={`${d.submission_count} form submissions from ${d.request_count} ${d.request_count === 1 ? 'person' : 'people'}`}
+                          >
+                            ({d.submission_count} subs)
+                          </span>
+                        )}
+                      </td>
                       <td className="whitespace-nowrap px-4 py-3">
                         {slug ? (
                           <Link

@@ -149,13 +149,32 @@ export async function POST(request: Request) {
     )
     .slice(0, limit);
 
+  // One person, one email. The unique constraint on notification_sends is
+  // (request_id, peptide_slug), which stops a row being sent twice but does NOT
+  // stop the same person being emailed twice: someone who submits the form three
+  // times has three rows. That is not hypothetical, one requester did exactly
+  // that on 2026-05-28. Dedupe on the address, keeping the earliest row.
+  const seenEmail = new Set<string>();
+  const primary: RequestRow[] = [];
+  const duplicates: RequestRow[] = [];
+  for (const row of matches) {
+    const key = row.email.trim().toLowerCase();
+    if (seenEmail.has(key)) {
+      duplicates.push(row);
+    } else {
+      seenEmail.add(key);
+      primary.push(row);
+    }
+  }
+
   if (dryRun) {
     return NextResponse.json({
       dryRun: true,
       peptide: peptide.name,
       slug,
-      wouldEmail: matches.length,
-      recipients: matches.map((r) => ({
+      wouldEmail: primary.length,
+      duplicateRowsSuppressed: duplicates.length,
+      recipients: primary.map((r) => ({
         email: r.email,
         requested: r.requested_peptide,
       })),
@@ -166,7 +185,7 @@ export async function POST(request: Request) {
   const failed: { email: string; error: string }[] = [];
   const skipped: string[] = [];
 
-  for (const row of matches) {
+  for (const row of primary) {
     // Claim first. A unique-constraint violation means someone else already has
     // this person, so we skip rather than risk a second email.
     const { error: claimError } = await supabase
@@ -230,13 +249,30 @@ export async function POST(request: Request) {
     }
   }
 
+  // Close out the duplicate rows for anyone who was successfully emailed. They
+  // are the same person and must not be mailed again, but leaving fulfilled_at
+  // null would keep them showing as still owed a notification forever.
+  const sentEmails = new Set(sent.map((e) => e.trim().toLowerCase()));
+  const toClose = duplicates.filter((r) => sentEmails.has(r.email.trim().toLowerCase()));
+  if (toClose.length > 0) {
+    await supabase
+      .from('peptide_requests')
+      .update({ fulfilled_at: new Date().toISOString(), matched_slug: slug })
+      .in(
+        'id',
+        toClose.map((r) => r.id)
+      );
+  }
+
   return NextResponse.json({
     peptide: peptide.name,
     slug,
-    matched: matches.length,
+    matchedRows: matches.length,
+    people: primary.length,
     sent: sent.length,
     skipped: skipped.length,
     failed: failed.length,
+    duplicateRowsClosed: toClose.length,
     failures: failed,
   });
 }
