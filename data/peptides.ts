@@ -262,6 +262,49 @@ export const PEPTIDES: Peptide[] = [
 
   // ───────── Longevity & mitochondrial ─────────
   {
+    // Strictly a coenzyme, not a peptide. It lives here because it is one of
+    // the most-requested items in the injectable longevity space and the
+    // reconstitution math is identical.
+    slug: 'nad-plus',
+    name: 'NAD+',
+    aliases: [
+      'NAD',
+      'NAD 500',
+      'NAD+ injection',
+      'Nicotinamide adenine dinucleotide',
+    ],
+    category: 'longevity',
+    legalStatus: 'research-chemical',
+    legalStatusLastUpdated: '2026-08-11',
+    commonVialSizes: [500, 1000],
+    vialUnit: 'mg',
+    typicalDose: 100,
+    typicalDoseUnit: 'mg',
+    typicalDosesPerWeek: 3,
+    dosingPattern: '50-100 mg, 2-3× weekly (subcutaneous) in commonly published protocols',
+    shortDescription:
+      'A coenzyme present in every cell, involved in energy metabolism and DNA repair. Not a peptide, though it is commonly sold and reconstituted alongside them. Not FDA-approved as an injectable drug; available through compounding pharmacies. Reconstituted solution is shorter-lived than most peptides, roughly 14 days refrigerated.',
+  },
+  {
+    slug: 'ss-31',
+    name: 'SS-31',
+    aliases: ['Elamipretide', 'Forzinity', 'MTP-131'],
+    category: 'longevity',
+    legalStatus: 'prescription',
+    legalStatusLastUpdated: '2026-08-11',
+    // Research suppliers also sell 10 mg vials, but a 10 mg vial cannot deliver
+    // the 40 mg studied dose, so pairing them as defaults would hand a newcomer
+    // an impossible combination. Users can still type any vial size they have.
+    commonVialSizes: [40, 50],
+    vialUnit: 'mg',
+    typicalDose: 40,
+    typicalDoseUnit: 'mg',
+    typicalDosesPerWeek: 7,
+    dosingPattern: '40 mg 1× daily (subcutaneous), the dose studied in the TAZPOWER trial',
+    shortDescription:
+      'A mitochondria-targeting peptide studied for mitochondrial dysfunction. FDA-approved in September 2025 under the brand name Forzinity for Barth syndrome in patients weighing at least 30 kg, the first approved therapy for any mitochondrial disease. That approval covers Barth syndrome only; longevity and general mitochondrial-health use remain off-label.',
+  },
+  {
     slug: 'mots-c',
     name: 'MOTS-c',
     aliases: ['MOTSc', 'MOTS-C', 'Mitochondrial ORF of the 12S rRNA type-c'],
