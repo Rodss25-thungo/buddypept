@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 /**
  * Soft email gate for the "Learn about peptides" library with double opt-in.
@@ -21,6 +21,9 @@ export function LearnGate({
   children: React.ReactNode;
 }) {
   const t = useTranslations('gate');
+  // Sent with the signup so the confirmation email arrives in the same
+  // language the person was reading when they signed up.
+  const locale = useLocale();
   const [{ checked, unlocked }, setGate] = useState({ checked: false, unlocked: false });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -48,7 +51,7 @@ export function LearnGate({
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source }),
+        body: JSON.stringify({ name, email, source, locale }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {

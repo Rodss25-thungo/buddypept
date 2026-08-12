@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 /**
  * Buddy: BuddyPept's helper character, built from the logo water droplet.
  * Calm and competent (simple dot eyes, a gentle understated smile), warm but
@@ -8,11 +10,12 @@
  * illustrated version can replace this later.
  */
 export function Buddy({ className }: { className?: string }) {
+  const t = useTranslations('a11y');
   return (
     <svg
       viewBox="0 0 100 120"
       role="img"
-      aria-label="Buddy, your friendly peptide helper"
+      aria-label={t('buddy')}
       className={className}
     >
       {/* Droplet body */}

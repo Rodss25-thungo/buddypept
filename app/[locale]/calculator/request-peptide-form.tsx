@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 /**
  * "Request a peptide" form. Captures name + email + which peptide the user
@@ -17,6 +17,9 @@ export function RequestPeptideForm({
   defaultPeptide?: string;
 }) {
   const t = useTranslations('requestForm');
+  // Sent with the signup so the confirmation email arrives in the same
+  // language the person was reading when they signed up.
+  const locale = useLocale();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [peptide, setPeptide] = useState(defaultPeptide);
@@ -33,7 +36,7 @@ export function RequestPeptideForm({
       const res = await fetch('/api/request-peptide', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, requestedPeptide: peptide }),
+        body: JSON.stringify({ name, email, requestedPeptide: peptide, locale }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {

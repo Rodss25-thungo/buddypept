@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Buddy } from './buddy';
 
 /**
@@ -14,6 +14,9 @@ import { Buddy } from './buddy';
 
 export function CommunityCTA() {
   const t = useTranslations('community');
+  // Sent with the signup so the confirmation email arrives in the same
+  // language the person was reading when they signed up.
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,7 +37,7 @@ export function CommunityCTA() {
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source: 'homepage' }),
+        body: JSON.stringify({ name, email, source: 'homepage', locale }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {

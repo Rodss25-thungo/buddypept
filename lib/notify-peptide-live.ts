@@ -35,6 +35,12 @@ interface RequestRow {
   email: string;
   requested_peptide: string;
   matched_slug: string | null;
+  /**
+   * Site language the person signed up in. Null on rows created before the
+   * locale column existed; the send path treats that as English, which is
+   * what those people were originally emailed in.
+   */
+  locale: string | null;
 }
 
 export interface NotifyResult {
@@ -80,7 +86,7 @@ export async function notifyPeptideLive({
 
   const { data: pending, error: selectError } = await supabase
     .from('peptide_requests')
-    .select('id, name, email, requested_peptide, matched_slug')
+    .select('id, name, email, requested_peptide, matched_slug, locale')
     .not('confirmed_at', 'is', null)
     .is('fulfilled_at', null)
     .order('created_at', { ascending: true });
@@ -183,6 +189,7 @@ export async function notifyPeptideLive({
         toName: row.name ?? '',
         peptideName: peptide.name,
         peptideSlug: slug,
+        locale: row.locale,
       });
 
       await supabase

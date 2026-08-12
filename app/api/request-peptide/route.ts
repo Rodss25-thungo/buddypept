@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { randomUUID } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabase';
+import { apiErrors, validationMessage } from '@/lib/api-messages';
 import {
   isNonPeptideRequest,
   sendConfirmationEmail,
@@ -24,13 +25,14 @@ import {
  */
 
 const RequestSchema = z.object({
-  name: z.string().trim().min(1, 'Please enter your name.').max(100),
-  email: z.string().trim().email('Please enter a valid email address.').max(200),
-  requestedPeptide: z
-    .string()
-    .trim()
-    .min(1, 'Please enter the peptide name.')
-    .max(200),
+  name: z.string().trim().min(1).max(100),
+  email: z.string().trim().email().max(200),
+  requestedPeptide: z.string().trim().min(1).max(200),
+  /**
+   * Site language the visitor was reading. Recorded on the row so the
+   * confirmation email, and any later email, goes out in the same language.
+   */
+  locale: z.enum(['en', 'pt', 'es']).optional(),
 });
 
 const SITE_URL = 'https://buddypept.com';
@@ -40,13 +42,20 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+    // No parsed body yet, so no locale to read. English is the only option.
+    const t = await apiErrors(null);
+    return NextResponse.json({ error: t('invalidRequest') }, { status: 400 });
   }
 
   const parsed = RequestSchema.safeParse(body);
+  // Read the locale off the raw body: it survives even when validation failed
+  // on some other field, so the error comes back in the right language.
+  const t = await apiErrors(
+    (body as { locale?: string } | null)?.locale ?? null
+  );
   if (!parsed.success) {
     return NextResponse.json(
-      { error: parsed.error.issues[0]?.message ?? 'Please check your entries.' },
+      { error: validationMessage(parsed.error, t) },
       { status: 400 }
     );
   }
@@ -61,11 +70,12 @@ export async function POST(request: Request) {
       email: parsed.data.email,
       requested_peptide: parsed.data.requestedPeptide,
       confirmation_token: token,
+      locale: parsed.data.locale ?? 'en',
     });
     if (error) {
       console.error('Supabase insert error:', error.message);
       return NextResponse.json(
-        { error: 'We could not save your request. Please try again.' },
+        { error: t('saveRequestFailed') },
         { status: 500 }
       );
     }
@@ -78,21 +88,24 @@ export async function POST(request: Request) {
           to: parsed.data.email,
           toName: parsed.data.name,
           requested: parsed.data.requestedPeptide,
+          locale: parsed.data.locale,
         });
       } else {
         await sendConfirmationEmail({
           to: parsed.data.email,
           toName: parsed.data.name,
-          confirmUrl: `${SITE_URL}/confirm?token=${token}`,
+          confirmUrl: `${SITE_URL}${
+            parsed.data.locale && parsed.data.locale !== 'en'
+              ? `/${parsed.data.locale}`
+              : ''
+          }/confirm?token=${token}`,
+          locale: parsed.data.locale,
         });
       }
     } catch (emailError) {
       console.error('request-peptide email send error:', emailError);
       return NextResponse.json(
-        {
-          error:
-            'We saved your request but could not send the email. Please try again in a minute.',
-        },
+        { error: t('emailRequestFailed') },
         { status: 500 }
       );
     }
@@ -113,7 +126,7 @@ export async function POST(request: Request) {
   } catch (e) {
     console.error('request-peptide route error:', e);
     return NextResponse.json(
-      { error: 'Server error. Please try again in a moment.' },
+      { error: t('serverError') },
       { status: 500 }
     );
   }

@@ -524,5 +524,52 @@
       "howSold": "As a freeze-dried powder in vials, commonly 5 mg or 10 mg, reconstituted with bacteriostatic water. Repeated freezing and thawing degrades it, so reconstituted solution is kept refrigerated rather than refrozen.",
       "bottomLine": "Not FDA-approved for any use, and the human evidence is very limited. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
     }
+  },
+  "emails": {
+    "greetingNamed": "Hi {name},",
+    "greetingAnon": "Hi there,",
+    "signoff": "The BuddyPept team",
+    "confirmation": {
+      "subject": "Confirm you're joining BuddyPept",
+      "body": "Tap the button below to confirm and finish joining the BuddyPept community. Takes one click.",
+      "cta": "Confirm my email",
+      "fallbackLink": "If the button does not work, copy and paste this link into your browser:",
+      "notYou": "If this was not you, just ignore this message. You will not be added.",
+      "textBody": "Tap the link below to confirm and finish joining the BuddyPept community. Takes one click."
+    },
+    "nonPeptide": {
+      "subject": "About your BuddyPept request",
+      "thanks": "Thanks for reaching out about <b>{requested}</b>!",
+      "scope": "BuddyPept focuses only on peptides (compounds like BPC-157, semaglutide, and similar). Steroids and steroid hormones like testosterone are outside what we cover, so this isn’t one we’ll be adding.",
+      "invite": "If you’d like to explore peptides instead, our library is open and waiting:",
+      "cta": "Browse the peptide library"
+    },
+    "peptideLive": {
+      "subject": "You asked. {name} is in.",
+      "lede": "You asked for <b>{name}</b>. It’s in the calculator now.",
+      "cta": "Run the {name} numbers",
+      "whatItDoes": "The calculator does exactly one thing and refuses to do it badly: the arithmetic. mg to mL to units, at whatever vial size and concentration your research calls for. No recommendations, no opinions, no nudging you toward a number.",
+      "noRounding": "It also refuses to round quietly. If something lands on 12.5 units, it says 12.5 units, not “about 12.”",
+      "tracker": "Coming next: a personal tracker, so your own research stays in one place instead of scattered across notes.",
+      "disclaimer": "Anything involving an actual human body is a conversation for a qualified healthcare professional. We do math.",
+      "thanks": "Thanks for the request. It’s genuinely how we pick what to build, so if something else is missing, tell us."
+    }
+  },
+  "apiErrors": {
+    "invalidRequest": "Invalid request.",
+    "name": "Please enter your name.",
+    "email": "Please enter a valid email address.",
+    "peptide": "Please enter the peptide name.",
+    "checkEntries": "Please check your entries.",
+    "saveFailed": "We could not save that. Please try again.",
+    "saveRequestFailed": "We could not save your request. Please try again.",
+    "emailFailed": "We saved your details but could not send the confirmation email. Please try again in a minute.",
+    "serverError": "Server error. Please try again in a moment.",
+    "emailRequestFailed": "We saved your request but could not send the email. Please try again in a minute."
+  },
+  "a11y": {
+    "buddy": "Buddy, your friendly peptide helper",
+    "logo": "BuddyPept logo",
+    "syringe": "{syringe} filled to the dose"
   }
 }

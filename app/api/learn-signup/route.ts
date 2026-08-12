@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { randomUUID } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabase';
+import { apiErrors, validationMessage } from '@/lib/api-messages';
 import { sendConfirmationEmail, sendOwnerNotification } from '@/lib/email';
 
 /**
@@ -13,9 +14,14 @@ import { sendConfirmationEmail, sendOwnerNotification } from '@/lib/email';
  */
 
 const SignupSchema = z.object({
-  name: z.string().trim().min(1, 'Please enter your name.').max(100),
-  email: z.string().trim().email('Please enter a valid email address.').max(200),
+  name: z.string().trim().min(1).max(100),
+  email: z.string().trim().email().max(200),
   source: z.string().trim().max(120).optional(),
+  /**
+   * Site language the visitor was reading. Recorded on the row so the
+   * confirmation email, and any later email, goes out in the same language.
+   */
+  locale: z.enum(['en', 'pt', 'es']).optional(),
 });
 
 const SITE_URL = 'https://buddypept.com';
@@ -25,13 +31,20 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+    // No parsed body yet, so no locale to read. English is the only option.
+    const t = await apiErrors(null);
+    return NextResponse.json({ error: t('invalidRequest') }, { status: 400 });
   }
 
   const parsed = SignupSchema.safeParse(body);
+  // Read the locale off the raw body: it survives even when validation failed
+  // on some other field, so the error comes back in the right language.
+  const t = await apiErrors(
+    (body as { locale?: string } | null)?.locale ?? null
+  );
   if (!parsed.success) {
     return NextResponse.json(
-      { error: parsed.error.issues[0]?.message ?? 'Please check your entries.' },
+      { error: validationMessage(parsed.error, t) },
       { status: 400 }
     );
   }
@@ -45,11 +58,12 @@ export async function POST(request: Request) {
       email: parsed.data.email,
       requested_peptide: `Learn: ${parsed.data.source ?? 'library'}`,
       confirmation_token: token,
+      locale: parsed.data.locale ?? 'en',
     });
     if (insertError) {
       console.error('learn-signup insert error:', insertError.message);
       return NextResponse.json(
-        { error: 'We could not save that. Please try again.' },
+        { error: t('saveFailed') },
         { status: 500 }
       );
     }
@@ -58,15 +72,17 @@ export async function POST(request: Request) {
       await sendConfirmationEmail({
         to: parsed.data.email,
         toName: parsed.data.name,
-        confirmUrl: `${SITE_URL}/confirm?token=${token}`,
+        confirmUrl: `${SITE_URL}${
+          parsed.data.locale && parsed.data.locale !== 'en'
+            ? `/${parsed.data.locale}`
+            : ''
+        }/confirm?token=${token}`,
+        locale: parsed.data.locale,
       });
     } catch (emailError) {
       console.error('learn-signup email send error:', emailError);
       return NextResponse.json(
-        {
-          error:
-            'We saved your details but could not send the confirmation email. Please try again in a minute.',
-        },
+        { error: t('emailFailed') },
         { status: 500 }
       );
     }
@@ -88,7 +104,7 @@ export async function POST(request: Request) {
   } catch (e) {
     console.error('learn-signup route error:', e);
     return NextResponse.json(
-      { error: 'Server error. Please try again in a moment.' },
+      { error: t('serverError') },
       { status: 500 }
     );
   }

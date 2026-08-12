@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Buddy } from './buddy';
 
 /**
@@ -18,6 +18,9 @@ const UNLOCK_KEY = 'bp_learn_unlocked';
 
 export function LearnPopup() {
   const tr = useTranslations('popup');
+  // Sent with the signup so the confirmation email arrives in the same
+  // language the person was reading when they signed up.
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,7 +60,7 @@ export function LearnPopup() {
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source: 'popup' }),
+        body: JSON.stringify({ name, email, source: 'popup', locale }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {

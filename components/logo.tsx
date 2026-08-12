@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 /**
  * BuddyPept logo: a friendly rounded teal tile holding a white droplet
  * (the bacteriostatic-water drop at the heart of reconstitution). Calm and
@@ -5,11 +7,12 @@
  */
 
 export function LogoMark({ className }: { className?: string }) {
+  const t = useTranslations('a11y');
   return (
     <svg
       viewBox="0 0 32 32"
       role="img"
-      aria-label="BuddyPept logo"
+      aria-label={t('logo')}
       className={className}
     >
       <rect width="32" height="32" rx="9" className="fill-brand-600" />

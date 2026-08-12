@@ -20,6 +20,7 @@ export function SyringeDiagram({
 }) {
   const isInsulin = scale === 'U-100';
   const t = useTranslations('syringe');
+  const ta = useTranslations('a11y');
   const locale = useLocale();
   const formatNum = (n: number, decimals: number) => fmt(locale, n, decimals) || '-';
   const unitLabel = isInsulin ? t('units') : 'mL';
@@ -56,7 +57,7 @@ export function SyringeDiagram({
         viewBox="0 0 320 92"
         className="h-auto w-full"
         role="img"
-        aria-label={`${shortLabel} filled to the dose`}
+        aria-label={ta('syringe', { syringe: shortLabel })}
       >
         <rect x="0" y="22" width="7" height="36" rx="2" className="fill-zinc-500" />
         <rect x="7" y="37" width="21" height="6" className="fill-zinc-500" />
