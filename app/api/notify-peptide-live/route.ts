@@ -3,6 +3,11 @@ import { z } from 'zod';
 import { getSupabaseAdmin } from '@/lib/supabase';
 import { getPeptideBySlug } from '@/data/peptides';
 import { sendPeptideLiveEmail } from '@/lib/email';
+import {
+  isNewsletterRow,
+  keysForPeptide,
+  normalizePeptideName,
+} from '@/lib/peptide-matching';
 
 /**
  * POST /api/notify-peptide-live
@@ -50,11 +55,6 @@ interface RequestRow {
   email: string;
   requested_peptide: string;
   matched_slug: string | null;
-}
-
-/** Mirrors public.normalize_peptide_name() in the database. Keep them identical. */
-function normalize(raw: string): string {
-  return raw.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 function isAuthorized(request: Request): boolean {
@@ -134,17 +134,18 @@ export async function POST(request: Request) {
     );
   }
 
-  const keys = new Set([peptide.name, ...(peptide.aliases ?? [])].map(normalize));
-  keys.add(normalize(peptide.slug));
+  const keys = keysForPeptide(slug);
 
   const matches = (pending ?? [])
-    // Mirrors is_peptide_request(). Newsletter signups are stored in the same
-    // table and must never receive a peptide notification. Filtered here rather
-    // than in the query because PostgREST's `not.like` wildcard handling is easy
-    // to get subtly wrong, and a miss here means emailing the wrong people.
-    .filter((r: RequestRow) => !r.requested_peptide.startsWith('Learn: '))
+    // Newsletter signups live in the same table and must never receive a peptide
+    // notification. Filtered here rather than in the query because PostgREST's
+    // `not.like` wildcard handling is easy to get subtly wrong, and a miss means
+    // emailing the wrong people.
+    .filter((r: RequestRow) => !isNewsletterRow(r.requested_peptide))
     .filter((r: RequestRow) =>
-      r.matched_slug ? r.matched_slug === slug : keys.has(normalize(r.requested_peptide))
+      r.matched_slug
+        ? r.matched_slug === slug
+        : keys.has(normalizePeptideName(r.requested_peptide))
     )
     .slice(0, limit);
 
