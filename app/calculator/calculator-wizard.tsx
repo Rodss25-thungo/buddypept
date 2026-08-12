@@ -279,6 +279,11 @@ export function CalculatorWizard({
           drawFromNative={drawFromNative}
           nativeFromDraw={nativeFromDraw}
           onChangeDoseNative={setDoseNative}
+          waterMl={waterMl}
+          onChangeWaterMl={setWaterMl}
+          vialAmount={vialAmount}
+          onChangeVialAmount={setVialAmount}
+          form={form}
           showMath={showMath}
           onToggleMath={() => setShowMath((s) => !s)}
           onEditSteps={() => setStepIndex(STEPS.length - 1)}
@@ -525,6 +530,11 @@ function ResultScreen({
   drawFromNative,
   nativeFromDraw,
   onChangeDoseNative,
+  waterMl,
+  onChangeWaterMl,
+  vialAmount,
+  onChangeVialAmount,
+  form,
   showMath,
   onToggleMath,
   onEditSteps,
@@ -539,6 +549,11 @@ function ResultScreen({
   drawFromNative: (n: number) => number;
   nativeFromDraw: (draw: number) => number;
   onChangeDoseNative: (n: number) => void;
+  waterMl: number;
+  onChangeWaterMl: (n: number) => void;
+  vialAmount: number;
+  onChangeVialAmount: (n: number) => void;
+  form: Form;
   showMath: boolean;
   onToggleMath: () => void;
   onEditSteps: () => void;
@@ -618,9 +633,38 @@ function ResultScreen({
         <p className="mb-2 text-xs font-medium uppercase tracking-wide text-zinc-500">
           Adjust without going back
         </p>
-        <div className="grid grid-cols-2 gap-3">
-          <EditField label={thirdLabel} value={drawFromNative(doseNative)} onChange={(v) => onChangeDoseNative(nativeFromDraw(v))} />
-          <EditField label={vialUnit} value={doseNative} onChange={(v) => onChangeDoseNative(v)} />
+        {/*
+          Two columns, two rows. The top row is the dose (what you draw, and
+          the same dose expressed in the vial's unit). The bottom row is the
+          mix itself: liquid in the vial, and how much peptide it holds.
+          Changing anything on the bottom row moves the concentration, so the
+          draw above it recalculates.
+        */}
+        <div className="grid grid-cols-2 gap-x-3 gap-y-4">
+          <EditField
+            label={thirdLabel}
+            hint="Draw"
+            value={drawFromNative(doseNative)}
+            onChange={(v) => onChangeDoseNative(nativeFromDraw(v))}
+          />
+          <EditField
+            label={vialUnit}
+            hint="Dose"
+            value={doseNative}
+            onChange={(v) => onChangeDoseNative(v)}
+          />
+          <EditField
+            label="mL"
+            hint={form === 'powder' ? 'Bacteriostatic water' : 'Liquid in vial'}
+            value={waterMl}
+            onChange={onChangeWaterMl}
+          />
+          <EditField
+            label={vialUnit}
+            hint="Vial strength"
+            value={vialAmount}
+            onChange={onChangeVialAmount}
+          />
         </div>
       </div>
 
@@ -826,28 +870,39 @@ function BigNumberInput({
 
 function EditField({
   label,
+  hint,
   value,
   onChange,
 }: {
   label: string;
+  /** What this number is. Needed once the panel holds more than one field. */
+  hint?: string;
   value: number;
   onChange: (n: number) => void;
 }) {
   return (
-    <div className="relative">
-      <input
-        type="number"
-        inputMode="decimal"
-        step="any"
-        min={0}
-        value={Number.isFinite(value) ? formatForInput(value) : ''}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full rounded-lg border border-zinc-300 bg-white py-2.5 pl-3 pr-14 text-lg font-semibold tabular-nums dark:border-zinc-700 dark:bg-zinc-800"
-      />
-      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-zinc-400">
-        {label}
+    <label className="block">
+      {hint ? (
+        <span className="mb-1 block text-xs font-medium text-zinc-500 dark:text-zinc-400">
+          {hint}
+        </span>
+      ) : null}
+      {/* The suffix centres on the input alone, not on the hint above it. */}
+      <span className="relative block">
+        <input
+          type="number"
+          inputMode="decimal"
+          step="any"
+          min={0}
+          value={Number.isFinite(value) ? formatForInput(value) : ''}
+          onChange={(e) => onChange(parseFloat(e.target.value))}
+          className="w-full rounded-lg border border-zinc-300 bg-white py-2.5 pl-3 pr-14 text-lg font-semibold tabular-nums dark:border-zinc-700 dark:bg-zinc-800"
+        />
+        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-zinc-400">
+          {label}
+        </span>
       </span>
-    </div>
+    </label>
   );
 }
 
