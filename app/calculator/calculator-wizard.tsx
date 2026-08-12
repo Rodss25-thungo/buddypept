@@ -56,6 +56,10 @@ function getBarrel(id: SyringeBarrelId): SyringeBarrel {
 }
 
 // Curated picker list (slugs in data/peptides.ts). Order shown in the dropdown.
+//
+// This list is the source of truth for what a user can pick. Adding an entry to
+// data/peptides.ts does NOT put it here, so a new peptide has to be added in
+// both places or it exists in the data and nowhere a user can reach.
 const WIZARD_PEPTIDE_SLUGS = [
   'semaglutide',
   'tirzepatide',
@@ -66,6 +70,9 @@ const WIZARD_PEPTIDE_SLUGS = [
   'cjc-1295',
   'sermorelin',
   'retatrutide',
+  'nad-plus',
+  'ss-31',
+  'mots-c',
   'hgh',
   'hcg',
 ];
@@ -88,16 +95,35 @@ type Form = 'powder' | 'liquid';
 
 const STEPS = ['peptide', 'form', 'amount', 'volume', 'syringe', 'dose'] as const;
 
-export function CalculatorWizard() {
+/**
+ * `initialPeptideSlug` preselects the dropdown from `/calculator?peptide=<slug>`.
+ * It is how the "your peptide is live" email links someone straight to the
+ * thing they asked for. Anything not in WIZARD_PEPTIDE_SLUGS is ignored, so a
+ * stale or hand-edited URL falls back to the normal empty picker rather than
+ * breaking the flow.
+ */
+export function CalculatorWizard({
+  initialPeptideSlug,
+}: {
+  initialPeptideSlug?: string;
+} = {}) {
+  const presetSlug =
+    initialPeptideSlug && WIZARD_PEPTIDE_SLUGS.includes(initialPeptideSlug)
+      ? initialPeptideSlug
+      : '';
+
   const [stepIndex, setStepIndex] = useState(0);
   const [showRequest, setShowRequest] = useState(false);
-  const [peptideSlug, setPeptideSlug] = useState('');
+  const [peptideSlug, setPeptideSlug] = useState(presetSlug);
   const [form, setForm] = useState<Form>('powder');
   const [vialAmount, setVialAmount] = useState<number>(NaN);
   const [waterMl, setWaterMl] = useState<number>(NaN);
   const [barrelId, setBarrelId] = useState<SyringeBarrelId>('insulin-1.0');
   const [doseNative, setDoseNative] = useState<number>(NaN);
-  const [doseEntryUnit, setDoseEntryUnit] = useState<DoseEntryUnit>('mg');
+  // Mirrors handlePeptideChange(): IU peptides (HGH, HCG) enter doses natively.
+  const [doseEntryUnit, setDoseEntryUnit] = useState<DoseEntryUnit>(
+    getPeptideBySlug(presetSlug)?.vialUnit === 'IU' ? 'native' : 'mg'
+  );
   const [showMath, setShowMath] = useState(false);
 
   const isNotListed = peptideSlug === NOT_LISTED;
