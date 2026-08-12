@@ -107,9 +107,15 @@ buddypept/
 ## Common tasks
 
 ### Adding a new peptide
-1. Add entry to `data/peptides.ts` (slug, name, common mg/vial, typical dose, unit, short description)
-2. Create `content/peptides/{slug}.md` for the educational page
-3. Peptide auto-appears in library and calculator
+Nothing is automatic. A peptide is reachable only after it is in **three lists**.
+Miss one and it exists in the data and nowhere a user can get to it.
+
+1. Add the entry to `data/peptides.ts`, matching the `Peptide` interface in that file
+2. Add the slug to `WIZARD_PEPTIDE_SLUGS` in `app/calculator/calculator-wizard.tsx`, or it is not selectable in the calculator
+3. Add education content to `data/peptide-education.ts` so `/learn/<slug>` exists
+
+Then verify the math against `lib/calculator.ts` with a real reconstitution example.
+`/calculator?peptide=<slug>` preselects the picker; unknown slugs fall back to empty.
 
 ### Updating the calculator math
 Math lives in `lib/calculator.ts` as pure functions. **Any change must be triple-checked against known peptide reconstitution examples.** The math is the brand's trust foundation: *"the math doesn't lie."* Add test cases for any new edge case.

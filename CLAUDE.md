@@ -129,19 +129,40 @@ buddypept/
 
 ### Adding a new peptide
 
-1. Add entry to `data/peptides.ts`:
+Nothing here is automatic. A peptide is reachable only after it is added to
+**three separate lists**. Miss one and it exists in the data and nowhere a user
+can get to it.
+
+1. **Add the entry to `data/peptides.ts`.** Match the `Peptide` interface in that
+   file; it is the source of truth for the fields, not this snippet:
    ```ts
    {
      slug: 'bpc-157',
      name: 'BPC-157',
-     commonMgPerVial: [5, 10],
-     typicalDoseMcg: 250,
-     unit: 'mcg',
+     aliases: ['Body Protection Compound 157'],
+     category: 'recovery',
+     legalStatus: 'research-chemical',
+     legalStatusLastUpdated: '2026-08-11',
+     commonVialSizes: [5, 10],
+     vialUnit: 'mg',
+     typicalDose: 250,
+     typicalDoseUnit: 'mcg',
+     typicalDosesPerWeek: 7,
+     dosingPattern: '250 mcg 1× daily (subcutaneous)',
      shortDescription: 'A peptide studied for tissue repair and recovery.',
    }
    ```
-2. Create `content/peptides/bpc-157.md` for the educational page.
-3. The peptide auto-appears in the library and is selectable in the calculator.
+2. **Add the slug to `WIZARD_PEPTIDE_SLUGS`** in
+   `app/calculator/calculator-wizard.tsx`. This is the calculator dropdown. Until
+   the slug is here, the peptide is not selectable.
+3. **Add education content to `data/peptide-education.ts`** so `/learn/<slug>`
+   exists. `LEARN_SLUGS` there drives the library index and the static pages.
+
+Then verify the math against `lib/calculator.ts` with a real reconstitution
+example, per `.claude/rules/calculator-precision.md`.
+
+Optional: `/calculator?peptide=<slug>` preselects the picker. Unknown slugs fall
+back to the empty picker.
 
 ### Updating the calculator math
 
