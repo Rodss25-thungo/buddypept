@@ -1,14 +1,20 @@
 import { NextResponse } from 'next/server';
-import { PEPTIDES } from '@/data/peptides';
+import { CALCULATOR_PEPTIDES } from '@/data/calculator-peptides';
 import { notifyPeptideLive } from '@/lib/notify-peptide-live';
 
 /**
  * GET /api/cron/notify-live  — runs daily, scheduled in vercel.json.
  *
- * Walks every peptide in the library and emails anyone still owed a "your
- * peptide is live" notification. Add a peptide to data/peptides.ts, ship it,
- * and the people who asked for it hear back within a day without you doing
- * anything.
+ * Walks every peptide a visitor can actually reach and emails anyone still owed
+ * a "your peptide is live" notification. Add a peptide to data/peptides.ts and
+ * data/calculator-peptides.ts, ship it, and the people who asked for it hear
+ * back within a day without you doing anything.
+ *
+ * It sweeps CALCULATOR_PEPTIDES rather than the raw PEPTIDES array on purpose.
+ * An entry can exist in the data with no dropdown row and no learn page, and
+ * sweeping the raw array told those requesters their peptide was live, then
+ * dropped them on a calculator that had never heard of it. If nobody can pick
+ * it, nobody gets an email about it.
  *
  * Vercel Hobby allows daily cron only, so the worst-case wait is 24 hours.
  *
@@ -43,7 +49,7 @@ export async function GET(request: Request) {
   let totalSent = 0;
   let totalFailed = 0;
 
-  for (const peptide of PEPTIDES) {
+  for (const peptide of CALCULATOR_PEPTIDES) {
     try {
       const result = await notifyPeptideLive({ slug: peptide.slug });
       totalSent += result.sent;
@@ -62,7 +68,7 @@ export async function GET(request: Request) {
 
   return NextResponse.json({
     ranAt: new Date().toISOString(),
-    peptidesChecked: PEPTIDES.length,
+    peptidesChecked: CALCULATOR_PEPTIDES.length,
     totalSent,
     totalFailed,
     results,

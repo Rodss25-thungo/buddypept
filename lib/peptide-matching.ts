@@ -8,10 +8,16 @@
  *
  * Matching is exact on the normalized key and deliberately never fuzzy. A false
  * positive emails someone about a peptide they never asked for, which is worse
- * than a miss. Misses are handled by setting matched_slug by hand.
+ * than a miss.
+ *
+ * Fuzzy lives in suggestPeptide() at the bottom, and it is only ever shown to
+ * the person who typed the text, never used to decide who gets an email. They
+ * confirm or they do not. A guess the visitor never saw is not evidence of
+ * anything.
  */
 
 import { PEPTIDES } from '@/data/peptides';
+import { PEPTIDE_VOCABULARY } from '@/data/peptide-vocabulary';
 
 /** Mirrors public.normalize_peptide_name() in the database. Keep them identical. */
 export function normalizePeptideName(raw: string): string {
@@ -48,4 +54,144 @@ export function resolveSlug(requestedPeptide: string): string | null {
     if (keysForPeptide(peptide.slug).has(key)) return peptide.slug;
   }
   return null;
+}
+
+/* ────────────────────────── suggestions ────────────────────────── */
+
+export interface PeptideSuggestion {
+  /** Slug in data/peptides.ts, only when the calculator curates this one. */
+  slug: string | null;
+  /** Canonical name, for showing back to the person who typed something else. */
+  name: string;
+  /** True when the text already resolves exactly and needs no confirming. */
+  exact: boolean;
+  /** The spreadsheet flags this name as not fully verified. */
+  needsReview?: string;
+}
+
+/** Levenshtein distance, bailing out once it cannot beat `max`. */
+function editDistance(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const curr = [i];
+    let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost);
+      if (curr[j] < rowMin) rowMin = curr[j];
+    }
+    // Every remaining row can only grow, so an already-hopeless row ends it.
+    if (rowMin > max) return max + 1;
+    prev = curr;
+  }
+  return prev[b.length];
+}
+
+/** How wrong a name is allowed to be before it stops being a typo. */
+function tolerance(len: number): number {
+  if (len <= 5) return 1;
+  if (len <= 10) return 2;
+  return 3;
+}
+
+/**
+ * Best guess at which peptide someone meant, for a "did you mean" prompt.
+ *
+ * Handles the three ways people actually get it wrong: a misspelling
+ * ("semaglutid"), a partial name ("tirzep"), and a brand or alias that is
+ * already recorded in data/peptides.ts. Punctuation and case never reach here,
+ * having been stripped by normalizePeptideName, so "BPC157" is already exact.
+ *
+ * Returns null rather than a bad guess. Two characters is not enough to guess
+ * from, and a wrong suggestion is worse than none: it teaches people to ignore
+ * the prompt.
+ */
+export function suggestPeptide(requestedPeptide: string): PeptideSuggestion | null {
+  if (isNewsletterRow(requestedPeptide)) return null;
+  const key = normalizePeptideName(requestedPeptide);
+  if (key.length < 3) return null;
+
+  // Every name the site knows: the curated library first, then the wider
+  // vocabulary from the nomenclature spreadsheet. Public Name is what comes
+  // back either way, so a request is filed under one spelling no matter which
+  // brand, code or misspelling someone typed to get here.
+  const targets: {
+    name: string;
+    slug: string | null;
+    keys: string[];
+    needsReview?: string;
+  }[] = [
+    ...PEPTIDES.map((p) => ({
+      name: p.name,
+      slug: p.slug as string | null,
+      keys: [...keysForPeptide(p.slug)],
+    })),
+    ...PEPTIDE_VOCABULARY.filter((v) => !v.slug).map((v) => ({
+      name: v.name,
+      slug: null,
+      keys: [v.name, ...v.aliases].map(normalizePeptideName).filter(Boolean),
+      needsReview: v.needsReview,
+    })),
+  ];
+
+  for (const target of targets) {
+    if (target.keys.includes(key)) {
+      return {
+        slug: target.slug,
+        name: target.name,
+        exact: true,
+        needsReview: target.needsReview,
+      };
+    }
+  }
+
+  let best: { slug: string | null; name: string; needsReview?: string } | null = null;
+  // Lower is better. Prefix and containment beat edit distance so that
+  // "sema" prefers semaglutide over a same-distance unrelated name.
+  let bestScore = Number.POSITIVE_INFINITY;
+  let bestKeyLength = Number.POSITIVE_INFINITY;
+
+  for (const target of targets) {
+    for (const candidate of target.keys) {
+      let score: number;
+      // Three is enough for a prefix because a real name has to start with it:
+      // "ghk" reaches GHK-Cu, while "xyz" still reaches nothing.
+      if (key.length >= 3 && candidate.startsWith(key)) {
+        score = 0.5;
+      } else if (key.length >= 5 && candidate.includes(key)) {
+        score = 0.75;
+      } else {
+        const max = tolerance(candidate.length);
+        const d = editDistance(key, candidate, max);
+        if (d > max) continue;
+        score = d;
+      }
+      /*
+       * Ties are common on short prefixes: "bpc" starts both BPC-157 and the
+       * blend "BPC-157 + TB-500 + GHK-Cu". Broken in two steps.
+       *
+       * A peptide the calculator curates wins first, because someone typing
+       * three letters is far more likely to want the common one than a
+       * combination product. Then the shorter matched name wins, as the
+       * closest thing to what was actually typed.
+       */
+      const beatsTie =
+        best === null ||
+        (target.slug !== null && best.slug === null) ||
+        ((target.slug === null) === (best.slug === null) && candidate.length < bestKeyLength);
+
+      if (score < bestScore || (score === bestScore && beatsTie)) {
+        bestScore = score;
+        bestKeyLength = candidate.length;
+        best = {
+          slug: target.slug,
+          name: target.name,
+          needsReview: target.needsReview,
+        };
+      }
+    }
+  }
+
+  return best ? { ...best, exact: false } : null;
 }

@@ -251,21 +251,55 @@ export const PEPTIDES: Peptide[] = [
       'A selective growth hormone secretagogue that stimulates the pituitary gland to release endogenous growth hormone. Often paired with CJC-1295. Not approved for human use.',
   },
   {
-    slug: 'cjc-1295',
-    name: 'CJC-1295',
-    aliases: ['Modified GRF 1-29', 'CJC-1295 with DAC', 'CJC-1295 no DAC'],
+    /*
+     * CJC-1295 is two compounds, not one with a setting.
+     *
+     * The DAC version carries a Drug Affinity Complex that binds serum albumin,
+     * pushing its half-life to roughly 6 to 8 days. Without DAC the molecule is
+     * Modified GRF (1-29), which clears in about 30 minutes. Same receptor,
+     * different dosing schedule entirely, so a single shared entry could only
+     * ever be right for one of them.
+     */
+    slug: 'cjc-1295-dac',
+    name: 'CJC-1295 With DAC',
+    aliases: ['CJC-1295 DAC', 'CJC1295 with DAC', 'CJC-1295 (Drug Affinity Complex)'],
     category: 'growth-hormone',
     legalStatus: 'research-chemical',
-    legalStatusLastUpdated: '2026-05-18',
-    // The DAC form is sold as 2 and 5 mg, the no-DAC form as 5 and 10 mg.
+    legalStatusLastUpdated: '2026-08-16',
+    commonVialSizes: [2, 5],
+    vialUnit: 'mg',
+    typicalDose: 1,
+    typicalDoseUnit: 'mg',
+    typicalDosesPerWeek: 1,
+    dosingPattern:
+      'Once or twice weekly (subcutaneous), reflecting a half-life of roughly 6 to 8 days',
+    shortDescription:
+      'A growth hormone releasing hormone (GHRH) analog carrying a Drug Affinity Complex, which binds serum albumin and extends its half-life to roughly 6 to 8 days. Dosed weekly rather than daily. Not approved for human use.',
+  },
+  {
+    slug: 'cjc-1295-no-dac',
+    name: 'CJC-1295 No DAC',
+    aliases: [
+      'Modified GRF (1-29)',
+      'Modified GRF 1-29',
+      'Mod GRF(1-29)',
+      'Mod GRF 1-29',
+      'CJC-1295 without DAC',
+      'CJC-1295 no DAC',
+      'tetrasubstituted GRF(1-29)',
+    ],
+    category: 'growth-hormone',
+    legalStatus: 'research-chemical',
+    legalStatusLastUpdated: '2026-08-16',
     commonVialSizes: [2, 5, 10],
     vialUnit: 'mg',
     typicalDose: 100,
     typicalDoseUnit: 'mcg',
     typicalDosesPerWeek: 7,
-    dosingPattern: '1× daily without DAC (subcutaneous); less frequent with DAC',
+    dosingPattern:
+      'Up to daily (subcutaneous), reflecting a half-life of roughly 30 minutes',
     shortDescription:
-      'A growth hormone releasing hormone (GHRH) analog. Two forms exist: with DAC (longer half-life, less frequent dosing) and without DAC (shorter half-life, daily dosing). Commonly stacked with ipamorelin. Not approved for human use.',
+      'Modified GRF (1-29), a growth hormone releasing hormone analog without the Drug Affinity Complex. Its half-life is roughly 30 minutes, so it is dosed far more frequently than the DAC version. Commonly paired with ipamorelin. Not approved for human use.',
   },
   {
     slug: 'sermorelin',
