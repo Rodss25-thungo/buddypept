@@ -1,21 +1,21 @@
 {
   "meta": {
     "siteTitle": "BuddyPept: calculadora gratuita de dosificación de péptidos",
-    "siteDescription": "Convierte la curiosidad por los péptidos en confianza. Una calculadora de dosificación de péptidos gratuita y en lenguaje claro, con guía. Sin vender nada, sin recolectar datos, solo las matemáticas.",
+    "siteDescription": "Entiende los cálculos de péptidos de forma clara y sencilla.\nUna calculadora gratuita, fácil de usar y con explicaciones paso a paso. Sin ventas, sin recopilación de datos. Solo cálculos claros.",
     "manifestDescription": "Una calculadora de dosificación de péptidos gratuita, paso a paso. Las matemáticas, gratis para siempre.",
     "calculatorTitle": "Calculadora de dosificación de péptidos | BuddyPept",
-    "calculatorDescription": "Una calculadora educativa y gratuita de dosificación de péptidos, paso a paso. Al ingresar la cantidad total del frasco y una dosis, se obtiene la cantidad exacta a cargar.",
+    "calculatorDescription": "Una calculadora educativa, gratuita y fácil de usar que simplifica los cálculos relacionados con péptidos. Ingresa la cantidad del vial y la dosis deseada para ver claramente el volumen correspondiente.",
     "learnTitle": "Aprende sobre péptidos | BuddyPept",
-    "learnDescription": "Resúmenes factuales y en lenguaje claro sobre péptidos comunes: qué son, para qué se han estudiado, cómo se venden y cuál es su estatus legal. Solo educación.",
+    "learnDescription": "Información clara y fácil de entender sobre los péptidos más conocidos: qué son, para qué se han estudiado, cómo se comercializan y cuál es su situación regulatoria. Contenido exclusivamente educativo.",
     "learnEntryTitle": "{name}: qué es | BuddyPept",
     "learnEntryDescription": "Panorama factual y en lenguaje claro sobre {name}. Solo educación, no es consejo médico.",
     "confirmTitle": "Confirmación del correo | BuddyPept",
     "disclaimerTitle": "Aviso médico | BuddyPept",
-    "disclaimerDescription": "BuddyPept es una herramienta educativa de cálculo de dosificación, no consejo médico. Conoce cómo funciona la herramienta y qué no hace.",
+    "disclaimerDescription": "BuddyPept es una herramienta educativa diseñada para facilitar y comprender los cálculos de dosificación. No sustituye la orientación médica ni recomienda tratamientos. Conoce cómo funciona, para qué sirve y cuáles son sus límites.",
     "termsTitle": "Términos de servicio | BuddyPept",
-    "termsDescription": "Los términos de uso de BuddyPept, una herramienta educativa y gratuita de cálculo de dosificación de péptidos.",
+    "termsDescription": "Conoce los términos de uso de BuddyPept y cómo utilizar nuestra calculadora educativa y gratuita de péptidos de forma responsable.",
     "privacyTitle": "Política de privacidad | BuddyPept",
-    "privacyDescription": "Cómo maneja BuddyPept los datos personales. Solo se recopilan un nombre y un correo al solicitar un péptido, nunca datos de salud, y la información nunca se vende."
+    "privacyDescription": "Conoce cómo BuddyPept protege tu privacidad. Solo recopilamos tu nombre y correo electrónico cuando solicitas información sobre un péptido. No recopilamos datos de salud ni vendemos tu información personal."
   },
   "nav": {
     "home": "Inicio",
@@ -28,17 +28,17 @@
     "chooseLanguage": "Elige un idioma"
   },
   "footer": {
-    "disclaimer": "BuddyPept es una herramienta educativa, no consejo médico. Realiza el cálculo de dosificación ingresado; no diagnostica, no trata, no receta ni recomienda el uso de ningún péptido. Muchos péptidos no están aprobados para uso humano y otros los venden solo como compuestos de investigación, así que siempre debe consultarse a un profesional de la salud autorizado antes de actuar con base en algo de aquí. El uso de esta información es por cuenta y riesgo del usuario, quien es responsable de cumplir las leyes que le apliquen.",
+    "disclaimer": "BuddyPept es una herramienta exclusivamente educativa. Realiza cálculos a partir de los datos ingresados por el usuario y no diagnostica, trata, prescribe ni recomienda el uso de péptidos.\n\nMuchos péptidos no están aprobados para uso humano y pueden ser comercializados por terceros únicamente con fines de investigación. Antes de tomar cualquier decisión relacionada con tu salud, consulta a un profesional de salud calificado.\n\nEl uso de la información disponible en BuddyPept es responsabilidad del usuario, incluido el cumplimiento de las leyes y regulaciones aplicables.",
     "colophon": "BuddyPept. Las matemáticas, gratis para siempre. © {year}"
   },
   "home": {
     "heroTitle": "Convierte cualquier dosis en la cantidad exacta a cargar.",
-    "heroBody": "Una calculadora gratuita para quienes empiezan con péptidos. Al ingresar lo que hay en el frasco y la dosis, se obtiene la cantidad exacta a cargar en la jeringa, en mcg, mg o unidades. Sin registro. Solo las matemáticas.",
+    "heroBody": "Una calculadora gratuita y fácil de usar para comprender mejor los cálculos relacionados con péptidos. Ingresa los datos del vial y la cantidad deseada para ver el resultado claramente en mcg, mg o unidades.\n\nSin registro. Sin complicaciones. Solo el cálculo.",
     "openCalculator": "Abrir la calculadora",
     "problemTitle": "mg, mcg, unidades. Aquí es donde se complica.",
-    "problemBody": "Un frasco, un poco de agua bacteriostática, una jeringa y un montón de números que no encajan de forma obvia. ¿mg? ¿mcg? ¿unidades? Internet está lleno de mitos de gimnasio, vendedores dudosos y gente que quiere vender algo. BuddyPept explica las matemáticas, con claridad.",
+    "problemBody": "Vial, agua bacteriostática, jeringa, mg, mcg, unidades... los cálculos pueden parecer complicados al principio.\n\nEntre tanta información confusa en internet, BuddyPept te ayuda a entender los cálculos de forma sencilla, clara y objetiva, sin intentar venderte nada.",
     "whatTitle": "Qué es BuddyPept",
-    "whatBody": "BuddyPept es una calculadora gratuita y una guía en lenguaje claro para quienes empiezan con péptidos. Al ingresar lo que hay en un frasco y una dosis, se obtiene exactamente cuánto representa, en la unidad que usa la jeringa. Eso es todo.",
+    "whatBody": "BuddyPept es una calculadora gratuita y fácil de entender, creada para simplificar los cálculos relacionados con péptidos. Ingresa los datos del vial y la cantidad deseada para ver el resultado en la unidad utilizada por la jeringa.\n\nSimple, directo y sin complicaciones.",
     "trueline": "Las matemáticas no mienten.",
     "howTitle": "Cómo funciona",
     "howStep1": "Elige un péptido, o pide uno que aún no esté en la lista.",
@@ -62,8 +62,8 @@
       "other": "Otro péptido",
       "useTyped": "Solicitar “{name}”",
       "notListed": "No aparece en la lista",
-      "notListedHint": "Sin problema. Toca Continuar para indicar qué péptido se necesita y poder agregarlo.",
-      "otherHint": "Las matemáticas funcionan para cualquier péptido. Ingresa la cantidad total que indica la etiqueta del frasco, en <b>mg</b> o en <b>UI</b>, y una dosis para ver la cantidad exacta a cargar.",
+      "notListedHint": "No hay problema. Haz clic en Continuar, indícanos qué péptido buscas y envía tu solicitud. Podremos considerarlo para futuras incorporaciones.",
+      "otherHint": "El cálculo funciona con cualquier péptido. Solo ingresa la cantidad indicada en el vial, en <b>mg</b> o <b>UI</b>, y la cantidad deseada para ver el resultado correspondiente.",
       "measuredIn": "La unidad de medida de {name} es <b>{unitLong}</b>, así que todo el cálculo se mantiene en {unitShort}."
     },
     "unit": {
@@ -85,14 +85,14 @@
       "questionIU": "¿Cuántas UI hay en el frasco de {name}?",
       "questionMass": "¿Cuántos {unit} hay en el frasco de {name}?",
       "unitQuestion": "¿La cantidad del frasco está en mg o en UI?",
-      "subtitlePowder": "Los péptidos vienen como polvo liofilizado sellado en un frasco de vidrio. Ingresa la cantidad total que indica la etiqueta, no el tamaño del frasco.",
+      "subtitlePowder": "El péptido viene como polvo liofilizado dentro de un vial sellado. Para realizar el cálculo, ingresa la cantidad indicada en la etiqueta, no la capacidad del vial.",
       "subtitleLiquid": "Ingresa la cantidad total de {name} en el frasco, impresa en la etiqueta. No el tamaño del frasco.",
       "placeholderIU": "ej.: 5000",
       "placeholderMg": "ej.: 5",
       "hint": "¿Otra cantidad? Escríbela en el campo de arriba en {unit}."
     },
     "volume": {
-      "powderQuestion": "¿Cuánta agua bacteriostática va?",
+      "powderQuestion": "Ingresa la cantidad de agua bacteriostática que vas a utilizar.",
       "powderSubtitle": "El polvo es una mezcla de dos partes: {name} más el agua bacteriostática que lo disuelve. Ingresa la cantidad de agua agregada al frasco.",
       "powderPlaceholder": "ej.: 2",
       "liquidQuestion": "¿Cuánto líquido total hay en el frasco?",
@@ -127,14 +127,14 @@
     },
     "dose": {
       "question": "¿Qué dosis se va a calcular?",
-      "subtitle": "Ingrésala en {enterUnit}. Para ingresar en su lugar cuántas {drawUnit} se van a cargar, cambia la unidad abajo.",
+      "subtitle": "Ingresa el valor en {enterUnit}. Para ver el resultado en {drawUnit}, cambia la unidad abajo.",
       "enterUnitIU": "UI",
       "enterUnitMass": "mg o mcg",
       "placeholderMg": "ej.: 0.25",
       "placeholderMcg": "ej.: 250",
       "placeholderNative": "ej.: 500",
       "placeholderDraw": "ej.: 25",
-      "neverSuggests": "BuddyPept nunca sugiere una dosis. Solo hace el cálculo del número ingresado. La dosificación es una decisión del usuario y de un profesional de la salud autorizado."
+      "neverSuggests": "BuddyPept no recomienda dosis. Solo calcula el valor que ingresas. La dosificación debe definirse con la orientación de un profesional de salud calificado."
     },
     "units": "unidades",
     "result": {
@@ -150,7 +150,7 @@
       "bacWater": "Agua bacteriostática",
       "liquidInVial": "Líquido en el frasco",
       "vialStrength": "Cantidad total del frasco",
-      "disclaimer": "Esto son matemáticas, no consejo médico. Contrástalo con la etiqueta del frasco y con la orientación de un profesional autorizado antes de cargar cualquier dosis.",
+      "disclaimer": "BuddyPept solo realiza el cálculo; no ofrece orientación médica. Verifica siempre la información de la etiqueta del vial y sigue las indicaciones de un profesional de salud calificado.",
       "summaryIU": "Dosis: {dose} UI · ",
       "summaryMass": "Dosis: {mcg} mcg = {mg} mg · ",
       "summaryTail": "Concentración: {conc} {concUnit} · Jeringa: {syringe}",
@@ -162,14 +162,14 @@
       "changeStep": "Cambiar un paso",
       "startOver": "Empezar de nuevo",
       "learnTitle": "Más detalle sobre los péptidos en sí",
-      "learnBody": "Guías gratuitas en lenguaje claro: qué es cada uno, para qué se ha estudiado, cómo se vende y cuál es su estatus legal.",
+      "learnBody": "Guías gratuitas, claras y fáciles de entender sobre cada péptido: qué es, para qué se ha estudiado, cómo se comercializa y cuál es su situación legal.",
       "learnCta": "Aprender sobre péptidos",
       "learnMemberCta": "¿Ya te registraste? Abre la biblioteca",
       "genericError": "Algo no cuadra con esos números."
     },
     "warning": {
-      "doseBelowOneUnit": "La dosis es menor que 1 unidad de la jeringa, así que la precisión de la medida es baja a esa escala. Considera reconstituir con menos agua bacteriostática para obtener una concentración mayor.",
-      "doseAboveSyringeCapacity": "La dosis supera las 100 unidades (1 mL en una jeringa U-100), más de lo que contiene una sola jeringa de 1 mL. Reconstituye con más agua bacteriostática para obtener una concentración menor.",
+      "doseBelowOneUnit": "El resultado es inferior a 1 unidad de la jeringa, lo que puede dificultar una medición precisa en esta escala. Confirma la concentración y la preparación adecuada con un profesional de salud calificado.",
+      "doseAboveSyringeCapacity": "El resultado supera las 100 unidades (1 mL en una jeringa U-100), excediendo la capacidad de una jeringa de 1 mL. Confirma la concentración y la preparación adecuada con un profesional de salud calificado.",
       "concentrationVeryHigh": "Concentración de péptido muy alta. Verifica que el polvo se haya disuelto por completo y que la cantidad de agua bacteriostática sea correcta.",
       "iuNotConvertible": "Las UI (unidades internacionales) no pueden convertirse de forma confiable a masa sin datos de bioactividad específicos de la sustancia. Consulta al fabricante del péptido o a un profesional de la salud para conocer la conversión correcta de UI a masa en el compuesto específico.",
       "exceedsBarrel": "Esta dosis necesita {ml} mL, más de lo que contiene la {syringe} ({max} mL). Usa una jeringa más grande, o mezcla con más agua para una concentración menor."
@@ -177,7 +177,7 @@
   },
   "learn": {
     "title": "Aprende sobre péptidos",
-    "intro": "Resúmenes factuales en lenguaje claro: qué es cada péptido, para qué se ha estudiado, cómo se vende y cuál es su estatus legal. Solo educación, nunca consejo médico, y nunca una recomendación de usar nada.",
+    "intro": "Información clara y objetiva sobre cada péptido: qué es, para qué se ha estudiado, cómo se comercializa y cuál es su situación legal. Contenido exclusivamente educativo, sin orientación médica ni recomendaciones de uso.",
     "mathTitle": "El cálculo de dosificación",
     "mathBody": "La calculadora es gratuita y no requiere registro.",
     "openCalculator": "Abrir la calculadora",
@@ -223,14 +223,14 @@
     "alreadyBody": "No hace falta hacer nada más.",
     "invalidKicker": "Enlace no reconocido",
     "invalidTitle": "Ese enlace no funcionó.",
-    "invalidBody": "Puede estar vencido, mal escrito o ya usado. Regístrate de nuevo en la página de inicio para recibir un correo de confirmación nuevo.",
+    "invalidBody": "El enlace puede haber caducado, haber sido utilizado anteriormente o ser incorrecto. Regresa a la página de inicio, vuelve a registrarte y te enviaremos un nuevo correo de confirmación.",
     "errorKicker": "Algo salió mal",
     "errorTitle": "Hubo un problema temporal.",
     "errorBody": "Intenta el enlace otra vez en un minuto. Si sigue fallando, regístrate de nuevo desde la página de inicio para recibir un correo nuevo."
   },
   "community": {
     "title": "Únete a la comunidad",
-    "body": "BuddyPept está construyendo una comunidad amable para quienes están aprendiendo sobre péptidos. Sin presión, solo aprender juntos.",
+    "body": "BuddyPept es un espacio para aprender y entender más sobre péptidos de forma sencilla y clara. Una comunidad enfocada en información, intercambio de conocimientos y aprendizaje, sin presiones.",
     "cta": "Unirse",
     "close": "Cerrar",
     "sentTitle": "Revisa el correo",
@@ -302,7 +302,7 @@
         },
         {
           "title": "BuddyPept no recomienda dosis",
-          "body": "La calculadora hace solo el cálculo solicitado. El usuario ingresa las cantidades (lo que hay en el frasco, cuánta agua, la dosis prevista) y la calculadora convierte esos números entre unidades. Nunca sugiere una dosis, una frecuencia ni un protocolo. Cualquier dosis ingresada es una que el usuario decidió junto con un profesional de la salud, no una que BuddyPept eligió."
+          "body": "BuddyPept solo realiza los cálculos con los valores que ingresas: cantidad en el vial, cantidad de agua y dosis deseada. La calculadora convierte estos valores entre diferentes unidades.\n\nBuddyPept no recomienda dosis, frecuencias ni protocolos de uso. Estas decisiones deben tomarse con la orientación de un profesional de salud calificado."
         },
         {
           "title": "Ninguna relación médico-paciente",
@@ -318,11 +318,11 @@
         },
         {
           "title": "Exactitud y responsabilidad del usuario",
-          "body": "BuddyPept trabaja con empeño para mantener las matemáticas correctas, pero no puede garantizar que un resultado sea exacto o apropiado para una situación específica. Contrasta siempre cualquier resultado con la etiqueta del frasco y con la orientación de un profesional autorizado antes de actuar. El usuario es responsable de verificar los números que ingresa y los números sobre los que actúa."
+          "body": "BuddyPept busca mantener sus cálculos claros y precisos, pero no puede garantizar que un resultado sea adecuado para cada situación. Verifica siempre los valores con la información de la etiqueta y con la orientación de un profesional de salud calificado antes de tomar cualquier decisión.\n\nEs responsabilidad del usuario verificar que los datos ingresados y los resultados obtenidos sean correctos."
         },
         {
           "title": "Asunción de riesgo y limitación de responsabilidad",
-          "body": "El uso de BuddyPept es por cuenta y riesgo del usuario. En la máxima medida permitida por la ley, BuddyPept y las personas detrás de él no son responsables de ningún daño, pérdida o perjuicio de ningún tipo derivado del uso del sitio o de la confianza en lo que muestre."
+          "body": "El uso de BuddyPept es responsabilidad del usuario. En la máxima medida permitida por la ley, BuddyPept y sus responsables no se hacen responsables de daños, pérdidas o perjuicios derivados del uso del sitio o de la información y los resultados que presenta."
         },
         {
           "title": "En una emergencia",
@@ -343,7 +343,7 @@
       "sections": [
         {
           "title": "Qué es BuddyPept",
-          "body": "BuddyPept es una herramienta educativa gratuita para la reconstitución de péptidos y el cálculo de dosificación, además de información en lenguaje sencillo sobre péptidos comunes. Se ofrece únicamente con fines informativos generales."
+          "body": "BuddyPept es una herramienta educativa y gratuita que facilita los cálculos relacionados con la reconstitución y dosificación de péptidos, además de ofrecer información clara y fácil de entender sobre los péptidos más conocidos. Todo el contenido se proporciona exclusivamente con fines educativos e informativos."
         },
         {
           "title": "No es consejo médico",
@@ -351,7 +351,7 @@
         },
         {
           "title": "Uso aceptable",
-          "body": "Usa el Servicio de forma lícita y para fines personales y educativos. No hagas mal uso de él, no intentes dañarlo ni sobrecargarlo, no lo copies para presentarlo como propio ni lo uses para perjudicar a otras personas."
+          "body": "Utiliza BuddyPept de forma responsable, dentro de la ley y con fines personales y educativos. No intentes dañar, sobrecargar o utilizar indebidamente el servicio, copiar su contenido y presentarlo como propio ni utilizarlo de forma que pueda perjudicar a otras personas."
         },
         {
           "title": "Sin garantías",
@@ -371,7 +371,7 @@
         },
         {
           "title": "Cambios",
-          "body": "BuddyPept puede actualizar el Servicio o estos términos con el tiempo. Los cambios relevantes se reflejan en la fecha en la parte superior de esta página. Seguir usando el Servicio implica la aceptación de los términos vigentes."
+          "body": "BuddyPept puede actualizar el servicio o estos términos cuando sea necesario. Los cambios importantes se indicarán mediante la fecha de actualización que aparece en la parte superior de esta página. Al continuar utilizando BuddyPept, aceptas los términos vigentes."
         },
         {
           "title": "Ley aplicable",
@@ -427,7 +427,7 @@
         },
         {
           "title": "Cambios",
-          "body": "Si esta política cambia, se actualiza la fecha en la parte superior de esta página."
+          "body": "Siempre que esta política sea modificada, se actualizará la fecha que aparece en la parte superior de esta página."
         },
         {
           "title": "Contacto",
@@ -449,14 +449,14 @@
       "whatItIs": "Un agonista del receptor de GLP-1.",
       "studiedFor": "Aprobado por la FDA para diabetes tipo 2 (Ozempic) y control de peso (Wegovy), y estudiado en grandes ensayos clínicos. Rybelsus es una forma oral para diabetes.",
       "howSold": "Con receta, como pluma precargada o frasco (Ozempic, Wegovy) o tabletas (Rybelsus). También lo venden proveedores del mercado gris como polvo de investigación, que no es el producto aprobado.",
-      "bottomLine": "La semaglutida es un medicamento con receta aprobado por la FDA. El producto aprobado llega a través de un profesional autorizado y una farmacia, y las decisiones sobre él les corresponden a ellos."
+      "bottomLine": "La semaglutida es un medicamento que requiere prescripción y cuenta con usos aprobados por la FDA. El tratamiento debe ser prescrito y supervisado por un profesional de salud calificado, y el medicamento debe obtenerse a través de canales autorizados."
     },
     "bpc-157": {
       "teaser": "Un péptido sintético estudiado en animales para reparación de tejidos.",
       "whatItIs": "Un péptido sintético, una cadena corta de aminoácidos basada en una secuencia hallada en una proteína del jugo gástrico. Se fabrica en laboratorio.",
       "studiedFor": "En trabajos preclínicos publicados, sobre todo estudios en animales y de laboratorio, se ha examinado para reparación de tejidos, cicatrización de tendones y ligamentos y efectos gastrointestinales. Son hallazgos tempranos de investigación, no resultados comprobados en personas.",
       "howSold": "Como polvo liofilizado en frascos de vidrio, comúnmente de 5 mg o 10 mg, mezclado con agua bacteriostática antes de usarse.",
-      "bottomLine": "La ciencia es temprana y mayormente preclínica. Si es apropiado, legal o seguro para alguna persona es una decisión de ella con un profesional de la salud autorizado."
+      "bottomLine": "La investigación aún se encuentra en etapas iniciales y es, en su mayoría, preclínica. Cualquier decisión sobre su uso, seguridad o idoneidad debe evaluarse individualmente con un profesional de salud calificado, teniendo en cuenta también las normas aplicables."
     },
     "tb-500": {
       "teaser": "Un fragmento sintético de una proteína natural, estudiado para reparación.",
@@ -556,7 +556,7 @@
     "signoff": "El equipo de BuddyPept",
     "confirmation": {
       "subject": "Confirma el registro en BuddyPept",
-      "body": "Toca el botón de abajo para confirmar y completar el registro en la comunidad de BuddyPept. Es un solo clic.",
+      "body": "Haz clic en el botón de abajo para confirmar tu correo electrónico y completar tu registro en la comunidad BuddyPept. Es rápido y sencillo.",
       "cta": "Confirmar el correo",
       "fallbackLink": "Si el botón no funciona, copia y pega este enlace en el navegador:",
       "notYou": "Si esta solicitud no fue hecha por quien recibe este mensaje, puede ignorarse. No se completará ningún registro.",
@@ -573,10 +573,10 @@
       "subject": "Lo pediste. {name} ya está.",
       "lede": "Se solicitó <b>{name}</b>. Ya está en la calculadora.",
       "cta": "Hacer los cálculos de {name}",
-      "whatItDoes": "La calculadora hace exactamente una cosa y se niega a hacerla mal: la aritmética. De mg a mL a unidades, con el tamaño de frasco y la concentración que la investigación requiera. Sin recomendaciones, sin opiniones, sin empujar hacia ningún número.",
+      "whatItDoes": "La calculadora tiene una función sencilla: realizar los cálculos de forma clara y precisa. Convierte mg, mL y unidades a partir de los valores que ingresas, independientemente de la cantidad o concentración. Sin recomendar dosis, sin opiniones y sin dirigirte hacia ningún valor específico.",
       "noRounding": "También se niega a redondear en silencio. Si algo da 12.5 unidades, dice 12.5 unidades, no “como 12”.",
-      "tracker": "Lo que viene: un registro personal, para que la investigación quede en un solo lugar en vez de repartida entre notas.",
-      "disclaimer": "Cualquier cosa que involucre un cuerpo humano real es una conversación para un profesional de la salud calificado. BuddyPept hace cuentas.",
+      "tracker": "Próximamente: un espacio personal para mantener tu información organizada en un solo lugar, sin depender de notas dispersas.",
+      "disclaimer": "Cuando se trata de tu salud, consulta siempre a un profesional de salud calificado. BuddyPept se encarga únicamente de los cálculos.",
       "thanks": "Gracias por la solicitud. Las solicitudes determinan qué se construye después, así que avisa si falta algo más."
     }
   },

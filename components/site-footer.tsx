@@ -28,7 +28,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-zinc-200 dark:border-zinc-800">
       <div className="mx-auto max-w-2xl px-4 py-8">
-        <p className="text-xs leading-relaxed text-zinc-500">
+        <p className="whitespace-pre-line text-xs leading-relaxed text-zinc-500">
           {t('disclaimer')}
         </p>
         <nav className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs">

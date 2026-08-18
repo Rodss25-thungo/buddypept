@@ -53,7 +53,7 @@ export function LegalPage({ page }: { page: 'disclaimer' | 'terms' | 'privacy' }
 
       <div className="mt-8 space-y-8 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
         {content.intro.map((_, i) => (
-          <p key={i}>{t.rich(`intro.${i}`, RICH)}</p>
+          <p key={i} className="whitespace-pre-line">{t.rich(`intro.${i}`, RICH)}</p>
         ))}
 
         {content.sections.map((section, i) => (
@@ -64,11 +64,11 @@ export function LegalPage({ page }: { page: 'disclaimer' | 'terms' | 'privacy' }
             {Array.isArray(section.body) ? (
               <div className="mt-2 space-y-3">
                 {section.body.map((_, j) => (
-                  <p key={j}>{t.rich(`sections.${i}.body.${j}`, RICH)}</p>
+                  <p key={j} className="whitespace-pre-line">{t.rich(`sections.${i}.body.${j}`, RICH)}</p>
                 ))}
               </div>
             ) : (
-              <p className="mt-2">{t.rich(`sections.${i}.body`, RICH)}</p>
+              <p className="mt-2 whitespace-pre-line">{t.rich(`sections.${i}.body`, RICH)}</p>
             )}
           </section>
         ))}

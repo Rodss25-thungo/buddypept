@@ -1,19 +1,19 @@
 {
   "meta": {
     "siteTitle": "BuddyPept: Calculadora gratuita de dosagem de peptídeos",
-    "siteDescription": "Transforme curiosidade sobre peptídeos em confiança. Uma calculadora de dosagem de peptídeos gratuita e em linguagem simples, com guia. Sem vender nada, sem coletar dados, só a matemática.",
+    "siteDescription": "Entenda seus cálculos de peptídeos com clareza e confiança.\nCalculadora gratuita, simples e fácil de usar, com orientação passo a passo. Sem vendas, sem coleta de dados — apenas cálculos claros.",
     "manifestDescription": "Uma calculadora de dosagem de peptídeos gratuita, passo a passo. A matemática, gratuita para sempre.",
     "calculatorTitle": "Calculadora de dosagem de peptídeos | BuddyPept",
-    "calculatorDescription": "Uma calculadora educativa e gratuita de dosagem de peptídeos, passo a passo. Ao informar a quantidade no frasco e uma dose, obtém-se exatamente quanto aspirar.",
+    "calculatorDescription": "Uma calculadora educativa, gratuita e fácil de usar, que simplifica seus cálculos de peptídeos. Informe a quantidade do frasco e a dose desejada para visualizar de forma clara o volume correspondente.",
     "learnTitle": "Aprenda sobre peptídeos | BuddyPept",
-    "learnDescription": "Resumos factuais e em linguagem simples sobre peptídeos comuns: o que são, para que foram estudados, como são vendidos e qual o status legal. Apenas educação.",
+    "learnDescription": "Informações claras e fáceis de entender sobre os peptídeos mais conhecidos: o que são, para que são estudados, como são comercializados e qual é a situação regulatória de cada um. Conteúdo exclusivamente educativo.",
     "learnEntryTitle": "{name}: o que é | BuddyPept",
     "learnEntryDescription": "Visão geral factual e em linguagem simples sobre {name}. Apenas educação, não é orientação médica.",
     "confirmTitle": "Confirmação do e-mail | BuddyPept",
     "disclaimerTitle": "Aviso médico | BuddyPept",
-    "disclaimerDescription": "O BuddyPept é uma ferramenta educativa de cálculo de dosagem, não orientação médica. Entenda como a ferramenta funciona e o que ela não faz.",
+    "disclaimerDescription": "O BuddyPept é uma ferramenta educativa criada para facilitar e entender cálculos de dosagem. Ele não substitui orientação médica nem recomenda tratamentos. Veja como funciona, para que serve e quais são seus limites.",
     "termsTitle": "Termos de uso | BuddyPept",
-    "termsDescription": "Os termos de uso do BuddyPept, uma ferramenta educativa e gratuita de cálculo de dosagem de peptídeos.",
+    "termsDescription": "Conheça os termos de uso do BuddyPept e entenda como utilizar nossa calculadora educativa e gratuita de peptídeos de forma responsável.",
     "privacyTitle": "Política de privacidade | BuddyPept",
     "privacyDescription": "Como o BuddyPept trata os dados pessoais. São coletados apenas um nome e um e-mail ao solicitar um peptídeo, nunca dados de saúde, e a informação nunca é vendida."
   },
@@ -28,17 +28,17 @@
     "chooseLanguage": "Escolha um idioma"
   },
   "footer": {
-    "disclaimer": "O BuddyPept é uma ferramenta educativa, não orientação médica. Ele faz o cálculo de dosagem informado; não diagnostica, não trata, não prescreve e não recomenda o uso de nenhum peptídeo. Muitos peptídeos não são aprovados para uso humano e são vendidos por terceiros apenas como compostos para pesquisa, então um profissional de saúde habilitado deve sempre ser consultado antes de agir com base em qualquer coisa aqui. O uso destas informações é por conta e risco do usuário, que é responsável por cumprir as leis aplicáveis.",
+    "disclaimer": "O BuddyPept é uma ferramenta exclusivamente educativa. Ele apenas realiza os cálculos com base nas informações inseridas pelo usuário e não diagnostica, trata, prescreve ou recomenda o uso de peptídeos.\n\nMuitos peptídeos não são aprovados para uso humano e podem ser comercializados por terceiros apenas para fins de pesquisa. Antes de tomar qualquer decisão relacionada à sua saúde, consulte um profissional de saúde habilitado.\n\nO uso das informações disponibilizadas no BuddyPept é de responsabilidade do usuário, incluindo o cumprimento das leis e regulamentações aplicáveis.",
     "colophon": "BuddyPept. A matemática, gratuita para sempre. © {year}"
   },
   "home": {
     "heroTitle": "Transforme qualquer dose na quantidade exata a aspirar.",
-    "heroBody": "Uma calculadora gratuita para quem está começando com peptídeos. Ao informar o que há no frasco e a dose, obtém-se a quantidade exata a aspirar na seringa, em mcg, mg ou unidades. Sem cadastro. Só a matemática.",
+    "heroBody": "Uma calculadora gratuita e fácil de usar para entender melhor os cálculos relacionados a peptídeos. Informe os dados do frasco e a quantidade desejada para visualizar o resultado de forma clara, em mcg, mg ou unidades.\n\nSem cadastro. Sem complicação. Apenas o cálculo.",
     "openCalculator": "Abrir a calculadora",
     "problemTitle": "mg, mcg, unidades. É aqui que confunde.",
-    "problemBody": "Um frasco, um pouco de água bacteriostática, uma seringa e um monte de números que não se encaixam de forma óbvia. mg? mcg? unidades? A internet está cheia de achismo, vendedores duvidosos e gente querendo vender alguma coisa. O BuddyPept explica a matemática, com clareza.",
+    "problemBody": "Frasco, água bacteriostática, seringa, mg, mcg, unidades... os cálculos podem parecer complicados no início.\n\nEm meio a tantas informações confusas na internet, o BuddyPept ajuda você a entender a matemática de forma simples, clara e objetiva, sem tentar vender nada.",
     "whatTitle": "O que é o BuddyPept",
-    "whatBody": "O BuddyPept é uma calculadora gratuita e um guia em linguagem simples para quem está começando com peptídeos. Ao informar o que há no frasco e uma dose, obtém-se exatamente quanto isso representa, na unidade que a seringa usa. É só isso.",
+    "whatBody": "O BuddyPept é uma calculadora gratuita e fácil de entender, criada para simplificar os cálculos relacionados a peptídeos. Informe os dados do frasco e a quantidade desejada para visualizar o resultado na unidade utilizada pela seringa.\n\nSimples, direto e sem complicação.",
     "trueline": "A matemática não mente.",
     "howTitle": "Como funciona",
     "howStep1": "Escolha um peptídeo, ou peça um que ainda não esteja na lista.",
@@ -62,8 +62,8 @@
       "other": "Outro peptídeo",
       "useTyped": "Solicitar “{name}”",
       "notListed": "Não está na lista",
-      "notListedHint": "Sem problema. Toque em Continuar para indicar qual peptídeo é necessário e ele poderá ser adicionado.",
-      "otherHint": "A matemática funciona para qualquer peptídeo. Basta informar a quantidade no frasco, em <b>mg</b> ou em <b>UI</b>, e uma dose para ver a quantidade exata a aspirar.",
+      "notListedHint": "Sem problema. Clique em Continuar, informe qual peptídeo você procura e envie sua solicitação. Ele poderá ser incluído futuramente.",
+      "otherHint": "O cálculo funciona para qualquer peptídeo. Basta informar a quantidade presente no frasco, em <b>mg</b> ou <b>UI</b>, e a quantidade desejada para visualizar o resultado correspondente.",
       "measuredIn": "A unidade de medida de {name} é <b>{unitLong}</b>, então todo o cálculo permanece em {unitShort}."
     },
     "unit": {
@@ -85,14 +85,14 @@
       "questionIU": "Quantas UI há no frasco de {name}?",
       "questionMass": "Quantos {unit} há no frasco de {name}?",
       "unitQuestion": "A quantidade no frasco está em mg ou em UI?",
-      "subtitlePowder": "Peptídeos vêm como pó liofilizado lacrado em um frasco de vidro. Informe a quantidade total indicada no rótulo, não o tamanho do vidro.",
+      "subtitlePowder": "No frasco, o peptídeo vem em pó liofilizado. Para o cálculo, informe a quantidade que aparece no rótulo, não a capacidade do frasco.",
       "subtitleLiquid": "Informe a quantidade total de {name} no frasco, impressa no rótulo. Não o tamanho do vidro.",
       "placeholderIU": "ex.: 5000",
       "placeholderMg": "ex.: 5",
       "hint": "Outra quantidade? Digite na caixa acima em {unit}."
     },
     "volume": {
-      "powderQuestion": "Quanta água bacteriostática entra?",
+      "powderQuestion": "Indique a quantidade de água bacteriostática que será utilizada.",
       "powderSubtitle": "O pó é uma mistura de duas partes: {name} mais a água bacteriostática que o dissolve. Informe a quantidade de água adicionada ao frasco.",
       "powderPlaceholder": "ex.: 2",
       "liquidQuestion": "Qual o volume total de líquido no frasco?",
@@ -134,7 +134,7 @@
       "placeholderMcg": "ex.: 250",
       "placeholderNative": "ex.: 500",
       "placeholderDraw": "ex.: 25",
-      "neverSuggests": "O BuddyPept nunca sugere uma dose. Ele apenas faz a conta do número informado. A dosagem é uma decisão do usuário com um profissional de saúde habilitado."
+      "neverSuggests": "O BuddyPept não recomenda doses. Ele apenas calcula o valor informado por você. A definição da dosagem deve ser feita com a orientação de um profissional de saúde habilitado."
     },
     "units": "unidades",
     "result": {
@@ -150,7 +150,7 @@
       "bacWater": "Água bacteriostática",
       "liquidInVial": "Líquido no frasco",
       "vialStrength": "Quantidade no frasco",
-      "disclaimer": "Isto é matemática, não orientação médica. Confira com o rótulo do frasco e com a orientação de um profissional habilitado antes de aspirar qualquer dose.",
+      "disclaimer": "O BuddyPept faz apenas o cálculo, não oferece orientação médica. Confira sempre as informações no rótulo do frasco e siga a orientação de um profissional de saúde habilitado.",
       "summaryIU": "Dose: {dose} UI · ",
       "summaryMass": "Dose: {mcg} mcg = {mg} mg · ",
       "summaryTail": "Concentração: {conc} {concUnit} · Seringa: {syringe}",
@@ -162,14 +162,14 @@
       "changeStep": "Mudar uma etapa",
       "startOver": "Começar de novo",
       "learnTitle": "Mais detalhes sobre os peptídeos em si",
-      "learnBody": "Guias gratuitos em linguagem simples: o que cada um é, para que foi estudado, como é vendido e qual o status legal.",
+      "learnBody": "Guias gratuitos, claros e fáceis de entender sobre cada peptídeo: o que é, para que tem sido estudado, como é comercializado e qual sua situação legal.",
       "learnCta": "Aprender sobre peptídeos",
       "learnMemberCta": "Já se cadastrou? Abra a biblioteca",
       "genericError": "Algo parece estranho nesses números."
     },
     "warning": {
-      "doseBelowOneUnit": "A dose é menor que 1 unidade da seringa, então a precisão da medida é baixa nessa escala. Considere reconstituir com menos água bacteriostática para obter uma concentração maior.",
-      "doseAboveSyringeCapacity": "A dose passa de 100 unidades (1 mL em uma seringa U-100), mais do que uma única seringa de 1 mL comporta. Reconstitua com mais água bacteriostática para obter uma concentração menor.",
+      "doseBelowOneUnit": "O resultado é menor que 1 unidade da seringa, o que pode dificultar uma medição precisa nessa escala. Confirme a concentração e a forma de preparo com um profissional de saúde habilitado.",
+      "doseAboveSyringeCapacity": "O resultado ultrapassa 100 unidades (1 mL em uma seringa U-100), excedendo a capacidade de uma seringa de 1 mL. Confirme a concentração e o preparo adequado com um profissional de saúde habilitado.",
       "concentrationVeryHigh": "Concentração de peptídeo muito alta. Confira se o frasco dissolveu por completo e se a quantidade de água bacteriostática está correta.",
       "iuNotConvertible": "UI (unidades internacionais) não podem ser convertidas de forma confiável em massa sem dados de bioatividade específicos da substância. Consulte o fabricante do peptídeo ou um profissional de saúde para saber a conversão correta de UI para massa no composto específico.",
       "exceedsBarrel": "Esta dose precisa de {ml} mL, mais do que a {syringe} comporta ({max} mL). Use uma seringa maior, ou reconstitua com mais água para uma concentração menor."
@@ -177,7 +177,7 @@
   },
   "learn": {
     "title": "Aprenda sobre peptídeos",
-    "intro": "Resumos factuais em linguagem simples: o que cada peptídeo é, para que foi estudado, como é vendido e qual o status legal. Apenas educação, nunca orientação médica, e nunca uma recomendação de usar qualquer coisa.",
+    "intro": "Informações claras e objetivas sobre cada peptídeo: o que é, para que tem sido estudado, como é comercializado e qual sua situação legal. Conteúdo exclusivamente educativo, sem orientação médica ou recomendação de uso.",
     "mathTitle": "O cálculo de dosagem",
     "mathBody": "A calculadora é gratuita e não exige cadastro.",
     "openCalculator": "Abrir a calculadora",
@@ -223,14 +223,14 @@
     "alreadyBody": "Não é preciso fazer mais nada.",
     "invalidKicker": "Link não reconhecido",
     "invalidTitle": "Esse link não funcionou.",
-    "invalidBody": "Ele pode estar vencido, digitado errado ou já usado. Cadastre-se de novo na página inicial para receber um novo e-mail de confirmação.",
+    "invalidBody": "O link pode ter expirado, já ter sido utilizado ou estar incorreto. Volte à página inicial, faça o cadastro novamente e enviaremos um novo e-mail de confirmação.",
     "errorKicker": "Algo deu errado",
     "errorTitle": "Houve um problema temporário.",
     "errorBody": "Tente o link de novo em um minuto. Se continuar falhando, cadastre-se novamente na página inicial para receber um novo e-mail."
   },
   "community": {
     "title": "Entre na comunidade",
-    "body": "O BuddyPept está construindo uma comunidade acolhedora para quem está aprendendo sobre peptídeos. Sem pressão, só aprendizado compartilhado.",
+    "body": "O BuddyPept é um espaço para aprender e entender mais sobre peptídeos de forma simples e clara. Uma comunidade focada em informação, troca de conhecimento e aprendizado, sem pressão.",
     "cta": "Participar",
     "close": "Fechar",
     "sentTitle": "Confira o e-mail",
@@ -302,7 +302,7 @@
         },
         {
           "title": "O BuddyPept não recomenda doses",
-          "body": "A calculadora faz apenas a conta solicitada. O usuário informa as quantidades (o que há no frasco, quanta água, a dose pretendida) e a calculadora converte esses números entre unidades. Ela nunca sugere uma dose, uma frequência ou um protocolo. Qualquer dose informada é uma decisão do usuário com um profissional de saúde, não uma escolha do BuddyPept."
+          "body": "O BuddyPept apenas faz os cálculos com os valores informados por você: quantidade no frasco, quantidade de água e dose pretendida. A calculadora converte esses valores entre as diferentes unidades.\n\nO BuddyPept não recomenda doses, frequência ou protocolos de uso. Essas decisões devem ser tomadas com a orientação de um profissional de saúde habilitado."
         },
         {
           "title": "Nenhuma relação médico-paciente",
@@ -318,11 +318,11 @@
         },
         {
           "title": "Precisão e responsabilidade do usuário",
-          "body": "O BuddyPept trabalha com afinco para manter a matemática correta, mas não pode garantir que qualquer resultado seja preciso ou adequado a uma situação específica. Confira sempre qualquer resultado com o rótulo do frasco e com a orientação de um profissional habilitado antes de agir com base nele. O usuário é responsável por verificar os números que informa e os números com base nos quais age."
+          "body": "O BuddyPept busca manter seus cálculos claros e precisos, mas não pode garantir que um resultado seja adequado para cada situação. Sempre confira os valores com as informações do rótulo e com a orientação de um profissional de saúde habilitado antes de tomar qualquer decisão.\n\nÉ responsabilidade do usuário verificar se os dados informados e os resultados obtidos estão corretos."
         },
         {
           "title": "Assunção de risco e limitação de responsabilidade",
-          "body": "O uso do BuddyPept é por conta e risco do usuário. Na máxima extensão permitida em lei, o BuddyPept e as pessoas por trás dele não se responsabilizam por qualquer dano, perda ou prejuízo de qualquer natureza decorrente do uso do site ou da confiança em qualquer coisa que ele mostre."
+          "body": "O uso do BuddyPept é de responsabilidade do usuário. Na máxima extensão permitida por lei, o BuddyPept e seus responsáveis não se responsabilizam por danos, perdas ou prejuízos decorrentes do uso do site ou das informações e resultados nele apresentados."
         },
         {
           "title": "Em uma emergência",
@@ -343,7 +343,7 @@
       "sections": [
         {
           "title": "O que é o BuddyPept",
-          "body": "O BuddyPept é uma ferramenta educativa gratuita para reconstituição de peptídeos e cálculo de dosagem, além de informações em linguagem simples sobre peptídeos comuns. É oferecido apenas para fins informativos gerais."
+          "body": "O BuddyPept é uma ferramenta educativa e gratuita que facilita cálculos relacionados à reconstituição e dosagem de peptídeos, além de oferecer informações claras e fáceis de entender sobre os peptídeos mais conhecidos. Todo o conteúdo é disponibilizado exclusivamente para fins educativos e informativos."
         },
         {
           "title": "Não é orientação médica",
@@ -351,7 +351,7 @@
         },
         {
           "title": "Uso aceitável",
-          "body": "Use o Serviço de forma lícita e para fins pessoais e educativos. Não faça mau uso, não tente danificá-lo ou sobrecarregá-lo, não o copie para apresentá-lo como próprio e não o use para prejudicar outras pessoas."
+          "body": "Use o BuddyPept de forma responsável, dentro da lei e para fins pessoais e educativos. Não tente danificar, sobrecarregar ou utilizar indevidamente o serviço, copiar seu conteúdo como se fosse seu ou usá-lo de forma que possa prejudicar outras pessoas."
         },
         {
           "title": "Sem garantias",
@@ -371,7 +371,7 @@
         },
         {
           "title": "Alterações",
-          "body": "O BuddyPept pode atualizar o Serviço ou estes termos ao longo do tempo. Mudanças relevantes são refletidas na data no topo desta página. Continuar usando o Serviço implica a aceitação dos termos vigentes."
+          "body": "O BuddyPept pode atualizar o serviço ou estes termos sempre que necessário. Alterações importantes serão indicadas pela data de atualização no topo desta página. Ao continuar utilizando o BuddyPept, você concorda com os termos vigentes."
         },
         {
           "title": "Lei aplicável",
@@ -427,7 +427,7 @@
         },
         {
           "title": "Alterações",
-          "body": "Se esta política mudar, a data no topo desta página é atualizada."
+          "body": "Sempre que esta política for alterada, a data de atualização no topo da página será atualizada."
         },
         {
           "title": "Contato",
@@ -449,14 +449,14 @@
       "whatItIs": "Um agonista do receptor de GLP-1.",
       "studiedFor": "Aprovado pela FDA para diabetes tipo 2 (Ozempic) e controle de peso (Wegovy), e estudado em grandes ensaios clínicos. O Rybelsus é uma forma oral para diabetes.",
       "howSold": "Sob prescrição, como caneta pré-preenchida ou frasco (Ozempic, Wegovy) ou comprimidos (Rybelsus). Também é vendido por fornecedores do mercado paralelo como pó para pesquisa, que não é o produto aprovado.",
-      "bottomLine": "A semaglutida é um medicamento sob prescrição aprovado pela FDA. O produto aprovado vem por meio de um profissional habilitado e de uma farmácia, e as decisões sobre ele cabem a eles."
+      "bottomLine": "A semaglutida é um medicamento que exige prescrição e possui usos aprovados pela FDA. O tratamento deve ser prescrito e acompanhado por um profissional de saúde habilitado, e o medicamento deve ser obtido por canais autorizados."
     },
     "bpc-157": {
       "teaser": "Um peptídeo sintético estudado em animais para reparo tecidual.",
       "whatItIs": "Um peptídeo sintético, uma cadeia curta de aminoácidos baseada em uma sequência encontrada em uma proteína do suco gástrico. É produzido em laboratório.",
       "studiedFor": "Em trabalhos pré-clínicos publicados, sobretudo estudos em animais e em laboratório, foi examinado para reparo tecidual, cicatrização de tendões e ligamentos e efeitos gastrointestinais. São achados iniciais de pesquisa, não resultados comprovados em pessoas.",
       "howSold": "Como pó liofilizado em frascos de vidro, comumente de 5 mg ou 10 mg, reconstituído com água bacteriostática antes do uso.",
-      "bottomLine": "A ciência é inicial e majoritariamente pré-clínica. Se é adequado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
+      "bottomLine": "As pesquisas ainda estão em estágio inicial e são, em sua maioria, pré-clínicas. Qualquer decisão sobre uso, segurança ou adequação deve ser avaliada individualmente com um profissional de saúde habilitado, considerando também as normas aplicáveis."
     },
     "tb-500": {
       "teaser": "Um fragmento sintético de uma proteína natural, estudado para reparo.",
@@ -556,7 +556,7 @@
     "signoff": "Equipe BuddyPept",
     "confirmation": {
       "subject": "Confirme o cadastro no BuddyPept",
-      "body": "Toque no botão abaixo para confirmar e concluir o cadastro na comunidade BuddyPept. É um clique só.",
+      "body": "Clique no botão abaixo para confirmar seu e-mail e concluir seu cadastro na comunidade BuddyPept. É rápido e simples.",
       "cta": "Confirmar o e-mail",
       "fallbackLink": "Se o botão não funcionar, copie e cole este link no navegador:",
       "notYou": "Se este pedido não partiu de quem recebe esta mensagem, basta ignorá-la. Nenhum cadastro será concluído.",
@@ -573,10 +573,10 @@
       "subject": "Você pediu. {name} está no ar.",
       "lede": "<b>{name}</b> foi solicitado. Já está na calculadora.",
       "cta": "Fazer as contas de {name}",
-      "whatItDoes": "A calculadora faz exatamente uma coisa e se recusa a fazê-la mal: a aritmética. De mg para mL para unidades, em qualquer tamanho de frasco e concentração que a pesquisa exigir. Sem recomendações, sem opiniões, sem empurrar para nenhum número.",
+      "whatItDoes": "A calculadora tem uma função simples: fazer a matemática de forma clara e precisa. Converte mg, mL e unidades com base nos valores informados por você, independentemente da quantidade ou concentração. Sem recomendar doses, sem opiniões e sem direcionar você para nenhum valor específico.",
       "noRounding": "Ela também se recusa a arredondar em silêncio. Se algo dá 12,5 unidades, ela diz 12,5 unidades, não “mais ou menos 12”.",
-      "tracker": "Vem por aí: um registro pessoal, para que a pesquisa fique em um só lugar em vez de espalhada por anotações.",
-      "disclaimer": "Qualquer coisa que envolva um corpo humano de verdade é conversa para um profissional de saúde qualificado. O BuddyPept faz contas.",
+      "tracker": "Em breve: um espaço pessoal para manter suas informações organizadas em um só lugar, sem depender de anotações espalhadas.",
+      "disclaimer": "Quando o assunto envolve sua saúde, procure sempre a orientação de um profissional de saúde habilitado. O BuddyPept cuida apenas dos cálculos.",
       "thanks": "Obrigado pelo pedido. Os pedidos determinam o que é construído em seguida, então avise se estiver faltando outra coisa."
     }
   },
