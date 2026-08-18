@@ -4,18 +4,18 @@
     "siteDescription": "Turn peptide-curious into peptide-confident. A free, plain-English peptide dosing calculator and guide. No selling, no data harvest, just the math.",
     "manifestDescription": "A free, step-by-step peptide dosing calculator. The math, free forever.",
     "calculatorTitle": "Peptide Dosing Calculator | BuddyPept",
-    "calculatorDescription": "A free, step-by-step peptide dosing calculator for education. Enter a vial strength and a dose to see exactly how much would be drawn.",
+    "calculatorDescription": "A free, step-by-step peptide dosing calculator for education. Entering a vial strength and a dose returns the exact amount to draw.",
     "learnTitle": "Learn about peptides | BuddyPept",
     "learnDescription": "Plain-English, factual summaries of common peptides: what they are, what they have been studied for, how they are sold, and their legal status. Education only.",
     "learnEntryTitle": "{name}: what it is | BuddyPept",
     "learnEntryDescription": "Factual, plain-English overview of {name}. Education only, not medical advice.",
-    "confirmTitle": "Confirming your email | BuddyPept",
+    "confirmTitle": "Confirming the email address | BuddyPept",
     "disclaimerTitle": "Medical Disclaimer | BuddyPept",
     "disclaimerDescription": "BuddyPept is an educational dosing-math tool, not medical advice. Read how the tool works and what it does not do.",
     "termsTitle": "Terms of Service | BuddyPept",
     "termsDescription": "The terms for using BuddyPept, a free educational peptide dosing-math tool.",
     "privacyTitle": "Privacy Policy | BuddyPept",
-    "privacyDescription": "How BuddyPept handles your data. We collect only your name and email when you ask for a peptide, never health data, and we never sell it."
+    "privacyDescription": "How BuddyPept handles personal data. Only a name and email are collected with a peptide request, never health data, and the information is never sold."
   },
   "nav": {
     "home": "Home",
@@ -28,28 +28,28 @@
     "chooseLanguage": "Choose a language"
   },
   "footer": {
-    "disclaimer": "BuddyPept is an educational tool, not medical advice. It does the dosing math you enter; it does not diagnose, treat, prescribe, or recommend that you take any peptide. We do not sell peptides and are not affiliated with any company that does. Many peptides are not approved for human use and are sold by others only as research compounds, so always consult a licensed healthcare provider before acting on anything here. You use this information at your own risk, and you are responsible for following the laws that apply to you.",
+    "disclaimer": "BuddyPept is an educational tool, not medical advice. It performs the dosing math entered; it does not diagnose, treat, prescribe, or recommend the use of any peptide. Many peptides are not approved for human use and are sold by others only as research compounds, so a licensed healthcare provider should always be consulted before acting on anything here. Use of this information is at the user’s own risk, and the user is responsible for following the laws that apply to them.",
     "colophon": "BuddyPept. The math, free forever. © {year}"
   },
   "home": {
     "heroTitle": "Turn any dose into the exact amount to draw.",
-    "heroBody": "A free calculator for people new to peptides. Enter what’s in the vial and the dose, and see the exact amount to draw on the syringe, in mcg, mg, or units. No sign-up. Just the math.",
+    "heroBody": "A free calculator for people new to peptides. Entering the vial contents and the dose returns the exact amount to draw on the syringe, in mcg, mg, or units. No sign-up. Just the math.",
     "openCalculator": "Open the calculator",
     "problemTitle": "mg, mcg, units. Where it gets confusing.",
-    "problemBody": "A vial, some bacteriostatic water, a syringe, and a pile of numbers that don’t obviously fit together. mg? mcg? units? The internet is full of bro-science, sketchy vendors, and people trying to sell something. BuddyPept just explains the math, clearly.",
+    "problemBody": "A vial, some bacteriostatic water, a syringe, and a pile of numbers that don’t obviously fit together. mg? mcg? units? The internet is full of bro-science, sketchy vendors, and people trying to sell something. BuddyPept explains the math, clearly.",
     "whatTitle": "What BuddyPept is",
-    "whatBody": "BuddyPept is a free calculator and plain-English guide for people new to peptides. Enter what’s in a vial and a dose, and it shows exactly how much that works out to, in whatever unit a syringe uses. That’s the whole thing.",
+    "whatBody": "BuddyPept is a free calculator and plain-English guide for people new to peptides. Entering the vial contents and a dose returns the exact equivalent amount, in whatever unit the syringe uses. That is the whole thing.",
     "trueline": "The math doesn’t lie.",
     "howTitle": "How it works",
-    "howStep1": "Pick a peptide, or request one that's not listed yet.",
+    "howStep1": "Pick a peptide, or request one that is not listed yet.",
     "howStep2": "Enter the vial amount, the bacteriostatic water, and a dose.",
     "howStep3": "See it in mcg, mg, and syringe units, clearly explained.",
     "closingTitle": "Turn peptide-curious into peptide-confident."
   },
   "calculator": {
     "request": {
-      "title": "Which peptide do you need?",
-      "body": "Tell us the one you want and your email. We’ll build it into the calculator and let you know when it’s ready."
+      "title": "Which peptide is needed?",
+      "body": "Enter the peptide and an email address. It will be built into the calculator, with a notification once it is ready."
     },
     "back": "Back",
     "continue": "Continue",
@@ -60,26 +60,31 @@
       "subtitle": "Select one from the list. For anything not listed, “Other peptide” still does the math.",
       "placeholder": "Choose a peptide…",
       "other": "Other peptide",
-      "notListed": "I don’t see it here",
-      "notListedHint": "No problem. Tap Continue and we’ll ask which one you need so we can add it.",
-      "otherHint": "The math works for any peptide. We’ll do it in <b>milligrams (mg)</b>. Just enter the strength on the vial and a dose to see the exact amount to draw.",
+      "useTyped": "Request “{name}”",
+      "notListed": "It is not listed here",
+      "notListedHint": "No problem. Tap Continue to specify which peptide is needed so it can be added.",
+      "otherHint": "The math works for any peptide. Enter the strength on the vial, in <b>mg</b> or <b>IU</b>, and a dose to see the exact amount to draw.",
       "measuredIn": "{name} is measured in <b>{unitLong}</b>, so the whole calculation will stay in {unitShort}."
     },
     "unit": {
       "iuLong": "international units (IU)",
-      "mgLong": "milligrams (mg)"
+      "mgLong": "milligrams (mg)",
+      "iuShort": "IU",
+      "mgShort": "mg"
     },
     "form": {
       "question": "Is the {name} a powder or already a liquid?",
       "subtitle": "Freeze-dried powder needs mixing. An already-liquid vial does not.",
-      "powderTitle": "A powder I mix",
+      "powderTitle": "A powder to mix",
       "powderSubtitle": "Freeze-dried, needs bacteriostatic water",
       "liquidTitle": "Already a liquid",
       "liquidSubtitle": "Pre-mixed in the vial, no water to add",
       "fallbackName": "peptide"
     },
     "amount": {
-      "question": "How many {unit} are in the {name} vial?",
+      "questionIU": "How many IU are in the {name} vial?",
+      "questionMass": "How many {unit} are in the {name} vial?",
+      "unitQuestion": "Is the amount on the vial in mg or IU?",
       "subtitlePowder": "Peptides come as a freeze-dried powder sealed in a glass vial. Enter the total amount on the label, not the size of the glass.",
       "subtitleLiquid": "Enter the total amount of {name} in the vial, printed on the label. Not the size of the glass.",
       "placeholderIU": "e.g. 5000",
@@ -96,7 +101,7 @@
     },
     "syringe": {
       "question": "Pick a syringe",
-      "subtitle": "Most people use an insulin syringe. The mL is how much it holds; the units are the marks along the barrel. We'll show where the dose lands on it."
+      "subtitle": "Most people use an insulin syringe. The mL is how much it holds; the units are the marks along the barrel. The position of the dose is shown on it."
     },
     "barrel": {
       "insulin03": {
@@ -121,15 +126,15 @@
       }
     },
     "dose": {
-      "question": "What dose do you want to calculate?",
-      "subtitle": "Enter it in {enterUnit}. Only know how many {drawUnit} to draw? Switch the unit below.",
+      "question": "What dose should be calculated?",
+      "subtitle": "Enter it in {enterUnit}. To enter the number of {drawUnit} to draw instead, switch the unit below.",
       "enterUnitIU": "IU",
       "enterUnitMass": "mg or mcg",
       "placeholderMg": "e.g. 0.25",
       "placeholderMcg": "e.g. 250",
       "placeholderNative": "e.g. 500",
       "placeholderDraw": "e.g. 25",
-      "neverSuggests": "BuddyPept never suggests a dose. It just does the math for the number you enter. Dosing is a decision for you and your provider."
+      "neverSuggests": "BuddyPept never suggests a dose. It calculates only the number entered. Dosing is a decision for the user and a licensed provider."
     },
     "units": "units",
     "result": {
@@ -145,7 +150,7 @@
       "bacWater": "Bacteriostatic water",
       "liquidInVial": "Liquid in vial",
       "vialStrength": "Vial strength",
-      "disclaimer": "This is math, not medical advice. Check it against the vial label and a licensed provider’s guidance before drawing any dose.",
+      "disclaimer": "This is math, not medical advice. Verify it against the vial label and a licensed provider’s guidance before drawing any dose.",
       "summaryIU": "Dose: {dose} IU · ",
       "summaryMass": "Dose: {mcg} mcg = {mg} mg · ",
       "summaryTail": "Concentration: {conc} {concUnit} · Syringe: {syringe}",
@@ -156,24 +161,25 @@
       "mathLine3": "{ml} mL × 100 units/mL = {units} units",
       "changeStep": "Change a step",
       "startOver": "Start over",
-      "learnTitle": "Want to understand the peptides themselves?",
+      "learnTitle": "More detail on the peptides themselves",
       "learnBody": "Free, plain-English guides: what each one is, what it has been studied for, how it is sold, and its legal status.",
       "learnCta": "Learn about peptides",
+      "learnMemberCta": "Already signed up? Open the library",
       "genericError": "Something looks off with those numbers."
     },
     "warning": {
       "doseBelowOneUnit": "Dose is less than 1 syringe unit, so measurement accuracy is poor at this scale. Consider reconstituting with less bacteriostatic water for a higher concentration.",
       "doseAboveSyringeCapacity": "Dose exceeds 100 units (1 mL on a U-100 syringe), more than a single 1 mL syringe holds. Reconstitute with more bacteriostatic water for a lower concentration.",
       "concentrationVeryHigh": "Very high peptide concentration. Double-check the vial fully dissolved and that the bacteriostatic water amount is correct.",
-      "iuNotConvertible": "IU (International Units) cannot be reliably converted to mass without substance-specific bioactivity data. Consult the peptide manufacturer or a healthcare professional for the correct IU-to-mass conversion for your specific compound.",
+      "iuNotConvertible": "IU (International Units) cannot be reliably converted to mass without substance-specific bioactivity data. Consult the peptide manufacturer or a healthcare professional for the correct IU-to-mass conversion for the specific compound.",
       "exceedsBarrel": "This dose needs {ml} mL, more than the {syringe} holds ({max} mL). Use a larger syringe, or mix with more water for a weaker concentration."
     }
   },
   "learn": {
     "title": "Learn about peptides",
     "intro": "Plain-English, factual summaries: what each peptide is, what it has been studied for, how it is sold, and its legal status. Education only, never medical advice, and never a recommendation to use anything.",
-    "mathTitle": "Need the dosing math?",
-    "mathBody": "The calculator is free and needs no sign-up.",
+    "mathTitle": "The dosing math",
+    "mathBody": "The calculator is free and requires no sign-up.",
     "openCalculator": "Open the calculator",
     "backToAll": "All peptides",
     "alsoCalled": "Also called: {aliases}",
@@ -184,7 +190,7 @@
     "bottomLine": "The honest bottom line",
     "legalBody": "{status}. Laws vary by location and change over time. Last reviewed: {date}.",
     "legalBodyResearch": "{status}. Vendors sell it strictly as a research compound (“for research use only,” “not for human consumption”). Laws vary by location and change over time. Last reviewed: {date}.",
-    "disclaimer": "This is general education, not medical advice. BuddyPept does not sell peptides, is not affiliated with any seller, and does not tell anyone to use any peptide. Talk to a licensed healthcare provider.",
+    "disclaimer": "This is general education, not medical advice. BuddyPept does not tell anyone to use any peptide. Consult a licensed healthcare provider.",
     "doTheMath": "Do the dosing math"
   },
   "legalStatus": {
@@ -193,16 +199,16 @@
     "supplement": "Available as a dietary supplement"
   },
   "gate": {
-    "sentTitle": "Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours to unlock the library.",
-    "sentSpam": "Didn’t get it? Check your spam folder.",
+    "sentTitle": "Check the inbox",
+    "sentBody": "A confirmation link was sent to <b>{email}</b>. Click it within 24 hours to unlock the library.",
+    "sentSpam": "Not received? Check the spam folder.",
     "title": "Read the full guide, free",
-    "body": "Pop in your name and email to unlock the full peptide library. We send one confirmation email; click the link and you’re in.",
+    "body": "Enter a name and email to unlock the full peptide library. One confirmation email is sent; clicking the link completes access.",
     "firstName": "First name",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "name@example.com",
     "submitting": "Sending the link…",
-    "submit": "Send me the link",
-    "privacy": "We use your email only to share peptide education and occasional updates. We never sell your data.",
+    "submit": "Send the link",
+    "privacy": "Email addresses are used only to share peptide education and occasional updates. Data is never sold.",
     "genericError": "Something went wrong. Please try again.",
     "networkError": "Network error. Please try again."
   },
@@ -211,65 +217,74 @@
     "backHome": "Back to BuddyPept",
     "successKicker": "Confirmed",
     "successTitle": "You’re in! 🎉",
-    "successBody": "Welcome to the BuddyPept community. We’ll keep you posted as the library and the community grow.",
+    "successBody": "Welcome to the BuddyPept community. Updates will follow as the library and the community grow.",
     "alreadyKicker": "Already confirmed",
-    "alreadyTitle": "You’re already in.",
-    "alreadyBody": "This email is already confirmed. No need to do it again.",
+    "alreadyTitle": "This email address is already confirmed.",
+    "alreadyBody": "No further action is needed.",
     "invalidKicker": "Link not recognised",
-    "invalidTitle": "Hmm, that link did not work.",
-    "invalidBody": "It might be old, mistyped, or already used. Try signing up again on the homepage and we’ll send you a fresh confirmation email.",
+    "invalidTitle": "That link did not work.",
+    "invalidBody": "It may be expired, mistyped, or already used. Sign up again on the homepage to receive a fresh confirmation email.",
     "errorKicker": "Something went wrong",
-    "errorTitle": "We had a hiccup.",
-    "errorBody": "Please try the link again in a minute. If it keeps failing, sign up again from the homepage and we’ll send a fresh email."
+    "errorTitle": "There was a temporary problem.",
+    "errorBody": "Try the link again in a minute. If it keeps failing, sign up again from the homepage to receive a fresh email."
   },
   "community": {
     "title": "Join the community",
-    "body": "We’re building a friendly community for people learning about peptides, and we’d love for you to be part of it. No pressure, just learning together.",
-    "cta": "I want in",
+    "body": "BuddyPept is building a friendly community for people learning about peptides. No pressure, just learning together.",
+    "cta": "Join",
     "close": "Close",
-    "sentTitle": "Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours to finish joining. Didn’t get it? Check your spam folder.",
+    "sentTitle": "Check the inbox",
+    "sentBody": "A confirmation link was sent to <b>{email}</b>. Click it within 24 hours to finish joining. Not received? Check the spam folder.",
     "gotIt": "Got it",
-    "modalTitle": "Let’s learn together",
-    "modalBody": "Add your name and email and we’ll welcome you in and keep you posted as the community grows.",
+    "modalTitle": "Learning together",
+    "modalBody": "Add a name and email to join and receive updates as the community grows.",
     "firstName": "First name",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "name@example.com",
     "submitting": "Sending the link…",
-    "submit": "Count me in",
+    "submit": "Join the community",
     "later": "Maybe later",
     "genericError": "Something went wrong. Please try again.",
     "networkError": "Network error. Please try again."
   },
   "popup": {
     "close": "Close",
-    "sentTitle": "Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours to finish joining. Didn’t get it? Check your spam folder.",
+    "sentTitle": "Check the inbox",
+    "sentBody": "A confirmation link was sent to <b>{email}</b>. Click it within 24 hours to finish joining. Not received? Check the spam folder.",
     "gotIt": "Got it",
     "title": "You’re a genius! 🎉",
-    "body1": "The mg-to-units math trips up almost everyone, and you just cracked it.",
-    "body2": "We’re building a community for people learning about peptides. Want in? Add your name and email and we’ll keep you posted as it grows.",
+    "body1": "The mg-to-units math trips up almost everyone. That step is now handled.",
+    "body2": "BuddyPept is building a community for people learning about peptides. Add a name and email to receive updates as it grows.",
     "firstName": "First name",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "name@example.com",
     "submitting": "Sending the link…",
-    "submit": "Count me in",
+    "submit": "Join the community",
     "later": "Maybe later",
     "genericError": "Something went wrong. Please try again.",
     "networkError": "Network error. Please try again."
   },
   "requestForm": {
-    "sentTitle": "📬 Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours and we’ll email you when {peptide} is added.",
+    "sentTitle": "Check the inbox",
+    "sentBody": "A confirmation link was sent to <b>{email}</b>. Click it within 24 hours to receive an email when {peptide} is added.",
     "sentFallbackPeptide": "the peptide",
-    "sentSpam": "Didn’t get it? Check your spam folder.",
-    "nameLabel": "Your name",
+    "sentSpam": "Not received? Check the spam folder.",
+    "doMathBody": "The calculator can still do the math for it in the meantime.",
+    "doMathCta": "Run the numbers now",
+    "nameLabel": "Name",
     "firstName": "First name",
-    "emailLabel": "Your email",
-    "emailPlaceholder": "you@example.com",
-    "peptideLabel": "Which peptide do you want added?",
+    "emailLabel": "Email",
+    "emailPlaceholder": "name@example.com",
+    "peptideLabel": "Which peptide should be added?",
+    "suggestTitle": "Did you mean {name}?",
+    "suggestAccept": "Yes, {name}",
+    "suggestKeep": "No, keep what I typed",
+    "availableTitle": "{name} is already in the calculator.",
+    "availableBody": "No need to wait for an email. Open it and run the numbers now.",
+    "availableCta": "Open {name}",
+    "availableDifferent": "I meant something else",
     "peptidePlaceholder": "e.g., HGH, HCG, Tesamorelin",
     "submitting": "Sending…",
     "submit": "Notify me when it’s ready",
-    "privacy": "We use your email only to tell you when this peptide is added. No spam, no selling your data.",
+    "privacy": "Email addresses are used only to give notice when this peptide is added. No spam, no selling of data.",
     "genericError": "Something went wrong. Please try again.",
     "networkError": "Network error. Please try again."
   },
@@ -278,44 +293,40 @@
       "title": "Medical Disclaimer",
       "lastUpdated": "May 25, 2026",
       "intro": [
-        "BuddyPept is a free educational tool that helps people understand peptide reconstitution and dosing math. Please read this page before using the calculator or anything else on the site."
+        "BuddyPept is a free educational tool that helps people understand peptide reconstitution and dosing math. Read this page before using the calculator or anything else on the site."
       ],
       "sections": [
         {
           "title": "This is education, not medical advice",
-          "body": "Everything on BuddyPept is for general informational and educational purposes only. It is not medical advice, and it is not a substitute for the judgment of a licensed healthcare provider. We do not diagnose conditions, treat illness, prescribe anything, or tell you whether a peptide is safe or appropriate for you."
+          "body": "Everything on BuddyPept is for general informational and educational purposes only. It is not medical advice, and it is not a substitute for the judgment of a licensed healthcare provider. BuddyPept does not diagnose conditions, treat illness, prescribe anything, or state whether a peptide is safe or appropriate for any person."
         },
         {
-          "title": "We do not recommend doses",
-          "body": "The calculator does only the math you ask it to do. You enter the amounts (what is in the vial, how much water, the intended dose), and it converts those numbers between units. It never suggests a dose, a frequency, or a protocol. Any dose you enter is one you decided on with your healthcare provider, not one BuddyPept chose for you."
+          "title": "BuddyPept does not recommend doses",
+          "body": "The calculator performs only the math requested. The user enters the amounts (the vial contents, the amount of water, the intended dose), and the calculator converts those numbers between units. It never suggests a dose, a frequency, or a protocol. Any dose entered is one decided by the user together with a healthcare provider, not one chosen by BuddyPept."
         },
         {
           "title": "No doctor-patient relationship",
-          "body": "Using this website does not create a doctor-patient, provider-patient, or any professional relationship between you and BuddyPept or anyone associated with it. We are not your healthcare provider."
+          "body": "Use of this website does not create a doctor-patient, provider-patient, or any professional relationship between the user and BuddyPept or anyone associated with it. BuddyPept is not a healthcare provider."
         },
         {
           "title": "Not evaluated by the FDA",
           "body": "The statements on this website have not been evaluated by the U.S. Food and Drug Administration. Nothing on BuddyPept is intended to diagnose, treat, cure, or prevent any disease."
         },
         {
-          "title": "We don't sell peptides",
-          "body": "BuddyPept is not a pharmacy, a compounding facility (as defined under Section 503A of the Federal Food, Drug, and Cosmetic Act), an outsourcing facility (Section 503B), or a peptide seller of any kind. We do not sell, supply, or ship any product, and we are not affiliated with any company that does. We do not endorse, recommend, or link to any seller. If you obtain a peptide somewhere else, that is between you and that seller, and we are not responsible for it or for its quality, legality, or safety."
-        },
-        {
           "title": "About peptides specifically",
-          "body": "Many peptides are not approved by the FDA or other regulators for human use, and their legal status varies by country and over time. Companies that sell them often do so strictly as research compounds, labeled “for research use only” and “not for human consumption.” BuddyPept explains the math and the science. It does not sell these compounds, does not encourage anyone to use them in a person, and does not tell you that doing so is safe or legal. Whether a peptide is legal where you live, and whether any use is right for you, is for you and a licensed professional to decide. You are responsible for following the laws that apply to you."
+          "body": "Many peptides are not approved by the FDA or other regulators for human use, and their legal status varies by country and over time. Companies that sell them often do so strictly as research compounds, labeled “for research use only” and “not for human consumption.” BuddyPept explains the math and the science. It does not sell these compounds, does not encourage anyone to use them in a person, and does not state that doing so is safe or legal. Whether a peptide is legal in a given location, and whether any use is appropriate, is for the user and a licensed professional to decide. The user is responsible for following the laws that apply to them."
         },
         {
-          "title": "Accuracy and your responsibility",
-          "body": "We work hard to keep the math correct, but we cannot guarantee that any result is accurate or appropriate for your specific situation. Always double-check any result against the vial label and a licensed provider’s guidance before acting on it. You are responsible for verifying the numbers you enter and the numbers you act on."
+          "title": "Accuracy and user responsibility",
+          "body": "BuddyPept works to keep the math correct, but cannot guarantee that any result is accurate or appropriate for a specific situation. Always verify any result against the vial label and a licensed provider’s guidance before acting on it. The user is responsible for verifying the numbers entered and the numbers acted on."
         },
         {
           "title": "Assumption of risk and limitation of liability",
-          "body": "You use BuddyPept at your own risk. To the fullest extent allowed by law, BuddyPept and the people behind it are not liable for any harm, loss, or damages of any kind arising from your use of the site or reliance on anything it shows you."
+          "body": "Use of BuddyPept is at the user’s own risk. To the fullest extent allowed by law, BuddyPept and the people behind it are not liable for any harm, loss, or damages of any kind arising from use of the site or reliance on anything it displays."
         },
         {
           "title": "In an emergency",
-          "body": "BuddyPept is not for medical emergencies. If you think you are having a medical emergency, call your local emergency number (911 in the US) or contact a healthcare professional immediately."
+          "body": "BuddyPept is not for medical emergencies. In a suspected medical emergency, call the local emergency number (911 in the US) or contact a healthcare professional immediately."
         },
         {
           "title": "Questions",
@@ -325,9 +336,9 @@
     },
     "terms": {
       "title": "Terms of Service",
-      "lastUpdated": "May 25, 2026",
+      "lastUpdated": "August 14, 2026",
       "intro": [
-        "These terms cover your use of BuddyPept (the “Service”). By using the Service, you agree to them. If you do not agree, please do not use the Service."
+        "These terms cover the use of BuddyPept (the “Service”). Use of the Service constitutes acceptance of these terms. Anyone who does not agree to them should not use the Service."
       ],
       "sections": [
         {
@@ -336,35 +347,35 @@
         },
         {
           "title": "Not medical advice",
-          "body": "The Service does not provide medical advice and does not recommend doses. Please read our <disclaimerLink>Medical Disclaimer</disclaimerLink>, which is part of these terms. You are responsible for verifying any result and for any decisions you make."
+          "body": "The Service does not provide medical advice and does not recommend doses. The <disclaimerLink>Medical Disclaimer</disclaimerLink> forms part of these terms and should be read in full. The user is responsible for verifying any result and for any decisions made."
         },
         {
           "title": "Acceptable use",
-          "body": "Use the Service lawfully and for your own personal, educational purposes. Do not misuse it, attempt to break or overload it, copy it to pass off as your own, or use it to harm others."
+          "body": "Use the Service lawfully and for personal, educational purposes. Do not misuse it, attempt to break or overload it, copy it to pass off as original work, or use it to harm others."
         },
         {
           "title": "No warranties",
-          "body": "The Service is provided “as is” and “as available,” without warranties of any kind, express or implied. We do not warrant that the Service will be accurate, error-free, uninterrupted, or suitable for your situation."
+          "body": "The Service is provided “as is” and “as available,” without warranties of any kind, express or implied. BuddyPept does not warrant that the Service will be accurate, error-free, uninterrupted, or suitable for any particular situation."
         },
         {
           "title": "Limitation of liability",
-          "body": "To the fullest extent allowed by law, BuddyPept and the people behind it are not liable for any indirect, incidental, or consequential damages, or for any harm or loss arising from your use of, or reliance on, the Service."
+          "body": "To the fullest extent allowed by law, BuddyPept and the people behind it are not liable for any indirect, incidental, or consequential damages, or for any harm or loss arising from the use of, or reliance on, the Service."
         },
         {
           "title": "Intellectual property",
-          "body": "The BuddyPept name, content, and design belong to BuddyPept. You may use the Service for your own personal use, but you may not copy, resell, or redistribute it without permission."
+          "body": "The BuddyPept name, content, and design belong to BuddyPept. The Service may be used for personal use, but it may not be copied, resold, or redistributed without permission."
         },
         {
           "title": "Third-party services",
-          "body": "The Service runs on third-party providers (for hosting, data storage, and email). Their handling of data is covered in our <privacyLink>Privacy Policy</privacyLink>."
+          "body": "The Service runs on third-party providers (for hosting, data storage, and email). Their handling of data is covered in the <privacyLink>Privacy Policy</privacyLink>."
         },
         {
           "title": "Changes",
-          "body": "We may update the Service or these terms over time. If we make meaningful changes, we will update the date at the top of this page. Continuing to use the Service means you accept the current terms."
+          "body": "BuddyPept may update the Service or these terms over time. Meaningful changes are reflected in the date at the top of this page. Continued use of the Service constitutes acceptance of the current terms."
         },
         {
           "title": "Governing law",
-          "body": "These terms are governed by the laws of [your home state], without regard to conflict-of-law rules."
+          "body": "These terms are governed by the laws of the State of Utah, without regard to conflict-of-law rules."
         },
         {
           "title": "Contact",
@@ -374,46 +385,53 @@
     },
     "privacy": {
       "title": "Privacy Policy",
-      "lastUpdated": "May 25, 2026",
+      "lastUpdated": "August 14, 2026",
       "intro": [
-        "Privacy is part of how BuddyPept is built. We keep what we collect to the bare minimum, we never sell it, and we do not track you around the web. Here is exactly what that means."
+        "Privacy is part of how BuddyPept is built. Collection is kept to the bare minimum, and data is never sold."
       ],
       "sections": [
         {
-          "title": "What we collect",
-          "body": "Only your name and email address, and only when you choose to submit the “request a peptide” form, along with the name of the peptide you asked us to add. That is the only personal information we collect."
+          "title": "What is collected",
+          "body": [
+            "The calculator is free, requires no sign-up, and collects nothing. A name and email address are collected only when the “request a peptide” form is submitted, along with the name of the peptide requested.",
+            "Other research tools may request investigator information when needed. Any such information is provided voluntarily and collected only with the investigator’s knowledge and consent.",
+            "BuddyPept continues to add tools, so what is collected may change over time. This policy is updated whenever it does."
+          ]
         },
         {
-          "title": "What we do not collect",
-          "body": "We do not ask for or store any health data: no height, weight, age, gender, conditions, or anything about your treatment. The dose numbers you type into the calculator are processed in your browser to show the result; we do not save them. We do not use third-party advertising or tracking pixels."
+          "title": "What is not collected",
+          "body": [
+            "The BuddyPept calculator does not request or store personal health information. Calculator inputs are processed in the browser only to generate results and are not saved.",
+            "BuddyPept does not use third-party advertising or tracking pixels."
+          ]
         },
         {
-          "title": "How we use your information",
-          "body": "We use your name and email for one purpose: to email you when the peptide you requested is added to the library. We do not add you to unrelated marketing without your say-so."
+          "title": "How the information is used",
+          "body": "The name and email are used for one purpose: to give notice by email when the requested peptide is added to the library. Addresses are not added to unrelated marketing without consent."
         },
         {
-          "title": "Who we share it with",
-          "body": "We never sell your information. We use a small number of trusted service providers to run the site, such as hosting, database, and email delivery. They process data only to provide those services to us. We share your information with them only as needed for that, or if required by law."
+          "title": "Who it is shared with",
+          "body": "Personal information is never sold. A small number of trusted service providers run the site, covering hosting, database, and email delivery. They process data only to provide those services to BuddyPept. Information is shared with them only as needed for that purpose, or if required by law."
         },
         {
-          "title": "Keeping it, and your choices",
-          "body": "We keep your request only as long as needed to follow up with you. You can ask us to show you what we have or to delete it at any time by emailing us, and we will honor that."
+          "title": "Retention and choices",
+          "body": "A request is kept only as long as needed to follow up on it. A request to see the stored information, or to delete it, can be made at any time by email, and it will be honored."
         },
         {
           "title": "Security",
-          "body": "We take reasonable steps to protect your information, but no method of storage or transmission over the internet is completely secure, so we cannot guarantee absolute security."
+          "body": "Reasonable steps are taken to protect personal information, but no method of storage or transmission over the internet is completely secure, so absolute security cannot be guaranteed."
         },
         {
           "title": "Children",
-          "body": "BuddyPept is not directed to children and is intended for adults. We do not knowingly collect information from minors."
+          "body": "BuddyPept is not directed to children and is intended for adults. Information from minors is not knowingly collected."
         },
         {
           "title": "Changes",
-          "body": "If we change this policy, we will update the date at the top of this page."
+          "body": "If this policy changes, the date at the top of this page is updated."
         },
         {
           "title": "Contact",
-          "body": "Questions or requests about your data can be sent to <b>hello@buddypept.com</b>."
+          "body": "Questions or requests about personal data can be sent to <b>hello@buddypept.com</b>."
         }
       ]
     },
@@ -421,7 +439,7 @@
   },
   "syringe": {
     "units": "units",
-    "over": "This dose is bigger than the {syringe} holds. Pick a larger syringe.",
+    "over": "This dose is larger than the {syringe} holds. Pick a larger syringe.",
     "markedAt": "Marked at <b>{amount} {unit}</b>",
     "empty": "Enter a dose to see where it lands on the syringe."
   },
@@ -461,12 +479,19 @@
       "howSold": "As a powder in vials (commonly 2, 5, or 10 mg), reconstituted with bacteriostatic water. Often paired with CJC-1295.",
       "bottomLine": "The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
     },
-    "cjc-1295": {
-      "teaser": "A growth-hormone-releasing-hormone analog studied in research.",
-      "whatItIs": "A synthetic analog of growth hormone releasing hormone (GHRH). It exists in two forms, with and without DAC, which differ in how long they last in the body.",
-      "studiedFor": "Examined for its influence on the body’s growth hormone release, and commonly studied together with ipamorelin. Findings are largely preclinical.",
-      "howSold": "As a powder in vials (commonly 2 or 5 mg), reconstituted with bacteriostatic water.",
-      "bottomLine": "The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    "cjc-1295-dac": {
+      "teaser": "A long-acting GHRH analog dosed weekly rather than daily.",
+      "whatItIs": "A synthetic analog of growth hormone releasing hormone (GHRH) carrying a Drug Affinity Complex, or DAC. The DAC binds to serum albumin in the blood, which is what keeps the molecule circulating for days instead of minutes.",
+      "studiedFor": "Examined for its influence on the body’s own growth hormone release. Published work reports a half-life of roughly 6 to 8 days, which is the property the DAC exists to create. Findings are largely preclinical.",
+      "howSold": "As a powder in vials, commonly 2 or 5 mg, reconstituted with bacteriostatic water. Sold by research suppliers, not as an approved medicine.",
+      "bottomLine": "The DAC is the whole difference. It is dosed on a weekly rhythm because it clears over days, and it is not interchangeable with the no-DAC version. The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    },
+    "cjc-1295-no-dac": {
+      "teaser": "Modified GRF (1-29), a short-acting GHRH analog.",
+      "whatItIs": "A synthetic analog of growth hormone releasing hormone (GHRH) without the Drug Affinity Complex. The molecule is more precisely called Modified GRF (1-29), and it carries no albumin-binding group.",
+      "studiedFor": "Examined for its influence on the body’s own growth hormone release, and commonly studied together with ipamorelin. Published work reports a half-life of roughly 30 minutes. Findings are largely preclinical.",
+      "howSold": "As a powder in vials, commonly 2, 5 or 10 mg, reconstituted with bacteriostatic water. Sold by research suppliers, not as an approved medicine.",
+      "bottomLine": "Despite sharing a name, this is not the DAC version on a different schedule. It clears in about half an hour rather than over days, which is why it appears in protocols at a very different frequency. The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
     },
     "sermorelin": {
       "teaser": "A prescription GHRH analog used in some hormone protocols.",
@@ -530,45 +555,45 @@
     "greetingAnon": "Hi there,",
     "signoff": "The BuddyPept team",
     "confirmation": {
-      "subject": "Confirm you're joining BuddyPept",
-      "body": "Tap the button below to confirm and finish joining the BuddyPept community. Takes one click.",
-      "cta": "Confirm my email",
-      "fallbackLink": "If the button does not work, copy and paste this link into your browser:",
-      "notYou": "If this was not you, just ignore this message. You will not be added.",
-      "textBody": "Tap the link below to confirm and finish joining the BuddyPept community. Takes one click."
+      "subject": "Confirm this BuddyPept sign-up",
+      "body": "Tap the button below to confirm and finish joining the BuddyPept community. It takes one click.",
+      "cta": "Confirm this email address",
+      "fallbackLink": "If the button does not work, copy and paste this link into a browser:",
+      "notYou": "If this request was not made by the recipient, this message can be ignored. No sign-up will be completed.",
+      "textBody": "Tap the link below to confirm and finish joining the BuddyPept community. It takes one click."
     },
     "nonPeptide": {
-      "subject": "About your BuddyPept request",
-      "thanks": "Thanks for reaching out about <b>{requested}</b>!",
-      "scope": "BuddyPept focuses only on peptides (compounds like BPC-157, semaglutide, and similar). Steroids and steroid hormones like testosterone are outside what we cover, so this isn’t one we’ll be adding.",
-      "invite": "If you’d like to explore peptides instead, our library is open and waiting:",
+      "subject": "About this BuddyPept request",
+      "thanks": "Thanks for the request about <b>{requested}</b>.",
+      "scope": "BuddyPept covers only peptides (compounds such as BPC-157, semaglutide, and similar). Steroids and steroid hormones such as testosterone fall outside that scope, so this one will not be added.",
+      "invite": "The peptide library is open for anyone exploring peptides instead:",
       "cta": "Browse the peptide library"
     },
     "peptideLive": {
       "subject": "You asked. {name} is in.",
-      "lede": "You asked for <b>{name}</b>. It’s in the calculator now.",
+      "lede": "<b>{name}</b> was requested. It is in the calculator now.",
       "cta": "Run the {name} numbers",
-      "whatItDoes": "The calculator does exactly one thing and refuses to do it badly: the arithmetic. mg to mL to units, at whatever vial size and concentration your research calls for. No recommendations, no opinions, no nudging you toward a number.",
-      "noRounding": "It also refuses to round quietly. If something lands on 12.5 units, it says 12.5 units, not “about 12.”",
-      "tracker": "Coming next: a personal tracker, so your own research stays in one place instead of scattered across notes.",
-      "disclaimer": "Anything involving an actual human body is a conversation for a qualified healthcare professional. We do math.",
-      "thanks": "Thanks for the request. It’s genuinely how we pick what to build, so if something else is missing, tell us."
+      "whatItDoes": "The calculator does exactly one thing and refuses to do it badly: the arithmetic. mg to mL to units, at whatever vial size and concentration the research calls for. No recommendations, no opinions, no nudging toward a number.",
+      "noRounding": "It also refuses to round quietly. If something lands on 12.5 units, it reports 12.5 units, not “about 12.”",
+      "tracker": "Coming next: a personal tracker, so research stays in one place instead of scattered across notes.",
+      "disclaimer": "Anything involving an actual human body is a conversation for a qualified healthcare professional. BuddyPept does math.",
+      "thanks": "Thanks for the request. Requests are genuinely how the build order gets decided, so send word if something else is missing."
     }
   },
   "apiErrors": {
     "invalidRequest": "Invalid request.",
-    "name": "Please enter your name.",
+    "name": "Please enter a name.",
     "email": "Please enter a valid email address.",
     "peptide": "Please enter the peptide name.",
-    "checkEntries": "Please check your entries.",
-    "saveFailed": "We could not save that. Please try again.",
-    "saveRequestFailed": "We could not save your request. Please try again.",
-    "emailFailed": "We saved your details but could not send the confirmation email. Please try again in a minute.",
+    "checkEntries": "Please check the entries.",
+    "saveFailed": "That could not be saved. Please try again.",
+    "saveRequestFailed": "The request could not be saved. Please try again.",
+    "emailFailed": "The details were saved, but the confirmation email could not be sent. Please try again in a minute.",
     "serverError": "Server error. Please try again in a moment.",
-    "emailRequestFailed": "We saved your request but could not send the email. Please try again in a minute."
+    "emailRequestFailed": "The request was saved, but the email could not be sent. Please try again in a minute."
   },
   "a11y": {
-    "buddy": "Buddy, your friendly peptide helper",
+    "buddy": "Buddy, the friendly peptide helper",
     "logo": "BuddyPept logo",
     "syringe": "{syringe} filled to the dose"
   }

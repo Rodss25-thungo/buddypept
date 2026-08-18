@@ -49,8 +49,14 @@ export const localeName: Record<Locale, string> = {
  *
  * Remove a locale from this list when its catalog is actually translated and
  * reviewed. That single edit is what "launches" the language.
+ *
+ * pt and es were launched once their catalogs were translated in full and
+ * rewritten into the institutional voice. The audience for both is Spanish- and
+ * Portuguese-speaking readers in the United States, not other markets, so the
+ * legal pages stay US-framed in every language: one jurisdiction, one FDA, one
+ * emergency number.
  */
-export const draftLocales: readonly Locale[] = ['pt', 'es'];
+export const draftLocales: readonly Locale[] = [];
 
 export function isLocaleLive(locale: Locale): boolean {
   return !draftLocales.includes(locale);

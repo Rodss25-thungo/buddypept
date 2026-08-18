@@ -4,6 +4,7 @@ import { use } from 'react';
 import { Link } from '@/i18n/navigation';
 import { Buddy } from '@/components/buddy';
 import { CommunityCTA } from '@/components/community-cta';
+import { Prose } from '@/components/prose';
 
 /**
  * BuddyPept homepage.
@@ -39,9 +40,10 @@ export default function HomePage({
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
             {t('heroTitle')}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-            {t('heroBody')}
-          </p>
+          <Prose
+            text={t('heroBody')}
+            className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400"
+          />
           <div className="mt-8">
             <Link
               href="/calculator"
@@ -60,9 +62,10 @@ export default function HomePage({
             <h2 className="text-2xl font-semibold tracking-tight">
               {t('problemTitle')}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
-              {t('problemBody')}
-            </p>
+            <Prose
+              text={t('problemBody')}
+              className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300"
+            />
           </div>
         </section>
 
@@ -71,9 +74,10 @@ export default function HomePage({
           <h2 className="text-2xl font-semibold tracking-tight">
             {t('whatTitle')}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
-            {t('whatBody')}
-          </p>
+          <Prose
+            text={t('whatBody')}
+            className="mt-4 text-base leading-relaxed text-zinc-700 dark:text-zinc-300"
+          />
           <p className="mt-6 text-lg font-semibold italic text-brand-700 dark:text-brand-400">
             {t('trueline')}
           </p>

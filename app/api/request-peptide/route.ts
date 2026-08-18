@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { randomUUID } from 'crypto';
 import { getSupabaseAdmin } from '@/lib/supabase';
+import { PEPTIDES } from '@/data/peptides';
 import { apiErrors, validationMessage } from '@/lib/api-messages';
 import {
   isNonPeptideRequest,
@@ -33,6 +34,15 @@ const RequestSchema = z.object({
    * confirmation email, and any later email, goes out in the same language.
    */
   locale: z.enum(['en', 'pt', 'es']).optional(),
+  /**
+   * Slug the visitor explicitly agreed to after a "did you mean" prompt.
+   *
+   * Stored as matched_slug so a misspelling still reaches the right person when
+   * the peptide ships. Only ever set from a confirmation the visitor saw and
+   * accepted: the server does not fuzzy-match on their behalf, because a wrong
+   * guess emails someone about a peptide they never asked for.
+   */
+  confirmedSlug: z.string().trim().max(100).nullish(),
 });
 
 const SITE_URL = 'https://buddypept.com';
@@ -63,6 +73,15 @@ export async function POST(request: Request) {
   const isNonPeptide = isNonPeptideRequest(parsed.data.requestedPeptide);
   const token = randomUUID();
 
+  // Trust the confirmation only as far as it is real: a slug that is not in the
+  // library is dropped rather than written, so a tampered request body cannot
+  // park an arbitrary value in matched_slug.
+  const confirmedSlug =
+    parsed.data.confirmedSlug &&
+    PEPTIDES.some((p) => p.slug === parsed.data.confirmedSlug)
+      ? parsed.data.confirmedSlug
+      : null;
+
   try {
     const supabase = getSupabaseAdmin();
     const { error } = await supabase.from('peptide_requests').insert({
@@ -71,6 +90,7 @@ export async function POST(request: Request) {
       requested_peptide: parsed.data.requestedPeptide,
       confirmation_token: token,
       locale: parsed.data.locale ?? 'en',
+      matched_slug: confirmedSlug,
     });
     if (error) {
       console.error('Supabase insert error:', error.message);

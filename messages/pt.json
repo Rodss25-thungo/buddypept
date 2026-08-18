@@ -1,575 +1,600 @@
 {
   "meta": {
-    "siteTitle": "BuddyPept: Free Peptide Dosing Calculator",
-    "siteDescription": "Turn peptide-curious into peptide-confident. A free, plain-English peptide dosing calculator and guide. No selling, no data harvest, just the math.",
-    "manifestDescription": "A free, step-by-step peptide dosing calculator. The math, free forever.",
-    "calculatorTitle": "Peptide Dosing Calculator | BuddyPept",
-    "calculatorDescription": "A free, step-by-step peptide dosing calculator for education. Enter a vial strength and a dose to see exactly how much would be drawn.",
-    "learnTitle": "Learn about peptides | BuddyPept",
-    "learnDescription": "Plain-English, factual summaries of common peptides: what they are, what they have been studied for, how they are sold, and their legal status. Education only.",
-    "learnEntryTitle": "{name}: what it is | BuddyPept",
-    "learnEntryDescription": "Factual, plain-English overview of {name}. Education only, not medical advice.",
-    "confirmTitle": "Confirming your email | BuddyPept",
-    "disclaimerTitle": "Medical Disclaimer | BuddyPept",
-    "disclaimerDescription": "BuddyPept is an educational dosing-math tool, not medical advice. Read how the tool works and what it does not do.",
-    "termsTitle": "Terms of Service | BuddyPept",
-    "termsDescription": "The terms for using BuddyPept, a free educational peptide dosing-math tool.",
-    "privacyTitle": "Privacy Policy | BuddyPept",
-    "privacyDescription": "How BuddyPept handles your data. We collect only your name and email when you ask for a peptide, never health data, and we never sell it."
+    "siteTitle": "BuddyPept: Calculadora gratuita de dosagem de peptídeos",
+    "siteDescription": "Entenda seus cálculos de peptídeos com clareza e confiança. Calculadora gratuita, simples e fácil de usar, com orientação passo a passo. Sem vendas, sem coleta de dados — apenas cálculos claros.",
+    "manifestDescription": "Uma calculadora de dosagem de peptídeos gratuita, passo a passo. A matemática, gratuita para sempre.",
+    "calculatorTitle": "Calculadora de dosagem de peptídeos | BuddyPept",
+    "calculatorDescription": "Uma calculadora educativa, gratuita e fácil de usar, que simplifica seus cálculos de peptídeos. Informe a quantidade do frasco e a dose desejada para visualizar de forma clara o volume correspondente.",
+    "learnTitle": "Aprenda sobre peptídeos | BuddyPept",
+    "learnDescription": "Informações claras e fáceis de entender sobre os peptídeos mais conhecidos: o que são, para que são estudados, como são comercializados e qual é a situação regulatória de cada um. Conteúdo exclusivamente educativo.",
+    "learnEntryTitle": "{name}: o que é | BuddyPept",
+    "learnEntryDescription": "Visão geral factual e em linguagem simples sobre {name}. Apenas educação, não é orientação médica.",
+    "confirmTitle": "Confirmação do e-mail | BuddyPept",
+    "disclaimerTitle": "Aviso médico | BuddyPept",
+    "disclaimerDescription": "O BuddyPept é uma ferramenta educativa criada para facilitar e entender cálculos de dosagem. Ele não substitui orientação médica nem recomenda tratamentos. Veja como funciona, para que serve e quais são seus limites.",
+    "termsTitle": "Termos de uso | BuddyPept",
+    "termsDescription": "Conheça os termos de uso do BuddyPept e entenda como utilizar nossa calculadora educativa e gratuita de peptídeos de forma responsável.",
+    "privacyTitle": "Política de privacidade | BuddyPept",
+    "privacyDescription": "Como o BuddyPept trata os dados pessoais. São coletados apenas um nome e um e-mail ao solicitar um peptídeo, nunca dados de saúde, e a informação nunca é vendida."
   },
   "nav": {
-    "home": "Home",
-    "calculator": "Calculator",
-    "learn": "Learn",
-    "disclaimer": "Medical Disclaimer",
-    "terms": "Terms",
-    "privacy": "Privacy",
-    "languageLabel": "Language",
-    "chooseLanguage": "Choose a language"
+    "home": "Início",
+    "calculator": "Calculadora",
+    "learn": "Aprender",
+    "disclaimer": "Aviso médico",
+    "terms": "Termos",
+    "privacy": "Privacidade",
+    "languageLabel": "Idioma",
+    "chooseLanguage": "Escolha um idioma"
   },
   "footer": {
-    "disclaimer": "BuddyPept is an educational tool, not medical advice. It does the dosing math you enter; it does not diagnose, treat, prescribe, or recommend that you take any peptide. We do not sell peptides and are not affiliated with any company that does. Many peptides are not approved for human use and are sold by others only as research compounds, so always consult a licensed healthcare provider before acting on anything here. You use this information at your own risk, and you are responsible for following the laws that apply to you.",
-    "colophon": "BuddyPept. The math, free forever. © {year}"
+    "disclaimer": "O BuddyPept é uma ferramenta exclusivamente educativa. Ele apenas realiza os cálculos com base nas informações inseridas pelo usuário e não diagnostica, trata, prescreve ou recomenda o uso de peptídeos.\n\nMuitos peptídeos não são aprovados para uso humano e podem ser comercializados por terceiros apenas para fins de pesquisa. Antes de tomar qualquer decisão relacionada à sua saúde, consulte um profissional de saúde habilitado.\n\nO uso das informações disponibilizadas no BuddyPept é de responsabilidade do usuário, incluindo o cumprimento das leis e regulamentações aplicáveis.",
+    "colophon": "BuddyPept. A matemática, gratuita para sempre. © {year}"
   },
   "home": {
-    "heroTitle": "Turn any dose into the exact amount to draw.",
-    "heroBody": "A free calculator for people new to peptides. Enter what’s in the vial and the dose, and see the exact amount to draw on the syringe, in mcg, mg, or units. No sign-up. Just the math.",
-    "openCalculator": "Open the calculator",
-    "problemTitle": "mg, mcg, units. Where it gets confusing.",
-    "problemBody": "A vial, some bacteriostatic water, a syringe, and a pile of numbers that don’t obviously fit together. mg? mcg? units? The internet is full of bro-science, sketchy vendors, and people trying to sell something. BuddyPept just explains the math, clearly.",
-    "whatTitle": "What BuddyPept is",
-    "whatBody": "BuddyPept is a free calculator and plain-English guide for people new to peptides. Enter what’s in a vial and a dose, and it shows exactly how much that works out to, in whatever unit a syringe uses. That’s the whole thing.",
-    "trueline": "The math doesn’t lie.",
-    "howTitle": "How it works",
-    "howStep1": "Pick a peptide, or request one that's not listed yet.",
-    "howStep2": "Enter the vial amount, the bacteriostatic water, and a dose.",
-    "howStep3": "See it in mcg, mg, and syringe units, clearly explained.",
-    "closingTitle": "Turn peptide-curious into peptide-confident."
+    "heroTitle": "Transforme qualquer dose na quantidade exata a aspirar.",
+    "heroBody": "Uma calculadora gratuita e fácil de usar para entender melhor os cálculos relacionados a peptídeos. Informe os dados do frasco e a quantidade desejada para visualizar o resultado de forma clara, em mcg, mg ou unidades.\n\nSem cadastro. Sem complicação. Apenas o cálculo.",
+    "openCalculator": "Abrir a calculadora",
+    "problemTitle": "mg, mcg, unidades. É aqui que confunde.",
+    "problemBody": "Frasco, água bacteriostática, seringa, mg, mcg, unidades... os cálculos podem parecer complicados no início.\n\nEm meio a tantas informações confusas na internet, o BuddyPept ajuda você a entender a matemática de forma simples, clara e objetiva, sem tentar vender nada.",
+    "whatTitle": "O que é o BuddyPept",
+    "whatBody": "O BuddyPept é uma calculadora gratuita e fácil de entender, criada para simplificar os cálculos relacionados a peptídeos. Informe os dados do frasco e a quantidade desejada para visualizar o resultado na unidade utilizada pela seringa.\n\nSimples, direto e sem complicação.",
+    "trueline": "A matemática não mente.",
+    "howTitle": "Como funciona",
+    "howStep1": "Escolha um peptídeo, ou peça um que ainda não esteja na lista.",
+    "howStep2": "Informe a quantidade do frasco, a água bacteriostática e uma dose.",
+    "howStep3": "Veja o resultado em mcg, mg e unidades da seringa, explicado com clareza.",
+    "closingTitle": "Transforme curiosidade sobre peptídeos em confiança."
   },
   "calculator": {
     "request": {
-      "title": "Which peptide do you need?",
-      "body": "Tell us the one you want and your email. We’ll build it into the calculator and let you know when it’s ready."
+      "title": "Qual peptídeo é necessário?",
+      "body": "Informe o peptídeo e um e-mail. Ele será incluído na calculadora, com um aviso quando estiver pronto."
     },
-    "back": "Back",
-    "continue": "Continue",
-    "calculate": "Calculate",
-    "progress": "Step {current} of {total}",
+    "back": "Voltar",
+    "continue": "Continuar",
+    "calculate": "Calcular",
+    "progress": "Etapa {current} de {total}",
     "peptide": {
-      "question": "Pick a peptide",
-      "subtitle": "Select one from the list. For anything not listed, “Other peptide” still does the math.",
-      "placeholder": "Choose a peptide…",
-      "other": "Other peptide",
-      "notListed": "I don’t see it here",
-      "notListedHint": "No problem. Tap Continue and we’ll ask which one you need so we can add it.",
-      "otherHint": "The math works for any peptide. We’ll do it in <b>milligrams (mg)</b>. Just enter the strength on the vial and a dose to see the exact amount to draw.",
-      "measuredIn": "{name} is measured in <b>{unitLong}</b>, so the whole calculation will stay in {unitShort}."
+      "question": "Escolha um peptídeo",
+      "subtitle": "Selecione um da lista. Para qualquer um que não esteja listado, “Outro peptídeo” também faz a conta.",
+      "placeholder": "Escolha um peptídeo…",
+      "other": "Outro peptídeo",
+      "useTyped": "Solicitar “{name}”",
+      "notListed": "Não está na lista",
+      "notListedHint": "Sem problema. Clique em Continuar, informe qual peptídeo você procura e envie sua solicitação. Ele poderá ser incluído futuramente.",
+      "otherHint": "O cálculo funciona para qualquer peptídeo. Basta informar a quantidade presente no frasco, em <b>mg</b> ou <b>UI</b>, e a quantidade desejada para visualizar o resultado correspondente.",
+      "measuredIn": "A unidade de medida de {name} é <b>{unitLong}</b>, então todo o cálculo permanece em {unitShort}."
     },
     "unit": {
-      "iuLong": "international units (IU)",
-      "mgLong": "milligrams (mg)"
+      "iuLong": "unidades internacionais (UI)",
+      "mgLong": "miligramas (mg)",
+      "iuShort": "UI",
+      "mgShort": "mg"
     },
     "form": {
-      "question": "Is the {name} a powder or already a liquid?",
-      "subtitle": "Freeze-dried powder needs mixing. An already-liquid vial does not.",
-      "powderTitle": "A powder I mix",
-      "powderSubtitle": "Freeze-dried, needs bacteriostatic water",
-      "liquidTitle": "Already a liquid",
-      "liquidSubtitle": "Pre-mixed in the vial, no water to add",
-      "fallbackName": "peptide"
+      "question": "{name}: é pó ou já é líquido?",
+      "subtitle": "Pó liofilizado precisa ser reconstituído. Um frasco que já vem líquido, não.",
+      "powderTitle": "Um pó para reconstituir",
+      "powderSubtitle": "Liofilizado, precisa de água bacteriostática",
+      "liquidTitle": "Já é líquido",
+      "liquidSubtitle": "Já vem pronto no frasco, sem água a adicionar",
+      "fallbackName": "peptídeo"
     },
     "amount": {
-      "question": "How many {unit} are in the {name} vial?",
-      "subtitlePowder": "Peptides come as a freeze-dried powder sealed in a glass vial. Enter the total amount on the label, not the size of the glass.",
-      "subtitleLiquid": "Enter the total amount of {name} in the vial, printed on the label. Not the size of the glass.",
-      "placeholderIU": "e.g. 5000",
-      "placeholderMg": "e.g. 5",
-      "hint": "Different strength? Type it in the box above in {unit}."
+      "questionIU": "Quantas UI há no frasco de {name}?",
+      "questionMass": "Quantos {unit} há no frasco de {name}?",
+      "unitQuestion": "A quantidade no frasco está em mg ou em UI?",
+      "subtitlePowder": "No frasco, o peptídeo vem em pó liofilizado. Para o cálculo, informe a quantidade que aparece no rótulo, não a capacidade do frasco.",
+      "subtitleLiquid": "Informe a quantidade total de {name} no frasco, impressa no rótulo. Não o tamanho do vidro.",
+      "placeholderIU": "ex.: 5000",
+      "placeholderMg": "ex.: 5",
+      "hint": "Outra quantidade? Digite na caixa acima em {unit}."
     },
     "volume": {
-      "powderQuestion": "How much bacteriostatic water goes in?",
-      "powderSubtitle": "Powder is a two-part mix: the {name} plus bacteriostatic water to dissolve it. Enter the amount of water added to the vial.",
-      "powderPlaceholder": "e.g. 2",
-      "liquidQuestion": "How much total liquid is in the vial?",
-      "liquidSubtitle": "The full volume already in the vial. Check the label (for example, the mL it came in).",
-      "liquidPlaceholder": "e.g. 1"
+      "powderQuestion": "Indique a quantidade de água bacteriostática que será utilizada.",
+      "powderSubtitle": "O pó é uma mistura de duas partes: {name} mais a água bacteriostática que o dissolve. Informe a quantidade de água adicionada ao frasco.",
+      "powderPlaceholder": "ex.: 2",
+      "liquidQuestion": "Qual o volume total de líquido no frasco?",
+      "liquidSubtitle": "O volume completo que já está no frasco. Confira o rótulo (por exemplo, os mL em que veio).",
+      "liquidPlaceholder": "ex.: 1"
     },
     "syringe": {
-      "question": "Pick a syringe",
-      "subtitle": "Most people use an insulin syringe. The mL is how much it holds; the units are the marks along the barrel. We'll show where the dose lands on it."
+      "question": "Escolha uma seringa",
+      "subtitle": "A maioria das pessoas usa seringa de insulina. O mL é quanto ela comporta; as unidades são as marcas ao longo do corpo da seringa. A posição da dose é mostrada nela."
     },
     "barrel": {
       "insulin03": {
-        "label": "Insulin syringe, 0.3 mL (up to 30 units)",
-        "short": "0.3 mL insulin"
+        "label": "Seringa de insulina, 0,3 mL (até 30 unidades)",
+        "short": "seringa de insulina 0,3 mL"
       },
       "insulin05": {
-        "label": "Insulin syringe, 0.5 mL (up to 50 units)",
-        "short": "0.5 mL insulin"
+        "label": "Seringa de insulina, 0,5 mL (até 50 unidades)",
+        "short": "seringa de insulina 0,5 mL"
       },
       "insulin10": {
-        "label": "Insulin syringe, 1 mL (up to 100 units)",
-        "short": "1 mL insulin"
+        "label": "Seringa de insulina, 1 mL (até 100 unidades)",
+        "short": "seringa de insulina 1 mL"
       },
       "im10": {
-        "label": "IM syringe, 1 mL (oil based, marked in mL)",
-        "short": "IM 1 mL"
+        "label": "Seringa IM, 1 mL (base oleosa, marcada em mL)",
+        "short": "seringa IM 1 mL"
       },
       "im30": {
-        "label": "IM syringe, 3 mL (oil based, marked in mL)",
-        "short": "IM 3 mL"
+        "label": "Seringa IM, 3 mL (base oleosa, marcada em mL)",
+        "short": "seringa IM 3 mL"
       }
     },
     "dose": {
-      "question": "What dose do you want to calculate?",
-      "subtitle": "Enter it in {enterUnit}. Only know how many {drawUnit} to draw? Switch the unit below.",
-      "enterUnitIU": "IU",
-      "enterUnitMass": "mg or mcg",
-      "placeholderMg": "e.g. 0.25",
-      "placeholderMcg": "e.g. 250",
-      "placeholderNative": "e.g. 500",
-      "placeholderDraw": "e.g. 25",
-      "neverSuggests": "BuddyPept never suggests a dose. It just does the math for the number you enter. Dosing is a decision for you and your provider."
+      "question": "Qual dose será calculada?",
+      "subtitle": "Informe em {enterUnit}. Para informar quantos {drawUnit} aspirar, troque a unidade abaixo.",
+      "enterUnitIU": "UI",
+      "enterUnitMass": "mg ou mcg",
+      "placeholderMg": "ex.: 0,25",
+      "placeholderMcg": "ex.: 250",
+      "placeholderNative": "ex.: 500",
+      "placeholderDraw": "ex.: 25",
+      "neverSuggests": "O BuddyPept não recomenda doses. Ele apenas calcula o valor informado por você. A definição da dosagem deve ser feita com a orientação de um profissional de saúde habilitado."
     },
-    "units": "units",
+    "units": "unidades",
     "result": {
-      "label": "Calculated draw",
+      "label": "Quanto aspirar",
       "empty": "—",
-      "prompt": "Type a dose below to see the draw.",
-      "sublineInsulin": "that's {ml} mL of {name}",
-      "sublineIM": "of {name}",
-      "peptideFallback": "the peptide",
-      "adjust": "Adjust without going back",
-      "draw": "Draw",
+      "prompt": "Digite uma dose abaixo para ver quanto aspirar.",
+      "sublineInsulin": "isso é {ml} mL de {name}",
+      "sublineIM": "de {name}",
+      "peptideFallback": "o peptídeo",
+      "adjust": "Ajuste sem voltar etapas",
+      "draw": "Aspirar",
       "dose": "Dose",
-      "bacWater": "Bacteriostatic water",
-      "liquidInVial": "Liquid in vial",
-      "vialStrength": "Vial strength",
-      "disclaimer": "This is math, not medical advice. Check it against the vial label and a licensed provider’s guidance before drawing any dose.",
-      "summaryIU": "Dose: {dose} IU · ",
+      "bacWater": "Água bacteriostática",
+      "liquidInVial": "Líquido no frasco",
+      "vialStrength": "Quantidade no frasco",
+      "disclaimer": "O BuddyPept faz apenas o cálculo, não oferece orientação médica. Confira sempre as informações no rótulo do frasco e siga a orientação de um profissional de saúde habilitado.",
+      "summaryIU": "Dose: {dose} UI · ",
       "summaryMass": "Dose: {mcg} mcg = {mg} mg · ",
-      "summaryTail": "Concentration: {conc} {concUnit} · Syringe: {syringe}",
-      "showMath": "Show the math",
-      "hideMath": "Hide the math",
-      "mathLine1": "Vial {unit} ÷ liquid mL = {conc} {concUnit}",
+      "summaryTail": "Concentração: {conc} {concUnit} · Seringa: {syringe}",
+      "showMath": "Ver a conta",
+      "hideMath": "Ocultar a conta",
+      "mathLine1": "{unit} do frasco ÷ mL de líquido = {conc} {concUnit}",
       "mathLine2": "{dose} {unit} ÷ {conc} {concUnit} = {ml} mL",
-      "mathLine3": "{ml} mL × 100 units/mL = {units} units",
-      "changeStep": "Change a step",
-      "startOver": "Start over",
-      "learnTitle": "Want to understand the peptides themselves?",
-      "learnBody": "Free, plain-English guides: what each one is, what it has been studied for, how it is sold, and its legal status.",
-      "learnCta": "Learn about peptides",
-      "genericError": "Something looks off with those numbers."
+      "mathLine3": "{ml} mL × 100 unidades/mL = {units} unidades",
+      "changeStep": "Mudar uma etapa",
+      "startOver": "Começar de novo",
+      "learnTitle": "Mais detalhes sobre os peptídeos em si",
+      "learnBody": "Guias gratuitos, claros e fáceis de entender sobre cada peptídeo: o que é, para que tem sido estudado, como é comercializado e qual sua situação legal.",
+      "learnCta": "Aprender sobre peptídeos",
+      "learnMemberCta": "Já se cadastrou? Abra a biblioteca",
+      "genericError": "Algo parece estranho nesses números."
     },
     "warning": {
-      "doseBelowOneUnit": "Dose is less than 1 syringe unit, so measurement accuracy is poor at this scale. Consider reconstituting with less bacteriostatic water for a higher concentration.",
-      "doseAboveSyringeCapacity": "Dose exceeds 100 units (1 mL on a U-100 syringe), more than a single 1 mL syringe holds. Reconstitute with more bacteriostatic water for a lower concentration.",
-      "concentrationVeryHigh": "Very high peptide concentration. Double-check the vial fully dissolved and that the bacteriostatic water amount is correct.",
-      "iuNotConvertible": "IU (International Units) cannot be reliably converted to mass without substance-specific bioactivity data. Consult the peptide manufacturer or a healthcare professional for the correct IU-to-mass conversion for your specific compound.",
-      "exceedsBarrel": "This dose needs {ml} mL, more than the {syringe} holds ({max} mL). Use a larger syringe, or mix with more water for a weaker concentration."
+      "doseBelowOneUnit": "O resultado é menor que 1 unidade da seringa, o que pode dificultar uma medição precisa nessa escala. Confirme a concentração e a forma de preparo com um profissional de saúde habilitado.",
+      "doseAboveSyringeCapacity": "O resultado ultrapassa 100 unidades (1 mL em uma seringa U-100), excedendo a capacidade de uma seringa de 1 mL. Confirme a concentração e o preparo adequado com um profissional de saúde habilitado.",
+      "concentrationVeryHigh": "Concentração de peptídeo muito alta. Confira se o frasco dissolveu por completo e se a quantidade de água bacteriostática está correta.",
+      "iuNotConvertible": "UI (unidades internacionais) não podem ser convertidas de forma confiável em massa sem dados de bioatividade específicos da substância. Consulte o fabricante do peptídeo ou um profissional de saúde para saber a conversão correta de UI para massa no composto específico.",
+      "exceedsBarrel": "Esta dose precisa de {ml} mL, mais do que a {syringe} comporta ({max} mL). Use uma seringa maior, ou reconstitua com mais água para uma concentração menor."
     }
   },
   "learn": {
-    "title": "Learn about peptides",
-    "intro": "Plain-English, factual summaries: what each peptide is, what it has been studied for, how it is sold, and its legal status. Education only, never medical advice, and never a recommendation to use anything.",
-    "mathTitle": "Need the dosing math?",
-    "mathBody": "The calculator is free and needs no sign-up.",
-    "openCalculator": "Open the calculator",
-    "backToAll": "All peptides",
-    "alsoCalled": "Also called: {aliases}",
-    "whatItIs": "What it is",
-    "studiedFor": "What it has been studied for",
-    "howSold": "How it is usually sold",
-    "legalStatus": "Legal status",
-    "bottomLine": "The honest bottom line",
-    "legalBody": "{status}. Laws vary by location and change over time. Last reviewed: {date}.",
-    "legalBodyResearch": "{status}. Vendors sell it strictly as a research compound (“for research use only,” “not for human consumption”). Laws vary by location and change over time. Last reviewed: {date}.",
-    "disclaimer": "This is general education, not medical advice. BuddyPept does not sell peptides, is not affiliated with any seller, and does not tell anyone to use any peptide. Talk to a licensed healthcare provider.",
-    "doTheMath": "Do the dosing math"
+    "title": "Aprenda sobre peptídeos",
+    "intro": "Informações claras e objetivas sobre cada peptídeo: o que é, para que tem sido estudado, como é comercializado e qual sua situação legal. Conteúdo exclusivamente educativo, sem orientação médica ou recomendação de uso.",
+    "mathTitle": "O cálculo de dosagem",
+    "mathBody": "A calculadora é gratuita e não exige cadastro.",
+    "openCalculator": "Abrir a calculadora",
+    "backToAll": "Todos os peptídeos",
+    "alsoCalled": "Também conhecido por: {aliases}",
+    "whatItIs": "O que é",
+    "studiedFor": "Para que foi estudado",
+    "howSold": "Como costuma ser vendido",
+    "legalStatus": "Status legal",
+    "bottomLine": "O resumo honesto",
+    "legalBody": "{status}. As leis variam conforme o local e mudam com o tempo. Última revisão: {date}.",
+    "legalBodyResearch": "{status}. Os vendedores o comercializam estritamente como composto para pesquisa (“somente para uso em pesquisa”, “não destinado ao consumo humano”). As leis variam conforme o local e mudam com o tempo. Última revisão: {date}.",
+    "disclaimer": "Isto é educação geral, não orientação médica. O BuddyPept não diz a ninguém para usar qualquer peptídeo. Consulte um profissional de saúde habilitado.",
+    "doTheMath": "Fazer o cálculo de dosagem"
   },
   "legalStatus": {
-    "prescription": "Prescription medication",
-    "research-chemical": "Not FDA-approved for human use",
-    "supplement": "Available as a dietary supplement"
+    "prescription": "Medicamento sob prescrição",
+    "research-chemical": "Sem aprovação da FDA para uso humano",
+    "supplement": "Disponível como suplemento alimentar"
   },
   "gate": {
-    "sentTitle": "Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours to unlock the library.",
-    "sentSpam": "Didn’t get it? Check your spam folder.",
-    "title": "Read the full guide, free",
-    "body": "Pop in your name and email to unlock the full peptide library. We send one confirmation email; click the link and you’re in.",
-    "firstName": "First name",
-    "emailPlaceholder": "you@example.com",
-    "submitting": "Sending the link…",
-    "submit": "Send me the link",
-    "privacy": "We use your email only to share peptide education and occasional updates. We never sell your data.",
-    "genericError": "Something went wrong. Please try again.",
-    "networkError": "Network error. Please try again."
+    "sentTitle": "Confira o e-mail",
+    "sentBody": "Um link de confirmação foi enviado para <b>{email}</b>. Clique nele em até 24 horas para liberar a biblioteca.",
+    "sentSpam": "Não chegou? Confira a caixa de spam.",
+    "title": "Leia o guia completo, gratuitamente",
+    "body": "Informe um nome e um e-mail para liberar a biblioteca completa de peptídeos. É enviado um único e-mail de confirmação; clicar no link conclui o acesso.",
+    "firstName": "Nome",
+    "emailPlaceholder": "nome@exemplo.com",
+    "submitting": "Enviando o link…",
+    "submit": "Enviar o link",
+    "privacy": "O e-mail é usado apenas para compartilhar educação sobre peptídeos e novidades ocasionais. Os dados nunca são vendidos.",
+    "genericError": "Algo deu errado. Tente novamente.",
+    "networkError": "Erro de conexão. Tente novamente."
   },
   "confirm": {
-    "browseLibrary": "Browse the library",
-    "backHome": "Back to BuddyPept",
-    "successKicker": "Confirmed",
-    "successTitle": "You’re in! 🎉",
-    "successBody": "Welcome to the BuddyPept community. We’ll keep you posted as the library and the community grow.",
-    "alreadyKicker": "Already confirmed",
-    "alreadyTitle": "You’re already in.",
-    "alreadyBody": "This email is already confirmed. No need to do it again.",
-    "invalidKicker": "Link not recognised",
-    "invalidTitle": "Hmm, that link did not work.",
-    "invalidBody": "It might be old, mistyped, or already used. Try signing up again on the homepage and we’ll send you a fresh confirmation email.",
-    "errorKicker": "Something went wrong",
-    "errorTitle": "We had a hiccup.",
-    "errorBody": "Please try the link again in a minute. If it keeps failing, sign up again from the homepage and we’ll send a fresh email."
+    "browseLibrary": "Explorar a biblioteca",
+    "backHome": "Voltar ao BuddyPept",
+    "successKicker": "Confirmado",
+    "successTitle": "Você está dentro! 🎉",
+    "successBody": "Boas-vindas à comunidade BuddyPept. Haverá novidades conforme a biblioteca e a comunidade crescerem.",
+    "alreadyKicker": "Já confirmado",
+    "alreadyTitle": "Este e-mail já foi confirmado.",
+    "alreadyBody": "Não é preciso fazer mais nada.",
+    "invalidKicker": "Link não reconhecido",
+    "invalidTitle": "Esse link não funcionou.",
+    "invalidBody": "O link pode ter expirado, já ter sido utilizado ou estar incorreto. Volte à página inicial, faça o cadastro novamente e enviaremos um novo e-mail de confirmação.",
+    "errorKicker": "Algo deu errado",
+    "errorTitle": "Houve um problema temporário.",
+    "errorBody": "Tente o link de novo em um minuto. Se continuar falhando, cadastre-se novamente na página inicial para receber um novo e-mail."
   },
   "community": {
-    "title": "Join the community",
-    "body": "We’re building a friendly community for people learning about peptides, and we’d love for you to be part of it. No pressure, just learning together.",
-    "cta": "I want in",
-    "close": "Close",
-    "sentTitle": "Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours to finish joining. Didn’t get it? Check your spam folder.",
-    "gotIt": "Got it",
-    "modalTitle": "Let’s learn together",
-    "modalBody": "Add your name and email and we’ll welcome you in and keep you posted as the community grows.",
-    "firstName": "First name",
-    "emailPlaceholder": "you@example.com",
-    "submitting": "Sending the link…",
-    "submit": "Count me in",
-    "later": "Maybe later",
-    "genericError": "Something went wrong. Please try again.",
-    "networkError": "Network error. Please try again."
+    "title": "Entre na comunidade",
+    "body": "O BuddyPept é um espaço para aprender e entender mais sobre peptídeos de forma simples e clara. Uma comunidade focada em informação, troca de conhecimento e aprendizado, sem pressão.",
+    "cta": "Participar",
+    "close": "Fechar",
+    "sentTitle": "Confira o e-mail",
+    "sentBody": "Um link de confirmação foi enviado para <b>{email}</b>. Clique nele em até 24 horas para concluir o cadastro. Não chegou? Confira a caixa de spam.",
+    "gotIt": "Entendi",
+    "modalTitle": "Vamos aprender juntos",
+    "modalBody": "Informe um nome e um e-mail para concluir o cadastro e receber novidades conforme a comunidade crescer.",
+    "firstName": "Nome",
+    "emailPlaceholder": "nome@exemplo.com",
+    "submitting": "Enviando o link…",
+    "submit": "Entrar na comunidade",
+    "later": "Talvez depois",
+    "genericError": "Algo deu errado. Tente novamente.",
+    "networkError": "Erro de conexão. Tente novamente."
   },
   "popup": {
-    "close": "Close",
-    "sentTitle": "Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours to finish joining. Didn’t get it? Check your spam folder.",
-    "gotIt": "Got it",
-    "title": "You’re a genius! 🎉",
-    "body1": "The mg-to-units math trips up almost everyone, and you just cracked it.",
-    "body2": "We’re building a community for people learning about peptides. Want in? Add your name and email and we’ll keep you posted as it grows.",
-    "firstName": "First name",
-    "emailPlaceholder": "you@example.com",
-    "submitting": "Sending the link…",
-    "submit": "Count me in",
-    "later": "Maybe later",
-    "genericError": "Something went wrong. Please try again.",
-    "networkError": "Network error. Please try again."
+    "close": "Fechar",
+    "sentTitle": "Confira o e-mail",
+    "sentBody": "Um link de confirmação foi enviado para <b>{email}</b>. Clique nele em até 24 horas para concluir o cadastro. Não chegou? Confira a caixa de spam.",
+    "gotIt": "Entendi",
+    "title": "Você é um gênio! 🎉",
+    "body1": "A conta de mg para unidades derruba quase todo mundo. Essa etapa já está resolvida.",
+    "body2": "O BuddyPept está construindo uma comunidade para quem está aprendendo sobre peptídeos. Informe um nome e um e-mail para receber novidades conforme ela crescer.",
+    "firstName": "Nome",
+    "emailPlaceholder": "nome@exemplo.com",
+    "submitting": "Enviando o link…",
+    "submit": "Entrar na comunidade",
+    "later": "Talvez depois",
+    "genericError": "Algo deu errado. Tente novamente.",
+    "networkError": "Erro de conexão. Tente novamente."
   },
   "requestForm": {
-    "sentTitle": "📬 Check your email",
-    "sentBody": "We sent a confirmation link to <b>{email}</b>. Click it within 24 hours and we’ll email you when {peptide} is added.",
-    "sentFallbackPeptide": "the peptide",
-    "sentSpam": "Didn’t get it? Check your spam folder.",
-    "nameLabel": "Your name",
-    "firstName": "First name",
-    "emailLabel": "Your email",
-    "emailPlaceholder": "you@example.com",
-    "peptideLabel": "Which peptide do you want added?",
-    "peptidePlaceholder": "e.g., HGH, HCG, Tesamorelin",
-    "submitting": "Sending…",
-    "submit": "Notify me when it’s ready",
-    "privacy": "We use your email only to tell you when this peptide is added. No spam, no selling your data.",
-    "genericError": "Something went wrong. Please try again.",
-    "networkError": "Network error. Please try again."
+    "sentTitle": "Confira o e-mail",
+    "sentBody": "Um link de confirmação foi enviado para <b>{email}</b>. Clique nele em até 24 horas para receber um aviso por e-mail quando {peptide} for adicionado.",
+    "sentFallbackPeptide": "o peptídeo",
+    "sentSpam": "Não chegou? Confira a caixa de spam.",
+    "doMathBody": "Enquanto isso, a calculadora já pode fazer a conta.",
+    "doMathCta": "Fazer a conta agora",
+    "nameLabel": "Nome",
+    "firstName": "Nome",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "nome@exemplo.com",
+    "peptideLabel": "Qual peptídeo deve ser adicionado?",
+    "suggestTitle": "Seria {name}?",
+    "suggestAccept": "Sim, {name}",
+    "suggestKeep": "Não, manter o que foi digitado",
+    "availableTitle": "{name} já está na calculadora.",
+    "availableBody": "Não é preciso esperar um e-mail. Abra e faça a conta agora.",
+    "availableCta": "Abrir {name}",
+    "availableDifferent": "É outro peptídeo",
+    "peptidePlaceholder": "ex.: HGH, HCG, Tesamorelina",
+    "submitting": "Enviando…",
+    "submit": "Avise-me quando estiver pronto",
+    "privacy": "O e-mail é usado apenas para avisar quando este peptídeo for adicionado. Sem spam, sem venda de dados.",
+    "genericError": "Algo deu errado. Tente novamente.",
+    "networkError": "Erro de conexão. Tente novamente."
   },
   "legal": {
     "disclaimer": {
-      "title": "Medical Disclaimer",
-      "lastUpdated": "May 25, 2026",
+      "title": "Aviso médico",
+      "lastUpdated": "25 de maio de 2026",
       "intro": [
-        "BuddyPept is a free educational tool that helps people understand peptide reconstitution and dosing math. Please read this page before using the calculator or anything else on the site."
+        "O BuddyPept é uma ferramenta educativa gratuita que ajuda as pessoas a entender a reconstituição de peptídeos e o cálculo de dosagem. Leia esta página antes de usar a calculadora ou qualquer outra parte do site."
       ],
       "sections": [
         {
-          "title": "This is education, not medical advice",
-          "body": "Everything on BuddyPept is for general informational and educational purposes only. It is not medical advice, and it is not a substitute for the judgment of a licensed healthcare provider. We do not diagnose conditions, treat illness, prescribe anything, or tell you whether a peptide is safe or appropriate for you."
+          "title": "Isto é educação, não orientação médica",
+          "body": "Tudo no BuddyPept tem finalidade exclusivamente informativa e educativa. Não é orientação médica e não substitui o julgamento de um profissional de saúde habilitado. O BuddyPept não diagnostica condições, não trata doenças, não prescreve nada e não informa se um peptídeo é seguro ou adequado para alguma pessoa."
         },
         {
-          "title": "We do not recommend doses",
-          "body": "The calculator does only the math you ask it to do. You enter the amounts (what is in the vial, how much water, the intended dose), and it converts those numbers between units. It never suggests a dose, a frequency, or a protocol. Any dose you enter is one you decided on with your healthcare provider, not one BuddyPept chose for you."
+          "title": "O BuddyPept não recomenda doses",
+          "body": "O BuddyPept apenas faz os cálculos com os valores informados por você: quantidade no frasco, quantidade de água e dose pretendida. A calculadora converte esses valores entre as diferentes unidades.\n\nO BuddyPept não recomenda doses, frequência ou protocolos de uso. Essas decisões devem ser tomadas com a orientação de um profissional de saúde habilitado."
         },
         {
-          "title": "No doctor-patient relationship",
-          "body": "Using this website does not create a doctor-patient, provider-patient, or any professional relationship between you and BuddyPept or anyone associated with it. We are not your healthcare provider."
+          "title": "Nenhuma relação médico-paciente",
+          "body": "Usar este site não cria relação médico-paciente, profissional-paciente nem qualquer relação profissional entre o usuário e o BuddyPept ou qualquer pessoa ligada a ele. O BuddyPept não é um profissional de saúde."
         },
         {
-          "title": "Not evaluated by the FDA",
-          "body": "The statements on this website have not been evaluated by the U.S. Food and Drug Administration. Nothing on BuddyPept is intended to diagnose, treat, cure, or prevent any disease."
+          "title": "Não avaliado pela FDA",
+          "body": "As afirmações deste site não foram avaliadas pela Food and Drug Administration dos Estados Unidos. Nada no BuddyPept se destina a diagnosticar, tratar, curar ou prevenir qualquer doença."
         },
         {
-          "title": "We don't sell peptides",
-          "body": "BuddyPept is not a pharmacy, a compounding facility (as defined under Section 503A of the Federal Food, Drug, and Cosmetic Act), an outsourcing facility (Section 503B), or a peptide seller of any kind. We do not sell, supply, or ship any product, and we are not affiliated with any company that does. We do not endorse, recommend, or link to any seller. If you obtain a peptide somewhere else, that is between you and that seller, and we are not responsible for it or for its quality, legality, or safety."
+          "title": "Sobre os peptídeos especificamente",
+          "body": "Muitos peptídeos não são aprovados pela FDA ou por outros órgãos reguladores para uso humano, e seu status legal varia conforme o país e ao longo do tempo. As empresas que os vendem costumam fazê-lo estritamente como compostos para pesquisa, rotulados como “somente para uso em pesquisa” e “não destinado ao consumo humano”. O BuddyPept explica a matemática e a ciência. Ele não vende esses compostos, não incentiva ninguém a usá-los em uma pessoa e não afirma que fazer isso é seguro ou legal. Se um peptídeo é legal em determinado local, e se algum uso é adequado, é uma decisão do usuário com um profissional habilitado. O usuário é responsável por cumprir as leis aplicáveis."
         },
         {
-          "title": "About peptides specifically",
-          "body": "Many peptides are not approved by the FDA or other regulators for human use, and their legal status varies by country and over time. Companies that sell them often do so strictly as research compounds, labeled “for research use only” and “not for human consumption.” BuddyPept explains the math and the science. It does not sell these compounds, does not encourage anyone to use them in a person, and does not tell you that doing so is safe or legal. Whether a peptide is legal where you live, and whether any use is right for you, is for you and a licensed professional to decide. You are responsible for following the laws that apply to you."
+          "title": "Precisão e responsabilidade do usuário",
+          "body": "O BuddyPept busca manter seus cálculos claros e precisos, mas não pode garantir que um resultado seja adequado para cada situação. Sempre confira os valores com as informações do rótulo e com a orientação de um profissional de saúde habilitado antes de tomar qualquer decisão.\n\nÉ responsabilidade do usuário verificar se os dados informados e os resultados obtidos estão corretos."
         },
         {
-          "title": "Accuracy and your responsibility",
-          "body": "We work hard to keep the math correct, but we cannot guarantee that any result is accurate or appropriate for your specific situation. Always double-check any result against the vial label and a licensed provider’s guidance before acting on it. You are responsible for verifying the numbers you enter and the numbers you act on."
+          "title": "Assunção de risco e limitação de responsabilidade",
+          "body": "O uso do BuddyPept é de responsabilidade do usuário. Na máxima extensão permitida por lei, o BuddyPept e seus responsáveis não se responsabilizam por danos, perdas ou prejuízos decorrentes do uso do site ou das informações e resultados nele apresentados."
         },
         {
-          "title": "Assumption of risk and limitation of liability",
-          "body": "You use BuddyPept at your own risk. To the fullest extent allowed by law, BuddyPept and the people behind it are not liable for any harm, loss, or damages of any kind arising from your use of the site or reliance on anything it shows you."
+          "title": "Em uma emergência",
+          "body": "O BuddyPept não serve para emergências médicas. Diante de uma possível emergência médica, ligue para o número de emergência local (911) ou procure um profissional de saúde imediatamente."
         },
         {
-          "title": "In an emergency",
-          "body": "BuddyPept is not for medical emergencies. If you think you are having a medical emergency, call your local emergency number (911 in the US) or contact a healthcare professional immediately."
-        },
-        {
-          "title": "Questions",
-          "body": "Questions about this disclaimer can be sent to <b>hello@buddypept.com</b>."
+          "title": "Dúvidas",
+          "body": "Dúvidas sobre este aviso podem ser enviadas para <b>hello@buddypept.com</b>."
         }
       ]
     },
     "terms": {
-      "title": "Terms of Service",
-      "lastUpdated": "May 25, 2026",
+      "title": "Termos de uso",
+      "lastUpdated": "14 de agosto de 2026",
       "intro": [
-        "These terms cover your use of BuddyPept (the “Service”). By using the Service, you agree to them. If you do not agree, please do not use the Service."
+        "Estes termos regem o uso do BuddyPept (o “Serviço”). O uso do Serviço implica a aceitação destes termos. Quem não concordar com eles não deve usar o Serviço."
       ],
       "sections": [
         {
-          "title": "What BuddyPept is",
-          "body": "BuddyPept is a free educational tool for peptide reconstitution and dosing math, plus plain-language information about common peptides. It is provided for general informational purposes only."
+          "title": "O que é o BuddyPept",
+          "body": "O BuddyPept é uma ferramenta educativa e gratuita que facilita cálculos relacionados à reconstituição e dosagem de peptídeos, além de oferecer informações claras e fáceis de entender sobre os peptídeos mais conhecidos. Todo o conteúdo é disponibilizado exclusivamente para fins educativos e informativos."
         },
         {
-          "title": "Not medical advice",
-          "body": "The Service does not provide medical advice and does not recommend doses. Please read our <disclaimerLink>Medical Disclaimer</disclaimerLink>, which is part of these terms. You are responsible for verifying any result and for any decisions you make."
+          "title": "Não é orientação médica",
+          "body": "O Serviço não fornece orientação médica e não recomenda doses. O <disclaimerLink>Aviso médico</disclaimerLink> faz parte destes termos e deve ser lido na íntegra. O usuário é responsável por verificar qualquer resultado e por qualquer decisão que tomar."
         },
         {
-          "title": "Acceptable use",
-          "body": "Use the Service lawfully and for your own personal, educational purposes. Do not misuse it, attempt to break or overload it, copy it to pass off as your own, or use it to harm others."
+          "title": "Uso aceitável",
+          "body": "Use o BuddyPept de forma responsável, dentro da lei e para fins pessoais e educativos. Não tente danificar, sobrecarregar ou utilizar indevidamente o serviço, copiar seu conteúdo como se fosse seu ou usá-lo de forma que possa prejudicar outras pessoas."
         },
         {
-          "title": "No warranties",
-          "body": "The Service is provided “as is” and “as available,” without warranties of any kind, express or implied. We do not warrant that the Service will be accurate, error-free, uninterrupted, or suitable for your situation."
+          "title": "Sem garantias",
+          "body": "O Serviço é fornecido “no estado em que se encontra” e “conforme disponível”, sem garantias de qualquer natureza, expressas ou implícitas. O BuddyPept não garante que o Serviço será preciso, livre de erros, ininterrupto ou adequado a determinada situação."
         },
         {
-          "title": "Limitation of liability",
-          "body": "To the fullest extent allowed by law, BuddyPept and the people behind it are not liable for any indirect, incidental, or consequential damages, or for any harm or loss arising from your use of, or reliance on, the Service."
+          "title": "Limitação de responsabilidade",
+          "body": "Na máxima extensão permitida em lei, o BuddyPept e as pessoas por trás dele não se responsabilizam por danos indiretos, incidentais ou consequentes, nem por qualquer prejuízo ou perda decorrente do uso do Serviço ou da confiança nele."
         },
         {
-          "title": "Intellectual property",
-          "body": "The BuddyPept name, content, and design belong to BuddyPept. You may use the Service for your own personal use, but you may not copy, resell, or redistribute it without permission."
+          "title": "Propriedade intelectual",
+          "body": "O nome, o conteúdo e o design do BuddyPept pertencem ao BuddyPept. O Serviço pode ser usado para uso pessoal, mas não pode ser copiado, revendido ou redistribuído sem autorização."
         },
         {
-          "title": "Third-party services",
-          "body": "The Service runs on third-party providers (for hosting, data storage, and email). Their handling of data is covered in our <privacyLink>Privacy Policy</privacyLink>."
+          "title": "Serviços de terceiros",
+          "body": "O Serviço funciona sobre provedores terceiros (para hospedagem, armazenamento de dados e e-mail). O tratamento de dados por eles está descrito na <privacyLink>Política de privacidade</privacyLink>."
         },
         {
-          "title": "Changes",
-          "body": "We may update the Service or these terms over time. If we make meaningful changes, we will update the date at the top of this page. Continuing to use the Service means you accept the current terms."
+          "title": "Alterações",
+          "body": "O BuddyPept pode atualizar o serviço ou estes termos sempre que necessário. Alterações importantes serão indicadas pela data de atualização no topo desta página. Ao continuar utilizando o BuddyPept, você concorda com os termos vigentes."
         },
         {
-          "title": "Governing law",
-          "body": "These terms are governed by the laws of [your home state], without regard to conflict-of-law rules."
+          "title": "Lei aplicável",
+          "body": "Estes termos são regidos pelas leis do estado de Utah, sem considerar as regras de conflito de leis."
         },
         {
-          "title": "Contact",
-          "body": "Questions about these terms can be sent to <b>hello@buddypept.com</b>."
+          "title": "Contato",
+          "body": "Dúvidas sobre estes termos podem ser enviadas para <b>hello@buddypept.com</b>."
         }
       ]
     },
     "privacy": {
-      "title": "Privacy Policy",
-      "lastUpdated": "May 25, 2026",
+      "title": "Política de privacidade",
+      "lastUpdated": "14 de agosto de 2026",
       "intro": [
-        "Privacy is part of how BuddyPept is built. We keep what we collect to the bare minimum, we never sell it, and we do not track you around the web. Here is exactly what that means."
+        "Privacidade faz parte da forma como o BuddyPept foi construído. Coleta-se o mínimo possível e os dados nunca são vendidos."
       ],
       "sections": [
         {
-          "title": "What we collect",
-          "body": "Only your name and email address, and only when you choose to submit the “request a peptide” form, along with the name of the peptide you asked us to add. That is the only personal information we collect."
+          "title": "O que é coletado",
+          "body": [
+            "A calculadora é gratuita, não exige cadastro e não coleta nada. Um nome e um endereço de e-mail são coletados apenas ao enviar o formulário “peça um peptídeo”, junto com o nome do peptídeo solicitado.",
+            "Outras ferramentas de pesquisa podem solicitar informações do pesquisador quando necessário. Qualquer informação desse tipo é fornecida voluntariamente e coletada somente com o conhecimento e o consentimento do pesquisador.",
+            "O BuddyPept continua adicionando ferramentas, então o que é coletado pode mudar com o tempo. Esta política é atualizada sempre que isso acontece."
+          ]
         },
         {
-          "title": "What we do not collect",
-          "body": "We do not ask for or store any health data: no height, weight, age, gender, conditions, or anything about your treatment. The dose numbers you type into the calculator are processed in your browser to show the result; we do not save them. We do not use third-party advertising or tracking pixels."
+          "title": "O que não é coletado",
+          "body": [
+            "A calculadora do BuddyPept não solicita nem armazena informações pessoais de saúde. Os dados informados na calculadora são processados no navegador apenas para gerar resultados e não são salvos.",
+            "O BuddyPept não usa publicidade de terceiros nem pixels de rastreamento."
+          ]
         },
         {
-          "title": "How we use your information",
-          "body": "We use your name and email for one purpose: to email you when the peptide you requested is added to the library. We do not add you to unrelated marketing without your say-so."
+          "title": "Como as informações são usadas",
+          "body": "O nome e o e-mail são usados com uma única finalidade: avisar por e-mail quando o peptídeo solicitado for adicionado à biblioteca. Os endereços não são incluídos em comunicações de marketing não relacionadas sem consentimento."
         },
         {
-          "title": "Who we share it with",
-          "body": "We never sell your information. We use a small number of trusted service providers to run the site, such as hosting, database, and email delivery. They process data only to provide those services to us. We share your information with them only as needed for that, or if required by law."
+          "title": "Com quem são compartilhadas",
+          "body": "As informações pessoais nunca são vendidas. Um pequeno número de prestadores de serviço confiáveis opera o site, em hospedagem, banco de dados e envio de e-mail. Eles processam dados apenas para prestar esses serviços ao BuddyPept. As informações são compartilhadas com eles somente na medida necessária para isso, ou se exigido por lei."
         },
         {
-          "title": "Keeping it, and your choices",
-          "body": "We keep your request only as long as needed to follow up with you. You can ask us to show you what we have or to delete it at any time by emailing us, and we will honor that."
+          "title": "Retenção e escolhas",
+          "body": "Um pedido é guardado apenas pelo tempo necessário para retornar o contato. A qualquer momento é possível pedir por e-mail para ver as informações armazenadas ou para apagá-las, e o pedido será atendido."
         },
         {
-          "title": "Security",
-          "body": "We take reasonable steps to protect your information, but no method of storage or transmission over the internet is completely secure, so we cannot guarantee absolute security."
+          "title": "Segurança",
+          "body": "São adotadas medidas razoáveis para proteger as informações pessoais, mas nenhum método de armazenamento ou transmissão pela internet é totalmente seguro, então não é possível garantir segurança absoluta."
         },
         {
-          "title": "Children",
-          "body": "BuddyPept is not directed to children and is intended for adults. We do not knowingly collect information from minors."
+          "title": "Crianças",
+          "body": "O BuddyPept não é direcionado a crianças e destina-se a adultos. Informações de menores de idade não são coletadas intencionalmente."
         },
         {
-          "title": "Changes",
-          "body": "If we change this policy, we will update the date at the top of this page."
+          "title": "Alterações",
+          "body": "Sempre que esta política for alterada, a data de atualização no topo da página será atualizada."
         },
         {
-          "title": "Contact",
-          "body": "Questions or requests about your data can be sent to <b>hello@buddypept.com</b>."
+          "title": "Contato",
+          "body": "Dúvidas ou solicitações sobre dados pessoais podem ser enviadas para <b>hello@buddypept.com</b>."
         }
       ]
     },
-    "lastUpdatedLabel": "Last updated: {date}"
+    "lastUpdatedLabel": "Última atualização: {date}"
   },
   "syringe": {
-    "units": "units",
-    "over": "This dose is bigger than the {syringe} holds. Pick a larger syringe.",
-    "markedAt": "Marked at <b>{amount} {unit}</b>",
-    "empty": "Enter a dose to see where it lands on the syringe."
+    "units": "unidades",
+    "over": "Esta dose é maior do que a {syringe} comporta. Escolha uma seringa maior.",
+    "markedAt": "Marcado em <b>{amount} {unit}</b>",
+    "empty": "Informe uma dose para ver onde ela cai na seringa."
   },
   "peptideEducation": {
     "semaglutide": {
-      "teaser": "An FDA-approved GLP-1 medicine for diabetes and weight.",
-      "whatItIs": "A GLP-1 receptor agonist.",
-      "studiedFor": "FDA-approved for type 2 diabetes (Ozempic) and weight management (Wegovy), and studied in large clinical trials. Rybelsus is an oral form for diabetes.",
-      "howSold": "By prescription as a pre-filled pen or vial (Ozempic, Wegovy) or tablets (Rybelsus). It is also sold by gray-market vendors as a research powder, which is not the approved product.",
-      "bottomLine": "Semaglutide is an FDA-approved prescription medicine. The approved product comes through a licensed provider and pharmacy, and decisions about it belong with them."
+      "teaser": "Um medicamento GLP-1 aprovado pela FDA para diabetes e peso.",
+      "whatItIs": "Um agonista do receptor de GLP-1.",
+      "studiedFor": "Aprovado pela FDA para diabetes tipo 2 (Ozempic) e controle de peso (Wegovy), e estudado em grandes ensaios clínicos. O Rybelsus é uma forma oral para diabetes.",
+      "howSold": "Sob prescrição, como caneta pré-preenchida ou frasco (Ozempic, Wegovy) ou comprimidos (Rybelsus). Também é vendido por fornecedores do mercado paralelo como pó para pesquisa, que não é o produto aprovado.",
+      "bottomLine": "A semaglutida é um medicamento que exige prescrição e possui usos aprovados pela FDA. O tratamento deve ser prescrito e acompanhado por um profissional de saúde habilitado, e o medicamento deve ser obtido por canais autorizados."
     },
     "bpc-157": {
-      "teaser": "A lab-made peptide studied in animals for tissue repair.",
-      "whatItIs": "A synthetic peptide, a short chain of amino acids based on a sequence found in a protein in gastric juice. It is made in a lab.",
-      "studiedFor": "In published preclinical work, mostly animal and laboratory studies, it has been examined for tissue repair, tendon and ligament healing, and gastrointestinal effects. These are early research findings, not proven results in people.",
-      "howSold": "As a freeze-dried powder in glass vials, commonly 5 mg or 10 mg, mixed with bacteriostatic water before use.",
-      "bottomLine": "The science is early and mostly preclinical. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+      "teaser": "Um peptídeo sintético estudado em animais para reparo tecidual.",
+      "whatItIs": "Um peptídeo sintético, uma cadeia curta de aminoácidos baseada em uma sequência encontrada em uma proteína do suco gástrico. É produzido em laboratório.",
+      "studiedFor": "Em trabalhos pré-clínicos publicados, sobretudo estudos em animais e em laboratório, foi examinado para reparo tecidual, cicatrização de tendões e ligamentos e efeitos gastrointestinais. São achados iniciais de pesquisa, não resultados comprovados em pessoas.",
+      "howSold": "Como pó liofilizado em frascos de vidro, comumente de 5 mg ou 10 mg, reconstituído com água bacteriostática antes do uso.",
+      "bottomLine": "As pesquisas ainda estão em estágio inicial e são, em sua maioria, pré-clínicas. Qualquer decisão sobre uso, segurança ou adequação deve ser avaliada individualmente com um profissional de saúde habilitado, considerando também as normas aplicáveis."
     },
     "tb-500": {
-      "teaser": "A synthetic fragment of a natural protein, studied for repair.",
-      "whatItIs": "A synthetic version of a fragment of thymosin beta-4, a protein that occurs naturally in the body. It is made in a lab.",
-      "studiedFor": "Preclinical studies have looked at it for tissue repair, wound healing, and inflammation in animal and laboratory models. These are research findings, not proven effects in people.",
-      "howSold": "As a freeze-dried powder in glass vials, commonly 5 mg or 10 mg, reconstituted with bacteriostatic water.",
-      "bottomLine": "The evidence is largely preclinical. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+      "teaser": "Um fragmento sintético de uma proteína natural, estudado para reparo.",
+      "whatItIs": "Uma versão sintética de um fragmento da timosina beta-4, uma proteína que ocorre naturalmente no corpo. É produzido em laboratório.",
+      "studiedFor": "Estudos pré-clínicos o examinaram para reparo tecidual, cicatrização de feridas e inflamação em modelos animais e de laboratório. São achados de pesquisa, não efeitos comprovados em pessoas.",
+      "howSold": "Como pó liofilizado em frascos de vidro, comumente de 5 mg ou 10 mg, reconstituído com água bacteriostática.",
+      "bottomLine": "As evidências são majoritariamente pré-clínicas. Se é adequado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
     "ghk-cu": {
-      "teaser": "A copper peptide common in skincare and studied for repair.",
-      "whatItIs": "A copper-binding peptide (copper tripeptide-1) that occurs naturally in human plasma, with levels that decline with age. It is produced synthetically for products.",
-      "studiedFor": "Studied for skin remodeling, hair, and wound healing. It is widely used in topical cosmetics and has been examined as an injectable in research settings.",
-      "howSold": "As a powder in vials (often 50 mg or 100 mg) for reconstitution, and in many topical skincare products.",
-      "bottomLine": "Topical cosmetic use is common; injectable use is research-stage. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+      "teaser": "Um peptídeo de cobre comum em cosméticos para a pele e estudado para reparo.",
+      "whatItIs": "Um peptídeo que se liga ao cobre (tripeptídeo-1 de cobre), presente naturalmente no plasma humano, com níveis que diminuem com a idade. É produzido sinteticamente para uso em produtos.",
+      "studiedFor": "Estudado para remodelação da pele, cabelo e cicatrização de feridas. É bastante usado em cosméticos tópicos e foi examinado como injetável em contextos de pesquisa.",
+      "howSold": "Como pó em frascos (muitas vezes de 50 mg ou 100 mg) para reconstituição, e em muitos produtos tópicos para a pele.",
+      "bottomLine": "O uso cosmético tópico é comum; o uso injetável está em fase de pesquisa. Se é adequado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
     "ipamorelin": {
-      "teaser": "A peptide studied for how the body releases growth hormone.",
-      "whatItIs": "A synthetic peptide that signals the pituitary gland. It is classed as a growth hormone secretagogue.",
-      "studiedFor": "Researched for its effect on the body’s own growth hormone release, often discussed alongside CJC-1295. Findings are largely preclinical.",
-      "howSold": "As a powder in vials (commonly 2, 5, or 10 mg), reconstituted with bacteriostatic water. Often paired with CJC-1295.",
-      "bottomLine": "The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+      "teaser": "Um peptídeo estudado por como o corpo libera hormônio do crescimento.",
+      "whatItIs": "Um peptídeo sintético que sinaliza para a hipófise. É classificado como secretagogo do hormônio do crescimento.",
+      "studiedFor": "Pesquisado por seu efeito sobre a liberação do próprio hormônio do crescimento do corpo, muitas vezes discutido junto com o CJC-1295. Os achados são majoritariamente pré-clínicos.",
+      "howSold": "Como pó em frascos (comumente 2, 5 ou 10 mg), reconstituído com água bacteriostática. Frequentemente combinado com o CJC-1295.",
+      "bottomLine": "A pesquisa é inicial. Se é adequado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
-    "cjc-1295": {
-      "teaser": "A growth-hormone-releasing-hormone analog studied in research.",
-      "whatItIs": "A synthetic analog of growth hormone releasing hormone (GHRH). It exists in two forms, with and without DAC, which differ in how long they last in the body.",
-      "studiedFor": "Examined for its influence on the body’s growth hormone release, and commonly studied together with ipamorelin. Findings are largely preclinical.",
-      "howSold": "As a powder in vials (commonly 2 or 5 mg), reconstituted with bacteriostatic water.",
-      "bottomLine": "The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    "cjc-1295-dac": {
+      "teaser": "Um análogo de GHRH de ação prolongada, dosado por semana.",
+      "whatItIs": "Um análogo sintético do hormônio liberador do hormônio do crescimento (GHRH) que carrega um Complexo de Afinidade a Fármaco (DAC). O DAC se liga à albumina sérica no sangue, e é isso que mantém a molécula circulando por dias em vez de minutos.",
+      "studiedFor": "Examinado por sua influência na liberação do próprio hormônio do crescimento do corpo. Os trabalhos publicados relatam uma meia-vida de cerca de 6 a 8 dias, que é justamente a propriedade que o DAC existe para criar. Os achados são majoritariamente pré-clínicos.",
+      "howSold": "Como pó em frascos, comumente de 2 ou 5 mg, reconstituído com água bacteriostática. Vendido por fornecedores de pesquisa, não como medicamento aprovado.",
+      "bottomLine": "O DAC é toda a diferença. É dosado em ritmo semanal porque é eliminado ao longo de dias, e não é intercambiável com a versão sem DAC. A pesquisa é inicial. Se é apropriado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
+    },
+    "cjc-1295-no-dac": {
+      "teaser": "GRF modificado (1-29), um análogo de GHRH de ação curta.",
+      "whatItIs": "Um análogo sintético do hormônio liberador do hormônio do crescimento (GHRH) sem o Complexo de Afinidade a Fármaco. A molécula é chamada com mais precisão de GRF modificado (1-29) e não carrega nenhum grupo que se ligue à albumina.",
+      "studiedFor": "Examinado por sua influência na liberação do próprio hormônio do crescimento do corpo, e comumente estudado junto com a ipamorelina. Os trabalhos publicados relatam uma meia-vida de cerca de 30 minutos. Os achados são majoritariamente pré-clínicos.",
+      "howSold": "Como pó em frascos, comumente de 2, 5 ou 10 mg, reconstituído com água bacteriostática. Vendido por fornecedores de pesquisa, não como medicamento aprovado.",
+      "bottomLine": "Apesar de dividir o nome, esta não é a versão com DAC em outro horário. É eliminada em cerca de meia hora em vez de dias, e por isso aparece nos protocolos com uma frequência muito diferente. A pesquisa é inicial. Se é apropriado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
     "sermorelin": {
-      "teaser": "A prescription GHRH analog used in some hormone protocols.",
-      "whatItIs": "A synthetic analog of growth hormone releasing hormone (GHRH).",
-      "studiedFor": "FDA-approved (as Geref) for diagnostic testing of pituitary function, and prescribed off-label in some anti-aging and hormone protocols.",
-      "howSold": "By prescription, including from compounding pharmacies, as a powder for reconstitution (commonly 2 to 15 mg vials).",
-      "bottomLine": "Sermorelin is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider."
+      "teaser": "Um análogo de GHRH sob prescrição usado em alguns protocolos hormonais.",
+      "whatItIs": "Um análogo sintético do hormônio liberador do hormônio do crescimento (GHRH).",
+      "studiedFor": "Aprovado pela FDA (como Geref) para testes diagnósticos da função hipofisária, e prescrito off-label em alguns protocolos hormonais e antienvelhecimento.",
+      "howSold": "Sob prescrição, inclusive por farmácias de manipulação, como pó para reconstituição (comumente frascos de 2 a 15 mg).",
+      "bottomLine": "A sermorelina é um medicamento sob prescrição. Se é adequada para determinada pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
     "retatrutide": {
-      "teaser": "An investigational metabolic peptide, still in clinical trials.",
-      "whatItIs": "An investigational peptide that acts on three receptors (GLP-1, GIP, and glucagon).",
-      "studiedFor": "Being tested in clinical trials for metabolic conditions such as obesity and type 2 diabetes. It is not yet approved for any use in any country.",
-      "howSold": "Not approved or sold as a finished medicine. Gray-market vendors sell it as a research compound in powder vials (commonly 10 or 30 mg).",
-      "bottomLine": "Retatrutide is still investigational and not approved anywhere. Any use outside a clinical trial is unproven, and decisions belong with a licensed professional."
+      "teaser": "Um peptídeo metabólico experimental, ainda em ensaios clínicos.",
+      "whatItIs": "Um peptídeo experimental que atua em três receptores (GLP-1, GIP e glucagon).",
+      "studiedFor": "Está sendo testado em ensaios clínicos para condições metabólicas como obesidade e diabetes tipo 2. Ainda não foi aprovado para nenhum uso em nenhum país.",
+      "howSold": "Não é aprovado nem vendido como medicamento acabado. Fornecedores do mercado paralelo o vendem como composto para pesquisa em frascos de pó (comumente 10 ou 30 mg).",
+      "bottomLine": "A retatrutida ainda é experimental e não foi aprovada em lugar nenhum. Qualquer uso fora de um ensaio clínico não tem comprovação, e as decisões cabem a um profissional habilitado."
     },
     "tirzepatide": {
-      "teaser": "An FDA-approved dual-receptor medicine for diabetes and weight.",
-      "whatItIs": "A dual GLP-1 and GIP receptor agonist.",
-      "studiedFor": "FDA-approved for type 2 diabetes (Mounjaro) and weight management (Zepbound), and studied in large clinical trials.",
-      "howSold": "By prescription as a pre-filled pen or vial (Mounjaro, Zepbound). It is also sold by gray-market vendors as a research powder, which is not the approved product.",
-      "bottomLine": "Tirzepatide is an FDA-approved prescription medicine. The approved product comes through a licensed provider and pharmacy, and decisions about it belong with them."
+      "teaser": "Um medicamento de duplo receptor aprovado pela FDA para diabetes e peso.",
+      "whatItIs": "Um agonista duplo dos receptores de GLP-1 e GIP.",
+      "studiedFor": "Aprovado pela FDA para diabetes tipo 2 (Mounjaro) e controle de peso (Zepbound), e estudado em grandes ensaios clínicos.",
+      "howSold": "Sob prescrição, como caneta pré-preenchida ou frasco (Mounjaro, Zepbound). Também é vendido por fornecedores do mercado paralelo como pó para pesquisa, que não é o produto aprovado.",
+      "bottomLine": "A tirzepatida é um medicamento sob prescrição aprovado pela FDA. O produto aprovado vem por meio de um profissional habilitado e de uma farmácia, e as decisões sobre ele cabem a eles."
     },
     "hgh": {
-      "teaser": "Prescription growth hormone, measured in international units.",
-      "whatItIs": "Recombinant human growth hormone (somatropin), a lab-made copy of a hormone the body produces.",
-      "studiedFor": "FDA-approved by prescription for specific growth hormone deficiencies and certain other conditions. It is measured in international units (IU).",
-      "howSold": "By prescription as a powder or pen for reconstitution. Vial strengths are given in IU.",
-      "bottomLine": "HGH is a prescription medication, and non-medical use is restricted by law in many places. Decisions belong with a licensed provider."
+      "teaser": "Hormônio do crescimento sob prescrição, medido em unidades internacionais.",
+      "whatItIs": "Hormônio do crescimento humano recombinante (somatropina), uma cópia feita em laboratório de um hormônio que o corpo produz.",
+      "studiedFor": "Aprovado pela FDA sob prescrição para deficiências específicas de hormônio do crescimento e algumas outras condições. É medido em unidades internacionais (UI).",
+      "howSold": "Sob prescrição, como pó ou caneta para reconstituição. As concentrações dos frascos são indicadas em UI.",
+      "bottomLine": "O HGH é um medicamento sob prescrição, e o uso não médico é restrito por lei em muitos lugares. As decisões cabem a um profissional habilitado."
     },
     "hcg": {
-      "teaser": "A prescription hormone dosed in international units.",
-      "whatItIs": "Human chorionic gonadotropin, a hormone produced as a medicine. It is dosed in international units (IU).",
-      "studiedFor": "Used in fertility treatment and prescribed in some hormone protocols.",
-      "howSold": "By prescription as a powder for reconstitution, in IU strengths (commonly 5,000 or 10,000 IU).",
-      "bottomLine": "HCG is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider."
+      "teaser": "Um hormônio sob prescrição dosado em unidades internacionais.",
+      "whatItIs": "Gonadotrofina coriônica humana, um hormônio produzido como medicamento. É dosado em unidades internacionais (UI).",
+      "studiedFor": "Usado em tratamento de fertilidade e prescrito em alguns protocolos hormonais.",
+      "howSold": "Sob prescrição, como pó para reconstituição, em concentrações em UI (comumente 5.000 ou 10.000 UI).",
+      "bottomLine": "O HCG é um medicamento sob prescrição. Se é adequado para determinada pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
     "nad-plus": {
-      "teaser": "A coenzyme found in every living cell, sold as an injectable.",
-      "whatItIs": "Nicotinamide adenine dinucleotide, a coenzyme present in every living cell. It is not a peptide, though it is commonly sold and reconstituted alongside them. It takes part in energy metabolism and DNA repair, and levels decline with age.",
-      "studiedFor": "Studied for metabolic function, cellular energy, and the biology of aging. Most human research has used precursors taken by mouth, such as nicotinamide riboside and NMN, rather than injected NAD+. Evidence for the injectable form is thinner than the attention it receives.",
-      "howSold": "As a freeze-dried powder in vials, commonly 500 mg or 1000 mg, reconstituted with bacteriostatic water. Also offered as an IV infusion in clinics and through compounding pharmacies. Once reconstituted it keeps for roughly two weeks refrigerated, a shorter window than most peptides.",
-      "bottomLine": "Not FDA-approved as an injectable drug, and the human evidence for injection specifically is limited. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+      "teaser": "Uma coenzima presente em toda célula viva, vendida como injetável.",
+      "whatItIs": "Dinucleotídeo de nicotinamida e adenina, uma coenzima presente em toda célula viva. O NAD+ não é um peptídeo, embora seja comumente vendido e reconstituído junto com eles. Participa do metabolismo energético e do reparo do DNA, e seus níveis diminuem com a idade.",
+      "studiedFor": "Estudado para função metabólica, energia celular e a biologia do envelhecimento. A maior parte da pesquisa em humanos usou precursores por via oral, como o ribosídeo de nicotinamida e o NMN, e não NAD+ injetável. As evidências para a forma injetável são mais frágeis do que a atenção que ela recebe.",
+      "howSold": "Como pó liofilizado em frascos, comumente de 500 mg ou 1.000 mg, reconstituído com água bacteriostática. Também é oferecido como infusão intravenosa em clínicas e por farmácias de manipulação. Depois de reconstituído, mantém-se por cerca de duas semanas sob refrigeração, uma janela menor do que a da maioria dos peptídeos.",
+      "bottomLine": "Não é aprovado pela FDA como medicamento injetável, e a evidência em humanos especificamente para injeção é limitada. Se é adequado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
     "ss-31": {
-      "teaser": "A mitochondria-targeting peptide, FDA-approved for one rare disease.",
-      "whatItIs": "A synthetic peptide, also called elamipretide, that concentrates in the inner mitochondrial membrane where it interacts with a lipid called cardiolipin.",
-      "studiedFor": "Studied for mitochondrial dysfunction. In September 2025 the FDA granted accelerated approval to elamipretide, under the brand name Forzinity, for Barth syndrome in patients weighing at least 30 kg. It was the first approved therapy for any mitochondrial disease. Work in other settings, including aging and heart and muscle function, remains investigational.",
-      "howSold": "As Forzinity by prescription for its approved use. Research suppliers also sell it as a powder in vials, commonly 10, 40, or 50 mg, which is not the approved product.",
-      "bottomLine": "Approved for one rare condition in one narrow population. Everything beyond that is off-label and still under study. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+      "teaser": "Um peptídeo direcionado às mitocôndrias, aprovado pela FDA para uma doença rara.",
+      "whatItIs": "Um peptídeo sintético, também chamado de elamipretida, que se concentra na membrana mitocondrial interna, onde interage com um lipídio chamado cardiolipina.",
+      "studiedFor": "Estudado para disfunção mitocondrial. Em setembro de 2025 a FDA concedeu aprovação acelerada à elamipretida, sob a marca Forzinity, para a síndrome de Barth em pacientes com pelo menos 30 kg. Foi a primeira terapia aprovada para qualquer doença mitocondrial. O trabalho em outros contextos, incluindo envelhecimento e função cardíaca e muscular, segue experimental.",
+      "howSold": "Como Forzinity, sob prescrição, para seu uso aprovado. Fornecedores de pesquisa também o vendem como pó em frascos, comumente de 10, 40 ou 50 mg, que não é o produto aprovado.",
+      "bottomLine": "Aprovado para uma condição rara em uma população restrita. Tudo além disso é off-label e ainda em estudo. Se é adequado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
     },
     "mots-c": {
-      "teaser": "A peptide written into mitochondrial DNA, studied in metabolism.",
-      "whatItIs": "A short peptide, 16 amino acids long, encoded not by the cell nucleus but by mitochondrial DNA. Peptides of this kind are called mitochondrial-derived peptides.",
-      "studiedFor": "Examined for insulin sensitivity, metabolic regulation, and exercise biology, mostly in animal and laboratory work. The one human study published to date used intravenous administration, while nearly all circulating protocols describe subcutaneous injection. The dosing figures widely quoted online are therefore extrapolated rather than tested.",
-      "howSold": "As a freeze-dried powder in vials, commonly 5 mg or 10 mg, reconstituted with bacteriostatic water. Repeated freezing and thawing degrades it, so reconstituted solution is kept refrigerated rather than refrozen.",
-      "bottomLine": "Not FDA-approved for any use, and the human evidence is very limited. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+      "teaser": "Um peptídeo escrito no DNA mitocondrial, estudado no metabolismo.",
+      "whatItIs": "Um peptídeo curto, de 16 aminoácidos, codificado não pelo núcleo da célula, mas pelo DNA mitocondrial. Peptídeos desse tipo são chamados de peptídeos derivados das mitocôndrias.",
+      "studiedFor": "Examinado para sensibilidade à insulina, regulação metabólica e biologia do exercício, sobretudo em trabalhos com animais e em laboratório. O único estudo em humanos publicado até hoje usou administração intravenosa, enquanto quase todos os protocolos que circulam descrevem injeção subcutânea. Os números de dosagem amplamente citados na internet são, portanto, extrapolados e não testados.",
+      "howSold": "Como pó liofilizado em frascos, comumente de 5 mg ou 10 mg, reconstituído com água bacteriostática. Congelar e descongelar repetidamente o degrada, então a solução reconstituída é mantida refrigerada em vez de recongelada.",
+      "bottomLine": "Não é aprovado pela FDA para nenhum uso, e a evidência em humanos é muito limitada. Se é adequado, legal ou seguro para alguma pessoa é uma decisão dela com um profissional de saúde habilitado."
     }
   },
   "emails": {
-    "greetingNamed": "Hi {name},",
-    "greetingAnon": "Hi there,",
-    "signoff": "The BuddyPept team",
+    "greetingNamed": "Olá, {name},",
+    "greetingAnon": "Olá,",
+    "signoff": "Equipe BuddyPept",
     "confirmation": {
-      "subject": "Confirm you're joining BuddyPept",
-      "body": "Tap the button below to confirm and finish joining the BuddyPept community. Takes one click.",
-      "cta": "Confirm my email",
-      "fallbackLink": "If the button does not work, copy and paste this link into your browser:",
-      "notYou": "If this was not you, just ignore this message. You will not be added.",
-      "textBody": "Tap the link below to confirm and finish joining the BuddyPept community. Takes one click."
+      "subject": "Confirme o cadastro no BuddyPept",
+      "body": "Clique no botão abaixo para confirmar seu e-mail e concluir seu cadastro na comunidade BuddyPept. É rápido e simples.",
+      "cta": "Confirmar o e-mail",
+      "fallbackLink": "Se o botão não funcionar, copie e cole este link no navegador:",
+      "notYou": "Se este pedido não partiu de quem recebe esta mensagem, basta ignorá-la. Nenhum cadastro será concluído.",
+      "textBody": "Toque no link abaixo para confirmar e concluir o cadastro na comunidade BuddyPept. É um clique só."
     },
     "nonPeptide": {
-      "subject": "About your BuddyPept request",
-      "thanks": "Thanks for reaching out about <b>{requested}</b>!",
-      "scope": "BuddyPept focuses only on peptides (compounds like BPC-157, semaglutide, and similar). Steroids and steroid hormones like testosterone are outside what we cover, so this isn’t one we’ll be adding.",
-      "invite": "If you’d like to explore peptides instead, our library is open and waiting:",
-      "cta": "Browse the peptide library"
+      "subject": "Sobre o pedido no BuddyPept",
+      "thanks": "Obrigado por escrever sobre <b>{requested}</b>.",
+      "scope": "O BuddyPept trata apenas de peptídeos (compostos como BPC-157, semaglutida e similares). Esteroides e hormônios esteroides como a testosterona estão fora desse escopo, então este não será adicionado.",
+      "invite": "A biblioteca de peptídeos está aberta para quem quiser explorar peptídeos:",
+      "cta": "Explorar a biblioteca de peptídeos"
     },
     "peptideLive": {
-      "subject": "You asked. {name} is in.",
-      "lede": "You asked for <b>{name}</b>. It’s in the calculator now.",
-      "cta": "Run the {name} numbers",
-      "whatItDoes": "The calculator does exactly one thing and refuses to do it badly: the arithmetic. mg to mL to units, at whatever vial size and concentration your research calls for. No recommendations, no opinions, no nudging you toward a number.",
-      "noRounding": "It also refuses to round quietly. If something lands on 12.5 units, it says 12.5 units, not “about 12.”",
-      "tracker": "Coming next: a personal tracker, so your own research stays in one place instead of scattered across notes.",
-      "disclaimer": "Anything involving an actual human body is a conversation for a qualified healthcare professional. We do math.",
-      "thanks": "Thanks for the request. It’s genuinely how we pick what to build, so if something else is missing, tell us."
+      "subject": "Você pediu. {name} está no ar.",
+      "lede": "<b>{name}</b> foi solicitado. Já está na calculadora.",
+      "cta": "Fazer as contas de {name}",
+      "whatItDoes": "A calculadora tem uma função simples: fazer a matemática de forma clara e precisa. Converte mg, mL e unidades com base nos valores informados por você, independentemente da quantidade ou concentração. Sem recomendar doses, sem opiniões e sem direcionar você para nenhum valor específico.",
+      "noRounding": "Ela também se recusa a arredondar em silêncio. Se algo dá 12,5 unidades, ela diz 12,5 unidades, não “mais ou menos 12”.",
+      "tracker": "Em breve: um espaço pessoal para manter suas informações organizadas em um só lugar, sem depender de anotações espalhadas.",
+      "disclaimer": "Quando o assunto envolve sua saúde, procure sempre a orientação de um profissional de saúde habilitado. O BuddyPept cuida apenas dos cálculos.",
+      "thanks": "Obrigado pelo pedido. Os pedidos determinam o que é construído em seguida, então avise se estiver faltando outra coisa."
     }
   },
   "apiErrors": {
-    "invalidRequest": "Invalid request.",
-    "name": "Please enter your name.",
-    "email": "Please enter a valid email address.",
-    "peptide": "Please enter the peptide name.",
-    "checkEntries": "Please check your entries.",
-    "saveFailed": "We could not save that. Please try again.",
-    "saveRequestFailed": "We could not save your request. Please try again.",
-    "emailFailed": "We saved your details but could not send the confirmation email. Please try again in a minute.",
-    "serverError": "Server error. Please try again in a moment.",
-    "emailRequestFailed": "We saved your request but could not send the email. Please try again in a minute."
+    "invalidRequest": "Requisição inválida.",
+    "name": "Informe um nome.",
+    "email": "Informe um endereço de e-mail válido.",
+    "peptide": "Informe o nome do peptídeo.",
+    "checkEntries": "Confira os dados informados.",
+    "saveFailed": "Não foi possível salvar. Tente novamente.",
+    "saveRequestFailed": "Não foi possível salvar o pedido. Tente novamente.",
+    "emailFailed": "Os dados foram salvos, mas não foi possível enviar o e-mail de confirmação. Tente novamente em um minuto.",
+    "serverError": "Erro no servidor. Tente novamente em instantes.",
+    "emailRequestFailed": "O pedido foi salvo, mas não foi possível enviar o e-mail. Tente novamente em um minuto."
   },
   "a11y": {
-    "buddy": "Buddy, your friendly peptide helper",
-    "logo": "BuddyPept logo",
-    "syringe": "{syringe} filled to the dose"
+    "buddy": "Buddy, o ajudante amigável de peptídeos",
+    "logo": "Logotipo do BuddyPept",
+    "syringe": "{syringe} preenchida até a dose"
   }
 }

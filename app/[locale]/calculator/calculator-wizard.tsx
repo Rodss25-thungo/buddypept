@@ -21,6 +21,7 @@
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { getPeptideBySlug, type Peptide } from '@/data/peptides';
+import { CALCULATOR_SLUGS, CALCULATOR_PEPTIDES } from '@/data/calculator-peptides';
 import {
   calculateDose,
   type SyringeType,
@@ -62,30 +63,12 @@ function getBarrel(id: SyringeBarrelId): SyringeBarrel {
   return BARRELS.find((b) => b.id === id) ?? BARRELS[2];
 }
 
-// Curated picker list (slugs in data/peptides.ts). Order shown in the dropdown.
-//
-// This list is the source of truth for what a user can pick. Adding an entry to
-// data/peptides.ts does NOT put it here, so a new peptide has to be added in
-// both places or it exists in the data and nowhere a user can reach.
-const WIZARD_PEPTIDE_SLUGS = [
-  'semaglutide',
-  'tirzepatide',
-  'bpc-157',
-  'tb-500',
-  'ghk-cu',
-  'ipamorelin',
-  'cjc-1295',
-  'sermorelin',
-  'retatrutide',
-  'nad-plus',
-  'ss-31',
-  'mots-c',
-  'hgh',
-  'hcg',
-];
-const WIZARD_PEPTIDES = WIZARD_PEPTIDE_SLUGS.map((s) => getPeptideBySlug(s)).filter(
-  (p): p is Peptide => Boolean(p)
-);
+// Curated picker list. It moved to data/calculator-peptides.ts so the code that
+// emails people "your peptide is live" reads the same list this dropdown does;
+// when those two disagreed, requesters were sent to a peptide that had no entry
+// here. Adding to data/peptides.ts still does not put it in the picker.
+const WIZARD_PEPTIDE_SLUGS: readonly string[] = CALCULATOR_SLUGS;
+const WIZARD_PEPTIDES: Peptide[] = CALCULATOR_PEPTIDES;
 
 const NOT_LISTED = '__not_listed__';
 const OTHER_PEPTIDE = '__other__';
@@ -134,13 +117,20 @@ export function CalculatorWizard({
     getPeptideBySlug(presetSlug)?.vialUnit === 'IU' ? 'native' : 'mg'
   );
   const [showMath, setShowMath] = useState(false);
+  /** Name typed for a peptide the library does not curate. Label only. */
+  const [customName, setCustomName] = useState('');
+  /** Unit on the vial, for a peptide the library does not curate. */
+  const [customUnit, setCustomUnit] = useState<VialUnit>('mg');
 
   const isNotListed = peptideSlug === NOT_LISTED;
   const isOther = peptideSlug === OTHER_PEPTIDE;
   const peptide =
     isNotListed || isOther ? undefined : getPeptideBySlug(peptideSlug);
   const barrel = getBarrel(barrelId);
-  const vialUnit: VialUnit = peptide?.vialUnit ?? 'mg';
+  // A curated peptide knows its own unit. A typed one has to be asked, because
+  // guessing mg would print "mg" all over a screen whose vial says IU, and a
+  // dosing tool that mislabels the unit is worse than one that asks.
+  const vialUnit: VialUnit = peptide?.vialUnit ?? customUnit;
   const isIU = vialUnit === 'IU';
 
   const concPerMl =
@@ -195,8 +185,15 @@ export function CalculatorWizard({
   // sitting between `vialUnit` and the useMemo stops the React Compiler from
   // proving the dependency is never mutated, which trips
   // react-hooks/preserve-manual-memoization.
-  const peptideLabel = peptide?.name ?? t('result.peptideFallback');
+  // Curated name, else whatever they typed, else a neutral stand-in. A person
+  // who entered "tesamorelin" should read "tesamorelin" back on the result,
+  // not "the peptide".
+  const peptideLabel =
+    peptide?.name ?? (customName.trim() || t('result.peptideFallback'));
   const thirdLabel = barrel.scale === 'U-100' ? t('units') : 'mL';
+  // The unit abbreviation a reader sees. `vialUnit` is the internal code and
+  // is always English; "IU" is "UI" in Portuguese and Spanish.
+  const unitShort = isIU ? t('unit.iuShort') : t('unit.mgShort');
 
   function stepValid(i: number): boolean {
     switch (STEPS[i]) {
@@ -220,8 +217,12 @@ export function CalculatorWizard({
   const canContinue = !isResult && stepValid(stepIndex);
   const isLastInput = stepIndex === STEPS.length - 1;
 
-  function handlePeptideChange(slug: string) {
+  function handlePeptideChange(slug: string, customName?: string) {
     setPeptideSlug(slug);
+    setCustomName(customName ?? '');
+    // Back to the default each time, so a unit chosen for one typed peptide
+    // cannot silently carry over to the next.
+    setCustomUnit('mg');
     setVialAmount(NaN);
     setDoseNative(NaN);
     const p = getPeptideBySlug(slug);
@@ -268,7 +269,20 @@ export function CalculatorWizard({
               </p>
             </div>
           </div>
-          <RequestPeptideForm defaultPeptide="" />
+          {/*
+            Seeded with whatever they typed in the picker, so nobody retypes a
+            name they already gave. onDone drops them into the generic
+            calculation under that same name: the request is captured, and the
+            answer still arrives in the same visit.
+          */}
+          <RequestPeptideForm
+            defaultPeptide={customName}
+            onDone={(peptideName) => {
+              setShowRequest(false);
+              handlePeptideChange(OTHER_PEPTIDE, peptideName);
+              setStepIndex(1);
+            }}
+          />
         </div>
         <div className="mt-5">
           <button
@@ -340,7 +354,7 @@ export function CalculatorWizard({
       : doseEntryUnit === 'mcg'
         ? 'mcg'
         : doseEntryUnit === 'native'
-          ? vialUnit
+          ? unitShort
           : thirdLabel;
 
   return (
@@ -353,20 +367,14 @@ export function CalculatorWizard({
             question={t('peptide.question')}
             subtitle={t('peptide.subtitle')}
           >
-            <select
+            <PeptidePicker
               value={peptideSlug}
-              onChange={(e) => handlePeptideChange(e.target.value)}
-              className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3.5 text-lg dark:border-zinc-700 dark:bg-zinc-800"
-            >
-              <option value="">{t('peptide.placeholder')}</option>
-              <option value={OTHER_PEPTIDE}>{t('peptide.other')}</option>
-              {WIZARD_PEPTIDES.map((p) => (
-                <option key={p.slug} value={p.slug}>
-                  {p.name}
-                </option>
-              ))}
-              <option value={NOT_LISTED}>{t('peptide.notListed')}</option>
-            </select>
+              onChange={handlePeptideChange}
+              placeholder={t('peptide.placeholder')}
+              otherLabel={t('peptide.other')}
+              notListedLabel={t('peptide.notListed')}
+              typedOptionLabel={(typed) => t('peptide.useTyped', { name: typed })}
+            />
             {isNotListed && (
               <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                 {t('peptide.notListedHint')}
@@ -384,7 +392,7 @@ export function CalculatorWizard({
                 {t.rich('peptide.measuredIn', {
                   name: peptide.name,
                   unitLong: isIU ? t('unit.iuLong') : t('unit.mgLong'),
-                  unitShort: isIU ? 'IU' : 'mg',
+                  unitShort: isIU ? t('unit.iuShort') : t('unit.mgShort'),
                   b: (chunks) => <strong>{chunks}</strong>,
                 })}
               </p>
@@ -418,32 +426,79 @@ export function CalculatorWizard({
 
         {STEPS[stepIndex] === 'amount' && (
           <Step
-            question={t('amount.question', {
-              unit: vialUnit,
-              name: peptide?.name ?? t('form.fallbackName'),
-            })}
+            /*
+              Split by unit rather than interpolating "IU" into one sentence.
+              The unit abbreviation carries grammatical gender in Portuguese
+              and Spanish (UI is feminine, mg is not), so the number word ahead
+              of it has to change with it. One shared string cannot agree with
+              both.
+            */
+            question={
+              isIU
+                ? t('amount.questionIU', { name: peptide?.name ?? t('form.fallbackName') })
+                : t('amount.questionMass', {
+                    unit: t('unit.mgShort'),
+                    name: peptide?.name ?? t('form.fallbackName'),
+                  })
+            }
             subtitle={
               form === 'powder'
                 ? t('amount.subtitlePowder')
                 : t('amount.subtitleLiquid', { name: peptideLabel })
             }
           >
-            <BigNumberInput value={vialAmount} onChange={setVialAmount} unit={vialUnit} placeholder={isIU ? t('amount.placeholderIU') : t('amount.placeholderMg')} />
+            {/*
+              Unit picker, only for a peptide the library does not curate. The
+              label on the vial is the only thing that settles this, so it is
+              asked plainly rather than inferred from the name.
+            */}
+            {!peptide && (
+              <div className="mb-3">
+                <p className="mb-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                  {t('amount.unitQuestion')}
+                </p>
+                <div className="flex gap-2">
+                  <UnitToggle
+                    label={t('unit.mgShort')}
+                    active={customUnit === 'mg'}
+                    onClick={() => {
+                      setCustomUnit('mg');
+                      setVialAmount(NaN);
+                      setDoseNative(NaN);
+                      setDoseEntryUnit('mg');
+                    }}
+                  />
+                  <UnitToggle
+                    label={t('unit.iuShort')}
+                    active={customUnit === 'IU'}
+                    onClick={() => {
+                      setCustomUnit('IU');
+                      setVialAmount(NaN);
+                      setDoseNative(NaN);
+                      setDoseEntryUnit('native');
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+            <BigNumberInput value={vialAmount} onChange={setVialAmount} unit={unitShort} placeholder={isIU ? t('amount.placeholderIU') : t('amount.placeholderMg')} />
             {peptide && peptide.commonVialSizes.length > 0 ? (
               <QuickPicks
                 options={peptide.commonVialSizes}
-                suffix={vialUnit}
+                suffix={unitShort}
                 value={vialAmount}
                 onPick={setVialAmount}
-                hint={t('amount.hint', { unit: vialUnit })}
+                hint={t('amount.hint', { unit: unitShort })}
               />
-            ) : isOther ? (
+            ) : isOther && !isIU ? (
+              // Common strengths are mg figures. Offering them beside an IU
+              // vial would suggest sizes that do not exist in that unit.
               <QuickPicks
                 options={COMMON_GENERIC_VIAL_MG}
-                suffix="mg"
+                suffix={t('unit.mgShort')}
                 value={vialAmount}
                 onPick={setVialAmount}
-                hint={t('amount.hint', { unit: 'mg' })}
+                hint={t('amount.hint', { unit: t('unit.mgShort') })}
               />
             ) : null}
           </Step>
@@ -512,10 +567,10 @@ export function CalculatorWizard({
             />
             <div className="mt-3 flex gap-2">
               {isIU ? (
-                <UnitToggle label="IU" active={doseEntryUnit === 'native'} onClick={() => setDoseEntryUnit('native')} />
+                <UnitToggle label={t('unit.iuShort')} active={doseEntryUnit === 'native'} onClick={() => setDoseEntryUnit('native')} />
               ) : (
                 <>
-                  <UnitToggle label="mg" active={doseEntryUnit === 'mg'} onClick={() => setDoseEntryUnit('mg')} />
+                  <UnitToggle label={t('unit.mgShort')} active={doseEntryUnit === 'mg'} onClick={() => setDoseEntryUnit('mg')} />
                   <UnitToggle label="mcg" active={doseEntryUnit === 'mcg'} onClick={() => setDoseEntryUnit('mcg')} />
                 </>
               )}
@@ -602,7 +657,10 @@ function ResultScreen({
   const isInsulin = barrel.scale === 'U-100';
   const thirdLabel = isInsulin ? t('units') : 'mL';
   const isIU = vialUnit === 'IU';
-  const concUnit = isIU ? 'IU/mL' : 'mg/mL';
+  // Built from the catalog, not hardcoded: "IU" is "UI" in Portuguese and
+  // Spanish, and a results screen that mixes both invites a misread of the unit.
+  const unitShort = isIU ? t('unit.iuShort') : t('unit.mgShort');
+  const concUnit = `${unitShort}/mL`;
   const ready = Boolean(result) && !error;
   const barrelShort = t(`barrel.${barrel.msgKey}.short`);
 
@@ -707,7 +765,7 @@ function ResultScreen({
             onChange={(v) => onChangeDoseNative(nativeFromDraw(v))}
           />
           <EditField
-            label={vialUnit}
+            label={unitShort}
             hint={t('result.dose')}
             value={doseNative}
             onChange={(v) => onChangeDoseNative(v)}
@@ -719,7 +777,7 @@ function ResultScreen({
             onChange={onChangeWaterMl}
           />
           <EditField
-            label={vialUnit}
+            label={unitShort}
             hint={t('result.vialStrength')}
             value={vialAmount}
             onChange={onChangeVialAmount}
@@ -772,7 +830,7 @@ function ResultScreen({
             <div className="mt-3 space-y-2 rounded-md bg-zinc-50 p-3 font-mono text-xs leading-relaxed text-zinc-700 dark:bg-zinc-950 dark:text-zinc-300">
               <p>
                 {t('result.mathLine1', {
-                  unit: vialUnit,
+                  unit: unitShort,
                   conc: formatNum(result!.concentrationMgPerMl, 3),
                   concUnit,
                 })}
@@ -780,7 +838,7 @@ function ResultScreen({
               <p>
                 {t('result.mathLine2', {
                   dose: formatNum(doseNative, 4),
-                  unit: vialUnit,
+                  unit: unitShort,
                   conc: formatNum(result!.concentrationMgPerMl, 3),
                   concUnit,
                   ml: formatNum(result!.volumeMl, 3),
@@ -828,6 +886,20 @@ function ResultScreen({
         >
           {t('result.learnCta')} <span aria-hidden>→</span>
         </Link>
+        {/*
+          Second door for people who already handed over their email. The main
+          CTA reads as a signup, so returning readers do not recognise it as
+          theirs. Same destination: a confirmed device walks straight in, an
+          unconfirmed one meets the usual gate.
+        */}
+        <p className="mt-3">
+          <Link
+            href="/learn"
+            className="text-sm font-medium text-brand-700 underline underline-offset-4 hover:text-brand-800 dark:text-brand-300 dark:hover:text-brand-200"
+          >
+            {t('result.learnMemberCta')}
+          </Link>
+        </p>
       </div>
 
       <LearnPopup />
@@ -914,6 +986,220 @@ function ChoiceButton({
         {selected && <span className="h-2 w-2 rounded-full bg-white" />}
       </span>
     </button>
+  );
+}
+
+/**
+ * Peptide picker as a type-to-filter combobox.
+ *
+ * A native <select> only jumps to the first option starting with the letters
+ * you type, which is useless when someone knows their peptide by an alias
+ * ("Body Protection Compound", "GLP-1") or types a fragment from the middle of
+ * the name. This filters the list live on the name and every alias in
+ * data/peptides.ts, and keeps the two escape hatches ("Other peptide",
+ * "Not listed") reachable at all times.
+ *
+ * Typing after a peptide is already chosen clears the choice, so the box can
+ * never read one peptide while the wizard is calculating another.
+ */
+function PeptidePicker({
+  value,
+  onChange,
+  placeholder,
+  otherLabel,
+  notListedLabel,
+  typedOptionLabel,
+}: {
+  value: string;
+  onChange: (slug: string, customName?: string) => void;
+  placeholder: string;
+  otherLabel: string;
+  notListedLabel: string;
+  typedOptionLabel: (typed: string) => string;
+}) {
+  interface PickerOption {
+    value: string;
+    label: string;
+    aliases: string[];
+    /** Set on the "use what I typed" row: the name to carry through. */
+    custom?: string;
+  }
+
+  const options: PickerOption[] = [
+    { value: OTHER_PEPTIDE, label: otherLabel, aliases: [] },
+    ...WIZARD_PEPTIDES.map((p) => ({
+      value: p.slug,
+      label: p.name,
+      aliases: p.aliases ?? [],
+    })),
+  ];
+  // Always last and never filtered out: it is the exit for a search that
+  // found nothing, which is exactly when it matters most.
+  const notListedOption: PickerOption = {
+    value: NOT_LISTED,
+    label: notListedLabel,
+    aliases: [],
+  };
+
+  const selectedLabel =
+    value === NOT_LISTED
+      ? notListedLabel
+      : (options.find((o) => o.value === value)?.label ?? '');
+
+  const [query, setQuery] = useState(selectedLabel);
+  const [open, setOpen] = useState(false);
+  const [highlight, setHighlight] = useState(0);
+
+  // "Start over" clears the selection from outside this component, so the box
+  // has to empty itself too. Guarded on `open` because the same clear happens
+  // while someone is mid-search, and that text must survive.
+  const [lastValue, setLastValue] = useState(value);
+  if (value !== lastValue) {
+    setLastValue(value);
+    if (!open) setQuery(selectedLabel);
+  }
+
+  const q = query.trim().toLowerCase();
+  // An untouched query, or one still showing the current selection, means the
+  // person is browsing rather than searching: show everything.
+  const searching = q !== '' && q !== selectedLabel.trim().toLowerCase();
+  const matches = searching
+    ? options.filter(
+        (o) =>
+          o.label.toLowerCase().includes(q) ||
+          o.aliases.some((a) => a.toLowerCase().includes(q))
+      )
+    : options;
+
+  /**
+   * "Use what I typed", offered whenever the text is not already an exact
+   * option.
+   *
+   * It routes to the request screen rather than straight to the arithmetic.
+   * The name is what tells BuddyPept which peptide to build next, and the
+   * person asking is the one who should hear when it lands, so the request is
+   * taken first. The maths is offered immediately afterwards, on the same
+   * screen, using the name they typed: nobody leaves without an answer, and
+   * nobody is counted as demand without being asked.
+   */
+  const typed = query.trim();
+  const exactAlready = options.some(
+    (o) => o.label.toLowerCase() === typed.toLowerCase()
+  );
+  const useTypedOption: PickerOption | null =
+    typed && !exactAlready
+      ? { value: NOT_LISTED, label: typedOptionLabel(typed), aliases: [], custom: typed }
+      : null;
+
+  const list = [
+    ...(useTypedOption ? [useTypedOption] : []),
+    ...matches,
+    notListedOption,
+  ];
+  const activeIndex = Math.min(highlight, list.length - 1);
+
+  function select(option: PickerOption) {
+    onChange(option.value, option.custom);
+    // The typed row keeps the person's own text in the box, not the wrapper
+    // label around it.
+    setQuery(option.custom ?? option.label);
+    setOpen(false);
+    setHighlight(0);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!open) {
+        setOpen(true);
+        return;
+      }
+      const step = e.key === 'ArrowDown' ? 1 : -1;
+      setHighlight((h) => {
+        const next = Math.min(h, list.length - 1) + step;
+        return (next + list.length) % list.length;
+      });
+      return;
+    }
+    if (e.key === 'Enter' && open) {
+      e.preventDefault();
+      select(list[activeIndex]);
+      return;
+    }
+    if (e.key === 'Escape' && open) {
+      setOpen(false);
+      setQuery(selectedLabel);
+    }
+  }
+
+  return (
+    <div
+      className="relative"
+      onBlur={(e) => {
+        // Ignore focus moves inside the widget (input -> option button).
+        if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
+        setOpen(false);
+        setQuery(selectedLabel);
+      }}
+    >
+      <input
+        type="text"
+        role="combobox"
+        aria-expanded={open}
+        aria-controls="peptide-picker-list"
+        aria-autocomplete="list"
+        autoComplete="off"
+        value={query}
+        placeholder={placeholder}
+        onFocus={(e) => {
+          setOpen(true);
+          e.currentTarget.select();
+        }}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setOpen(true);
+          setHighlight(0);
+          // Editing the text abandons the current choice rather than leaving a
+          // stale peptide selected behind a box that reads as something else.
+          if (value) onChange('');
+        }}
+        onKeyDown={handleKeyDown}
+        className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3.5 text-lg dark:border-zinc-700 dark:bg-zinc-800"
+      />
+
+      {open && (
+        <ul
+          id="peptide-picker-list"
+          role="listbox"
+          className="absolute z-20 mt-1 max-h-72 w-full overflow-y-auto rounded-xl border border-zinc-200 bg-white py-1 shadow-lg dark:border-zinc-700 dark:bg-zinc-800"
+        >
+          {list.map((option, i) => (
+            <li key={option.value} role="none">
+              <button
+                type="button"
+                role="option"
+                aria-selected={option.value === value}
+                // Runs before blur, so picking with the mouse keeps focus in
+                // the widget and the list does not close out from under it.
+                onMouseDown={(e) => e.preventDefault()}
+                onMouseEnter={() => setHighlight(i)}
+                onClick={() => select(option)}
+                className={`flex w-full items-center justify-between px-4 py-3 text-left text-base ${
+                  i === activeIndex ? 'bg-brand-50 dark:bg-zinc-700' : ''
+                } ${option.value === value ? 'font-semibold' : ''}`}
+              >
+                <span>{option.label}</span>
+                {option.value === value && (
+                  <span className="text-brand-600" aria-hidden>
+                    ✓
+                  </span>
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 

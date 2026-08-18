@@ -18,7 +18,9 @@ import { Link } from '@/i18n/navigation';
 
 interface LegalSection {
   title: string;
-  body: string;
+  // A body is usually one paragraph. Where a section needs several, it is an
+  // array instead, so each entry stays its own translatable message.
+  body: string | string[];
 }
 
 interface LegalContent {
@@ -51,15 +53,23 @@ export function LegalPage({ page }: { page: 'disclaimer' | 'terms' | 'privacy' }
 
       <div className="mt-8 space-y-8 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
         {content.intro.map((_, i) => (
-          <p key={i}>{t.rich(`intro.${i}`, RICH)}</p>
+          <p key={i} className="whitespace-pre-line">{t.rich(`intro.${i}`, RICH)}</p>
         ))}
 
-        {content.sections.map((_, i) => (
+        {content.sections.map((section, i) => (
           <section key={i}>
             <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
               {t(`sections.${i}.title`)}
             </h2>
-            <p className="mt-2">{t.rich(`sections.${i}.body`, RICH)}</p>
+            {Array.isArray(section.body) ? (
+              <div className="mt-2 space-y-3">
+                {section.body.map((_, j) => (
+                  <p key={j} className="whitespace-pre-line">{t.rich(`sections.${i}.body.${j}`, RICH)}</p>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-2 whitespace-pre-line">{t.rich(`sections.${i}.body`, RICH)}</p>
+            )}
           </section>
         ))}
       </div>
