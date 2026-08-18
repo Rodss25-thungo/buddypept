@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { Prose } from '@/components/prose';
 
 /**
  * Site-wide footer. Carries the persistent medical disclaimer (per the Phase 7
@@ -28,9 +29,11 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-zinc-200 dark:border-zinc-800">
       <div className="mx-auto max-w-2xl px-4 py-8">
-        <p className="whitespace-pre-line text-xs leading-relaxed text-zinc-500">
-          {t('disclaimer')}
-        </p>
+        <Prose
+          text={t('disclaimer')}
+          className="text-xs leading-relaxed text-zinc-500"
+          spacing="mt-2"
+        />
         <nav className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs">
           {LINKS.map(({ href, key }) => (
             <Link
