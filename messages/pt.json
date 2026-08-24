@@ -32,7 +32,7 @@
     "colophon": "BuddyPept. A matemática, gratuita para sempre. © {year}"
   },
   "home": {
-    "heroTitle": "Transforme qualquer dose na quantidade exata a aspirar.",
+    "heroTitle": "Transforme qualquer dose na quantidade exata a medir.",
     "heroBody": "Uma calculadora gratuita e fácil de usar para entender melhor os cálculos relacionados a peptídeos. Informe os dados do frasco e a quantidade desejada para visualizar o resultado de forma clara, em mcg, mg ou unidades.\n\nSem cadastro. Sem complicação. Apenas o cálculo.",
     "openCalculator": "Abrir a calculadora",
     "problemTitle": "mg, mcg, unidades. É aqui que confunde.",
@@ -127,7 +127,7 @@
     },
     "dose": {
       "question": "Qual dose será calculada?",
-      "subtitle": "Informe em {enterUnit}. Para informar quantos {drawUnit} aspirar, troque a unidade abaixo.",
+      "subtitle": "Informe em {enterUnit}. Para informar quantos {drawUnit} deve puxar na seringa, troque a unidade abaixo.",
       "enterUnitIU": "UI",
       "enterUnitMass": "mg ou mcg",
       "placeholderMg": "ex.: 0,25",
@@ -138,14 +138,14 @@
     },
     "units": "unidades",
     "result": {
-      "label": "Quanto aspirar",
+      "label": "Quanto medir",
       "empty": "—",
-      "prompt": "Digite uma dose abaixo para ver quanto aspirar.",
+      "prompt": "Digite uma dose abaixo para ver quanto medir na seringa.",
       "sublineInsulin": "isso é {ml} mL de {name}",
       "sublineIM": "de {name}",
       "peptideFallback": "o peptídeo",
       "adjust": "Ajuste sem voltar etapas",
-      "draw": "Aspirar",
+      "draw": "Medida",
       "dose": "Dose",
       "bacWater": "Água bacteriostática",
       "liquidInVial": "Líquido no frasco",
