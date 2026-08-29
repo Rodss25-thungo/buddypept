@@ -1,7 +1,7 @@
 # BuddyPept: full project brief
 
 Paste-ready context for a fresh Claude Code session started from a terminal
-(no VS Code). Current as of 2026-08-29, commit `44331bb`.
+(no VS Code). Current as of 2026-08-29, commit `815b928`.
 
 ---
 
@@ -56,15 +56,30 @@ concentration → mL → syringe units), plus a plain-language peptide library.
 - **Founder:** Rod Galvez, solo, marketing background, non-technical, builds
   with AI assistance.
 
-### Hard rules that override any suggestion
+### Standing defaults
 
-1. Never paywall the calculator or the education content.
-2. Never collect data beyond name + email. No height, weight, age, gender, conditions.
-3. Never add third-party tracking pixels.
-4. Never mix calculator code with commerce code.
-5. Never give medical advice; always point back to a healthcare professional.
-6. Never write in clinical-pharma or bro-science voice.
-7. Never link to a supplier.
+Rod's current intent, written down so a new session does not silently reverse a
+decision he made deliberately. **Defaults, not locks.** He can override any of
+them at any time, without justifying it and without argument. Nothing here
+should block development, a change of direction, or a new project.
+
+1. Free forever. No paywall on the calculator or the education content.
+2. Name and email only. No height, weight, age, gender, or conditions. Signup
+   locale is stored, which is app configuration, not personal data.
+3. Analytics stay light and disclosed. Vercel Analytics and Google Analytics are
+   both live and intentional. The bar is no covert behavioral tracking, no data
+   brokering, nothing that would surprise a reader.
+4. Editorial and commercial stay structurally separate. A future `/shop` shares
+   no code with the calculator.
+5. **BuddyPept never gives medical advice in its own voice.** It does not tell
+   anyone what to take, how much, or whether to start or stop, and it always
+   points back to a healthcare professional.
+   **Citing is not advising.** Quoting, summarizing, or linking published
+   medical literature and named expert sources is fine and encouraged, as long
+   as the source is attributed and BuddyPept is not the one recommending.
+6. Voice: calm, kind, precise. Not clinical-pharma, not bro-science.
+7. Never link to a supplier. The manufacturer files in Drive are research
+   inputs; the app does not send anyone to a seller.
 
 ---
 
@@ -74,7 +89,7 @@ concentration → mL → syringe units), plus a plain-language peptide library.
 - Tailwind CSS v4
 - next-intl 4 for i18n
 - Supabase (`@supabase/supabase-js`) for Postgres
-- Brevo for transactional email (not Resend, despite `.env.local.example`)
+- Brevo for transactional email
 - Vercel hosting, auto-deploy on push to `main`, plus one daily cron
 - Vercel Analytics + GA (`NEXT_PUBLIC_GA_ID`)
 - Zod v4 at API boundaries
@@ -122,6 +137,8 @@ messages/      en.json, es.json, pt.json  (all user-facing copy)
 supabase/      setup.sql + 4 migration files
 docs/adr/      001-pwa-not-native.md
 .claude/       settings.json (committed), rules/calculator-precision.md
+CLAUDE.md      thin pointer to this brief, plus workflow notes and defaults
+social-media/  brand book, campaign cards, Instagram post, TikTok source
 index.html     PRIOR ART, the v0 single-file calculator, reference only
 ```
 
@@ -204,8 +221,6 @@ NEXT_PUBLIC_GA_ID
 Set in `.env.local` (gitignored) and in Vercel Production. `CRON_SECRET` values
 are locked in the Vercel UI; the copy in `.env.local` is the only readable one,
 so rotating means changing both places.
-
-`.env.local.example` is stale: it still lists Resend and Sentry. Email is Brevo.
 
 **Supabase MCP token is separate.** `.mcp.json` expands
 `${SUPABASE_ACCESS_TOKEN}` from the Claude Code process environment. Claude Code
@@ -305,10 +320,12 @@ a test case for every new branch; never round silently; refuse impossible inputs
 2. **Four-field adjust grid on narrow phones.** The results screen's "adjust
    without going back" panel is a 2x2 grid, never eyeballed at 375px. May need
    to stack at the smallest breakpoint. Deferred, needs Rod's call.
-3. `.env.local.example` is out of date (Resend/Sentry vs. the real Brevo setup).
-4. `index.html` prior art still sits at the repo root; it goes when the new
+3. `index.html` prior art still sits at the repo root; it goes when the new
    calculator is considered final.
-5. `pt-141` has a library entry but no `/learn` page.
+4. `pt-141` has a library entry but no `/learn` page.
+5. Weekly performance report by email: requested 2026-08-29, not yet scoped.
+6. `README.md` (2026-08-06) has not been checked for the same drift that
+   CLAUDE.md had.
 
 ---
 

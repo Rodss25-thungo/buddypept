@@ -14,11 +14,7 @@ import { Prose } from '@/components/prose';
  * sell" zag, and the "the math doesn't lie" trueline. Copy now lives in
  * messages/<locale>.json under the `home` namespace.
  *
- * Phase 7 placeholder: [MEDICAL_DISCLAIMER_FOOTER] in the site-wide footer,
- * per the Disclaimer & Legal Placement Map in CLAUDE.md.
- *
- * Styling: minimal Tailwind. Final visual identity + character art come in
- * Phase 6 (Wheeler / Archetype).
+ * Styling: minimal Tailwind.
  */
 
 export default function HomePage({
