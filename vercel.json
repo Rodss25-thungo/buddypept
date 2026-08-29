@@ -4,6 +4,10 @@
     {
       "path": "/api/cron/notify-live",
       "schedule": "0 14 * * *"
+    },
+    {
+      "path": "/api/cron/weekly-report",
+      "schedule": "0 22 * * 0"
     }
   ]
 }

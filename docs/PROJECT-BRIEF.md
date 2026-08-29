@@ -90,7 +90,7 @@ should block development, a change of direction, or a new project.
 - next-intl 4 for i18n
 - Supabase (`@supabase/supabase-js`) for Postgres
 - Brevo for transactional email
-- Vercel hosting, auto-deploy on push to `main`, plus one daily cron
+- Vercel hosting, auto-deploy on push to `main`, plus two crons
 - Vercel Analytics + GA (`NEXT_PUBLIC_GA_ID`)
 - Zod v4 at API boundaries
 - Husky + lint-staged pre-commit running `eslint --fix`
@@ -123,6 +123,7 @@ app/
     request-peptide/route.ts     peptide requests
     notify-peptide-live/route.ts manual "it's live" send
     cron/notify-live/route.ts    daily 14:00 UTC cron, CRON_SECRET auth
+    cron/weekly-report/route.ts  Sunday 22:00 UTC, guards on day itself
   manifest.ts, icon.svg, apple-icon.tsx, favicon.ico, fonts.ts, globals.css
   signature-logo/route.tsx       generated email-signature logo
 components/    buddy, logo, site-header, site-footer, language-switcher,
@@ -131,7 +132,8 @@ components/    buddy, logo, site-header, site-footer, language-switcher,
 data/          peptides.ts, calculator-peptides.ts, peptide-education.ts,
                peptide-vocabulary.ts, Peptide_Nomenclature.xlsx
 lib/           calculator.ts (the math), email.ts, notify-peptide-live.ts,
-               peptide-matching.ts, format.ts, supabase.ts, api-messages.ts
+               peptide-matching.ts, format.ts, supabase.ts, api-messages.ts,
+               weekly-report.ts
 i18n/          routing.ts, request.ts, navigation.ts
 messages/      en.json, es.json, pt.json  (all user-facing copy)
 supabase/      setup.sql + 4 migration files
@@ -238,7 +240,9 @@ The MCP server runs `--read-only`; drop that flag only for a deliberate write.
 - `buddypept@gmail.com` is the inbox Rod actually reads. Owner notifications on
   every signup land there, as do Brevo alerts, as do replies (`REPLY_TO_EMAIL`).
 - `rodss25@gmail.com` is Rod's personal address: previews and test copies only,
-  never anything user-facing.
+  never anything user-facing. **One deliberate exception:** the weekly
+  performance report goes here, by Rod's request on 2026-08-29. It is internal
+  and never reaches a reader.
 - The "your peptide is live" email sends from the daily cron, days after signup,
   so it reads the language off the signup row rather than inferring it.
 - It closes with a personal-tracker teaser. That is deliberate: the replies are
@@ -323,7 +327,9 @@ a test case for every new branch; never round silently; refuse impossible inputs
 3. `index.html` prior art still sits at the repo root; it goes when the new
    calculator is considered final.
 4. `pt-141` has a library entry but no `/learn` page.
-5. Weekly performance report by email: requested 2026-08-29, not yet scoped.
+5. Weekly performance report: the Supabase half ships Sunday 22:00 UTC to
+   `rodss25@gmail.com`. Traffic numbers are still missing and need a Google
+   Cloud service account for the GA Data API before they can be added.
 6. `README.md` (2026-08-06) has not been checked for the same drift that
    CLAUDE.md had.
 

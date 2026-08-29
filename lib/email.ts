@@ -24,6 +24,11 @@
 
 import { getTranslations } from 'next-intl/server';
 import { routing, type Locale } from '@/i18n/routing';
+import {
+  describeChange,
+  describeWindow,
+  type WeeklyReport,
+} from '@/lib/weekly-report';
 
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
 const OWNER_EMAIL = 'buddypept@gmail.com';
@@ -367,6 +372,146 @@ export async function sendOwnerNotification({
     to: OWNER_EMAIL,
     toName: 'BuddyPept',
     subject: `BuddyPept: ${label.toLowerCase()} from ${name}`,
+    html,
+    text,
+  });
+}
+
+// ─── Weekly performance report ───
+
+/**
+ * Where the weekly report goes.
+ *
+ * This is a deliberate exception to the rule that rodss25@gmail.com only ever
+ * receives previews and test copies. Rod asked for the report in his personal
+ * inbox on 2026-08-29. It is an internal report, never user-facing, so nothing
+ * about it reaches a reader.
+ */
+const REPORT_EMAIL = 'rodss25@gmail.com';
+
+function reportRow(label: string, value: string): string {
+  return `<tr><td style="padding:7px 0;color:#6b7280;width:190px;">${escapeHtml(label)}</td><td style="padding:7px 0;"><strong>${escapeHtml(value)}</strong></td></tr>`;
+}
+
+/**
+ * Sends the weekly numbers to Rod.
+ *
+ * English only and plain by design: this is an internal report, so it skips the
+ * locale machinery and the brand shell that reader-facing mail uses.
+ */
+export async function sendWeeklyReport({
+  report,
+}: {
+  report: WeeklyReport;
+}): Promise<void> {
+  const apiKey = requireApiKey();
+  const window = describeWindow(report.windowStart, report.windowEnd);
+  const change = describeChange(report.signups, report.signupsPrior);
+
+  const rate =
+    report.confirmationRate === null
+      ? 'no signups to measure'
+      : `${Math.round(report.confirmationRate)}%`;
+
+  const locales = Object.entries(report.localeSplit)
+    .sort((a, b) => b[1] - a[1])
+    .map(([code, n]) => `${code} ${n}`)
+    .join(', ');
+
+  const demandList = report.topDemand.length
+    ? report.topDemand
+        .map(
+          (d) =>
+            `<li style="margin:0 0 6px;">${escapeHtml(d.displayName)} <span style="color:#6b7280;">${d.requestCount} ${d.requestCount === 1 ? 'person' : 'people'}</span>${d.isGap ? ' <span style="color:#b45309;">not in the calculator</span>' : ''}</li>`
+        )
+        .join('')
+    : '<li style="color:#6b7280;">No confirmed requests yet.</li>';
+
+  const gapsBlock = report.gaps.length
+    ? `<p style="margin:24px 0 8px;font-size:14px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Asked for, not offered</p>
+       <p style="margin:0 0 10px;font-size:15px;line-height:1.6;">People confirmed their email, then found the calculator could not help them. Each one is a peptide worth considering.</p>
+       <ul style="margin:0;padding-left:20px;font-size:15px;line-height:1.6;">${report.gaps
+         .map(
+           (d) =>
+             `<li style="margin:0 0 6px;">${escapeHtml(d.displayName)} <span style="color:#6b7280;">${d.requestCount} ${d.requestCount === 1 ? 'person' : 'people'}</span></li>`
+         )
+         .join('')}</ul>`
+    : '';
+
+  const html = `
+<!DOCTYPE html>
+<html>
+  <body style="margin:0;padding:0;background:#fafaf9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1c1917;">
+    <div style="max-width:560px;margin:0 auto;padding:32px 24px;">
+      <p style="margin:0 0 4px;font-size:14px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">BuddyPept weekly</p>
+      <p style="margin:0 0 24px;font-size:15px;color:#6b7280;">${escapeHtml(window)}</p>
+
+      <p style="margin:0 0 20px;font-size:17px;line-height:1.6;"><strong>${report.signups}</strong> ${report.signups === 1 ? 'person' : 'people'} signed up, ${escapeHtml(change)}.</p>
+
+      <table style="width:100%;font-size:15px;line-height:1.6;border-collapse:collapse;">
+        ${reportRow('Confirmed', String(report.confirmed))}
+        ${reportRow('Still unconfirmed', String(report.pending))}
+        ${reportRow('Confirmation rate', rate)}
+        ${reportRow('Language', locales || 'none')}
+        ${reportRow('Owed a "it is live" email', String(report.awaitingNotification))}
+        ${reportRow('Confirmed, all time', String(report.totalConfirmedAllTime))}
+      </table>
+
+      <p style="margin:28px 0 8px;font-size:14px;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">Most requested</p>
+      <ul style="margin:0;padding-left:20px;font-size:15px;line-height:1.6;">${demandList}</ul>
+
+      ${gapsBlock}
+
+      <p style="margin:28px 0 0;">
+        <a href="${ADMIN_URL}" style="display:inline-block;background:#0d9488;color:#ffffff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;">Open the admin page</a>
+      </p>
+
+      <hr style="border:0;border-top:1px solid #e5e7eb;margin:28px 0 16px;">
+      <p style="margin:0;font-size:13px;line-height:1.6;color:#6b7280;">
+        Traffic numbers are not in here yet. Page views and sources live in Google Analytics, which needs a Google Cloud service account before this report can read them.<br><br>
+        Replies to the tracker teaser are not counted either. They arrive in Gmail rather than the database, so the 30-reply threshold stays a manual count.
+      </p>
+    </div>
+  </body>
+</html>`.trim();
+
+  const text = [
+    `BuddyPept weekly, ${window}`,
+    ``,
+    `${report.signups} signed up, ${change}.`,
+    `Confirmed: ${report.confirmed}`,
+    `Still unconfirmed: ${report.pending}`,
+    `Confirmation rate: ${rate}`,
+    `Language: ${locales || 'none'}`,
+    `Owed an "it is live" email: ${report.awaitingNotification}`,
+    `Confirmed, all time: ${report.totalConfirmedAllTime}`,
+    ``,
+    `Most requested:`,
+    ...(report.topDemand.length
+      ? report.topDemand.map(
+          (d) =>
+            `  ${d.displayName}: ${d.requestCount}${d.isGap ? ' (not in the calculator)' : ''}`
+        )
+      : ['  No confirmed requests yet.']),
+    ...(report.gaps.length
+      ? [
+          ``,
+          `Asked for, not offered:`,
+          ...report.gaps.map((d) => `  ${d.displayName}: ${d.requestCount}`),
+        ]
+      : []),
+    ``,
+    `Admin: ${ADMIN_URL}`,
+    ``,
+    `Traffic is not included yet: GA needs a Google Cloud service account.`,
+    `Tracker replies are not counted: they arrive in Gmail, not the database.`,
+  ].join('\n');
+
+  await sendViaBrevo({
+    apiKey,
+    to: REPORT_EMAIL,
+    toName: 'Rod',
+    subject: `BuddyPept weekly: ${report.signups} ${report.signups === 1 ? 'signup' : 'signups'}, ${window}`,
     html,
     text,
   });
