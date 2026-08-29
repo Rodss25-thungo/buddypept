@@ -1,0 +1,72 @@
+1
+00:00:00,050 --> 00:00:03,033
+You're just starting your research, and the vial arrived.
+
+2
+00:00:03,033 --> 00:00:03,867
+Now what?
+
+3
+00:00:03,867 --> 00:00:07,955
+Five milligrams of powder doesn't tell you how many units that is.
+
+4
+00:00:07,955 --> 00:00:09,010
+That's math.
+
+5
+00:00:09,010 --> 00:00:10,664
+BuddyPept does it for you.
+
+6
+00:00:10,664 --> 00:00:11,822
+Enter the vial.
+
+7
+00:00:11,822 --> 00:00:12,747
+The water.
+
+8
+00:00:12,747 --> 00:00:13,984
+The target amount.
+
+9
+00:00:13,984 --> 00:00:17,643
+Get the exact units on a U-100 syringe.
+
+10
+00:00:17,643 --> 00:00:18,880
+Step by step.
+
+11
+00:00:18,880 --> 00:00:19,856
+Explained.
+
+12
+00:00:19,856 --> 00:00:20,598
+Free.
+
+13
+00:00:20,598 --> 00:00:21,731
+No pay wall.
+
+14
+00:00:21,731 --> 00:00:22,473
+Ever.
+
+15
+00:00:22,473 --> 00:00:23,971
+Buddy Pept dot com.
+
+16
+00:00:23,971 --> 00:00:25,403
+Educational tool.
+
+17
+00:00:25,403 --> 00:00:26,914
+Not medical advice.
+
+18
+00:00:26,914 --> 00:00:28,867
+For research purposes only.
+

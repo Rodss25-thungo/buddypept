@@ -62,3 +62,10 @@ desktop.ini
 .claude/*.docx
 # Project-level files in .claude/ (settings.json, hooks.json, rules/, agents/, skills/) ARE committed.
 # This lets the project share Claude Code configuration with collaborators / other machines
+
+# Nested tool projects under social-media/ bring their own dependencies
+# and build output. The source and the exported assets are tracked; these are not.
+social-media/**/node_modules/
+social-media/**/dist/
+social-media/**/out/
+social-media/**/.vite/
