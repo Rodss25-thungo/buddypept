@@ -12,38 +12,75 @@ import {
 } from 'remotion';
 import {loadFont as loadAnton} from '@remotion/google-fonts/Anton';
 import {loadFont as loadArchivo} from '@remotion/google-fonts/Archivo';
+import type {Cue, LocaleConfig} from './locales';
 
 const anton = loadAnton();
 const archivo = loadArchivo();
 
-const FPS = 30;
-const WHITE = '#F5F7FA';
-const TEAL = '#2ab6c9';
-const TEAL_DEEP = '#0C8092';
-const BG = '#05090c';
-const MUTED = '#c9d4da';
+export const FPS = 30;
+export const WHITE = '#F5F7FA';
+export const TEAL = '#2ab6c9';
+export const TEAL_DEEP = '#0C8092';
+export const BG = '#05090c';
+export const MUTED = '#c9d4da';
 
-// Caption cues from the voiceover srt (seconds)
-type Cue = {from: number; to: number; lines: [string, string?]; teal?: 0 | 1};
-const CUES: Cue[] = [
-  {from: 0.05, to: 3.03, lines: ['STARTING YOUR RESEARCH?', 'THE VIAL JUST ARRIVED.'], teal: 1},
-  {from: 3.03, to: 3.87, lines: ['NOW WHAT?']},
-  {from: 3.87, to: 7.96, lines: ['5 MG OF POWDER', "DOESN'T TELL YOU UNITS."], teal: 1},
-  {from: 7.96, to: 9.01, lines: ["THAT'S MATH."]},
-  {from: 9.01, to: 10.66, lines: ['BUDDYPEPT', 'DOES IT FOR YOU.'], teal: 1},
-  {from: 10.66, to: 11.82, lines: ['ENTER THE VIAL.']},
-  {from: 11.82, to: 12.75, lines: ['THE WATER.']},
-  {from: 12.75, to: 13.98, lines: ['THE TARGET AMOUNT.']},
-  {from: 13.98, to: 17.64, lines: ['EXACT UNITS ON', 'A U-100 SYRINGE.'], teal: 1},
-  {from: 17.64, to: 18.88, lines: ['STEP BY STEP.']},
-  {from: 18.88, to: 19.86, lines: ['EXPLAINED.']},
-  {from: 19.86, to: 20.6, lines: ['FREE.']},
-  {from: 20.6, to: 21.73, lines: ['NO PAYWALL.']},
-  {from: 21.73, to: 22.47, lines: ['EVER.'], teal: 1},
-];
+// Small country flag, top-left corner, legible at grid-thumbnail size
+export const Flag: React.FC<{code: 'us' | 'mx' | 'br'}> = ({code}) => {
+  const W = 120;
+  const H = 80;
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: 70,
+        left: 56,
+        width: W,
+        height: H,
+        borderRadius: 14,
+        overflow: 'hidden',
+        border: '3px solid rgba(245,247,250,0.35)',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.6)',
+      }}
+    >
+      {code === 'us' ? (
+        <svg width={W} height={H} viewBox="0 0 120 80">
+          <rect width="120" height="80" fill="#b22234" />
+          {[1, 3, 5].map((i) => (
+            <rect key={i} y={(i * 80) / 7} width="120" height={80 / 7} fill="#fff" />
+          ))}
+          <rect width="54" height={(80 / 7) * 4} fill="#3c3b6e" />
+          {Array.from({length: 12}).map((_, i) => (
+            <circle
+              key={i}
+              cx={8 + (i % 4) * 13}
+              cy={9 + Math.floor(i / 4) * 13}
+              r="2.6"
+              fill="#fff"
+            />
+          ))}
+        </svg>
+      ) : code === 'mx' ? (
+        <svg width={W} height={H} viewBox="0 0 120 80">
+          <rect width="40" height="80" fill="#006847" />
+          <rect x="40" width="40" height="80" fill="#fff" />
+          <rect x="80" width="40" height="80" fill="#ce1126" />
+          <circle cx="60" cy="40" r="11" fill="none" stroke="#8c6a1f" strokeWidth="2.5" />
+          <circle cx="60" cy="40" r="5" fill="#6b4f17" />
+        </svg>
+      ) : (
+        <svg width={W} height={H} viewBox="0 0 120 80">
+          <rect width="120" height="80" fill="#009c3b" />
+          <polygon points="60,8 110,40 60,72 10,40" fill="#ffdf00" />
+          <circle cx="60" cy="40" r="17" fill="#002776" />
+          <path d="M44 37 C 54 32, 68 33, 76 42" stroke="#fff" strokeWidth="3.4" fill="none" />
+        </svg>
+      )}
+    </div>
+  );
+};
 
 // Captions live in a fixed TOP zone (below the logo, above all visuals)
-const Caption: React.FC<{cue: Cue}> = ({cue}) => {
+export const Caption: React.FC<{cue: Cue}> = ({cue}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const pop = spring({frame, fps, config: {damping: 14, stiffness: 220}});
@@ -55,12 +92,12 @@ const Caption: React.FC<{cue: Cue}> = ({cue}) => {
         style={{
           transform: `scale(${scale})`,
           fontFamily: anton.fontFamily,
-          fontSize: single ? 132 : 100,
-          lineHeight: 1.04,
+          fontSize: single ? 132 : 96,
+          lineHeight: 1.06,
           textAlign: 'center',
           color: WHITE,
           textShadow: '0 6px 40px rgba(0,0,0,0.8)',
-          padding: '0 60px',
+          padding: '0 50px',
         }}
       >
         <div>{cue.lines[0]}</div>
@@ -72,7 +109,6 @@ const Caption: React.FC<{cue: Cue}> = ({cue}) => {
   );
 };
 
-// Fake calculator rows during the "enter your..." section
 const CalcRow: React.FC<{label: string; value: string; delay: number}> = ({label, value, delay}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -91,6 +127,7 @@ const CalcRow: React.FC<{label: string; value: string; delay: number}> = ({label
         padding: '34px 44px',
         marginBottom: 30,
         width: 820,
+        gap: 30,
       }}
     >
       <span style={{fontFamily: archivo.fontFamily, fontSize: 40, color: MUTED}}>{label}</span>
@@ -99,7 +136,7 @@ const CalcRow: React.FC<{label: string; value: string; delay: number}> = ({label
   );
 };
 
-const ResultCard: React.FC = () => {
+const ResultCard: React.FC<{top: string; mid: string; bottom: string}> = ({top, mid, bottom}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const s = spring({frame, fps, config: {damping: 12, stiffness: 200}});
@@ -116,13 +153,13 @@ const ResultCard: React.FC = () => {
       }}
     >
       <div style={{fontFamily: archivo.fontFamily, fontSize: 38, color: '#d8f6fa', marginBottom: 10}}>
-        Draw to
+        {top}
       </div>
-      <div style={{fontFamily: anton.fontFamily, fontSize: 150, color: WHITE, lineHeight: 1}}>
-        10 UNITS
+      <div style={{fontFamily: anton.fontFamily, fontSize: 140, color: WHITE, lineHeight: 1}}>
+        {mid}
       </div>
       <div style={{fontFamily: archivo.fontFamily, fontSize: 36, color: '#d8f6fa', marginTop: 12}}>
-        on a U-100 syringe
+        {bottom}
       </div>
     </div>
   );
@@ -130,14 +167,12 @@ const ResultCard: React.FC = () => {
 
 // Lively Buddy: spring entrance, continuous hop with squash-and-stretch,
 // and a gentle side-to-side sway so he reads as alive, not a sticker.
-const Buddy: React.FC<{size?: number}> = ({size = 480}) => {
+export const Buddy: React.FC<{size?: number}> = ({size = 480}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const s = spring({frame, fps, config: {damping: 10, stiffness: 150}});
-  // Hop cycle: parabolic-ish bounce every ~0.8s
   const cycle = (frame % 24) / 24;
   const hop = Math.sin(cycle * Math.PI) * 34;
-  // Squash on landing, stretch at hop peak
   const squash = 1 + Math.sin(cycle * Math.PI * 2) * 0.05;
   const sway = Math.sin(frame / 26) * 5;
   const tilt = Math.sin(frame / 19) * 3.5;
@@ -157,7 +192,7 @@ const Buddy: React.FC<{size?: number}> = ({size = 480}) => {
   );
 };
 
-const Glow: React.FC = () => {
+export const Glow: React.FC = () => {
   const frame = useCurrentFrame();
   const pulse = 0.16 + 0.05 * Math.sin(frame / 20);
   return (
@@ -169,7 +204,7 @@ const Glow: React.FC = () => {
   );
 };
 
-const Logo: React.FC<{small?: boolean}> = ({small}) => (
+export const Logo: React.FC<{small?: boolean}> = ({small}) => (
   <div style={{display: 'flex', alignItems: 'center', gap: 20}}>
     <div
       style={{
@@ -196,57 +231,60 @@ const Logo: React.FC<{small?: boolean}> = ({small}) => (
   </div>
 );
 
-export const BuddyMath: React.FC = () => {
+export const BuddyMath: React.FC<{locale: LocaleConfig}> = ({locale}) => {
   const frame = useCurrentFrame();
   const sec = (s: number) => Math.round(s * FPS);
+  const L = locale;
 
   return (
     <AbsoluteFill style={{background: BG}}>
-      <Audio src={staticFile('voiceover.mp3')} />
+      <Audio src={staticFile(L.voFile)} />
       <Audio src={staticFile('music.wav')} volume={0.55} />
       <Glow />
 
-      {/* Persistent logo top */}
+      {/* Persistent logo top + flag top-left */}
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 90}}>
         <Logo small />
       </AbsoluteFill>
+      <Flag code={L.flag} />
 
       {/* Captions */}
-      {CUES.map((cue) => (
+      {L.cues.map((cue) => (
         <Sequence key={cue.from} from={sec(cue.from)} durationInFrames={sec(cue.to - cue.from)}>
           <Caption cue={cue} />
         </Sequence>
       ))}
 
-      {/* Buddy lives in the bottom zone (below y=1450), clear of cards and captions */}
-      <Sequence from={sec(9.01)} durationInFrames={sec(22.47 - 9.01)}>
+      {/* Buddy lives in the bottom zone, clear of cards and captions */}
+      <Sequence from={sec(L.buddy.from)} durationInFrames={sec(L.buddy.to - L.buddy.from)}>
         <AbsoluteFill style={{justifyContent: 'flex-end', alignItems: 'center', paddingBottom: 70}}>
           <Buddy size={380} />
         </AbsoluteFill>
       </Sequence>
 
-      {/* Calculator rows in the middle band (y ~800-1300) */}
-      <Sequence from={sec(10.66)} durationInFrames={sec(13.98 - 10.66) + 8}>
+      {/* Calculator rows in the middle band */}
+      <Sequence from={sec(L.calc.from)} durationInFrames={sec(L.calc.to - L.calc.from) + 8}>
         <AbsoluteFill style={{alignItems: 'center', paddingTop: 800}}>
           <div>
-            <CalcRow label="Vial" value="5 mg" delay={0} />
-            <CalcRow label="Bac water" value="2 mL" delay={sec(1.16)} />
-            <CalcRow label="Target amount" value="0.25 mg" delay={sec(2.09)} />
+            {L.calc.rows.map((r) => (
+              <CalcRow key={r.label} label={r.label} value={r.value} delay={sec(r.delay)} />
+            ))}
           </div>
         </AbsoluteFill>
       </Sequence>
 
       {/* Result card in the middle band */}
-      <Sequence from={sec(13.98)} durationInFrames={sec(19.86 - 13.98)}>
+      <Sequence from={sec(L.result.from)} durationInFrames={sec(L.result.to - L.result.from)}>
         <AbsoluteFill style={{alignItems: 'center', paddingTop: 840}}>
-          <ResultCard />
+          <ResultCard top={L.result.top} mid={L.result.mid} bottom={L.result.bottom} />
         </AbsoluteFill>
       </Sequence>
 
-      {/* End card from 22.99 */}
-      <Sequence from={sec(22.47)}>
+      {/* End card */}
+      <Sequence from={sec(L.endFrom)}>
         <AbsoluteFill style={{background: BG}}>
           <Glow />
+          <Flag code={L.flag} />
           <AbsoluteFill style={{justifyContent: 'center', alignItems: 'center', gap: 50}}>
             <Buddy size={520} />
             <Logo />
@@ -259,10 +297,12 @@ export const BuddyMath: React.FC = () => {
                 fontWeight: 700,
                 fontSize: 58,
                 color: WHITE,
-                opacity: interpolate(frame, [sec(23.0), sec(23.6)], [0, 1], {
-                  extrapolateLeft: 'clamp',
-                  extrapolateRight: 'clamp',
-                }),
+                opacity: interpolate(
+                  frame,
+                  [sec(L.endFrom + 0.5), sec(L.endFrom + 1.1)],
+                  [0, 1],
+                  {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
+                ),
               }}
             >
               buddypept.com
@@ -272,13 +312,15 @@ export const BuddyMath: React.FC = () => {
                 fontFamily: archivo.fontFamily,
                 fontSize: 30,
                 color: '#5d7078',
-                opacity: interpolate(frame, [sec(24.4), sec(25.0)], [0, 1], {
-                  extrapolateLeft: 'clamp',
-                  extrapolateRight: 'clamp',
-                }),
+                opacity: interpolate(
+                  frame,
+                  [sec(L.endFrom + 1.9), sec(L.endFrom + 2.5)],
+                  [0, 1],
+                  {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
+                ),
               }}
             >
-              Educational tool. Not medical advice. Research use only.
+              {L.disclaimer}
             </div>
           </AbsoluteFill>
         </AbsoluteFill>
