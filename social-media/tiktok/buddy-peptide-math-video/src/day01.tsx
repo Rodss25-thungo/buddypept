@@ -19,7 +19,7 @@ const archivo = loadArchivo();
 
 type Card = {title: string; sub: string; value: string};
 
-type Day1Config = {
+export type Day1Config = {
   id: string;
   flag: 'us' | 'mx' | 'br';
   voFile: string;
