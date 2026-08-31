@@ -47,9 +47,14 @@ read again.
 |---|---|
 | Questions, decisions, strategy, "look at this", "what next" | `Daily: BuddyPept` |
 | Instagram settings, account setup, post migration | `IG: <account>` |
-| Content production: Reels, carousels, captions, video | `IG: <campaign>` |
+| Content production: Reels, carousels, captions, video | `IG: main (EN)`, all three languages |
 | Site code, copy, i18n, calculator, email, database | `Site: <thing>` |
 | Researching an idea for the ideas doc | `Book of Ideas` |
+
+All content is produced once, in `IG: main (EN)`, in English, Spanish and
+Portuguese together. It is then distributed one language per account:
+`@buddypept` (EN), `@buddypept_es` (ES), `@buddypept_br` (PT-BR). The per-account
+chats handle settings and posting, not creation.
 
 Shape of a correct exchange:
 
