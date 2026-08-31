@@ -26,6 +26,46 @@ again in the session wrap-up. Marketing deliverables go to Drive, not the repo.
 
 ---
 
+## Start of session: confirm intent, then route
+
+**Do this before the first tool call of any session, in one short exchange.**
+
+Rod runs several chats per area so that context stays clean. The failure mode is
+starting real work in the wrong one: the task chat that should own it ends up
+missing half the decisions, and the daily chat fills with output nobody will
+read again.
+
+1. **Restate the intent in one line.** What he is actually asking for, not what
+   it sounds adjacent to. If two readings would lead to different work, ask.
+2. **Classify it.** Guidance, or a task with a deliverable?
+   - **Guidance** is a question, an opinion, a decision, a review, "what do you
+     think", "what should I do next". It produces an answer.
+   - **A task** produces files, commits, posts, or a thread that will run past
+     one sitting.
+3. **Name the chat that should own it**, using the table below.
+4. **If this is not that chat, say so before doing the work.** One or two
+   sentences: what the intent is, which chat owns it, why. Then stop and let him
+   move.
+
+| Intent | Chat |
+|---|---|
+| Questions, decisions, strategy, "look at this", "what next" | `Daily: BuddyPept` |
+| Instagram settings, account setup, post migration | `IG: <account>` |
+| Content production: Reels, carousels, captions, video | `IG: <campaign>` |
+| Site code, copy, i18n, calculator, email, database | `Site: <thing>` |
+| Researching an idea for the ideas doc | `Book of Ideas` |
+
+**Do not be pedantic about this.** If the answer takes two minutes and leaves no
+artifact, just answer, wherever he asked. Route him only when the work would
+produce files or commits, or would run long enough that a future session will
+need the thread. A correct answer in the wrong chat beats a routing lecture.
+
+**When work does get routed elsewhere, hand it over.** Say in one line what the
+new chat needs to know that this one already established, so he can paste it and
+start warm.
+
+---
+
 ## How Rod works
 
 - **One change at a time.** He describes what he sees on screen, not the file.
