@@ -1,0 +1,103 @@
+import type {Day1Config} from './day01';
+
+export const DAY4_EN: Day1Config = {
+  id: 'Day4EN',
+  flag: 'us',
+  voFile: 'd4-vo-en.mp3',
+  cues: [
+    {from: 0.05, to: 2.49, lines: ['YOUR SYRINGE', 'SAYS 100 UNITS.']},
+    {from: 2.49, to: 4.79, lines: ['WHAT IS A UNIT,', 'ACTUALLY?'], teal: 1},
+    {from: 4.79, to: 10.3, lines: ['1 UNIT ON A U-100', '= 0.01 ML'], teal: 1},
+    {from: 10.3, to: 13.31, lines: ['10 UNITS', '= 0.1 ML'], teal: 1},
+    {from: 13.31, to: 17.23, lines: ['UNITS MEASURE VOLUME,', 'NOT PEPTIDE.'], teal: 1},
+    {from: 17.23, to: 21.17, lines: ['THE PEPTIDE DEPENDS ON', 'YOUR CONCENTRATION.']},
+    {from: 21.17, to: 24.27, lines: ['BUDDYPEPT CONVERTS', 'UNITS TO MG.'], teal: 1},
+  ],
+  cards: {
+    from: 4.79,
+    to: 13.31,
+    a: {title: '1 unit', sub: 'on a U-100', value: '0.01 mL'},
+    b: {title: '10 units', sub: 'on a U-100', value: '0.1 mL'},
+    bFrom: 10.3,
+  },
+  info: {
+    from: 13.31,
+    to: 24.27,
+    top: "Here's the catch",
+    mid: 'UNITS = VOLUME',
+    bottom: 'Not peptide. Concentration decides that.',
+  },
+  buddy: {from: 2.49, to: 24.27},
+  endFrom: 24.27,
+  dayChip: {from: 26.52, label: 'DAY 4 OF 10'},
+  disclaimer: 'Educational tool. Not medical advice. For research purposes only.',
+  durationSec: 43,
+};
+
+export const DAY4_PT: Day1Config = {
+  id: 'Day4PT',
+  flag: 'br',
+  voFile: 'd4-vo-pt.mp3',
+  cues: [
+    {from: 0.1, to: 2.5, lines: ['SUA SERINGA MARCA', '100 UNIDADES.']},
+    {from: 2.5, to: 4.78, lines: ['O QUE É UMA', 'UNIDADE, AFINAL?'], teal: 1},
+    {from: 4.78, to: 9.24, lines: ['1 UNIDADE NA U-100', '= 0.01 ML'], teal: 1},
+    {from: 9.24, to: 12.41, lines: ['10 UNIDADES', '= 0.1 ML'], teal: 1},
+    {from: 12.41, to: 15.66, lines: ['UNIDADES MEDEM VOLUME,', 'NÃO PEPTÍDEO.'], teal: 1},
+    {from: 15.66, to: 19.61, lines: ['O PEPTÍDEO DEPENDE DA', 'SUA CONCENTRAÇÃO.']},
+    {from: 19.61, to: 23.12, lines: ['O BUDDYPEPT CONVERTE', 'UNIDADES EM MG.'], teal: 1},
+  ],
+  cards: {
+    from: 4.78,
+    to: 12.41,
+    a: {title: '1 unidade', sub: 'na U-100', value: '0.01 mL'},
+    b: {title: '10 unidades', sub: 'na U-100', value: '0.1 mL'},
+    bFrom: 9.24,
+  },
+  info: {
+    from: 12.41,
+    to: 23.12,
+    top: 'O detalhe',
+    mid: 'UNIDADE = VOLUME',
+    bottom: 'Não peptídeo. A concentração decide isso.',
+  },
+  buddy: {from: 2.5, to: 23.12},
+  endFrom: 23.12,
+  dayChip: {from: 25.5, label: 'DIA 4 DE 10'},
+  disclaimer: 'Ferramenta educacional. Não é orientação médica. Somente para fins de pesquisa.',
+  durationSec: 43,
+};
+
+export const DAY4_ES: Day1Config = {
+  id: 'Day4ES',
+  flag: 'mx',
+  voFile: 'd4-vo-es.mp3',
+  cues: [
+    {from: 0.1, to: 2.89, lines: ['TU JERINGA MARCA', '100 UNIDADES.']},
+    {from: 2.89, to: 5.87, lines: ['¿QUÉ ES UNA', 'UNIDAD, REALMENTE?'], teal: 1},
+    {from: 5.87, to: 12.32, lines: ['1 UNIDAD EN LA U-100', '= 0.01 ML'], teal: 1},
+    {from: 12.32, to: 17.1, lines: ['10 UNIDADES', '= 0.1 ML'], teal: 1},
+    {from: 17.1, to: 21.68, lines: ['LAS UNIDADES MIDEN', 'VOLUMEN, NO PÉPTIDO.'], teal: 1},
+    {from: 21.68, to: 26.13, lines: ['EL PÉPTIDO DEPENDE DE', 'TU CONCENTRACIÓN.']},
+    {from: 26.13, to: 29.95, lines: ['BUDDYPEPT CONVIERTE', 'UNIDADES A MG.'], teal: 1},
+  ],
+  cards: {
+    from: 5.87,
+    to: 17.1,
+    a: {title: '1 unidad', sub: 'en la U-100', value: '0.01 mL'},
+    b: {title: '10 unidades', sub: 'en la U-100', value: '0.1 mL'},
+    bFrom: 12.32,
+  },
+  info: {
+    from: 17.1,
+    to: 29.95,
+    top: 'El detalle',
+    mid: 'UNIDAD = VOLUMEN',
+    bottom: 'No péptido. La concentración decide eso.',
+  },
+  buddy: {from: 2.89, to: 29.95},
+  endFrom: 29.95,
+  dayChip: {from: 33.05, label: 'DÍA 4 DE 10'},
+  disclaimer: 'Herramienta educativa. No es consejo médico. Solo con fines de investigación.',
+  durationSec: 56,
+};

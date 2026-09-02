@@ -1,0 +1,64 @@
+1
+00:00:00,100 --> 00:00:02,550
+Sua seringa marca cem unidades.
+
+2
+00:00:02,500 --> 00:00:04,775
+Já se perguntou o que é uma unidade?
+
+3
+00:00:04,775 --> 00:00:08,275
+Uma unidade na seringa U-100 é um centésimo de mililitro.
+
+4
+00:00:08,275 --> 00:00:09,237
+Só isso.
+
+5
+00:00:09,237 --> 00:00:10,575
+Dez unidades?
+
+6
+00:00:10,575 --> 00:00:12,412
+Zero vírgula um mililitro.
+
+7
+00:00:12,412 --> 00:00:15,662
+O detalhe: unidades medem volume, não peptídeo.
+
+8
+00:00:15,662 --> 00:00:19,612
+Quanto peptídeo tem nessas unidades depende da sua concentração.
+
+9
+00:00:19,612 --> 00:00:23,125
+O BuddyPept converte unidades em miligramas para você.
+
+10
+00:00:23,125 --> 00:00:25,500
+Grátis, em Buddy Pept ponto com.
+
+11
+00:00:25,500 --> 00:00:30,787
+Esse é o dia quatro de dez. Dez dias de matemática de peptídeos, uma lição por dia.
+
+12
+00:00:30,787 --> 00:00:32,537
+A matemática não mente.
+
+13
+00:00:32,537 --> 00:00:34,812
+Siga para não perder o dia cinco.
+
+14
+00:00:34,812 --> 00:00:36,537
+Ferramenta educacional.
+
+15
+00:00:36,537 --> 00:00:38,325
+Não é orientação médica.
+
+16
+00:00:38,325 --> 00:00:41,050
+Somente para fins de pesquisa.
+

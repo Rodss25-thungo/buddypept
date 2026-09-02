@@ -1,0 +1,68 @@
+1
+00:00:00,100 --> 00:00:02,940
+Tu jeringa marca cien unidades.
+
+2
+00:00:02,890 --> 00:00:05,872
+Te has preguntado qué es una unidad?
+
+3
+00:00:05,872 --> 00:00:10,533
+Una unidad en una jeringa U-100 es una centésima de mililitro.
+
+4
+00:00:10,533 --> 00:00:12,317
+Eso es todo.
+
+5
+00:00:12,317 --> 00:00:14,309
+Diez unidades?
+
+6
+00:00:14,309 --> 00:00:17,096
+Cero punto uno mililitros.
+
+7
+00:00:17,096 --> 00:00:21,679
+El detalle: las unidades miden volumen, no péptido.
+
+8
+00:00:21,679 --> 00:00:26,132
+Cuánto péptido hay en esas unidades depende de tu concentración.
+
+9
+00:00:26,132 --> 00:00:29,947
+BuddyPept convierte unidades a miligramos por ti.
+
+10
+00:00:29,947 --> 00:00:33,046
+Gratis, en Buddy Pept punto com.
+
+11
+00:00:33,046 --> 00:00:35,820
+Este es el día cuatro de diez.
+
+12
+00:00:35,820 --> 00:00:40,260
+Diez días de matemática de péptidos, una lección por día.
+
+13
+00:00:40,260 --> 00:00:42,669
+La matemática no miente.
+
+14
+00:00:42,669 --> 00:00:45,937
+Síguenos para no perderte el día cinco.
+
+15
+00:00:45,937 --> 00:00:48,151
+Herramienta educativa.
+
+16
+00:00:48,151 --> 00:00:50,442
+No es consejo médico.
+
+17
+00:00:50,442 --> 00:00:53,268
+Solo con fines de investigación.
+
