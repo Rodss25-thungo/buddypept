@@ -1,0 +1,72 @@
+1
+00:00:00,100 --> 00:00:03,148
+Acabas de agregar más agua a tu vial.
+
+2
+00:00:03,098 --> 00:00:05,468
+Obtuviste más péptido?
+
+3
+00:00:05,468 --> 00:00:06,770
+No.
+
+4
+00:00:06,770 --> 00:00:12,057
+Cinco miligramos en dos mililitros: dos punto cinco por mililitro.
+
+5
+00:00:12,057 --> 00:00:17,174
+Los mismos cinco miligramos en cinco mililitros: uno por mililitro.
+
+6
+00:00:17,174 --> 00:00:19,661
+Más agua no agregó nada.
+
+7
+00:00:19,661 --> 00:00:22,513
+Solo repartió el mismo péptido.
+
+8
+00:00:22,513 --> 00:00:26,067
+La cantidad sigue siendo cinco miligramos.
+
+9
+00:00:26,067 --> 00:00:28,710
+Solo cambió la concentración.
+
+10
+00:00:28,710 --> 00:00:32,070
+BuddyPept lleva el control de ambos por ti.
+
+11
+00:00:32,070 --> 00:00:35,169
+Gratis, en Buddy Pept punto com.
+
+12
+00:00:35,169 --> 00:00:37,890
+Este es el día tres de diez.
+
+13
+00:00:37,890 --> 00:00:42,330
+Diez días de matemática de péptidos, una lección por día.
+
+14
+00:00:42,330 --> 00:00:44,739
+La matemática no miente.
+
+15
+00:00:44,739 --> 00:00:48,020
+Síguenos para no perderte el día cuatro.
+
+16
+00:00:48,020 --> 00:00:50,234
+Herramienta educativa.
+
+17
+00:00:50,234 --> 00:00:52,526
+No es consejo médico.
+
+18
+00:00:52,526 --> 00:00:55,351
+Solo con fines de investigación.
+

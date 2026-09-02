@@ -1,0 +1,72 @@
+1
+00:00:00,050 --> 00:00:02,317
+You just added more water to your vial.
+
+2
+00:00:02,317 --> 00:00:03,763
+Did you get more peptide?
+
+3
+00:00:03,763 --> 00:00:04,479
+No.
+
+4
+00:00:04,479 --> 00:00:09,049
+Five milligrams in two milliliters: two point five per milliliter.
+
+5
+00:00:09,049 --> 00:00:13,541
+The same five milligrams in five milliliters: one per milliliter.
+
+6
+00:00:13,541 --> 00:00:15,260
+More water added nothing.
+
+7
+00:00:15,260 --> 00:00:17,916
+It only spread the same peptide thinner.
+
+8
+00:00:17,916 --> 00:00:20,299
+The amount stays five milligrams.
+
+9
+00:00:20,299 --> 00:00:22,369
+Only the concentration changed.
+
+10
+00:00:22,369 --> 00:00:24,309
+BuddyPept tracks both for you.
+
+11
+00:00:24,309 --> 00:00:26,562
+Free, at Buddy Pept dot com.
+
+12
+00:00:26,562 --> 00:00:28,281
+That's day three of ten.
+
+13
+00:00:28,281 --> 00:00:31,367
+Ten days of peptide math, one lesson a day.
+
+14
+00:00:31,367 --> 00:00:32,838
+The math doesn't lie.
+
+15
+00:00:32,838 --> 00:00:34,791
+Follow so you don't miss day four.
+
+16
+00:00:34,791 --> 00:00:36,223
+Educational tool.
+
+17
+00:00:36,223 --> 00:00:37,734
+Not medical advice.
+
+18
+00:00:37,734 --> 00:00:39,687
+For research purposes only.
+
