@@ -1,0 +1,76 @@
+1
+00:00:00,050 --> 00:00:05,677
+Three numbers run every vial: milligrams, milliliters, and concentration.
+
+2
+00:00:05,677 --> 00:00:07,200
+They form a triangle.
+
+3
+00:00:07,200 --> 00:00:08,671
+Milligrams on top.
+
+4
+00:00:08,671 --> 00:00:11,184
+Concentration and milliliters below.
+
+5
+00:00:11,184 --> 00:00:14,388
+Cover the one you want, and the other two give it to you.
+
+6
+00:00:14,388 --> 00:00:18,229
+Milligrams divided by milliliters: that's concentration.
+
+7
+00:00:18,229 --> 00:00:21,914
+Concentration times milliliters: that's milligrams.
+
+8
+00:00:21,914 --> 00:00:24,375
+Five milligrams in two milliliters?
+
+9
+00:00:24,375 --> 00:00:26,406
+Two point five per milliliter.
+
+10
+00:00:26,406 --> 00:00:27,408
+Every time.
+
+11
+00:00:27,408 --> 00:00:29,843
+BuddyPept runs this triangle for you.
+
+12
+00:00:29,843 --> 00:00:32,096
+Free, at Buddy Pept dot com.
+
+13
+00:00:32,096 --> 00:00:33,841
+That's day five of ten.
+
+14
+00:00:33,841 --> 00:00:36,927
+Ten days of peptide math, one lesson a day.
+
+15
+00:00:36,927 --> 00:00:38,398
+The math doesn't lie.
+
+16
+00:00:38,398 --> 00:00:40,507
+Follow so you don't miss day six.
+
+17
+00:00:40,507 --> 00:00:41,940
+Educational tool.
+
+18
+00:00:41,940 --> 00:00:43,450
+Not medical advice.
+
+19
+00:00:43,450 --> 00:00:45,403
+For research purposes only.
+

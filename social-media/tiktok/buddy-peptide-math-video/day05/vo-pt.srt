@@ -1,0 +1,72 @@
+1
+00:00:00,100 --> 00:00:04,662
+Três números comandam todo frasco: miligramas, mililitros e concentração.
+
+2
+00:00:04,612 --> 00:00:06,225
+Eles formam um triângulo.
+
+3
+00:00:06,225 --> 00:00:07,725
+Miligramas em cima.
+
+4
+00:00:07,725 --> 00:00:10,012
+Concentração e mililitros embaixo.
+
+5
+00:00:10,012 --> 00:00:13,662
+Cubra o que você quer, e os outros dois entregam a resposta.
+
+6
+00:00:13,662 --> 00:00:17,175
+Miligramas dividido por mililitros: é a concentração.
+
+7
+00:00:17,175 --> 00:00:20,462
+Concentração vezes mililitros: são os miligramas.
+
+8
+00:00:20,462 --> 00:00:22,950
+Cinco miligramas em dois mililitros?
+
+9
+00:00:22,950 --> 00:00:25,100
+Dois vírgula cinco por mililitro.
+
+10
+00:00:25,100 --> 00:00:25,987
+Sempre.
+
+11
+00:00:25,987 --> 00:00:28,687
+O BuddyPept roda esse triângulo por você.
+
+12
+00:00:28,687 --> 00:00:31,062
+Grátis, em Buddy Pept ponto com.
+
+13
+00:00:31,062 --> 00:00:36,312
+Esse é o dia cinco de dez. Dez dias de matemática de peptídeos, uma lição por dia.
+
+14
+00:00:36,312 --> 00:00:38,062
+A matemática não mente.
+
+15
+00:00:38,062 --> 00:00:40,362
+Siga para não perder o dia seis.
+
+16
+00:00:40,362 --> 00:00:42,087
+Ferramenta educacional.
+
+17
+00:00:42,087 --> 00:00:43,875
+Não é orientação médica.
+
+18
+00:00:43,875 --> 00:00:46,600
+Somente para fins de pesquisa.
+
