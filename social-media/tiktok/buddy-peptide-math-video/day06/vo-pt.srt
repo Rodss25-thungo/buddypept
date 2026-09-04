@@ -1,0 +1,80 @@
+1
+00:00:00,100 --> 00:00:01,375
+Dois frascos.
+
+2
+00:00:01,325 --> 00:00:02,762
+O mesmo peptídeo.
+
+3
+00:00:02,762 --> 00:00:04,637
+Dez miligramas e vinte.
+
+4
+00:00:04,637 --> 00:00:06,862
+A mesma água: dois mililitros.
+
+5
+00:00:06,862 --> 00:00:10,825
+Agora veja a mesma retirada de zero vírgula cinco miligrama.
+
+6
+00:00:10,825 --> 00:00:13,525
+O frasco de dez: cinco por mililitro.
+
+7
+00:00:13,525 --> 00:00:15,837
+Essa retirada dá dez unidades.
+
+8
+00:00:15,837 --> 00:00:17,875
+O de vinte: dez por mililitro.
+
+9
+00:00:17,875 --> 00:00:20,337
+Mesma retirada, cinco unidades.
+
+10
+00:00:20,337 --> 00:00:23,775
+A mesma quantidade de peptídeo, metade das unidades.
+
+11
+00:00:23,775 --> 00:00:25,425
+O número da seringa mudou.
+
+12
+00:00:25,425 --> 00:00:26,750
+A quantidade não.
+
+13
+00:00:26,750 --> 00:00:28,950
+O BuddyPept pega isso por você.
+
+14
+00:00:28,950 --> 00:00:31,325
+Grátis, em Buddy Pept ponto com.
+
+15
+00:00:31,325 --> 00:00:36,562
+Esse é o dia seis de dez. Dez dias de matemática de peptídeos, uma lição por dia.
+
+16
+00:00:36,562 --> 00:00:38,312
+A matemática não mente.
+
+17
+00:00:38,312 --> 00:00:40,650
+Siga para não perder o dia sete.
+
+18
+00:00:40,650 --> 00:00:42,375
+Ferramenta educacional.
+
+19
+00:00:42,375 --> 00:00:44,162
+Não é orientação médica.
+
+20
+00:00:44,162 --> 00:00:46,887
+Somente para fins de pesquisa.
+

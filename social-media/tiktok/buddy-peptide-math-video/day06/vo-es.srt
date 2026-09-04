@@ -1,0 +1,84 @@
+1
+00:00:00,100 --> 00:00:01,911
+Dos viales.
+
+2
+00:00:01,861 --> 00:00:03,945
+El mismo péptido.
+
+3
+00:00:03,945 --> 00:00:06,380
+Diez miligramos y veinte.
+
+4
+00:00:06,380 --> 00:00:09,518
+La misma agua: dos mililitros.
+
+5
+00:00:09,518 --> 00:00:14,049
+Ahora mira la misma extracción de cero punto cinco miligramos.
+
+6
+00:00:14,049 --> 00:00:17,473
+El vial de diez: cinco por mililitro.
+
+7
+00:00:17,473 --> 00:00:20,572
+Esa extracción son diez unidades.
+
+8
+00:00:20,572 --> 00:00:23,645
+El de veinte: diez por mililitro.
+
+9
+00:00:23,645 --> 00:00:27,005
+Misma extracción, cinco unidades.
+
+10
+00:00:27,005 --> 00:00:31,367
+La misma cantidad de péptido, la mitad de las unidades.
+
+11
+00:00:31,367 --> 00:00:34,036
+El número de la jeringa cambió.
+
+12
+00:00:34,036 --> 00:00:36,002
+La cantidad no.
+
+13
+00:00:36,002 --> 00:00:38,763
+BuddyPept detecta esto por ti.
+
+14
+00:00:38,763 --> 00:00:41,861
+Gratis, en Buddy Pept punto com.
+
+15
+00:00:41,861 --> 00:00:44,648
+Este es el día seis de diez.
+
+16
+00:00:44,648 --> 00:00:49,088
+Diez días de matemática de péptidos, una lección por día.
+
+17
+00:00:49,088 --> 00:00:51,497
+La matemática no miente.
+
+18
+00:00:51,497 --> 00:00:54,752
+Síguenos para no perderte el día siete.
+
+19
+00:00:54,752 --> 00:00:56,966
+Herramienta educativa.
+
+20
+00:00:56,966 --> 00:00:59,257
+No es consejo médico.
+
+21
+00:00:59,257 --> 00:01:02,083
+Solo con fines de investigación.
+
