@@ -1,0 +1,72 @@
+1
+00:00:00,100 --> 00:00:03,591
+Tu nota dice doscientos cincuenta microgramos.
+
+2
+00:00:03,541 --> 00:00:06,028
+Tu vial habla en miligramos.
+
+3
+00:00:06,028 --> 00:00:11,731
+Quiz rápido: ¿eso es cero punto veinticinco miligramos, o dos punto cinco?
+
+4
+00:00:11,731 --> 00:00:14,726
+Un miligramo son mil microgramos.
+
+5
+00:00:14,726 --> 00:00:20,130
+Así que doscientos cincuenta microgramos son cero punto veinticinco miligramos.
+
+6
+00:00:20,130 --> 00:00:24,700
+Elige dos punto cinco, y te equivocas por diez veces.
+
+7
+00:00:24,700 --> 00:00:30,729
+Míralo en un vial real: diez miligramos con cinco mililitros da dos por mililitro.
+
+8
+00:00:30,729 --> 00:00:35,963
+Doscientos cincuenta microgramos son cero punto uno dos cinco mililitros.
+
+9
+00:00:35,963 --> 00:00:38,684
+Doce punto cinco unidades.
+
+10
+00:00:38,684 --> 00:00:42,708
+BuddyPept convierte mcg y mg por ti.
+
+11
+00:00:42,708 --> 00:00:45,807
+Gratis, en Buddy Pept punto com.
+
+12
+00:00:45,807 --> 00:00:48,606
+Este es el día siete de diez.
+
+13
+00:00:48,606 --> 00:00:53,046
+Diez días de matemática de péptidos, una lección por día.
+
+14
+00:00:53,046 --> 00:00:55,455
+La matemática no miente.
+
+15
+00:00:55,455 --> 00:00:58,723
+Síguenos para no perderte el día ocho.
+
+16
+00:00:58,723 --> 00:01:00,937
+Herramienta educativa.
+
+17
+00:01:00,937 --> 00:01:03,229
+No es consejo médico.
+
+18
+00:01:03,229 --> 00:01:06,054
+Solo con fines de investigación.
+

@@ -1,0 +1,72 @@
+1
+00:00:00,050 --> 00:00:03,528
+Your protocol note says two hundred fifty micrograms.
+
+2
+00:00:03,528 --> 00:00:05,664
+Your vial talks in milligrams.
+
+3
+00:00:05,664 --> 00:00:10,546
+Quick quiz: is that zero point two five milligrams, or two point five?
+
+4
+00:00:10,546 --> 00:00:13,684
+One milligram is one thousand micrograms.
+
+5
+00:00:13,684 --> 00:00:18,437
+So two hundred fifty micrograms is zero point two five milligrams.
+
+6
+00:00:18,437 --> 00:00:21,627
+Pick two point five, and you're off by ten times.
+
+7
+00:00:21,627 --> 00:00:27,278
+Watch it on a real vial: ten milligrams with five milliliters gives two per milliliter.
+
+8
+00:00:27,278 --> 00:00:31,992
+Two hundred fifty micrograms is zero point one two five milliliters.
+
+9
+00:00:31,992 --> 00:00:33,736
+Twelve point five units.
+
+10
+00:00:33,736 --> 00:00:37,200
+BuddyPept converts mcg and mg for you.
+
+11
+00:00:37,200 --> 00:00:39,453
+Free, at Buddy Pept dot com.
+
+12
+00:00:39,453 --> 00:00:41,132
+That's day seven of ten.
+
+13
+00:00:41,132 --> 00:00:44,218
+Ten days of peptide math, one lesson a day.
+
+14
+00:00:44,218 --> 00:00:45,690
+The math doesn't lie.
+
+15
+00:00:45,690 --> 00:00:47,604
+Follow so you don't miss day eight.
+
+16
+00:00:47,604 --> 00:00:49,036
+Educational tool.
+
+17
+00:00:49,036 --> 00:00:50,546
+Not medical advice.
+
+18
+00:00:50,546 --> 00:00:52,500
+For research purposes only.
+

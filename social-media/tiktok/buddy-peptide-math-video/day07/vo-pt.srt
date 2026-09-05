@@ -1,0 +1,68 @@
+1
+00:00:00,100 --> 00:00:03,400
+Sua anotação diz duzentos e cinquenta microgramas.
+
+2
+00:00:03,350 --> 00:00:05,487
+Seu frasco fala em miligramas.
+
+3
+00:00:05,487 --> 00:00:10,350
+Quiz rápido: isso é zero vírgula vinte e cinco miligrama, ou dois vírgula cinco?
+
+4
+00:00:10,350 --> 00:00:12,475
+Um miligrama são mil microgramas.
+
+5
+00:00:12,475 --> 00:00:17,137
+Então duzentos e cinquenta microgramas são zero vírgula vinte e cinco miligrama.
+
+6
+00:00:17,137 --> 00:00:20,725
+Escolha dois vírgula cinco, e você erra por dez vezes.
+
+7
+00:00:20,725 --> 00:00:25,812
+Veja num frasco real: dez miligramas com cinco mililitros dá dois por mililitro.
+
+8
+00:00:25,812 --> 00:00:30,262
+Duzentos e cinquenta microgramas são zero vírgula um dois cinco mililitro.
+
+9
+00:00:30,262 --> 00:00:32,450
+Doze vírgula cinco unidades.
+
+10
+00:00:32,450 --> 00:00:35,987
+O BuddyPept converte mcg e mg para você.
+
+11
+00:00:35,987 --> 00:00:38,362
+Grátis, em Buddy Pept ponto com.
+
+12
+00:00:38,362 --> 00:00:43,700
+Esse é o dia sete de dez. Dez dias de matemática de peptídeos, uma lição por dia.
+
+13
+00:00:43,700 --> 00:00:45,450
+A matemática não mente.
+
+14
+00:00:45,450 --> 00:00:47,637
+Siga para não perder o dia oito.
+
+15
+00:00:47,637 --> 00:00:49,362
+Ferramenta educacional.
+
+16
+00:00:49,362 --> 00:00:51,150
+Não é orientação médica.
+
+17
+00:00:51,150 --> 00:00:53,875
+Somente para fins de pesquisa.
+

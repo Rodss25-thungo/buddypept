@@ -38,7 +38,7 @@ type Day6Config = {
 
 // A U-100 syringe modeled on the brand render: glass barrel, metal needle,
 // teal liquid animating up to `units` (scale 0-25 units).
-const Syringe: React.FC<{units: number; label: string}> = ({units, label}) => {
+export const Syringe: React.FC<{units: number; label: string}> = ({units, label}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const fill = spring({frame: frame - 8, fps, config: {damping: 16, stiffness: 60}});
