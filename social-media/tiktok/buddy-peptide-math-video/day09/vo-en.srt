@@ -1,0 +1,96 @@
+1
+00:00:00,050 --> 00:00:01,093
+Quick test.
+
+2
+00:00:01,093 --> 00:00:02,955
+Your note says two fifty.
+
+3
+00:00:02,955 --> 00:00:04,166
+Two fifty what?
+
+4
+00:00:04,166 --> 00:00:05,364
+Micrograms?
+
+5
+00:00:05,364 --> 00:00:06,250
+Units?
+
+6
+00:00:06,250 --> 00:00:07,369
+Milligrams?
+
+7
+00:00:07,369 --> 00:00:09,960
+If the note can't answer, the note failed.
+
+8
+00:00:09,960 --> 00:00:12,356
+Here's what to write down on every mix.
+
+9
+00:00:12,356 --> 00:00:14,244
+One: the vial size.
+
+10
+00:00:14,244 --> 00:00:15,572
+Ten milligrams.
+
+11
+00:00:15,572 --> 00:00:17,617
+Two: the water that went in.
+
+12
+00:00:17,617 --> 00:00:19,596
+Two point five milliliters.
+
+13
+00:00:19,596 --> 00:00:21,536
+Three: the concentration.
+
+14
+00:00:21,536 --> 00:00:23,242
+Four milligrams per em ell.
+
+15
+00:00:23,242 --> 00:00:25,494
+Four: the dose with its unit.
+
+16
+00:00:25,494 --> 00:00:29,778
+Two hundred fifty micrograms equals six point two five units.
+
+17
+00:00:29,778 --> 00:00:30,703
+And date it.
+
+18
+00:00:30,703 --> 00:00:32,929
+Never write a number without its unit.
+
+19
+00:00:32,929 --> 00:00:37,083
+BuddyPept dot com does the math and keeps every number straight.
+
+20
+00:00:37,083 --> 00:00:38,828
+Free, no pay wall.
+
+21
+00:00:38,828 --> 00:00:40,390
+That's day nine of ten.
+
+22
+00:00:40,390 --> 00:00:43,476
+Ten days of peptide math, one lesson a day.
+
+23
+00:00:43,476 --> 00:00:44,947
+The math doesn't lie.
+
+24
+00:00:44,947 --> 00:00:48,020
+Follow so you don't miss the finale, day ten.
+

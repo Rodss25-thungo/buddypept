@@ -1,0 +1,92 @@
+1
+00:00:00,100 --> 00:00:01,200
+Teste rápido.
+
+2
+00:00:01,150 --> 00:00:03,787
+Sua anotação diz duzentos e cinquenta.
+
+3
+00:00:03,787 --> 00:00:05,575
+Duzentos e cinquenta o quê?
+
+4
+00:00:05,575 --> 00:00:06,787
+Microgramas?
+
+5
+00:00:06,787 --> 00:00:07,862
+Unidades?
+
+6
+00:00:07,862 --> 00:00:09,012
+Miligramas?
+
+7
+00:00:09,012 --> 00:00:11,912
+Se a anotação não responde, a anotação falhou.
+
+8
+00:00:11,912 --> 00:00:14,362
+Aqui está o que anotar em toda mistura.
+
+9
+00:00:14,362 --> 00:00:16,312
+Um: o tamanho do frasco.
+
+10
+00:00:16,312 --> 00:00:17,750
+Dez miligramas.
+
+11
+00:00:17,750 --> 00:00:19,575
+Dois: a água que entrou.
+
+12
+00:00:19,575 --> 00:00:21,750
+Dois vírgula cinco mililitros.
+
+13
+00:00:21,750 --> 00:00:23,575
+Três: a concentração.
+
+14
+00:00:23,575 --> 00:00:25,612
+Quatro miligramas por mililitro.
+
+15
+00:00:25,612 --> 00:00:27,875
+Quatro: a dose com a unidade.
+
+16
+00:00:27,875 --> 00:00:32,462
+Duzentos e cinquenta microgramas igual a seis vírgula vinte e cinco unidades.
+
+17
+00:00:32,462 --> 00:00:33,812
+E coloque a data.
+
+18
+00:00:33,812 --> 00:00:36,262
+Nunca escreva um número sem a unidade.
+
+19
+00:00:36,262 --> 00:00:39,900
+O BuddyPept ponto com faz a conta e mantém tudo certo.
+
+20
+00:00:39,900 --> 00:00:41,500
+Grátis, sem paywall.
+
+21
+00:00:41,500 --> 00:00:46,775
+Esse é o dia nove de dez. Dez dias de matemática de peptídeos, uma lição por dia.
+
+22
+00:00:46,775 --> 00:00:48,525
+A matemática não mente.
+
+23
+00:00:48,525 --> 00:00:52,037
+Siga para não perder o final, dia dez.
+
