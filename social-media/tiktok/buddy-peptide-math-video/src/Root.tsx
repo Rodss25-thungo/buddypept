@@ -10,6 +10,7 @@ import {Day6, DAY6_EN, DAY6_ES, DAY6_PT} from './day06';
 import {Day7, DAY7_EN, DAY7_ES, DAY7_PT} from './day07';
 import {Day8, DAY8_EN, DAY8_ES, DAY8_PT} from './day08';
 import {Day9, DAY9_EN, DAY9_ES, DAY9_PT} from './day09';
+import {Day10, DAY10_EN, DAY10_ES, DAY10_PT} from './day10';
 import {DAY2_EN, DAY2_ES, DAY2_PT} from './day02';
 
 export const RemotionRoot: React.FC = () => (
@@ -43,6 +44,18 @@ export const RemotionRoot: React.FC = () => (
         key={L.id}
         id={L.id}
         component={Day1}
+        defaultProps={{locale: L}}
+        durationInFrames={30 * L.durationSec}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+    ))}
+    {[DAY10_EN, DAY10_ES, DAY10_PT].map((L) => (
+      <Composition
+        key={L.id}
+        id={L.id}
+        component={Day10}
         defaultProps={{locale: L}}
         durationInFrames={30 * L.durationSec}
         fps={30}
