@@ -11,6 +11,8 @@ import {Day7, DAY7_EN, DAY7_ES, DAY7_PT} from './day07';
 import {Day8, DAY8_EN, DAY8_ES, DAY8_PT} from './day08';
 import {Day9, DAY9_EN, DAY9_ES, DAY9_PT} from './day09';
 import {Day10, DAY10_EN, DAY10_ES, DAY10_PT} from './day10';
+import {S2Seed1, S2Seed5} from './s2seeds';
+import {S2Day1, S2DAY1_EN, S2DAY1_ES, S2DAY1_PT} from './s2day01';
 import {DAY2_EN, DAY2_ES, DAY2_PT} from './day02';
 
 export const RemotionRoot: React.FC = () => (
@@ -51,6 +53,20 @@ export const RemotionRoot: React.FC = () => (
         height={1920}
       />
     ))}
+    {[S2DAY1_EN, S2DAY1_ES, S2DAY1_PT].map((L) => (
+      <Composition
+        key={L.id}
+        id={L.id}
+        component={S2Day1}
+        defaultProps={{locale: L}}
+        durationInFrames={30 * L.durationSec}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+    ))}
+    <Composition id="S2Seed1" component={S2Seed1} durationInFrames={1} fps={30} width={1080} height={1920} />
+    <Composition id="S2Seed5" component={S2Seed5} durationInFrames={1} fps={30} width={1080} height={1920} />
     {[DAY10_EN, DAY10_ES, DAY10_PT].map((L) => (
       <Composition
         key={L.id}
