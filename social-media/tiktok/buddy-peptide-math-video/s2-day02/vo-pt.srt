@@ -1,0 +1,100 @@
+1
+00:00:00,100 --> 00:00:01,900
+Ontem, o relógio começou.
+
+2
+00:00:01,850 --> 00:00:03,812
+Hoje, olhe mais de perto.
+
+3
+00:00:03,812 --> 00:00:05,812
+Seu frasco não tem um relógio.
+
+4
+00:00:05,812 --> 00:00:06,750
+Tem dois.
+
+5
+00:00:06,750 --> 00:00:08,487
+Relógio um: química.
+
+6
+00:00:08,487 --> 00:00:11,312
+Em solução, o peptídeo muda lentamente.
+
+7
+00:00:11,312 --> 00:00:14,962
+Reações como hidrólise e oxidação nunca param totalmente.
+
+8
+00:00:14,962 --> 00:00:17,112
+O frio desacelera esse relógio.
+
+9
+00:00:17,112 --> 00:00:18,575
+Mas ele nunca zera.
+
+10
+00:00:18,575 --> 00:00:20,937
+Relógio dois: microbiologia.
+
+11
+00:00:20,937 --> 00:00:25,050
+Cada vez que um frasco é aberto, a contaminação se torna possível.
+
+12
+00:00:25,050 --> 00:00:28,750
+Conservantes ajudam a suprimir o crescimento de bactérias.
+
+13
+00:00:28,750 --> 00:00:30,437
+Eles não param a química.
+
+14
+00:00:30,437 --> 00:00:31,687
+Dois relógios.
+
+15
+00:00:31,687 --> 00:00:33,450
+Dois riscos diferentes.
+
+16
+00:00:33,450 --> 00:00:34,775
+Um muda a molécula.
+
+17
+00:00:34,775 --> 00:00:36,650
+O outro contamina o frasco.
+
+18
+00:00:36,650 --> 00:00:38,262
+E aqui está a armadilha.
+
+19
+00:00:38,262 --> 00:00:40,375
+Os famosos vinte e oito dias?
+
+20
+00:00:40,375 --> 00:00:43,462
+Esse número pertence ao relógio da microbiologia.
+
+21
+00:00:43,462 --> 00:00:46,325
+Ele não diz nada sobre a química do seu peptídeo.
+
+22
+00:00:46,325 --> 00:00:47,437
+Isso é amanhã.
+
+23
+00:00:47,437 --> 00:00:48,912
+Dia dois de dez.
+
+24
+00:00:48,912 --> 00:00:50,975
+Os dois relógios estão correndo.
+
+25
+00:00:50,975 --> 00:00:53,750
+Siga para não perder o dia três.
+

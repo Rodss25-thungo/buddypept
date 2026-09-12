@@ -1,0 +1,100 @@
+1
+00:00:00,100 --> 00:00:02,875
+Ayer, el reloj empezó.
+
+2
+00:00:02,825 --> 00:00:05,520
+Hoy, mira más de cerca.
+
+3
+00:00:05,520 --> 00:00:07,968
+Tu vial no tiene un reloj.
+
+4
+00:00:07,968 --> 00:00:09,635
+Tiene dos.
+
+5
+00:00:09,635 --> 00:00:12,252
+Reloj uno: química.
+
+6
+00:00:12,252 --> 00:00:16,028
+En solución, el péptido cambia lentamente.
+
+7
+00:00:16,028 --> 00:00:21,249
+Reacciones como la hidrólisis y la oxidación nunca se detienen por completo.
+
+8
+00:00:21,249 --> 00:00:24,179
+El frío desacelera este reloj.
+
+9
+00:00:24,179 --> 00:00:26,445
+Pero nunca se reinicia.
+
+10
+00:00:26,445 --> 00:00:29,440
+Reloj dos: microbiología.
+
+11
+00:00:29,440 --> 00:00:34,192
+Cada vez que un vial se abre, la contaminación se vuelve posible.
+
+12
+00:00:34,192 --> 00:00:38,671
+Los conservantes ayudan a suprimir el crecimiento de bacterias.
+
+13
+00:00:38,671 --> 00:00:40,937
+No detienen la química.
+
+14
+00:00:40,937 --> 00:00:42,799
+Dos relojes.
+
+15
+00:00:42,799 --> 00:00:45,234
+Dos riesgos diferentes.
+
+16
+00:00:45,234 --> 00:00:47,513
+Uno cambia la molécula.
+
+17
+00:00:47,513 --> 00:00:49,908
+El otro contamina el vial.
+
+18
+00:00:49,908 --> 00:00:52,200
+Y aquí está la trampa.
+
+19
+00:00:52,200 --> 00:00:54,921
+Los famosos veintiocho días?
+
+20
+00:00:54,921 --> 00:00:58,828
+Ese número pertenece al reloj de la microbiología.
+
+21
+00:00:58,828 --> 00:01:02,330
+No dice nada sobre la química de tu péptido.
+
+22
+00:01:02,330 --> 00:01:04,244
+Eso es mañana.
+
+23
+00:01:04,244 --> 00:01:06,289
+Día dos de diez.
+
+24
+00:01:06,289 --> 00:01:09,153
+Los dos relojes están corriendo.
+
+25
+00:01:09,153 --> 00:01:12,721
+Sigue la cuenta para no perderte el día tres.
+
