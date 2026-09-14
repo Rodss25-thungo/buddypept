@@ -1,0 +1,84 @@
+1
+00:00:00,050 --> 00:00:01,210
+Twenty-eight days.
+
+2
+00:00:01,210 --> 00:00:02,539
+Everyone quotes it.
+
+3
+00:00:02,539 --> 00:00:04,752
+Almost nobody knows where it comes from.
+
+4
+00:00:04,752 --> 00:00:06,197
+Here's the real story.
+
+5
+00:00:06,197 --> 00:00:09,557
+It is a pharmacy rule for opened multi-dose vials.
+
+6
+00:00:09,557 --> 00:00:13,359
+United States Pharmacopeia, chapter seven ninety-seven.
+
+7
+00:00:13,359 --> 00:00:20,585
+Once a multi-dose vial is punctured, discard it within twenty-eight days, unless the manufacturer says otherwise.
+
+8
+00:00:20,585 --> 00:00:21,367
+That's it.
+
+9
+00:00:21,367 --> 00:00:23,411
+It's about contamination risk.
+
+10
+00:00:23,411 --> 00:00:25,260
+The microbiology clock.
+
+11
+00:00:25,260 --> 00:00:27,513
+It was never a measurement of your peptide.
+
+12
+00:00:27,513 --> 00:00:31,184
+The twenty-eight days doesn't know what molecule is in the vial.
+
+13
+00:00:31,184 --> 00:00:35,312
+It doesn't know your concentration, your temperature, or your handling.
+
+14
+00:00:35,312 --> 00:00:37,044
+So what actually decides?
+
+15
+00:00:37,044 --> 00:00:38,567
+The product's own label.
+
+16
+00:00:38,567 --> 00:00:41,341
+Some products are even labeled use immediately.
+
+17
+00:00:41,341 --> 00:00:44,140
+Twenty-eight days is a ceiling for the vial.
+
+18
+00:00:44,140 --> 00:00:46,223
+Never a promise for the chemistry.
+
+19
+00:00:46,223 --> 00:00:47,643
+Day three of ten.
+
+20
+00:00:47,643 --> 00:00:50,833
+The math doesn't lie, and neither do the sources.
+
+21
+00:00:50,833 --> 00:00:52,786
+Follow so you don't miss day four.
+
