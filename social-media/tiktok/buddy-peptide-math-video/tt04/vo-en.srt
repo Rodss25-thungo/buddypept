@@ -1,0 +1,68 @@
+1
+00:00:00,050 --> 00:00:02,252
+Your scale says one hundred units.
+
+2
+00:00:02,252 --> 00:00:04,557
+Ever wondered what a unit actually is?
+
+3
+00:00:04,557 --> 00:00:09,036
+One unit on a one hundred unit scale is one hundredth of a milliliter.
+
+4
+00:00:09,036 --> 00:00:09,817
+That's it.
+
+5
+00:00:09,817 --> 00:00:10,885
+Ten units?
+
+6
+00:00:10,885 --> 00:00:12,825
+Zero point one milliliter.
+
+7
+00:00:12,825 --> 00:00:16,744
+Here's the catch: units measure volume, not peptide.
+
+8
+00:00:16,744 --> 00:00:20,690
+How much peptide is in those units depends on your concentration.
+
+9
+00:00:20,690 --> 00:00:23,789
+BuddyPept converts units to milligrams for you.
+
+10
+00:00:23,789 --> 00:00:26,041
+Free, at Buddy Pept dot com.
+
+11
+00:00:26,041 --> 00:00:27,643
+That's day four of ten.
+
+12
+00:00:27,643 --> 00:00:30,729
+Ten days of peptide math, one lesson a day.
+
+13
+00:00:30,729 --> 00:00:32,200
+The math doesn't lie.
+
+14
+00:00:32,200 --> 00:00:34,270
+Follow so you don't miss day five.
+
+15
+00:00:34,270 --> 00:00:35,703
+Educational tool.
+
+16
+00:00:35,703 --> 00:00:37,213
+Not medical advice.
+
+17
+00:00:37,213 --> 00:00:39,166
+For research purposes only.
+
