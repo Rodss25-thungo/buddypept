@@ -1,0 +1,72 @@
+1
+00:00:00,050 --> 00:00:01,080
+Same vial.
+
+2
+00:00:01,080 --> 00:00:02,239
+Same peptide.
+
+3
+00:00:02,239 --> 00:00:03,541
+Two different clocks.
+
+4
+00:00:03,541 --> 00:00:05,455
+The only difference is temperature.
+
+5
+00:00:05,455 --> 00:00:13,151
+In water, the chemistry that breaks a peptide down is still running: hydrolysis, deamidation, oxidation.
+
+6
+00:00:13,151 --> 00:00:15,052
+Heat speeds that chemistry up.
+
+7
+00:00:15,052 --> 00:00:21,927
+A common pharmaceutical rule of thumb says some reaction rates roughly double for every ten degrees Celsius warmer.
+
+8
+00:00:21,927 --> 00:00:25,039
+It is a rule of thumb, not a universal law.
+
+9
+00:00:25,039 --> 00:00:27,669
+But it explains why cold slows the clock.
+
+10
+00:00:27,669 --> 00:00:30,429
+Room temperature is about twenty-five degrees.
+
+11
+00:00:30,429 --> 00:00:32,096
+A fridge is two to eight.
+
+12
+00:00:32,096 --> 00:00:36,796
+That gap can mean the chemistry clock runs several times slower in the cold.
+
+13
+00:00:36,796 --> 00:00:38,033
+The labels agree.
+
+14
+00:00:38,033 --> 00:00:44,479
+Ozempic's label says a new pen goes in the refrigerator, two to eight degrees, and never in the freezer.
+
+15
+00:00:44,479 --> 00:00:46,640
+Cold slows the chemistry clock.
+
+16
+00:00:46,640 --> 00:00:47,929
+It does not stop it.
+
+17
+00:00:47,929 --> 00:00:49,309
+Day five of ten.
+
+18
+00:00:49,309 --> 00:00:51,419
+Follow so you don't miss day six.
+

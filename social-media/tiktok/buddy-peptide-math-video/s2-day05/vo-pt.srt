@@ -1,0 +1,68 @@
+1
+00:00:00,100 --> 00:00:01,362
+Mesmo frasco.
+
+2
+00:00:01,312 --> 00:00:02,687
+Mesmo peptídeo.
+
+3
+00:00:02,687 --> 00:00:04,537
+Dois relógios diferentes.
+
+4
+00:00:04,537 --> 00:00:06,837
+A única diferença é a temperatura.
+
+5
+00:00:06,837 --> 00:00:13,512
+Na água, a química que degrada um peptídeo continua funcionando: hidrólise, desamidação, oxidação.
+
+6
+00:00:13,512 --> 00:00:15,425
+O calor acelera essa química.
+
+7
+00:00:15,425 --> 00:00:23,187
+Uma regra prática comum na farmácia diz que algumas velocidades de reação praticamente dobram a cada dez graus Celsius a mais.
+
+8
+00:00:23,187 --> 00:00:25,862
+É uma regra prática, não uma lei universal.
+
+9
+00:00:25,862 --> 00:00:28,787
+Mas explica por que o frio desacelera o relógio.
+
+10
+00:00:28,787 --> 00:00:32,400
+A temperatura ambiente fica em torno de vinte e cinco graus.
+
+11
+00:00:32,400 --> 00:00:34,825
+Uma geladeira fica entre dois e oito.
+
+12
+00:00:34,825 --> 00:00:40,037
+Essa diferença pode fazer o relógio da química andar várias vezes mais devagar no frio.
+
+13
+00:00:40,037 --> 00:00:41,637
+Os rótulos concordam.
+
+14
+00:00:41,637 --> 00:00:48,112
+O rótulo do Ozempic diz que uma caneta nova vai na geladeira, entre dois e oito graus, e nunca no congelador.
+
+15
+00:00:48,112 --> 00:00:50,675
+O frio desacelera o relógio da química.
+
+16
+00:00:50,675 --> 00:00:52,325
+Mas não para esse relógio.
+
+17
+00:00:52,325 --> 00:00:56,112
+Dia cinco de dez. Siga para não perder o dia seis.
+

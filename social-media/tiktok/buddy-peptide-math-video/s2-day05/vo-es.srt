@@ -1,0 +1,72 @@
+1
+00:00:00,100 --> 00:00:01,872
+Mismo vial.
+
+2
+00:00:01,822 --> 00:00:03,750
+Mismo péptido.
+
+3
+00:00:03,750 --> 00:00:06,210
+Dos relojes diferentes.
+
+4
+00:00:06,210 --> 00:00:09,322
+La única diferencia es la temperatura.
+
+5
+00:00:09,322 --> 00:00:17,070
+En el agua, la química que degrada un péptido sigue en marcha: hidrólisis, desamidación, oxidación.
+
+6
+00:00:17,070 --> 00:00:19,921
+El calor acelera esa química.
+
+7
+00:00:19,921 --> 00:00:28,203
+Una regla práctica común en farmacia dice que algunas velocidades de reacción casi se duplican por cada diez grados Celsius más.
+
+8
+00:00:28,203 --> 00:00:32,031
+Es una regla práctica, no una ley universal.
+
+9
+00:00:32,031 --> 00:00:35,820
+Pero explica por qué el frío hace más lento el reloj.
+
+10
+00:00:35,820 --> 00:00:39,752
+La temperatura ambiente ronda los veinticinco grados.
+
+11
+00:00:39,752 --> 00:00:43,007
+Un refrigerador está entre dos y ocho.
+
+12
+00:00:43,007 --> 00:00:49,127
+Esa diferencia puede hacer que el reloj de la química avance varias veces más lento en el frío.
+
+13
+00:00:49,127 --> 00:00:51,536
+Las etiquetas coinciden.
+
+14
+00:00:51,536 --> 00:00:59,908
+La etiqueta de Ozempic dice que una pluma nueva va en el refrigerador, entre dos y ocho grados, y nunca en el congelador.
+
+15
+00:00:59,908 --> 00:01:03,437
+El frío hace más lento el reloj de la química.
+
+16
+00:01:03,437 --> 00:01:05,390
+Pero no lo detiene.
+
+17
+00:01:05,390 --> 00:01:07,578
+Día cinco de diez.
+
+18
+00:01:07,578 --> 00:01:10,846
+Síguenos para no perderte el día seis.
+
