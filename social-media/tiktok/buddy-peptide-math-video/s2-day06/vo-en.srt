@@ -1,0 +1,64 @@
+1
+00:00:00,050 --> 00:00:03,463
+Temperature is not the only thing that changes the clock.
+
+2
+00:00:03,463 --> 00:00:04,466
+Light can too.
+
+3
+00:00:04,466 --> 00:00:07,187
+A peptide is a chain of amino acids.
+
+4
+00:00:07,187 --> 00:00:11,614
+Some of those links can absorb light, especially ultraviolet light.
+
+5
+00:00:11,614 --> 00:00:14,375
+Tryptophan and tyrosine are two of them.
+
+6
+00:00:14,375 --> 00:00:18,111
+When they absorb that energy, the molecule can oxidize.
+
+7
+00:00:18,111 --> 00:00:21,927
+The chain looks the same in the vial, but part of it has changed.
+
+8
+00:00:21,927 --> 00:00:24,856
+Not every peptide is equally sensitive.
+
+9
+00:00:24,856 --> 00:00:26,588
+It depends on the sequence.
+
+10
+00:00:26,588 --> 00:00:30,677
+Stay tuned to learn which chains are more sensitive, and which are less.
+
+11
+00:00:30,677 --> 00:00:34,023
+That is why many peptide labels say protect from light.
+
+12
+00:00:34,023 --> 00:00:36,041
+The box is not decoration.
+
+13
+00:00:36,041 --> 00:00:38,281
+It is part of the storage instructions.
+
+14
+00:00:38,281 --> 00:00:40,364
+Light is a clock you cannot see.
+
+15
+00:00:40,364 --> 00:00:41,692
+Day six of ten.
+
+16
+00:00:41,692 --> 00:00:43,750
+Follow so you don't miss day seven.
+

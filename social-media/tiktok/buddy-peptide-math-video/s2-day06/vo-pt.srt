@@ -1,0 +1,60 @@
+1
+00:00:00,100 --> 00:00:03,287
+A temperatura não é a única coisa que muda o relógio.
+
+2
+00:00:03,237 --> 00:00:04,650
+A luz também muda.
+
+3
+00:00:04,650 --> 00:00:07,200
+Um peptídeo é uma cadeia de aminoácidos.
+
+4
+00:00:07,200 --> 00:00:11,925
+Alguns desses elos podem absorver luz, principalmente luz ultravioleta.
+
+5
+00:00:11,925 --> 00:00:14,612
+Triptofano e tirosina são dois deles.
+
+6
+00:00:14,612 --> 00:00:18,162
+Quando eles absorvem essa energia, a molécula pode oxidar.
+
+7
+00:00:18,162 --> 00:00:21,712
+A cadeia parece a mesma no frasco, mas parte dela mudou.
+
+8
+00:00:21,712 --> 00:00:24,462
+Nem todo peptídeo é igualmente sensível.
+
+9
+00:00:24,462 --> 00:00:26,075
+Depende da sequência.
+
+10
+00:00:26,075 --> 00:00:30,575
+Fique ligado para saber quais cadeias são mais sensíveis, e quais são menos.
+
+11
+00:00:30,575 --> 00:00:34,562
+Por isso muitos rótulos de peptídeos dizem: proteger da luz.
+
+12
+00:00:34,562 --> 00:00:36,237
+A caixa não é enfeite.
+
+13
+00:00:36,237 --> 00:00:39,175
+Ela faz parte das instruções de armazenamento.
+
+14
+00:00:39,175 --> 00:00:41,937
+A luz é um relógio que você não consegue ver.
+
+15
+00:00:41,937 --> 00:00:45,700
+Dia seis de dez. Siga para não perder o dia sete.
+
