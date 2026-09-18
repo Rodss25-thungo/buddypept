@@ -18,6 +18,7 @@ import {S2Day3, S2DAY3_EN, S2DAY3_ES, S2DAY3_PT} from './s2day03';
 import {S2Day4, S2DAY4_EN, S2DAY4_ES, S2DAY4_PT} from './s2day04';
 import {S2Day5, S2DAY5_EN, S2DAY5_ES, S2DAY5_PT} from './s2day05';
 import {S2Day6, S2DAY6_EN, S2DAY6_ES, S2DAY6_PT} from './s2day06';
+import {S2Day7, S2DAY7_EN, S2DAY7_ES, S2DAY7_PT} from './s2day07';
 import {DAY2_EN, DAY2_ES, DAY2_PT} from './day02';
 
 export const RemotionRoot: React.FC = () => (
@@ -57,6 +58,9 @@ export const RemotionRoot: React.FC = () => (
         width={1080}
         height={1920}
       />
+    ))}
+    {[S2DAY7_EN, S2DAY7_ES, S2DAY7_PT].map((L) => (
+      <Composition key={L.id} id={L.id} component={S2Day7} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />
     ))}
     {[S2DAY6_EN, S2DAY6_ES, S2DAY6_PT].map((L) => (
       <Composition key={L.id} id={L.id} component={S2Day6} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />

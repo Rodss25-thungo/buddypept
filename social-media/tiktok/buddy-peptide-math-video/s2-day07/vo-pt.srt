@@ -1,0 +1,56 @@
+1
+00:00:00,100 --> 00:00:01,475
+Agitar ou girar?
+
+2
+00:00:01,425 --> 00:00:03,012
+O rótulo já respondeu.
+
+3
+00:00:03,012 --> 00:00:04,125
+Veja por quê.
+
+4
+00:00:04,125 --> 00:00:09,637
+Dentro do frasco está a cadeia de aminoácidos, o peptídeo, dobrada em uma forma compacta.
+
+5
+00:00:09,637 --> 00:00:12,350
+Quando você agita, cria bolhas e espuma.
+
+6
+00:00:12,350 --> 00:00:15,762
+Cada bolha é uma nova superfície onde o ar encontra a água.
+
+7
+00:00:15,762 --> 00:00:19,800
+Nessa superfície, algumas cadeias podem se desdobrar em parte.
+
+8
+00:00:19,800 --> 00:00:25,600
+Cadeias desdobradas podem grudar umas nas outras e formar aglomerados, chamados agregados.
+
+9
+00:00:25,600 --> 00:00:31,512
+Laboratórios até agitam amostras de propósito, para forçar a agregação em testes de estabilidade.
+
+10
+00:00:31,512 --> 00:00:36,600
+Um giro suave mistura o líquido quase sem criar nova superfície entre ar e água.
+
+11
+00:00:36,600 --> 00:00:42,262
+Por isso alguns rótulos deixam claro: gire o frasco suavemente até dissolver por completo.
+
+12
+00:00:42,262 --> 00:00:44,237
+Suave não é uma sugestão.
+
+13
+00:00:44,237 --> 00:00:45,837
+Faz parte do método.
+
+14
+00:00:45,837 --> 00:00:49,600
+Dia sete de dez. Siga para não perder o dia oito.
+

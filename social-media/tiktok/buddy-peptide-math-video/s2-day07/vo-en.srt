@@ -1,0 +1,60 @@
+1
+00:00:00,050 --> 00:00:01,380
+Shake it or swirl it?
+
+2
+00:00:01,380 --> 00:00:03,242
+The label already answered.
+
+3
+00:00:03,242 --> 00:00:04,218
+Here is why.
+
+4
+00:00:04,218 --> 00:00:10,013
+Inside the vial is the amino-chain, a peptide, folded into a compact shape.
+
+5
+00:00:10,013 --> 00:00:12,812
+When you shake, you create bubbles and foam.
+
+6
+00:00:12,812 --> 00:00:16,354
+Every bubble is a new surface where air meets water.
+
+7
+00:00:16,354 --> 00:00:20,039
+At that surface, some amino-chains can partly unfold.
+
+8
+00:00:20,039 --> 00:00:24,947
+Unfolded chains can stick to each other and form clumps, called aggregates.
+
+9
+00:00:24,947 --> 00:00:30,403
+Labs even shake samples on purpose, to force aggregation in stability testing.
+
+10
+00:00:30,403 --> 00:00:35,677
+A gentle swirl mixes the liquid with almost no new air-water surface.
+
+11
+00:00:35,677 --> 00:00:40,976
+That is why some labels spell it out: swirl the vial gently until fully dissolved.
+
+12
+00:00:40,976 --> 00:00:42,903
+Gentle is not a suggestion.
+
+13
+00:00:42,903 --> 00:00:44,361
+It is part of the method.
+
+14
+00:00:44,361 --> 00:00:45,716
+Day seven of ten.
+
+15
+00:00:45,716 --> 00:00:47,630
+Follow so you don't miss day eight.
+
