@@ -1,0 +1,64 @@
+1
+00:00:00,100 --> 00:00:01,375
+Dois frascos.
+
+2
+00:00:01,325 --> 00:00:04,012
+Os dois parecem perfeitamente límpidos.
+
+3
+00:00:04,012 --> 00:00:05,287
+Eles são iguais?
+
+4
+00:00:05,287 --> 00:00:07,412
+Seus olhos não conseguem dizer.
+
+5
+00:00:07,412 --> 00:00:12,475
+Turvação, flocos ou partículas que você consegue ver são um sinal de alerta real.
+
+6
+00:00:12,475 --> 00:00:17,812
+As normas da farmacopeia tratam partículas visíveis como motivo para rejeitar um frasco.
+
+7
+00:00:17,812 --> 00:00:20,375
+Mas límpido não significa inalterado.
+
+8
+00:00:20,375 --> 00:00:24,912
+Muito do que acontece com a cadeia de aminoácidos, o peptídeo, é invisível.
+
+9
+00:00:24,912 --> 00:00:29,187
+Mudanças químicas como a oxidação deixam o líquido com a mesma aparência.
+
+10
+00:00:29,187 --> 00:00:32,237
+E alguns aglomerados são pequenos demais para ver.
+
+11
+00:00:32,237 --> 00:00:35,487
+Laboratórios precisam de instrumentos para contá-los.
+
+12
+00:00:35,487 --> 00:00:38,725
+Então um frasco límpido não é um atestado de saúde.
+
+13
+00:00:38,725 --> 00:00:40,025
+Turvo é um alerta.
+
+14
+00:00:40,025 --> 00:00:41,662
+Límpido não prova nada.
+
+15
+00:00:41,662 --> 00:00:45,800
+O rótulo, o armazenamento e o tempo são o que merece confiança.
+
+16
+00:00:45,800 --> 00:00:49,487
+Dia oito de dez. Siga para não perder o dia nove.
+
