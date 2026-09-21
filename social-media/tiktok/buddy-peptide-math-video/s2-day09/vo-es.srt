@@ -1,0 +1,64 @@
+1
+00:00:00,100 --> 00:00:03,878
+Misma cadena de aminoácidos, mismo péptido.
+
+2
+00:00:03,828 --> 00:00:05,950
+Reglas diferentes.
+
+3
+00:00:05,950 --> 00:00:10,078
+Podrías esperar que un péptido tenga una sola vida útil.
+
+4
+00:00:10,078 --> 00:00:11,770
+No es así.
+
+5
+00:00:11,770 --> 00:00:17,174
+Las reglas publicadas pertenecen al producto exacto, no solo a la molécula.
+
+6
+00:00:17,174 --> 00:00:19,934
+Mira tres etiquetas reales.
+
+7
+00:00:19,934 --> 00:00:25,585
+El producto A dice: usar inmediatamente después de mezclar y desechar lo que sobre.
+
+8
+00:00:25,585 --> 00:00:31,184
+El producto B dice: desechar la pluma veintiocho días después del primer uso.
+
+9
+00:00:31,184 --> 00:00:36,002
+El producto C dice: cincuenta y seis días después del primer uso.
+
+10
+00:00:36,002 --> 00:00:41,250
+Productos diferentes, formulaciones diferentes, reglas diferentes.
+
+11
+00:00:41,250 --> 00:00:48,723
+Puede pasar incluso con la misma molécula activa: dos productos pueden tener tiempos de almacenamiento distintos.
+
+12
+00:00:48,723 --> 00:00:54,843
+La formulación decide: el agua, el conservador, el envase, el pH.
+
+13
+00:00:54,843 --> 00:01:00,299
+Así que un número que oyes sobre la cadena de aminoácidos no es la regla de tu vial.
+
+14
+00:01:00,299 --> 00:01:03,932
+La etiqueta publicada del producto exacto gana.
+
+15
+00:01:03,932 --> 00:01:06,067
+Día nueve de diez.
+
+16
+00:01:06,067 --> 00:01:09,140
+Sigue para no perderte el día diez.
+

@@ -1,0 +1,60 @@
+1
+00:00:00,100 --> 00:00:03,125
+Mesma cadeia de aminoácidos, mesmo peptídeo.
+
+2
+00:00:03,075 --> 00:00:04,600
+Regras diferentes.
+
+3
+00:00:04,600 --> 00:00:08,587
+Você pode esperar que um peptídeo tenha um único prazo de validade.
+
+4
+00:00:08,587 --> 00:00:09,450
+Não tem.
+
+5
+00:00:09,450 --> 00:00:13,725
+As regras publicadas pertencem ao produto exato, não só à molécula.
+
+6
+00:00:13,725 --> 00:00:15,600
+Veja três rótulos reais.
+
+7
+00:00:15,600 --> 00:00:20,312
+O produto A diz: use imediatamente após misturar e descarte o que sobrar.
+
+8
+00:00:20,312 --> 00:00:25,325
+O produto B diz: descarte a caneta vinte e oito dias após o primeiro uso.
+
+9
+00:00:25,325 --> 00:00:29,212
+O produto C diz: cinquenta e seis dias após o primeiro uso.
+
+10
+00:00:29,212 --> 00:00:33,250
+Produtos diferentes, formulações diferentes, regras diferentes.
+
+11
+00:00:33,250 --> 00:00:40,012
+Isso pode acontecer até com a mesma molécula ativa: dois produtos podem ter prazos de armazenamento diferentes.
+
+12
+00:00:40,012 --> 00:00:44,387
+A formulação decide: a água, o conservante, o recipiente, o pH.
+
+13
+00:00:44,387 --> 00:00:49,287
+Então um número que você ouve sobre a cadeia de aminoácidos não é a regra do seu frasco.
+
+14
+00:00:49,287 --> 00:00:52,137
+O rótulo publicado do produto exato vence.
+
+15
+00:00:52,137 --> 00:00:55,925
+Dia nove de dez. Siga para não perder o dia dez.
+

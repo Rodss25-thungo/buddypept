@@ -1,0 +1,17 @@
+es 0.10 Misma cadena de amino?cidos, mismo p?p
+es 3.83 Reglas diferentes.
+es 5.95 Podr?as esperar que un p?ptido tenga u
+es 10.08 No es as?.
+es 11.77 Las reglas publicadas pertenecen al pr
+es 17.17 Mira tres etiquetas reales.
+es 19.93 El producto A dice: usar inmediatament
+es 25.59 El producto B dice: desechar la pluma 
+es 31.18 El producto C dice: cincuenta y seis d
+es 36.00 Productos diferentes, formulaciones di
+es 41.25 Puede pasar incluso con la misma mol?c
+es 48.72 La formulaci?n decide: el agua, el con
+es 54.84 As? que un n?mero que oyes sobre la ca
+es 60.30 La etiqueta publicada del producto exa
+es 63.93 D?a nueve de diez.
+es 66.07 Sigue para no perderte el d?a diez.
+END 00:01:09,140

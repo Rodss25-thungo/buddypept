@@ -1,0 +1,64 @@
+1
+00:00:00,050 --> 00:00:02,526
+Same amino-chain, same peptide.
+
+2
+00:00:02,526 --> 00:00:03,619
+Different rules.
+
+3
+00:00:03,619 --> 00:00:07,070
+You might expect one peptide to have one shelf life.
+
+4
+00:00:07,070 --> 00:00:08,098
+It does not.
+
+5
+00:00:08,098 --> 00:00:12,656
+The published rules belong to the exact product, not just the molecule.
+
+6
+00:00:12,656 --> 00:00:14,466
+Look at three real labels.
+
+7
+00:00:14,466 --> 00:00:19,375
+Product A says use immediately after mixing, and throw away what is left.
+
+8
+00:00:19,375 --> 00:00:23,606
+Product B says throw the pen away twenty-eight days after first use.
+
+9
+00:00:23,606 --> 00:00:26,992
+Product C says fifty-six days after first use.
+
+10
+00:00:26,992 --> 00:00:30,677
+Different products, different formulations, different rules.
+
+11
+00:00:30,677 --> 00:00:37,057
+It can even happen with the very same active molecule: two products can carry different storage times.
+
+12
+00:00:37,057 --> 00:00:42,734
+The formulation decides: the water, the preservative, the container, the pH.
+
+13
+00:00:42,734 --> 00:00:46,966
+So a number you hear about the amino-chain is not a rule for your vial.
+
+14
+00:00:46,966 --> 00:00:49,921
+The published label for the exact product wins.
+
+15
+00:00:49,921 --> 00:00:51,171
+Day nine of ten.
+
+16
+00:00:51,171 --> 00:00:53,190
+Follow so you don't miss day ten.
+

@@ -1,0 +1,16 @@
+pt 0.10 Mesma cadeia de amino?cidos, mesmo pep
+pt 3.08 Regras diferentes.
+pt 4.60 Voc? pode esperar que um pept?deo tenh
+pt 8.59 N?o tem.
+pt 9.45 As regras publicadas pertencem ao prod
+pt 13.72 Veja tr?s r?tulos reais.
+pt 15.60 O produto A diz: use imediatamente ap?
+pt 20.31 O produto B diz: descarte a caneta vin
+pt 25.32 O produto C diz: cinquenta e seis dias
+pt 29.21 Produtos diferentes, formula??es difer
+pt 33.25 Isso pode acontecer at? com a mesma mo
+pt 40.01 A formula??o decide: a ?gua, o conserv
+pt 44.39 Ent?o um n?mero que voc? ouve sobre a 
+pt 49.29 O r?tulo publicado do produto exato ve
+pt 52.14 Dia nove de dez. Siga para n?o perder 
+END 00:00:55,925
