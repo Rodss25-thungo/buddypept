@@ -1,0 +1,60 @@
+1
+00:00:00,050 --> 00:00:01,041
+Nine days.
+
+2
+00:00:01,041 --> 00:00:02,083
+One question.
+
+3
+00:00:02,083 --> 00:00:06,992
+How long does the amino-chain, a peptide, last after the water goes in?
+
+4
+00:00:06,992 --> 00:00:08,554
+Here is the honest answer.
+
+5
+00:00:08,554 --> 00:00:11,132
+There is no universal peptide clock.
+
+6
+00:00:11,132 --> 00:00:15,677
+There are two clocks: one for microbiology, one for chemistry.
+
+7
+00:00:15,677 --> 00:00:24,440
+And the chemistry clock changes with the molecule, the formulation, the temperature, the light, the container, the handling, and the time.
+
+8
+00:00:24,440 --> 00:00:26,875
+Change one, and the clock changes.
+
+9
+00:00:26,875 --> 00:00:32,473
+That is why a number from a friend, a forum, or a video is not a rule for your vial.
+
+10
+00:00:32,473 --> 00:00:35,937
+The published stability data for the exact product wins.
+
+11
+00:00:35,937 --> 00:00:39,466
+And that is why BuddyPept will never hand you one magic number.
+
+12
+00:00:39,466 --> 00:00:41,445
+Next: Inside the Vial.
+
+13
+00:00:41,445 --> 00:00:47,434
+What an amino-chain is, how it is made, how pure it is, and which chains are more sensitive.
+
+14
+00:00:47,434 --> 00:00:48,671
+Day ten of ten.
+
+15
+00:00:48,671 --> 00:00:51,276
+Follow, so you don't miss what comes next.
+
