@@ -1,0 +1,56 @@
+1
+00:00:00,050 --> 00:00:02,786
+Light can change an amino-chain, a peptide.
+
+2
+00:00:02,786 --> 00:00:05,169
+But not every chain reacts the same way.
+
+3
+00:00:05,169 --> 00:00:07,239
+It depends on which links it is made of.
+
+4
+00:00:07,239 --> 00:00:14,687
+In lab studies, a few links are the usual suspects: tryptophan, tyrosine, phenylalanine, and cysteine.
+
+5
+00:00:14,687 --> 00:00:17,213
+When light hits them, they can oxidize.
+
+6
+00:00:17,213 --> 00:00:21,093
+A chain without those links has far fewer places for that to happen.
+
+7
+00:00:21,093 --> 00:00:23,111
+But the links do not act alone.
+
+8
+00:00:23,111 --> 00:00:24,401
+Their neighbors matter.
+
+9
+00:00:24,401 --> 00:00:29,700
+In one study, a histidine link next to tryptophan was oxidized under light.
+
+10
+00:00:29,700 --> 00:00:33,919
+The same peptide, with the tryptophan swapped out, did not show it.
+
+11
+00:00:33,919 --> 00:00:35,703
+So the sequence decides.
+
+12
+00:00:35,703 --> 00:00:38,580
+Two chains, same light, different result.
+
+13
+00:00:38,580 --> 00:00:44,101
+That is why some labels say protect from light, and why no single rule covers every chain.
+
+14
+00:00:44,101 --> 00:00:46,028
+Follow for more peptide math.
+

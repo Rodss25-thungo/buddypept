@@ -1,0 +1,56 @@
+1
+00:00:00,100 --> 00:00:04,516
+La luz puede cambiar una cadena de aminoácidos, un péptido.
+
+2
+00:00:04,466 --> 00:00:07,773
+Pero no todas las cadenas reaccionan igual.
+
+3
+00:00:07,773 --> 00:00:10,533
+Depende de qué eslabones tenga.
+
+4
+00:00:10,533 --> 00:00:19,830
+En estudios de laboratorio, algunos eslabones son los sospechosos habituales: triptófano, tirosina, fenilalanina y cisteína.
+
+5
+00:00:19,830 --> 00:00:23,411
+Cuando la luz los alcanza, pueden oxidarse.
+
+6
+00:00:23,411 --> 00:00:28,893
+Una cadena sin esos eslabones tiene muchos menos puntos donde eso puede pasar.
+
+7
+00:00:28,893 --> 00:00:31,979
+Pero los eslabones no actúan solos.
+
+8
+00:00:31,979 --> 00:00:34,244
+Los vecinos importan.
+
+9
+00:00:34,244 --> 00:00:40,091
+En un estudio, un eslabón de histidina junto a un triptófano se oxidó bajo la luz.
+
+10
+00:00:40,091 --> 00:00:44,869
+El mismo péptido, con el triptófano cambiado, no lo mostró.
+
+11
+00:00:44,869 --> 00:00:47,434
+Así que la secuencia decide.
+
+12
+00:00:47,434 --> 00:00:51,888
+Dos cadenas, la misma luz, distinto resultado.
+
+13
+00:00:51,888 --> 00:00:58,997
+Por eso algunas etiquetas dicen proteger de la luz, y por eso ninguna regla única sirve para toda cadena.
+
+14
+00:00:58,997 --> 00:01:02,460
+Síguenos para más matemática de péptidos.
+

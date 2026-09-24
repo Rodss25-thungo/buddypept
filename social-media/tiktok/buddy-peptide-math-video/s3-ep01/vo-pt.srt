@@ -1,0 +1,56 @@
+1
+00:00:00,100 --> 00:00:03,737
+A luz pode alterar uma cadeia de aminoácidos, um peptídeo.
+
+2
+00:00:03,687 --> 00:00:06,487
+Mas nem toda cadeia reage do mesmo jeito.
+
+3
+00:00:06,487 --> 00:00:08,525
+Depende de quais elos ela tem.
+
+4
+00:00:08,525 --> 00:00:16,000
+Em estudos de laboratório, alguns elos são os suspeitos de sempre: triptofano, tirosina, fenilalanina e cisteína.
+
+5
+00:00:16,000 --> 00:00:18,762
+Quando a luz os atinge, eles podem oxidar.
+
+6
+00:00:18,762 --> 00:00:23,250
+Uma cadeia sem esses elos tem muito menos pontos onde isso pode acontecer.
+
+7
+00:00:23,250 --> 00:00:25,462
+Mas os elos não agem sozinhos.
+
+8
+00:00:25,462 --> 00:00:27,037
+Os vizinhos importam.
+
+9
+00:00:27,037 --> 00:00:32,037
+Em um estudo, um elo de histidina ao lado de um triptofano foi oxidado sob luz.
+
+10
+00:00:32,037 --> 00:00:35,862
+O mesmo peptídeo, com o triptofano trocado, não mostrou isso.
+
+11
+00:00:35,862 --> 00:00:37,600
+Então a sequência decide.
+
+12
+00:00:37,600 --> 00:00:40,875
+Duas cadeias, mesma luz, resultado diferente.
+
+13
+00:00:40,875 --> 00:00:47,150
+Por isso alguns rótulos dizem proteger da luz, e por isso nenhuma regra única serve para toda cadeia.
+
+14
+00:00:47,150 --> 00:00:50,700
+Siga para mais matemática dos peptídeos.
+

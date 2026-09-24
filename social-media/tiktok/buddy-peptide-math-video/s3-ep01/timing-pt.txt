@@ -1,0 +1,15 @@
+pt 0.10 A luz pode alterar uma cadeia de amino?cidos, um p
+pt 3.69 Mas nem toda cadeia reage do mesmo jeito.
+pt 6.49 Depende de quais elos ela tem.
+pt 8.53 Em estudos de laborat?rio, alguns elos s?o os susp
+pt 16.00 Quando a luz os atinge, eles podem oxidar.
+pt 18.76 Uma cadeia sem esses elos tem muito menos pontos o
+pt 23.25 Mas os elos n?o agem sozinhos.
+pt 25.46 Os vizinhos importam.
+pt 27.04 Em um estudo, um elo de histidina ao lado de um tr
+pt 32.04 O mesmo pept?deo, com o triptofano trocado, n?o mo
+pt 35.86 Ent?o a sequ?ncia decide.
+pt 37.60 Duas cadeias, mesma luz, resultado diferente.
+pt 40.88 Por isso alguns r?tulos dizem proteger da luz, e p
+pt 47.15 Siga para mais matem?tica dos pept?deos.
+END 00:00:50,700

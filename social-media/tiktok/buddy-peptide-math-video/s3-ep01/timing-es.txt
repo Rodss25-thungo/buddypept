@@ -1,0 +1,15 @@
+es 0.10 La luz puede cambiar una cadena de amino?cidos, un
+es 4.47 Pero no todas las cadenas reaccionan igual.
+es 7.77 Depende de qu? eslabones tenga.
+es 10.53 En estudios de laboratorio, algunos eslabones son 
+es 19.83 Cuando la luz los alcanza, pueden oxidarse.
+es 23.41 Una cadena sin esos eslabones tiene muchos menos p
+es 28.89 Pero los eslabones no act?an solos.
+es 31.98 Los vecinos importan.
+es 34.24 En un estudio, un eslab?n de histidina junto a un 
+es 40.09 El mismo p?ptido, con el tript?fano cambiado, no l
+es 44.87 As? que la secuencia decide.
+es 47.43 Dos cadenas, la misma luz, distinto resultado.
+es 51.89 Por eso algunas etiquetas dicen proteger de la luz
+es 59.00 S?guenos para m?s matem?tica de p?ptidos.
+END 00:01:02,460
