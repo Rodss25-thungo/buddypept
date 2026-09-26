@@ -1,0 +1,56 @@
+1
+00:00:00,100 --> 00:00:06,475
+Digamos que um relatório mostre uma cadeia de aminoácidos, um peptídeo, com 98 por cento de pureza.
+
+2
+00:00:06,425 --> 00:00:08,312
+O que esse número significa?
+
+3
+00:00:08,312 --> 00:00:12,225
+Um laboratório separa a amostra, e um detector desenha picos.
+
+4
+00:00:12,225 --> 00:00:14,237
+Um pico alto é a cadeia alvo.
+
+5
+00:00:14,237 --> 00:00:17,050
+Os pequenos são outras coisas que vieram junto.
+
+6
+00:00:17,050 --> 00:00:21,087
+A pureza compara a área do pico alto com a área de todos os picos.
+
+7
+00:00:21,087 --> 00:00:23,425
+Mas um pico é um sinal, não um peso.
+
+8
+00:00:23,425 --> 00:00:26,825
+Peças diferentes absorvem luz de formas diferentes.
+
+9
+00:00:26,825 --> 00:00:35,512
+Em um estudo de laboratório, o triptofano absorveu cerca de trinta vezes mais que uma ligação peptídica simples, em um comprimento de onda comum.
+
+10
+00:00:35,512 --> 00:00:37,150
+Então área não é massa.
+
+11
+00:00:37,150 --> 00:00:39,712
+A pureza diz quão limpo o sinal parece.
+
+12
+00:00:39,712 --> 00:00:42,100
+Ela não diz quanto do frasco é cadeia.
+
+13
+00:00:42,100 --> 00:00:44,337
+São duas perguntas diferentes.
+
+14
+00:00:44,337 --> 00:00:47,887
+Siga para mais matemática dos peptídeos.
+

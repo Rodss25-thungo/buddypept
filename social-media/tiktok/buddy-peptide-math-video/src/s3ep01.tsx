@@ -19,7 +19,7 @@ import {BG, Buddy, Caption, FPS, Flag, Glow, Logo, MUTED, TEAL, TEAL_DEEP, WHITE
 const anton = loadAnton();
 const archivo = loadArchivo();
 
-const AMBER = '#f59e0b';
+export const AMBER = '#f59e0b';
 const VIOLET = '#a78bfa';
 
 type ClipCfg = {src: string; from: number; dur: number};
@@ -58,7 +58,7 @@ const Cinematic: React.FC<{src: string}> = ({src}) => {
   );
 };
 
-const SourceChip: React.FC<{label: string; source: string; sp: number}> = ({label, source, sp}) => (
+export const SourceChip: React.FC<{label: string; source: string; sp: number}> = ({label, source, sp}) => (
   <div style={{opacity: sp, transform: `translateY(${interpolate(sp, [0, 1], [30, 0])}px)`, display: 'flex', alignItems: 'center', gap: 18, background: 'rgba(10,18,24,0.92)', border: `3px solid ${TEAL}`, borderRadius: 999, padding: '14px 34px', maxWidth: 960}}>
     <div style={{width: 34, height: 34, borderRadius: 999, background: TEAL, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: anton.fontFamily, fontSize: 24, color: '#04262b', flexShrink: 0}}>{'✓'}</div>
     <div style={{fontFamily: anton.fontFamily, fontSize: 30, letterSpacing: 2, color: TEAL, flexShrink: 0}}>{label}</div>
@@ -111,7 +111,7 @@ const Chain: React.FC<{beads: BeadSpec[]; width: number; cy: number; wave?: numb
   );
 };
 
-const Pill: React.FC<{text: string; color: string; sp: number; bg?: string}> = ({text, color, sp, bg = '#0a1218'}) => (
+export const Pill: React.FC<{text: string; color: string; sp: number; bg?: string}> = ({text, color, sp, bg = '#0a1218'}) => (
   <div style={{opacity: sp, transform: `scale(${interpolate(sp, [0, 1], [0.6, 1])})`, background: bg, border: `4px solid ${color}`, borderRadius: 999, padding: '12px 40px', fontFamily: anton.fontFamily, fontSize: 44, letterSpacing: 2, color: WHITE, textAlign: 'center'}}>{text}</div>
 );
 
@@ -138,7 +138,7 @@ const Hook: React.FC<{labelA: string; labelB: string; res: S3Ep1Config['res']}> 
   );
 };
 
-const VialScene: React.FC<{chip: string; img: string}> = ({chip, img}) => {
+export const VialScene: React.FC<{chip: string; img: string}> = ({chip, img}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const s = spring({frame, fps, config: {damping: 13, stiffness: 150}});

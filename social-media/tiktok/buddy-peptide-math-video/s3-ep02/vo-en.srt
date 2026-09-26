@@ -1,0 +1,56 @@
+1
+00:00:00,050 --> 00:00:05,403
+Say a report lists an amino-chain, a peptide, as 98 percent pure.
+
+2
+00:00:05,403 --> 00:00:06,731
+What does that number mean?
+
+3
+00:00:06,731 --> 00:00:10,455
+A lab separates the sample, and a detector draws peaks.
+
+4
+00:00:10,455 --> 00:00:12,760
+One tall peak is the target chain.
+
+5
+00:00:12,760 --> 00:00:15,169
+The small ones are other things that came along.
+
+6
+00:00:15,169 --> 00:00:20,052
+Purity compares the area of the tall peak to the area of all the peaks.
+
+7
+00:00:20,052 --> 00:00:22,513
+But a peak is a signal, not a weight.
+
+8
+00:00:22,513 --> 00:00:25,182
+Different pieces absorb light differently.
+
+9
+00:00:25,182 --> 00:00:32,317
+In one lab study, tryptophan absorbed about thirty times more than a plain peptide bond at a common wavelength.
+
+10
+00:00:32,317 --> 00:00:34,153
+So area is not mass.
+
+11
+00:00:34,153 --> 00:00:36,692
+Purity says how clean the signal looks.
+
+12
+00:00:36,692 --> 00:00:39,283
+It does not say how much of the vial is chain.
+
+13
+00:00:39,283 --> 00:00:41,067
+Those are two different questions.
+
+14
+00:00:41,067 --> 00:00:42,994
+Follow for more peptide math.
+
