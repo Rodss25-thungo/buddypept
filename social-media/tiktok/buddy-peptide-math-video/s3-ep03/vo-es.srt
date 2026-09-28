@@ -1,0 +1,44 @@
+1
+00:00:00,100 --> 00:00:03,044
+Esto es una cadena de aminoácidos.
+
+2
+00:00:02,994 --> 00:00:08,281
+Son solo aminoácidos, unidos uno tras otro, como cuentas en un hilo.
+
+3
+00:00:08,281 --> 00:00:11,223
+Un aminoácido solo no hace mucho.
+
+4
+00:00:11,223 --> 00:00:14,648
+Une unos cuantos, y tienes un péptido.
+
+5
+00:00:14,648 --> 00:00:20,078
+Sigue uniendo más, y en algún momento, se convierte en una proteína.
+
+6
+00:00:20,078 --> 00:00:22,968
+Los mismos bloques, siempre.
+
+7
+00:00:22,968 --> 00:00:28,307
+La única diferencia real es cuántos eslabones hay, y en qué orden vienen.
+
+8
+00:00:28,307 --> 00:00:30,976
+Cadena corta: péptido.
+
+9
+00:00:30,976 --> 00:00:33,750
+Cadena larga: proteína.
+
+10
+00:00:33,750 --> 00:00:36,054
+Esa es toda la idea.
+
+11
+00:00:36,054 --> 00:00:39,518
+Síguenos para más matemática de péptidos.
+

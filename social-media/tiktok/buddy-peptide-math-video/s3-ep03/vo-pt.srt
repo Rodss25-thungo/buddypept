@@ -1,0 +1,44 @@
+1
+00:00:00,100 --> 00:00:02,287
+Isto é uma cadeia de aminoácidos.
+
+2
+00:00:02,237 --> 00:00:06,762
+É só aminoácidos, ligados um após o outro, como contas em um fio.
+
+3
+00:00:06,762 --> 00:00:09,487
+Um aminoácido sozinho não faz muita coisa.
+
+4
+00:00:09,487 --> 00:00:11,912
+Ligue alguns, e você tem um peptídeo.
+
+5
+00:00:11,912 --> 00:00:15,625
+Continue ligando mais, e em algum momento, vira uma proteína.
+
+6
+00:00:15,625 --> 00:00:17,537
+Os mesmos blocos, sempre.
+
+7
+00:00:17,537 --> 00:00:22,262
+A única diferença real é quantos elos existem, e a ordem em que eles vêm.
+
+8
+00:00:22,262 --> 00:00:24,287
+Cadeia curta: peptídeo.
+
+9
+00:00:24,287 --> 00:00:26,200
+Cadeia longa: proteína.
+
+10
+00:00:26,200 --> 00:00:27,650
+Essa é toda a ideia.
+
+11
+00:00:27,650 --> 00:00:31,200
+Siga para mais matemática dos peptídeos.
+

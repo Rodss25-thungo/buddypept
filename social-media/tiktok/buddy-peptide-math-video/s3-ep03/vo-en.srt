@@ -1,0 +1,44 @@
+1
+00:00:00,050 --> 00:00:01,861
+This is an amino-chain.
+
+2
+00:00:01,861 --> 00:00:07,031
+It is just amino acids, linked one after another, like beads on a string.
+
+3
+00:00:07,031 --> 00:00:09,713
+One amino acid alone does not do much.
+
+4
+00:00:09,713 --> 00:00:12,408
+Link a few together, and you have a peptide.
+
+5
+00:00:12,408 --> 00:00:16,263
+Keep linking more, and at some point, it becomes a protein.
+
+6
+00:00:16,263 --> 00:00:18,528
+Same building blocks, every time.
+
+7
+00:00:18,528 --> 00:00:23,085
+The only real difference is how many links there are, and the order they come in.
+
+8
+00:00:23,085 --> 00:00:25,091
+A short chain: peptide.
+
+9
+00:00:25,091 --> 00:00:27,187
+A long chain: protein.
+
+10
+00:00:27,187 --> 00:00:28,580
+That is the whole idea.
+
+11
+00:00:28,580 --> 00:00:30,507
+Follow for more peptide math.
+
