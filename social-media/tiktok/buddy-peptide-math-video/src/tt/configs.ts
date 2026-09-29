@@ -97,8 +97,17 @@ export const TT06_EN = {
   info: {...tt06Base.info, bottom: "The scale number changed. The amount didn't."},
 };
 
-// Post 7: 250 MCG = 12.5 units (audio unchanged, unit scale).
-export const TT07_EN = {...DAY7_EN, id: 'TT07EN'};
+// Post 7: 250 MCG = 12.5 units (re-voiced: drops "your note"/"your vial", unit scale).
+const tt07Base = warpDeep(DAY7_EN, WARPS.tt07);
+export const TT07_EN = withCue(
+  withCue(
+    {...tt07Base, id: 'TT07EN', voFile: 'tt07-vo-en.mp3'},
+    0,
+    ['A LABEL READS', '250 MCG.'],
+  ),
+  1,
+  ['THE FORMULA NEEDS', 'MG.'],
+);
 
 // Post 8: same 250 MCG = 6.25 units (re-voiced, unit scale).
 export const TT08_EN = {...warpDeep(DAY8_EN, WARPS.tt08), id: 'TT08EN', voFile: 'tt08-vo-en.mp3'};

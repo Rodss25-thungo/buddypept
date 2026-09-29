@@ -1,0 +1,72 @@
+1
+00:00:00,050 --> 00:00:02,955
+A label reads two hundred fifty micrograms.
+
+2
+00:00:02,955 --> 00:00:05,065
+The formula needs milligrams.
+
+3
+00:00:05,065 --> 00:00:09,947
+Quick quiz: is that zero point two five milligrams, or two point five?
+
+4
+00:00:09,947 --> 00:00:13,085
+One milligram is one thousand micrograms.
+
+5
+00:00:13,085 --> 00:00:17,838
+So two hundred fifty micrograms is zero point two five milligrams.
+
+6
+00:00:17,838 --> 00:00:21,028
+Pick two point five, and you're off by ten times.
+
+7
+00:00:21,028 --> 00:00:26,966
+Here's the concentration math: ten milligrams with five milliliters gives two per milliliter.
+
+8
+00:00:26,966 --> 00:00:31,679
+Two hundred fifty micrograms is zero point one two five milliliters.
+
+9
+00:00:31,679 --> 00:00:33,424
+Twelve point five units.
+
+10
+00:00:33,424 --> 00:00:36,888
+BuddyPept converts mcg and mg for you.
+
+11
+00:00:36,888 --> 00:00:39,140
+Free, at Buddy Pept dot com.
+
+12
+00:00:39,140 --> 00:00:40,820
+That's day seven of ten.
+
+13
+00:00:40,820 --> 00:00:43,906
+Ten days of peptide math, one lesson a day.
+
+14
+00:00:43,906 --> 00:00:45,377
+The math doesn't lie.
+
+15
+00:00:45,377 --> 00:00:47,291
+Follow so you don't miss day eight.
+
+16
+00:00:47,291 --> 00:00:48,723
+Educational tool.
+
+17
+00:00:48,723 --> 00:00:50,234
+Not medical advice.
+
+18
+00:00:50,234 --> 00:00:52,187
+For research purposes only.
+
