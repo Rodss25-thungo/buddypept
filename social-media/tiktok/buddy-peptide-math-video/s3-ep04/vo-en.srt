@@ -1,0 +1,44 @@
+1
+00:00:00,050 --> 00:00:03,255
+Every amino-chain is built from the same alphabet.
+
+2
+00:00:03,255 --> 00:00:04,335
+Not letters.
+
+3
+00:00:04,335 --> 00:00:06,067
+Twenty amino acids.
+
+4
+00:00:06,067 --> 00:00:10,429
+Each one gets a one-letter code, so a chain can be written out like a word.
+
+5
+00:00:10,429 --> 00:00:13,632
+Put those letters in this order, and you get Mahts-See.
+
+6
+00:00:13,632 --> 00:00:17,838
+Mix them, put them in a different order, and you get Retatrutide.
+
+7
+00:00:17,838 --> 00:00:22,044
+Different order again, and you get BPC-157.
+
+8
+00:00:22,044 --> 00:00:24,739
+Same twenty letters, every single time.
+
+9
+00:00:24,739 --> 00:00:26,901
+It's not about which letters exist.
+
+10
+00:00:26,901 --> 00:00:28,802
+It's about the order you put them in.
+
+11
+00:00:28,802 --> 00:00:30,937
+Follow for more peptide science.
+

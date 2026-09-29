@@ -1,0 +1,44 @@
+1
+00:00:00,100 --> 00:00:05,050
+Toda cadena de aminoácidos está construida a partir del mismo alfabeto.
+
+2
+00:00:05,000 --> 00:00:06,796
+No letras.
+
+3
+00:00:06,796 --> 00:00:08,906
+Veinte aminoácidos.
+
+4
+00:00:08,906 --> 00:00:15,247
+Cada uno tiene un código de una letra, para que una cadena se pueda escribir como una palabra.
+
+5
+00:00:15,247 --> 00:00:19,231
+Pon esas letras en este orden, y obtienes MOTS-C.
+
+6
+00:00:19,231 --> 00:00:24,388
+Mézclalas, ponlas en un orden distinto, y obtienes Retatrutide.
+
+7
+00:00:24,388 --> 00:00:29,648
+Otro orden distinto, y obtienes BPC-157.
+
+8
+00:00:29,648 --> 00:00:32,695
+Siempre las mismas veinte letras.
+
+9
+00:00:32,695 --> 00:00:35,638
+No se trata de qué letras existen.
+
+10
+00:00:35,638 --> 00:00:38,658
+Se trata del orden en que las pones.
+
+11
+00:00:38,658 --> 00:00:41,875
+Síguenos para más ciencia de péptidos.
+

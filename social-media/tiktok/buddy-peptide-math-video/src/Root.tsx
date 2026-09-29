@@ -25,6 +25,7 @@ import {S2Day10, S2DAY10_EN, S2DAY10_ES, S2DAY10_PT} from './s2day10';
 import {S3Ep1, S3EP1_EN, S3EP1_ES, S3EP1_PT} from './s3ep01';
 import {S3Ep2, S3EP2_EN, S3EP2_ES, S3EP2_PT} from './s3ep02';
 import {S3Ep3, S3EP3_EN, S3EP3_ES, S3EP3_PT} from './s3ep03';
+import {S3Ep4, S3EP4_EN, S3EP4_ES, S3EP4_PT} from './s3ep04';
 import {DAY2_EN, DAY2_ES, DAY2_PT} from './day02';
 
 export const RemotionRoot: React.FC = () => (
@@ -73,6 +74,9 @@ export const RemotionRoot: React.FC = () => (
     ))}
     {[S3EP3_EN, S3EP3_ES, S3EP3_PT].map((L) => (
       <Composition key={L.id} id={L.id} component={S3Ep3} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />
+    ))}
+    {[S3EP4_EN, S3EP4_ES, S3EP4_PT].map((L) => (
+      <Composition key={L.id} id={L.id} component={S3Ep4} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />
     ))}
     {[S2DAY10_EN, S2DAY10_ES, S2DAY10_PT].map((L) => (
       <Composition key={L.id} id={L.id} component={S2Day10} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />

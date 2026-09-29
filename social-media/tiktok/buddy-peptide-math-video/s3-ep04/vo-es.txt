@@ -1,0 +1,11 @@
+Toda cadena de aminoácidos está construida a partir del mismo alfabeto.
+No letras.
+Veinte aminoácidos.
+Cada uno tiene un código de una letra, para que una cadena se pueda escribir como una palabra.
+Pon esas letras en este orden, y obtienes MOTS-C.
+Mézclalas, ponlas en un orden distinto, y obtienes Retatrutide.
+Otro orden distinto, y obtienes BPC-157.
+Siempre las mismas veinte letras.
+No se trata de qué letras existen.
+Se trata del orden en que las pones.
+Síguenos para más ciencia de péptidos.

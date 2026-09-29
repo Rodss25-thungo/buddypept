@@ -1,0 +1,11 @@
+Toda cadeia de aminoácidos é construída a partir do mesmo alfabeto.
+Não letras.
+Vinte aminoácidos.
+Cada um recebe um código de uma letra, para que a cadeia possa ser escrita como uma palavra.
+Coloque essas letras nesta ordem, e você tem MOTS-C.
+Misture-as, coloque em uma ordem diferente, e você tem Retatrutide.
+Ordem diferente de novo, e você tem BPC-157.
+Sempre as mesmas vinte letras.
+Não é sobre quais letras existem.
+É sobre a ordem em que você as coloca.
+Siga para mais ciência dos peptídeos.
