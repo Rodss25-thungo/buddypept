@@ -500,6 +500,41 @@
       "howSold": "Con receta, incluso desde farmacias de preparados magistrales, como polvo para reconstitución (comúnmente frascos de 2 a 15 mg).",
       "bottomLine": "La sermorelina es un medicamento con receta. Si es apropiada para una persona determinada es una decisión de ella con un profesional de la salud autorizado."
     },
+    "tesamorelin": {
+      "teaser": "Un análogo de GHRH aprobado por la FDA, también vendido como polvo de investigación.",
+      "whatItIs": "Un análogo sintético de la hormona liberadora de la hormona del crecimiento (GHRH), formado por 44 aminoácidos con un pequeño grupo químico añadido que retrasa su degradación.",
+      "studiedFor": "Aprobado por la FDA con el nombre comercial Egrifta SV para reducir el exceso de grasa abdominal en adultos con VIH y lipodistrofia. También se ha estudiado por su efecto en la liberación de la propia hormona del crecimiento del cuerpo.",
+      "howSold": "Como kit con receta (Egrifta SV, un frasco de 2 mg) y como polvo de proveedores de investigación, comúnmente de 2, 5 o 10 mg, reconstituido con agua bacteriostática.",
+      "bottomLine": "El producto aprobado es un medicamento con receta para una condición específica. Cualquier otro uso es fuera de indicación, y si es apropiado, legal o seguro para alguna persona es una decisión de ella con un profesional de la salud autorizado."
+    },
+    "glow": {
+      "teaser": "Una mezcla premezclada de BPC-157, TB-500 y GHK-Cu.",
+      "whatItIs": "No es un solo péptido. GLOW es una mezcla de tres: BPC-157, TB-500 y GHK-Cu. El frasco común contiene 70 mg en total, formados por 10 mg de BPC-157, 10 mg de TB-500 y 50 mg de GHK-Cu.",
+      "studiedFor": "Cada componente se ha estudiado por separado, sobre todo en trabajos preclínicos, para la reparación de tejidos y la piel. La mezcla como combinación tiene poca investigación publicada. Los hallazgos son tempranos.",
+      "howSold": "Como polvo liofilizado en un solo frasco, casi siempre de 70 mg, reconstituido con agua bacteriostática. Lo venden proveedores de investigación, no como medicamento aprobado.",
+      "bottomLine": "La calculadora trata el frasco como un total de 70 mg, así que la dosis que calcula es una dosis de la mezcla completa, no de un solo componente. La investigación es temprana. Si es apropiado, legal o seguro para alguna persona es una decisión de ella con un profesional de la salud autorizado."
+    },
+    "klow": {
+      "teaser": "GLOW con un cuarto péptido, KPV, añadido.",
+      "whatItIs": "Una mezcla de cuatro péptidos: BPC-157, TB-500, GHK-Cu y KPV. El frasco común contiene 80 mg en total, formados por 10 mg de BPC-157, 10 mg de TB-500, 50 mg de GHK-Cu y 10 mg de KPV. Es GLOW más KPV.",
+      "studiedFor": "BPC-157, TB-500 y GHK-Cu se han estudiado para la reparación de tejidos y la piel, y KPV, un fragmento corto de alfa-MSH, para señales relacionadas con la inflamación. La investigación es sobre todo preclínica y la mezcla en sí tiene poco trabajo publicado.",
+      "howSold": "Como polvo liofilizado en un solo frasco, casi siempre de 80 mg, reconstituido con agua bacteriostática. Lo venden proveedores de investigación, no como medicamento aprobado.",
+      "bottomLine": "La calculadora trata el frasco como un total de 80 mg, así que la dosis que calcula es una dosis de la mezcla completa, no de un solo componente. La investigación es temprana. Si es apropiado, legal o seguro para alguna persona es una decisión de ella con un profesional de la salud autorizado."
+    },
+    "cjc-1295-no-dac-ipamorelin": {
+      "teaser": "Una mezcla premezclada de CJC-1295 sin DAC e ipamorelina.",
+      "whatItIs": "Dos péptidos en un frasco: CJC-1295 sin DAC (GRF modificada 1-29), un análogo de la hormona liberadora de la hormona del crecimiento, e ipamorelina, un secretagogo de la hormona del crecimiento. El frasco común contiene 10 mg en total, 5 mg de cada uno.",
+      "studiedFor": "Se estudian juntos con frecuencia porque actúan sobre la liberación de la propia hormona del crecimiento del cuerpo a través de receptores distintos. Los hallazgos son mayormente preclínicos.",
+      "howSold": "Como polvo liofilizado en un solo frasco, casi siempre de 10 mg, reconstituido con agua bacteriostática. Lo venden proveedores de investigación, no como medicamento aprobado.",
+      "bottomLine": "La calculadora trata el frasco como un total de 10 mg, así que la dosis que calcula es una dosis de la mezcla completa, no de uno de sus componentes. La investigación es temprana. Si es apropiado, legal o seguro para alguna persona es una decisión de ella con un profesional de la salud autorizado."
+    },
+    "tesamorelin-ipamorelin": {
+      "teaser": "Una mezcla premezclada de tesamorelina e ipamorelina.",
+      "whatItIs": "Dos péptidos en un frasco: tesamorelina, un análogo de la hormona liberadora de la hormona del crecimiento, e ipamorelina, un secretagogo de la hormona del crecimiento. El frasco común contiene 10 mg en total, 5 mg de cada uno, aunque la proporción varía según el proveedor.",
+      "studiedFor": "La tesamorelina está aprobada por la FDA por sí sola para una condición específica. La combinación con ipamorelina es una mezcla de investigación, estudiada en trabajos preclínicos por su señalización de la hormona del crecimiento.",
+      "howSold": "Como polvo liofilizado en un solo frasco, comúnmente de 10 o 15 mg, reconstituido con agua bacteriostática. Lo venden proveedores de investigación, no como medicamento aprobado.",
+      "bottomLine": "La calculadora trata el frasco como un total, así que la dosis que calcula es una dosis de la mezcla completa, no de uno de sus componentes. Revisa la proporción en la etiqueta. La investigación es temprana. Si es apropiado, legal o seguro para alguna persona es una decisión de ella con un profesional de la salud autorizado."
+    },
     "retatrutide": {
       "teaser": "Un péptido metabólico en investigación, aún en ensayos clínicos.",
       "whatItIs": "Un péptido en investigación que actúa sobre tres receptores (GLP-1, GIP y glucagón).",

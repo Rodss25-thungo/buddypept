@@ -500,6 +500,41 @@
       "howSold": "By prescription, including from compounding pharmacies, as a powder for reconstitution (commonly 2 to 15 mg vials).",
       "bottomLine": "Sermorelin is a prescription medication. Whether it is appropriate for a given person is a decision for them and a licensed healthcare provider."
     },
+    "tesamorelin": {
+      "teaser": "An FDA-approved GHRH analog, also sold as a research powder.",
+      "whatItIs": "A synthetic analog of growth hormone releasing hormone (GHRH), made of 44 amino acids with a small added chemical group that slows its breakdown.",
+      "studiedFor": "FDA-approved under the brand name Egrifta SV to reduce excess abdominal fat in adults with HIV and lipodystrophy. It has also been studied for its effect on the body’s own growth hormone release.",
+      "howSold": "As a prescription kit (Egrifta SV, a 2 mg vial) and as a powder from research suppliers, commonly 2, 5 or 10 mg, reconstituted with bacteriostatic water.",
+      "bottomLine": "The approved product is a prescription medicine for one specific condition. Anything beyond that is off-label, and whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    },
+    "glow": {
+      "teaser": "A pre-mixed blend of BPC-157, TB-500 and GHK-Cu.",
+      "whatItIs": "Not a single peptide. GLOW is a blend of three: BPC-157, TB-500 and GHK-Cu. The common vial holds 70 mg in total, made of 10 mg BPC-157, 10 mg TB-500 and 50 mg GHK-Cu.",
+      "studiedFor": "Each part has been studied on its own, mostly in preclinical work, for tissue repair and skin. The blend itself has little published research as a combination. Findings are early.",
+      "howSold": "As a freeze-dried powder in a single vial, most often 70 mg, reconstituted with bacteriostatic water. Sold by research suppliers, not as an approved medicine.",
+      "bottomLine": "The calculator treats the vial as one 70 mg total, so the dose it works out is a dose of the whole blend, not of any one part. The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    },
+    "klow": {
+      "teaser": "GLOW with a fourth peptide, KPV, added.",
+      "whatItIs": "A blend of four peptides: BPC-157, TB-500, GHK-Cu and KPV. The common vial holds 80 mg in total, made of 10 mg BPC-157, 10 mg TB-500, 50 mg GHK-Cu and 10 mg KPV. It is GLOW plus KPV.",
+      "studiedFor": "BPC-157, TB-500 and GHK-Cu have been studied for tissue repair and skin, and KPV, a short fragment of alpha-MSH, for inflammation-related signaling. The research is mostly preclinical and the blend itself has little published work.",
+      "howSold": "As a freeze-dried powder in a single vial, most often 80 mg, reconstituted with bacteriostatic water. Sold by research suppliers, not as an approved medicine.",
+      "bottomLine": "The calculator treats the vial as one 80 mg total, so the dose it works out is a dose of the whole blend, not of any one part. The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    },
+    "cjc-1295-no-dac-ipamorelin": {
+      "teaser": "A pre-mixed blend of CJC-1295 No DAC and ipamorelin.",
+      "whatItIs": "Two peptides in one vial: CJC-1295 No DAC (Modified GRF 1-29), a growth hormone releasing hormone analog, and ipamorelin, a growth hormone secretagogue. The common vial holds 10 mg in total, 5 mg of each.",
+      "studiedFor": "The two are commonly studied together because they act on the body’s own growth hormone release through different receptors. Findings are largely preclinical.",
+      "howSold": "As a freeze-dried powder in a single vial, most often 10 mg, reconstituted with bacteriostatic water. Sold by research suppliers, not as an approved medicine.",
+      "bottomLine": "The calculator treats the vial as one 10 mg total, so the dose it works out is a dose of the whole blend, not of either part. The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    },
+    "tesamorelin-ipamorelin": {
+      "teaser": "A pre-mixed blend of tesamorelin and ipamorelin.",
+      "whatItIs": "Two peptides in one vial: tesamorelin, a growth hormone releasing hormone analog, and ipamorelin, a growth hormone secretagogue. The common vial holds 10 mg in total, 5 mg of each, though the split varies by seller.",
+      "studiedFor": "Tesamorelin is FDA-approved on its own for one specific condition. The combination with ipamorelin is a research blend, studied for growth hormone signaling in preclinical work.",
+      "howSold": "As a freeze-dried powder in a single vial, commonly 10 or 15 mg, reconstituted with bacteriostatic water. Sold by research suppliers, not as an approved medicine.",
+      "bottomLine": "The calculator treats the vial as one total, so the dose it works out is a dose of the whole blend, not of either part. Check the split on the label. The research is early. Whether it is appropriate, legal, or safe for any person is a decision for that person and a licensed healthcare provider."
+    },
     "retatrutide": {
       "teaser": "An investigational metabolic peptide, still in clinical trials.",
       "whatItIs": "An investigational peptide that acts on three receptors (GLP-1, GIP, and glucagon).",

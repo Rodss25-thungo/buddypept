@@ -214,6 +214,52 @@ export const PEPTIDES: Peptide[] = [
       'A synthetic fragment of thymosin beta-4, a naturally occurring protein. Studied in preclinical models for tissue repair, wound healing, and inflammation modulation. Not approved for human use.',
   },
 
+  /*
+   * Blends are calculated as one vial, not per component. The vial size is the
+   * TOTAL milligrams of everything in it, and the dose is milligrams (or mcg)
+   * of the blend. The split below is the one most sellers use; a seller with a
+   * different split still works, because the calculator takes any vial size.
+   */
+  {
+    slug: 'glow',
+    name: 'GLOW',
+    aliases: ['GLOW blend', 'BPC-157 + TB-500 + GHK-Cu'],
+    category: 'recovery',
+    legalStatus: 'research-chemical',
+    legalStatusLastUpdated: '2026-09-30',
+    // 70 mg (10 mg BPC-157, 10 mg TB-500, 50 mg GHK-Cu) is the size every
+    // seller lists. A 50 mg GLOW exists at a few sellers with a different
+    // split, so it is left to hand entry.
+    commonVialSizes: [70],
+    vialUnit: 'mg',
+    typicalDose: 1,
+    typicalDoseUnit: 'mg',
+    typicalDosesPerWeek: 7,
+    dosingPattern:
+      'Dose is measured as the whole blend, not per component (subcutaneous)',
+    shortDescription:
+      'A pre-mixed blend of BPC-157, TB-500 and GHK-Cu, most often sold as a 70 mg vial (10 mg, 10 mg and 50 mg). Calculated as one vial of 70 mg total. Not approved for human use.',
+  },
+  {
+    slug: 'klow',
+    name: 'KLOW',
+    aliases: ['KLOW blend', 'BPC-157 + TB-500 + GHK-Cu + KPV'],
+    category: 'recovery',
+    legalStatus: 'research-chemical',
+    legalStatusLastUpdated: '2026-09-30',
+    // 80 mg (10 mg BPC-157, 10 mg TB-500, 50 mg GHK-Cu, 10 mg KPV) is GLOW
+    // plus 10 mg of KPV, and the only size sellers list.
+    commonVialSizes: [80],
+    vialUnit: 'mg',
+    typicalDose: 1,
+    typicalDoseUnit: 'mg',
+    typicalDosesPerWeek: 7,
+    dosingPattern:
+      'Dose is measured as the whole blend, not per component (subcutaneous)',
+    shortDescription:
+      'GLOW with KPV added: BPC-157, TB-500, GHK-Cu and KPV, most often sold as an 80 mg vial (10 mg, 10 mg, 50 mg and 10 mg). Calculated as one vial of 80 mg total. Not approved for human use.',
+  },
+
   // ───────── Aesthetic ─────────
   {
     slug: 'ghk-cu',
@@ -318,6 +364,67 @@ export const PEPTIDES: Peptide[] = [
     dosingPattern: '1× daily (subcutaneous, typically before bed)',
     shortDescription:
       'A growth hormone releasing hormone (GHRH) analog. FDA-approved under the brand name Geref for diagnostic testing of pituitary function. Available from compounding pharmacies by prescription for off-label anti-aging protocols.',
+  },
+
+  {
+    slug: 'cjc-1295-no-dac-ipamorelin',
+    name: 'CJC-1295 No DAC + Ipamorelin',
+    aliases: [
+      'CJC-1295/Ipamorelin',
+      'CJC/Ipa',
+      'Modified GRF (1-29) + Ipamorelin',
+      'CJC-1295 without DAC + Ipamorelin',
+    ],
+    category: 'growth-hormone',
+    legalStatus: 'research-chemical',
+    legalStatusLastUpdated: '2026-09-30',
+    // 10 mg (5 mg of each) is the standard blend vial; larger vials exist but
+    // vary in split and are left to hand entry.
+    commonVialSizes: [10],
+    vialUnit: 'mg',
+    typicalDose: 200,
+    typicalDoseUnit: 'mcg',
+    typicalDosesPerWeek: 7,
+    dosingPattern:
+      'Dose is measured as the whole blend, not per component (subcutaneous)',
+    shortDescription:
+      'A pre-mixed blend of CJC-1295 No DAC and ipamorelin, most often sold as a 10 mg vial (5 mg of each). Calculated as one vial of 10 mg total. Not approved for human use.',
+  },
+  {
+    slug: 'tesamorelin',
+    name: 'Tesamorelin',
+    aliases: ['Egrifta', 'Egrifta SV'],
+    category: 'growth-hormone',
+    legalStatus: 'prescription',
+    legalStatusLastUpdated: '2026-09-30',
+    // Egrifta SV is a 2 mg vial; research suppliers carry 2, 5 and 10 mg.
+    commonVialSizes: [2, 5, 10],
+    vialUnit: 'mg',
+    typicalDose: 1.4,
+    typicalDoseUnit: 'mg',
+    typicalDosesPerWeek: 7,
+    dosingPattern: '1.4 mg 1× daily (subcutaneous), the labeled dose of Egrifta SV',
+    shortDescription:
+      'A growth hormone releasing hormone (GHRH) analog. FDA-approved under the brand name Egrifta SV to reduce excess abdominal fat in adults with HIV and lipodystrophy. Research suppliers also sell it as a powder.',
+  },
+  {
+    slug: 'tesamorelin-ipamorelin',
+    name: 'Tesamorelin + Ipamorelin',
+    aliases: ['Tesa/Ipa', 'Tesamorelin/Ipamorelin'],
+    category: 'growth-hormone',
+    legalStatus: 'research-chemical',
+    legalStatusLastUpdated: '2026-09-30',
+    // 10 mg (5 mg of each) is the common blend vial; 15 mg (10 mg tesamorelin
+    // and 5 mg ipamorelin) is listed by some sellers. Splits vary by seller.
+    commonVialSizes: [10, 15],
+    vialUnit: 'mg',
+    typicalDose: 500,
+    typicalDoseUnit: 'mcg',
+    typicalDosesPerWeek: 7,
+    dosingPattern:
+      'Dose is measured as the whole blend, not per component (subcutaneous)',
+    shortDescription:
+      'A pre-mixed blend of tesamorelin and ipamorelin, most often sold as a 10 mg vial (5 mg of each). The split varies by seller. Calculated as one vial of the total milligrams. Not approved for human use.',
   },
 
   // ───────── Longevity & mitochondrial ─────────
