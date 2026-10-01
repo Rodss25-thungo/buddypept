@@ -1,0 +1,40 @@
+1
+00:00:00,100 --> 00:00:02,784
+Aquí hay una cadena de péptido.
+
+2
+00:00:02,734 --> 00:00:07,747
+Veinte letras para elegir, y esta tiene su propio orden exacto.
+
+3
+00:00:07,747 --> 00:00:10,104
+Cambia solo un eslabón.
+
+4
+00:00:10,104 --> 00:00:13,059
+No toda la cadena, solo uno.
+
+5
+00:00:13,059 --> 00:00:15,572
+No es un error de escritura.
+
+6
+00:00:15,572 --> 00:00:18,580
+No es lo suficientemente parecido.
+
+7
+00:00:18,580 --> 00:00:22,460
+Es una molécula distinta, con un nombre distinto.
+
+8
+00:00:22,460 --> 00:00:26,132
+Una letra cambiada, y todo lo demás cambia.
+
+9
+00:00:26,132 --> 00:00:28,789
+Así de sensible es el orden.
+
+10
+00:00:28,789 --> 00:00:32,252
+Síguenos para más matemática de péptidos.
+

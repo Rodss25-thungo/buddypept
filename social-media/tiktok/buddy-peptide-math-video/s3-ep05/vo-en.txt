@@ -1,0 +1,10 @@
+Here is a peptide chain.
+Twenty letters to choose from, and this one has its own exact order.
+Change just one link.
+Not the whole chain, just one.
+It is not a typo.
+It is not close enough.
+It is a different molecule, with a different name.
+One letter swapped, and everything downstream changes.
+That is how sensitive the order really is.
+Follow for more peptide math.

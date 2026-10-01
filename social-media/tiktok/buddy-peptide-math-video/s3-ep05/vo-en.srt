@@ -1,0 +1,40 @@
+1
+00:00:00,050 --> 00:00:01,588
+Here is a peptide chain.
+
+2
+00:00:01,588 --> 00:00:05,950
+Twenty letters to choose from, and this one has its own exact order.
+
+3
+00:00:05,950 --> 00:00:07,369
+Change just one link.
+
+4
+00:00:07,369 --> 00:00:09,427
+Not the whole chain, just one.
+
+5
+00:00:09,427 --> 00:00:10,742
+It is not a typo.
+
+6
+00:00:10,742 --> 00:00:12,265
+It is not close enough.
+
+7
+00:00:12,265 --> 00:00:15,143
+It is a different molecule, with a different name.
+
+8
+00:00:15,143 --> 00:00:18,476
+One letter swapped, and everything downstream changes.
+
+9
+00:00:18,476 --> 00:00:21,041
+That is how sensitive the order really is.
+
+10
+00:00:21,041 --> 00:00:22,968
+Follow for more peptide math.
+

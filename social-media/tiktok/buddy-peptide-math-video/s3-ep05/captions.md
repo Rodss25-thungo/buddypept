@@ -1,0 +1,8 @@
+## EN (@buddypept)
+Here is a peptide chain. Twenty letters to choose from, and this one has its own exact order. Change just one link. Not the whole chain, just one. It's not a typo. It's not close enough. It's a different molecule, with a different name. One letter swapped, and everything downstream changes. That's how sensitive the order really is. Inside the Vial. Free calculator at buddypept.com, no paywall, forever. Educational content, for research purposes only. Not medical advice. #peptidecalculator #selfcare #wellness #fitness
+
+## PT-BR (@buddypept_br)
+Aqui está uma cadeia de peptídeo. Vinte letras para escolher, e esta tem sua própria ordem exata. Mude só um elo. Não a cadeia toda, só um. Não é um erro de digitação. Não é parecido o suficiente. É uma molécula diferente, com um nome diferente. Uma letra trocada, e tudo muda a partir daí. É assim que a ordem é sensível. Dentro do Frasco. Calculadora grátis em buddypept.com, sem paywall, para sempre. Conteúdo educacional, apenas para fins de pesquisa. Não é orientação médica. #peptidecalculator #selfcare #wellness #fitness
+
+## ES (@buddypept_es)
+Aquí hay una cadena de péptido. Veinte letras para elegir, y esta tiene su propio orden exacto. Cambia solo un eslabón. No toda la cadena, solo uno. No es un error de escritura. No es lo suficientemente parecido. Es una molécula distinta, con un nombre distinto. Una letra cambiada, y todo lo demás cambia. Así de sensible es el orden. Dentro del Vial. Calculadora gratis en buddypept.com, sin muro de pago, para siempre. Contenido educativo, solo con fines de investigación. No es consejo médico. #peptidecalculator #selfcare #wellness #fitness

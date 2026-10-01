@@ -1,0 +1,40 @@
+1
+00:00:00,100 --> 00:00:02,262
+Aqui está uma cadeia de peptídeo.
+
+2
+00:00:02,212 --> 00:00:06,437
+Vinte letras para escolher, e esta tem sua própria ordem exata.
+
+3
+00:00:06,437 --> 00:00:07,787
+Mude só um elo.
+
+4
+00:00:07,787 --> 00:00:09,650
+Não a cadeia toda, só um.
+
+5
+00:00:09,650 --> 00:00:11,475
+Não é um erro de digitação.
+
+6
+00:00:11,475 --> 00:00:13,412
+Não é parecido o suficiente.
+
+7
+00:00:13,412 --> 00:00:16,287
+É uma molécula diferente, com um nome diferente.
+
+8
+00:00:16,287 --> 00:00:19,362
+Uma letra trocada, e tudo muda a partir daí.
+
+9
+00:00:19,362 --> 00:00:21,462
+É assim que a ordem é sensível.
+
+10
+00:00:21,462 --> 00:00:25,012
+Siga para mais matemática dos peptídeos.
+
