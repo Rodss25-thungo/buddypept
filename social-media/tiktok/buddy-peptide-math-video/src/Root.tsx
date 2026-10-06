@@ -28,6 +28,7 @@ import {S3Ep3, S3EP3_EN, S3EP3_ES, S3EP3_PT} from './s3ep03';
 import {S3Ep4, S3EP4_EN, S3EP4_ES, S3EP4_PT} from './s3ep04';
 import {S3Ep5, S3EP5_EN, S3EP5_ES, S3EP5_PT} from './s3ep05';
 import {S3Ep6, S3EP6_EN, S3EP6_ES, S3EP6_PT} from './s3ep06';
+import {CalcVideo, CALC_BPC_EN, CALC_BPC_ES, CALC_BPC_PT} from './calcvideo';
 import {DAY2_EN, DAY2_ES, DAY2_PT} from './day02';
 
 export const RemotionRoot: React.FC = () => (
@@ -82,6 +83,9 @@ export const RemotionRoot: React.FC = () => (
     ))}
     {[S3EP5_EN, S3EP5_ES, S3EP5_PT].map((L) => (
       <Composition key={L.id} id={L.id} component={S3Ep5} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />
+    ))}
+    {[CALC_BPC_EN, CALC_BPC_ES, CALC_BPC_PT].map((L) => (
+      <Composition key={L.id} id={L.id} component={CalcVideo} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />
     ))}
     {[S3EP6_EN, S3EP6_ES, S3EP6_PT].map((L) => (
       <Composition key={L.id} id={L.id} component={S3Ep6} defaultProps={{locale: L}} durationInFrames={30 * L.durationSec} fps={30} width={1080} height={1920} />

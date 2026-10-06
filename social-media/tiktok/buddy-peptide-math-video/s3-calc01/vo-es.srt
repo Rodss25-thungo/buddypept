@@ -1,0 +1,76 @@
+1
+00:00:00,100 --> 00:00:03,452
+Estás comenzando tu investigación con un compuesto.
+
+2
+00:00:03,402 --> 00:00:05,960
+Primero, abre la calculadora.
+
+3
+00:00:05,960 --> 00:00:08,634
+Segundo, elige el compuesto.
+
+4
+00:00:08,634 --> 00:00:11,944
+Vamos a elegir B P C ciento cincuenta y siete.
+
+5
+00:00:11,944 --> 00:00:16,469
+Tercero, ¿tu vial ya está mezclado, o es un polvo para mezclar?
+
+6
+00:00:16,469 --> 00:00:18,645
+Vamos a elegir el polvo.
+
+7
+00:00:18,645 --> 00:00:21,076
+Cuarto, ¿cuánto hay en tu vial?
+
+8
+00:00:21,076 --> 00:00:22,916
+Diez miligramos.
+
+9
+00:00:22,916 --> 00:00:25,034
+Quinto, ¿cuánta agua?
+
+10
+00:00:25,034 --> 00:00:27,511
+Vamos a usar dos mililitros.
+
+11
+00:00:27,511 --> 00:00:30,196
+Sexto, elige una jeringa.
+
+12
+00:00:30,196 --> 00:00:32,118
+Una de un mililitro.
+
+13
+00:00:32,118 --> 00:00:35,694
+Séptimo, ¿con qué dosis empiezas la investigación?
+
+14
+00:00:35,694 --> 00:00:38,043
+Vamos a elegir un miligramo.
+
+15
+00:00:38,043 --> 00:00:39,456
+Y listo.
+
+16
+00:00:39,456 --> 00:00:41,226
+Veinte unidades.
+
+17
+00:00:41,226 --> 00:00:43,645
+Quieres tu compuesto en el próximo?
+
+18
+00:00:43,645 --> 00:00:48,067
+Mándanos un D M con el nombre del compuesto, y haremos tu video.
+
+19
+00:00:48,067 --> 00:00:51,678
+Síguenos para saber más sobre las diferentes opciones.
+

@@ -1,0 +1,183 @@
+{
+ "peptide": "BPC-157",
+ "vial": "10",
+ "water": "2",
+ "dose": "1",
+ "frames": [
+  {
+   "file": "f000_home.png",
+   "tag": "home"
+  },
+  {
+   "file": "f001_s1_empty.png",
+   "tag": "s1_empty"
+  },
+  {
+   "file": "f002_s1_focus.png",
+   "tag": "s1_focus"
+  },
+  {
+   "file": "f003_s1_type.png",
+   "tag": "s1_type"
+  },
+  {
+   "file": "f004_s1_type.png",
+   "tag": "s1_type"
+  },
+  {
+   "file": "f005_s1_type.png",
+   "tag": "s1_type"
+  },
+  {
+   "file": "f006_s1_type.png",
+   "tag": "s1_type"
+  },
+  {
+   "file": "f007_s1_list.png",
+   "tag": "s1_list"
+  },
+  {
+   "file": "f008_s1_picked.png",
+   "tag": "s1_picked"
+  },
+  {
+   "file": "f009_s2.png",
+   "tag": "s2"
+  },
+  {
+   "file": "f010_s2_picked.png",
+   "tag": "s2_picked"
+  },
+  {
+   "file": "f011_s3_empty.png",
+   "tag": "s3_empty"
+  },
+  {
+   "file": "f012_s3_type.png",
+   "tag": "s3_type"
+  },
+  {
+   "file": "f013_s3_type.png",
+   "tag": "s3_type"
+  },
+  {
+   "file": "f014_s4_empty.png",
+   "tag": "s4_empty"
+  },
+  {
+   "file": "f015_s4_type.png",
+   "tag": "s4_type"
+  },
+  {
+   "file": "f016_s5.png",
+   "tag": "s5"
+  },
+  {
+   "file": "f017_s5_picked.png",
+   "tag": "s5_picked"
+  },
+  {
+   "file": "f018_s6_empty.png",
+   "tag": "s6_empty"
+  },
+  {
+   "file": "f019_s6_type.png",
+   "tag": "s6_type"
+  },
+  {
+   "file": "f020_result.png",
+   "tag": "result"
+  },
+  {
+   "file": "f021_result_scrolled.png",
+   "tag": "result_scrolled"
+  }
+ ],
+ "targets": {
+  "home_open": {
+   "x": 315.71875,
+   "y": 915.5,
+   "w": 448.5625,
+   "h": 96
+  },
+  "s1_input": {
+   "x": 74,
+   "y": 492,
+   "w": 932,
+   "h": 109.75
+  },
+  "s1_option": {
+   "x": 76,
+   "y": 619.75,
+   "w": 928,
+   "h": 96
+  },
+  "s1_continue": {
+   "x": 56,
+   "y": 787.75,
+   "w": 992,
+   "h": 120
+  },
+  "s2_powder": {
+   "x": 108,
+   "y": 522,
+   "w": 515.125,
+   "h": 48
+  },
+  "s2_continue": {
+   "x": 222.09375,
+   "y": 894,
+   "w": 825.90625,
+   "h": 120
+  },
+  "s3_input": {
+   "x": 74,
+   "y": 492,
+   "w": 932,
+   "h": 110.65625
+  },
+  "s3_continue": {
+   "x": 222.09375,
+   "y": 856.65625,
+   "w": 825.90625,
+   "h": 120
+  },
+  "s4_input": {
+   "x": 74,
+   "y": 492,
+   "w": 932,
+   "h": 110.65625
+  },
+  "s4_continue": {
+   "x": 222.09375,
+   "y": 800.65625,
+   "w": 825.90625,
+   "h": 120
+  },
+  "s5_syringe": {
+   "x": 74,
+   "y": 785.5,
+   "w": 932,
+   "h": 108
+  },
+  "s5_continue": {
+   "x": 222.09375,
+   "y": 1223.5,
+   "w": 825.90625,
+   "h": 120
+  },
+  "s6_input": {
+   "x": 74,
+   "y": 492,
+   "w": 932,
+   "h": 110.65625
+  },
+  "s6_calc": {
+   "x": 222.09375,
+   "y": 912.65625,
+   "w": 825.90625,
+   "h": 120
+  }
+ },
+ "resultText": "CALCULATED DRAW / 20units / that's 0.2 mL of BPC-157 / Syringe / 1 mL insulin / 0 / 10 / 20 / 30 / 40 / 50 / 60 / 70 / 80 / 90 / 100 / units / Marked at 20 units / ADJUST WITHOUT GOING BACK / Draw / units / Dose / mg / Bacteriostatic water / mL / Vial strength / mg / This is math, not medical advice. Verify it against the vial label and a licensed provider’s guidance before drawing any dose. / Dose: 1000 mcg = 1 mg · Concentration: 5 mg/mL · Syringe: 1 mL insulin / ▸ / Show the math / Change a step / Start over / More detail on the peptides themselves / Free, plain-English guides: what each one is, what it has been studied for, how it is sold, and its legal status. / Learn about peptides / → / Already signed up? Open the library"
+}

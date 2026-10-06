@@ -1,0 +1,8 @@
+## EN (@buddypept)
+You are starting your compound research. Open the calculator, choose the compound (BPC-157), pick powder, then enter the vial (10 mg), the water (2 mL), the syringe (1 mL) and the dose (1 mg). The result: 20 units. Want your compound next? DM us the compound name and we will make your video. Follow us to learn more about the different options. Free calculator at buddypept.com, no paywall, forever. Educational content, for research purposes only. Not medical advice. #peptidecalculator #selfcare #wellness #fitness
+
+## PT-BR (@buddypept_br)
+Você está começando a sua pesquisa com um composto. Abra a calculadora, escolha o composto (BPC-157), escolha o pó, depois informe o frasco (10 mg), a água (2 mL), a seringa (1 mL) e a dose (1 mg). O resultado: 20 unidades. Quer o seu composto no próximo? Mande uma DM com o nome do composto e a gente faz o seu vídeo. Siga a gente para saber mais sobre as diferentes opções. Calculadora grátis em buddypept.com, sem paywall, para sempre. Conteúdo educacional, apenas para fins de pesquisa. Não é orientação médica. #peptidecalculator #selfcare #wellness #fitness
+
+## ES (@buddypept_es)
+Estás comenzando tu investigación con un compuesto. Abre la calculadora, elige el compuesto (BPC-157), elige el polvo, luego indica el vial (10 mg), el agua (2 mL), la jeringa (1 mL) y la dosis (1 mg). El resultado: 20 unidades. ¿Quieres tu compuesto en el próximo? Envíanos un DM con el nombre del compuesto y haremos tu video. Síguenos para saber más sobre las diferentes opciones. Calculadora gratis en buddypept.com, sin muro de pago, para siempre. Contenido educativo, solo con fines de investigación. No es consejo médico. #peptidecalculator #selfcare #wellness #fitness
