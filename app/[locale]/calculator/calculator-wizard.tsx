@@ -1174,7 +1174,7 @@ function PeptidePicker({
           className="absolute z-20 mt-1 max-h-72 w-full overflow-y-auto rounded-xl border border-zinc-200 bg-white py-1 shadow-lg dark:border-zinc-700 dark:bg-zinc-800"
         >
           {list.map((option, i) => (
-            <li key={option.value} role="none">
+            <li key={option.custom !== undefined ? 'typed' : option.value} role="none">
               <button
                 type="button"
                 role="option"
