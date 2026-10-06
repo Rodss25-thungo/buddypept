@@ -45,7 +45,8 @@ concentration → mL → syringe units), plus a plain-language peptide library.
 
 - **Audience:** the confused beginner, the first time someone holds a vial.
   Cuts across GLP-1, recovery, biohacking, aesthetics. English, Spanish, and
-  Portuguese speakers **in the United States**, not other markets.
+  Portuguese speakers **in the United States**, not other markets. **Exception
+  (Rod, 2026-10-06):** the Instagram account `@buddypept_br` targets Brazil.
 - **Mission:** turn peptide-curious into peptide-confident, free forever.
 - **Stake:** the math stays free, forever.
 - **Trueline:** the math doesn't lie.

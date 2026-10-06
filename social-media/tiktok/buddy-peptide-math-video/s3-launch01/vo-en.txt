@@ -1,0 +1,4 @@
+Pick a compound.
+Enter the vial.
+The calculator shows the exact units.
+Comment a compound name and the next video runs it through the math.

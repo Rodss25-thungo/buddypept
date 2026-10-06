@@ -1,0 +1,16 @@
+1
+00:00:00,100 --> 00:00:02,250
+Elige un compuesto.
+
+2
+00:00:02,200 --> 00:00:04,075
+Indica el vial.
+
+3
+00:00:04,075 --> 00:00:07,695
+La calculadora muestra las unidades exactas.
+
+4
+00:00:07,695 --> 00:00:13,007
+Comenta el nombre de un compuesto y el próximo video lo pasa por la matemática.
+

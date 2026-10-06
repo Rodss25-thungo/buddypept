@@ -16,7 +16,7 @@ type Pt = {x: number; y: number};
 type Way = {t: number; at: string | Pt; click?: boolean};
 type Cap = {from: number; to: number; text: string; hot?: boolean};
 
-type CalcVideoConfig = {
+export type CalcVideoConfig = {
   id: string;
   flag: 'us' | 'mx' | 'br';
   voFile: string;

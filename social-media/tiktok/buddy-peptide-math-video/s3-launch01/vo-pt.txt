@@ -1,0 +1,4 @@
+Escolha um composto.
+Informe o frasco.
+A calculadora mostra as unidades exatas.
+Comente o nome de um composto e o próximo vídeo passa ele pela matemática.

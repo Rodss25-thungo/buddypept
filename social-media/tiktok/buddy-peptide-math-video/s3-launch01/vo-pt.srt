@@ -1,0 +1,16 @@
+1
+00:00:00,100 --> 00:00:01,562
+Escolha um composto.
+
+2
+00:00:01,512 --> 00:00:02,937
+Informe o frasco.
+
+3
+00:00:02,937 --> 00:00:05,737
+A calculadora mostra as unidades exatas.
+
+4
+00:00:05,737 --> 00:00:10,750
+Comente o nome de um composto e o próximo vídeo passa ele pela matemática.
+

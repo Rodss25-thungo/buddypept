@@ -1,0 +1,4 @@
+Elige un compuesto.
+Indica el vial.
+La calculadora muestra las unidades exactas.
+Comenta el nombre de un compuesto y el próximo video lo pasa por la matemática.
