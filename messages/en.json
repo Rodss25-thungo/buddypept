@@ -438,6 +438,7 @@
     "lastUpdatedLabel": "Last updated: {date}"
   },
   "syringe": {
+    "label": "Syringe",
     "units": "units",
     "over": "This dose is larger than the {syringe} holds. Pick a larger syringe.",
     "markedAt": "Marked at <b>{amount} {unit}</b>",

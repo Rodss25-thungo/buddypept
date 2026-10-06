@@ -50,7 +50,7 @@ export function SyringeDiagram({
   return (
     <div className="rounded-xl bg-zinc-900 p-4 shadow-sm">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-medium text-zinc-300">Syringe</span>
+        <span className="text-xs font-medium text-zinc-300">{t('label')}</span>
         <span className="text-xs text-zinc-400">{shortLabel}</span>
       </div>
       <svg

@@ -438,6 +438,7 @@
     "lastUpdatedLabel": "Última actualización: {date}"
   },
   "syringe": {
+    "label": "Jeringa",
     "units": "unidades",
     "over": "Esta dosis es mayor de lo que contiene la {syringe}. Elige una jeringa más grande.",
     "markedAt": "Marcado en <b>{amount} {unit}</b>",
