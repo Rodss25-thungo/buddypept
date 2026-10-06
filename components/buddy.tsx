@@ -14,9 +14,9 @@ import { useTranslations } from 'next-intl';
  * at the largest placement (96px).
  */
 const VARIANTS = {
-  thumbs: { src: '/buddy/buddy-thumbs.webp', width: 354, height: 420 },
-  hug: { src: '/buddy/buddy-hug.webp', width: 402, height: 420 },
-  mail: { src: '/buddy/buddy-mail.webp', width: 393, height: 420 },
+  thumbs: { src: '/buddy/buddy-thumbs-v2.webp', width: 354, height: 420 },
+  hug: { src: '/buddy/buddy-hug-v2.webp', width: 402, height: 420 },
+  mail: { src: '/buddy/buddy-mail-v2.webp', width: 393, height: 420 },
 } as const;
 
 export type BuddyVariant = keyof typeof VARIANTS;
