@@ -1,0 +1,40 @@
+1
+00:00:00,100 --> 00:00:04,425
+Una cadena de péptido se construye sobre una esfera diminuta.
+
+2
+00:00:04,375 --> 00:00:06,510
+Un eslabón a la vez.
+
+3
+00:00:06,510 --> 00:00:12,213
+Agrega un eslabón, lava, desbloquea el extremo, agrega el siguiente.
+
+4
+00:00:12,213 --> 00:00:14,895
+Cada ciclo es casi perfecto.
+
+5
+00:00:14,895 --> 00:00:16,783
+Nunca perfecto.
+
+6
+00:00:16,783 --> 00:00:23,906
+Aun con noventa y nueve por ciento por paso, treinta eslabones conservan cerca de setenta y cuatro por ciento.
+
+7
+00:00:23,906 --> 00:00:29,283
+Omite un eslabón, y obtienes una cadena más corta que se ve casi igual.
+
+8
+00:00:29,283 --> 00:00:32,486
+Por eso un vial contiene más de una cosa.
+
+9
+00:00:32,486 --> 00:00:36,848
+Cuando la cadena termina, se corta y se libera de la esfera.
+
+10
+00:00:36,848 --> 00:00:40,065
+Síguenos para más ciencia de péptidos.
+

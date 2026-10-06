@@ -1,0 +1,40 @@
+1
+00:00:00,100 --> 00:00:03,887
+Uma cadeia de peptídeo é construída sobre uma esfera minúscula.
+
+2
+00:00:03,837 --> 00:00:05,375
+Um elo de cada vez.
+
+3
+00:00:05,375 --> 00:00:09,925
+Adicione um elo, lave, desbloqueie a ponta, adicione o próximo.
+
+4
+00:00:09,925 --> 00:00:11,937
+Cada ciclo é quase perfeito.
+
+5
+00:00:11,937 --> 00:00:13,250
+Nunca perfeito.
+
+6
+00:00:13,250 --> 00:00:18,950
+Mesmo com noventa e nove por cento por etapa, trinta elos mantêm cerca de setenta e quatro por cento.
+
+7
+00:00:18,950 --> 00:00:22,975
+Pule um elo, e você tem uma cadeia mais curta que parece quase igual.
+
+8
+00:00:22,975 --> 00:00:25,800
+É por isso que um frasco contém mais de uma coisa.
+
+9
+00:00:25,800 --> 00:00:29,512
+Quando a cadeia fica pronta, ela é cortada e solta da esfera.
+
+10
+00:00:29,512 --> 00:00:32,700
+Siga para mais ciência dos peptídeos.
+

@@ -1,0 +1,40 @@
+1
+00:00:00,050 --> 00:00:02,942
+A peptide chain is built on a tiny bead.
+
+2
+00:00:02,942 --> 00:00:04,283
+One link at a time.
+
+3
+00:00:04,283 --> 00:00:08,346
+Add a link, wash, unlock the end, add the next.
+
+4
+00:00:08,346 --> 00:00:10,455
+Every cycle is close to perfect.
+
+5
+00:00:10,455 --> 00:00:11,627
+Never perfect.
+
+6
+00:00:11,627 --> 00:00:16,718
+Even at ninety-nine percent per step, thirty links keeps about seventy-four percent.
+
+7
+00:00:16,718 --> 00:00:20,846
+Skip one link, and you get a shorter chain that looks almost the same.
+
+8
+00:00:20,846 --> 00:00:23,333
+That is why a vial holds more than one thing.
+
+9
+00:00:23,333 --> 00:00:26,901
+When the chain is done, it is cut free from the bead.
+
+10
+00:00:26,901 --> 00:00:29,036
+Follow for more peptide science.
+
