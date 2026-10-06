@@ -259,7 +259,7 @@ export function CalculatorWizard({
       <main className="mx-auto max-w-xl px-4 py-6 sm:py-10">
         <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:p-7">
           <div className="mb-5 flex items-start gap-3">
-            <Buddy className="h-12 w-auto flex-shrink-0 drop-shadow-sm" />
+            <Buddy variant="mail" className="h-16 w-auto flex-shrink-0 drop-shadow-sm" />
             <div>
               <h1 className="text-xl font-bold leading-snug tracking-tight sm:text-2xl">
                 {t('request.title')}
@@ -942,7 +942,7 @@ function Step({
   return (
     <div>
       <div className="mb-5 flex items-start gap-3">
-        <Buddy className="h-12 w-auto flex-shrink-0 drop-shadow-sm" />
+        <Buddy className="h-16 w-auto flex-shrink-0 drop-shadow-sm" />
         <div>
           <h1 className="text-xl font-bold leading-snug tracking-tight sm:text-2xl">{question}</h1>
           {subtitle && <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{subtitle}</p>}
