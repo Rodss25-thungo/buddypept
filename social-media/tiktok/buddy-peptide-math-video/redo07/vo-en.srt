@@ -1,0 +1,48 @@
+1
+00:00:00,050 --> 00:00:03,645
+Which vial is stronger: ten milligrams, or five?
+
+2
+00:00:03,645 --> 00:00:04,726
+Trick question.
+
+3
+00:00:04,726 --> 00:00:06,406
+A vial has no strength.
+
+4
+00:00:06,406 --> 00:00:09,114
+Ten milligrams is simply more peptide.
+
+5
+00:00:09,114 --> 00:00:12,539
+In one milligram portions, it holds ten portions.
+
+6
+00:00:12,539 --> 00:00:14,570
+Five milligrams holds five.
+
+7
+00:00:14,570 --> 00:00:17,122
+And water never changes the amount.
+
+8
+00:00:17,122 --> 00:00:19,414
+One milligram is one milligram.
+
+9
+00:00:19,414 --> 00:00:26,197
+More water only means each portion takes more volume, and more units on a U-100 scale.
+
+10
+00:00:26,197 --> 00:00:28,411
+BuddyPept does this math for you.
+
+11
+00:00:28,411 --> 00:00:32,161
+Free, at Buddy Pept dot com. The math doesn't lie.
+
+12
+00:00:32,161 --> 00:00:33,398
+Follow us for more.
+

@@ -1,0 +1,52 @@
+1
+00:00:00,050 --> 00:00:02,825
+A label says two hundred fifty micrograms.
+
+2
+00:00:02,825 --> 00:00:04,739
+A vial says milligrams.
+
+3
+00:00:04,739 --> 00:00:09,622
+Quick quiz: is that zero point two five milligrams, or two point five?
+
+4
+00:00:09,622 --> 00:00:12,760
+One milligram is one thousand micrograms.
+
+5
+00:00:12,760 --> 00:00:17,513
+So two hundred fifty micrograms is zero point two five milligrams.
+
+6
+00:00:17,513 --> 00:00:20,703
+Pick two point five, and you're off by ten times.
+
+7
+00:00:20,703 --> 00:00:22,005
+Now carry it through.
+
+8
+00:00:22,005 --> 00:00:26,640
+Ten milligrams in five milliliters is two milligrams per milliliter.
+
+9
+00:00:26,640 --> 00:00:31,549
+Zero point two five milligrams is zero point one two five milliliters.
+
+10
+00:00:31,549 --> 00:00:36,093
+That reads as twelve point five units on a U-100 scale.
+
+11
+00:00:36,093 --> 00:00:39,557
+BuddyPept converts mcg and mg for you.
+
+12
+00:00:39,557 --> 00:00:43,307
+Free, at Buddy Pept dot com. The math doesn't lie.
+
+13
+00:00:43,307 --> 00:00:44,544
+Follow us for more.
+

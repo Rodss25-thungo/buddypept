@@ -1,0 +1,64 @@
+1
+00:00:00,050 --> 00:00:02,643
+Two vials, five milligrams each.
+
+2
+00:00:02,643 --> 00:00:04,947
+One gets two milliliters of water.
+
+3
+00:00:04,947 --> 00:00:06,302
+The other gets five.
+
+4
+00:00:06,302 --> 00:00:08,177
+Which vial holds more peptide?
+
+5
+00:00:08,177 --> 00:00:09,010
+Neither.
+
+6
+00:00:09,010 --> 00:00:10,768
+Water never adds peptide.
+
+7
+00:00:10,768 --> 00:00:16,171
+At two milliliters, the concentration is two point five milligrams per milliliter.
+
+8
+00:00:16,171 --> 00:00:19,882
+At five milliliters, it is one milligram per milliliter.
+
+9
+00:00:19,882 --> 00:00:27,877
+A portion of two hundred fifty micrograms takes zero point one milliliter from the first vial, and zero point two five from the second.
+
+10
+00:00:27,877 --> 00:00:29,166
+Now divide it out.
+
+11
+00:00:29,166 --> 00:00:34,583
+Five thousand micrograms, in portions of two hundred fifty, is twenty portions.
+
+12
+00:00:34,583 --> 00:00:35,468
+Either way.
+
+13
+00:00:35,468 --> 00:00:39,947
+More water means more volume per portion, never more portions.
+
+14
+00:00:39,947 --> 00:00:41,419
+The math doesn't lie.
+
+15
+00:00:41,419 --> 00:00:44,778
+Buddy Pept dot com. Free, no pay wall.
+
+16
+00:00:44,778 --> 00:00:46,015
+Follow us for more.
+

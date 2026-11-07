@@ -1,0 +1,52 @@
+1
+00:00:00,050 --> 00:00:03,359
+A U-100 scale shows one hundred units.
+
+2
+00:00:03,359 --> 00:00:04,908
+What is a unit, actually?
+
+3
+00:00:04,908 --> 00:00:09,622
+One unit on a U-100 scale is one hundredth of a milliliter.
+
+4
+00:00:09,622 --> 00:00:10,403
+That's it.
+
+5
+00:00:10,403 --> 00:00:13,476
+Ten units is zero point one milliliter.
+
+6
+00:00:13,476 --> 00:00:17,395
+Here's the catch: units measure volume, not peptide.
+
+7
+00:00:17,395 --> 00:00:20,403
+The amount of peptide depends on the concentration.
+
+8
+00:00:20,403 --> 00:00:26,679
+At two milligrams per milliliter, zero point one milliliter holds zero point two milligrams.
+
+9
+00:00:26,679 --> 00:00:32,473
+At five milligrams per milliliter, the same volume holds zero point five milligrams.
+
+10
+00:00:32,473 --> 00:00:34,492
+Same units, different amount.
+
+11
+00:00:34,492 --> 00:00:37,591
+BuddyPept converts units to milligrams for you.
+
+12
+00:00:37,591 --> 00:00:41,341
+Free, at Buddy Pept dot com. The math doesn't lie.
+
+13
+00:00:41,341 --> 00:00:42,578
+Follow us for more.
+

@@ -1,0 +1,84 @@
+1
+00:00:00,050 --> 00:00:02,812
+A vial of solution doesn't have one clock.
+
+2
+00:00:02,812 --> 00:00:03,906
+It has two.
+
+3
+00:00:03,906 --> 00:00:05,742
+Clock one: chemistry.
+
+4
+00:00:05,742 --> 00:00:08,763
+In solution, the peptide slowly changes.
+
+5
+00:00:08,763 --> 00:00:13,164
+Reactions like hydrolysis and oxidation never fully stop.
+
+6
+00:00:13,164 --> 00:00:15,000
+Cold slows this clock down.
+
+7
+00:00:15,000 --> 00:00:16,523
+But it never resets.
+
+8
+00:00:16,523 --> 00:00:18,645
+Clock two: microbiology.
+
+9
+00:00:18,645 --> 00:00:22,734
+Every time a vial is opened, contamination becomes possible.
+
+10
+00:00:22,734 --> 00:00:25,768
+Preservatives help suppress bacterial growth.
+
+11
+00:00:25,768 --> 00:00:27,382
+They don't stop the chemistry.
+
+12
+00:00:27,382 --> 00:00:28,515
+Two clocks.
+
+13
+00:00:28,515 --> 00:00:29,843
+Two different risks.
+
+14
+00:00:29,843 --> 00:00:31,653
+One changes the molecule.
+
+15
+00:00:31,653 --> 00:00:33,567
+One contaminates the vial.
+
+16
+00:00:33,567 --> 00:00:34,856
+And here's the trap.
+
+17
+00:00:34,856 --> 00:00:36,705
+The famous twenty-eight days?
+
+18
+00:00:36,705 --> 00:00:39,804
+That number belongs to the microbiology clock.
+
+19
+00:00:39,804 --> 00:00:42,382
+It says nothing about the peptide's chemistry.
+
+20
+00:00:42,382 --> 00:00:43,789
+Both clocks are running.
+
+21
+00:00:43,789 --> 00:00:45,026
+Follow us for more.
+

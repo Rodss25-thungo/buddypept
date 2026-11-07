@@ -1,0 +1,60 @@
+1
+00:00:00,050 --> 00:00:01,106
+Two vials.
+
+2
+00:00:01,106 --> 00:00:02,265
+Same peptide.
+
+3
+00:00:02,265 --> 00:00:04,101
+Ten milligrams and twenty.
+
+4
+00:00:04,101 --> 00:00:06,236
+Same two milliliters of water.
+
+5
+00:00:06,236 --> 00:00:08,750
+Now take the same half milligram portion.
+
+6
+00:00:08,750 --> 00:00:12,539
+The ten milligram vial: five milligrams per milliliter.
+
+7
+00:00:12,539 --> 00:00:18,190
+That portion is zero point one milliliter, ten units on a U-100 scale.
+
+8
+00:00:18,190 --> 00:00:21,171
+The twenty: ten milligrams per milliliter.
+
+9
+00:00:21,171 --> 00:00:25,937
+Same portion, zero point zero five milliliters, five units.
+
+10
+00:00:25,937 --> 00:00:28,750
+Same amount of peptide, half the units.
+
+11
+00:00:28,750 --> 00:00:30,403
+The scale number changed.
+
+12
+00:00:30,403 --> 00:00:31,588
+The amount didn't.
+
+13
+00:00:31,588 --> 00:00:33,437
+BuddyPept catches this for you.
+
+14
+00:00:33,437 --> 00:00:37,187
+Free, at Buddy Pept dot com. The math doesn't lie.
+
+15
+00:00:37,187 --> 00:00:38,424
+Follow us for more.
+

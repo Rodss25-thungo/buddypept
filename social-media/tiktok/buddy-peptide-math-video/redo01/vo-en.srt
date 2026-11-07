@@ -1,0 +1,40 @@
+1
+00:00:00,050 --> 00:00:01,966
+Here is how the calculator works.
+
+2
+00:00:01,966 --> 00:00:04,361
+Step one: open the calculator.
+
+3
+00:00:04,361 --> 00:00:07,460
+Step two: choose the compound from the list.
+
+4
+00:00:07,460 --> 00:00:12,669
+Step three: powder to mix or already liquid, here a powder to mix.
+
+5
+00:00:12,669 --> 00:00:16,458
+Step four: the amount in the vial, ten milligrams.
+
+6
+00:00:16,458 --> 00:00:20,000
+Step five: the water added, two milliliters.
+
+7
+00:00:20,000 --> 00:00:23,203
+Step six: the scale, one milliliter.
+
+8
+00:00:23,203 --> 00:00:26,497
+Step seven: the target amount, one milligram.
+
+9
+00:00:26,497 --> 00:00:33,723
+The result: zero point two milliliters, which reads as twenty units on a U-100 scale.
+
+10
+00:00:33,723 --> 00:00:34,960
+Follow us for more.
+
