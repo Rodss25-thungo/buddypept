@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { getSupabaseAdmin } from '@/lib/supabase';
+import { syncBrevoContact } from '@/lib/brevo-contacts';
 import { Buddy } from '@/components/buddy';
 import { UnlockLibrary } from './unlock-library';
 
@@ -76,7 +77,7 @@ async function confirmToken(token?: string): Promise<ConfirmStatus> {
     const supabase = getSupabaseAdmin();
     const { data, error } = await supabase
       .from('peptide_requests')
-      .select('id, confirmed_at')
+      .select('id, confirmed_at, name, email, locale, requested_peptide')
       .eq('confirmation_token', token)
       .maybeSingle();
     if (error) {
@@ -86,14 +87,22 @@ async function confirmToken(token?: string): Promise<ConfirmStatus> {
     if (!data) return 'invalid';
     if (data.confirmed_at) return 'already';
 
+    const confirmedAt = new Date().toISOString();
     const { error: updateError } = await supabase
       .from('peptide_requests')
-      .update({ confirmed_at: new Date().toISOString() })
+      .update({ confirmed_at: confirmedAt })
       .eq('id', data.id);
     if (updateError) {
       console.error('confirm update error:', updateError.message);
       return 'error';
     }
+    await syncBrevoContact({
+      email: data.email,
+      name: data.name,
+      locale: data.locale,
+      requestedPeptide: data.requested_peptide,
+      confirmedAt,
+    });
     return 'success';
   } catch (e) {
     console.error('confirm route error:', e);

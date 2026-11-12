@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { saveSignup, recordEmailSent, recordEmailFailed } from '@/lib/signups';
+import { syncBrevoContact } from '@/lib/brevo-contacts';
 import { apiErrors, validationMessage } from '@/lib/api-messages';
 import { sendConfirmationEmail, sendOwnerNotification } from '@/lib/email';
 
@@ -66,6 +67,14 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    await syncBrevoContact({
+      email: parsed.data.email,
+      name: parsed.data.name,
+      locale: parsed.data.locale ?? 'en',
+      requestedPeptide: `Learn: ${parsed.data.source ?? 'library'}`,
+      confirmedAt: signup.confirmedAt,
+    });
 
     try {
       await sendConfirmationEmail({

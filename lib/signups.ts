@@ -24,6 +24,8 @@ export interface SavedSignup {
   /** False when an earlier submission already existed and was reused. */
   isNew: boolean;
   emailAttempts: number;
+  /** Their real confirmation time, or null while unconfirmed. */
+  confirmedAt: string | null;
 }
 
 /** Escapes LIKE wildcards so an email's "_" matches only itself. */
@@ -36,7 +38,7 @@ export async function saveSignup(input: SignupInput): Promise<SavedSignup> {
 
   const { data: found, error: lookupError } = await supabase
     .from('peptide_requests')
-    .select('id, confirmation_token, email_attempts, matched_slug')
+    .select('id, confirmation_token, email_attempts, matched_slug, confirmed_at')
     .ilike('email', escapeLike(input.email))
     .ilike('requested_peptide', escapeLike(input.requestedPeptide))
     .order('created_at', { ascending: true })
@@ -65,6 +67,7 @@ export async function saveSignup(input: SignupInput): Promise<SavedSignup> {
       token,
       isNew: false,
       emailAttempts: existing.email_attempts ?? 0,
+      confirmedAt: existing.confirmed_at ?? null,
     };
   }
 
@@ -84,7 +87,13 @@ export async function saveSignup(input: SignupInput): Promise<SavedSignup> {
   if (insertError || !inserted) {
     throw new Error(`Signup insert failed: ${insertError?.message ?? 'no row'}`);
   }
-  return { id: inserted.id, token, isNew: true, emailAttempts: 0 };
+  return {
+    id: inserted.id,
+    token,
+    isNew: true,
+    emailAttempts: 0,
+    confirmedAt: null,
+  };
 }
 
 export async function recordEmailSent(

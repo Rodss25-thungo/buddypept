@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { saveSignup, recordEmailSent, recordEmailFailed } from '@/lib/signups';
+import { syncBrevoContact } from '@/lib/brevo-contacts';
 import { PEPTIDES } from '@/data/peptides';
 import { apiErrors, validationMessage } from '@/lib/api-messages';
 import {
@@ -98,6 +99,17 @@ export async function POST(request: Request) {
         { error: t('saveRequestFailed') },
         { status: 500 }
       );
+    }
+
+    // Requests for non-peptides get an auto-reply only, and are not synced.
+    if (!isNonPeptide) {
+      await syncBrevoContact({
+        email: parsed.data.email,
+        name: parsed.data.name,
+        locale: parsed.data.locale ?? 'en',
+        requestedPeptide: parsed.data.requestedPeptide,
+        confirmedAt: signup.confirmedAt,
+      });
     }
 
     try {
