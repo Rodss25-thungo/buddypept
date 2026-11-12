@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { randomUUID } from 'crypto';
-import { getSupabaseAdmin } from '@/lib/supabase';
+import { saveSignup, recordEmailSent, recordEmailFailed } from '@/lib/signups';
 import { PEPTIDES } from '@/data/peptides';
 import { apiErrors, validationMessage } from '@/lib/api-messages';
 import {
@@ -27,7 +26,7 @@ import {
 
 const RequestSchema = z.object({
   name: z.string().trim().min(1).max(100),
-  email: z.string().trim().email().max(200),
+  email: z.string().trim().toLowerCase().email().max(200),
   requestedPeptide: z.string().trim().min(1).max(200),
   /**
    * Site language the visitor was reading. Recorded on the row so the
@@ -71,7 +70,6 @@ export async function POST(request: Request) {
   }
 
   const isNonPeptide = isNonPeptideRequest(parsed.data.requestedPeptide);
-  const token = randomUUID();
 
   // Trust the confirmation only as far as it is real: a slug that is not in the
   // library is dropped rather than written, so a tampered request body cannot
@@ -83,17 +81,19 @@ export async function POST(request: Request) {
       : null;
 
   try {
-    const supabase = getSupabaseAdmin();
-    const { error } = await supabase.from('peptide_requests').insert({
-      name: parsed.data.name,
-      email: parsed.data.email,
-      requested_peptide: parsed.data.requestedPeptide,
-      confirmation_token: token,
-      locale: parsed.data.locale ?? 'en',
-      matched_slug: confirmedSlug,
-    });
-    if (error) {
-      console.error('Supabase insert error:', error.message);
+    // Save first. The row exists before any email is attempted, and a repeat
+    // submission reuses it instead of creating a duplicate.
+    let signup;
+    try {
+      signup = await saveSignup({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        requestedPeptide: parsed.data.requestedPeptide,
+        locale: parsed.data.locale ?? 'en',
+        matchedSlug: confirmedSlug,
+      });
+    } catch (saveError) {
+      console.error('request-peptide save error:', saveError);
       return NextResponse.json(
         { error: t('saveRequestFailed') },
         { status: 500 }
@@ -118,28 +118,32 @@ export async function POST(request: Request) {
             parsed.data.locale && parsed.data.locale !== 'en'
               ? `/${parsed.data.locale}`
               : ''
-          }/confirm?token=${token}`,
+          }/confirm?token=${signup.token}`,
           locale: parsed.data.locale,
         });
       }
+      await recordEmailSent(signup.id, signup.emailAttempts);
     } catch (emailError) {
       console.error('request-peptide email send error:', emailError);
+      await recordEmailFailed(signup.id, signup.emailAttempts, emailError);
       return NextResponse.json(
         { error: t('emailRequestFailed') },
         { status: 500 }
       );
     }
 
-    // Owner notification (non-fatal if it fails).
-    try {
-      await sendOwnerNotification({
-        type: isNonPeptide ? 'non-peptide-request' : 'peptide-request',
-        name: parsed.data.name,
-        email: parsed.data.email,
-        detail: parsed.data.requestedPeptide,
-      });
-    } catch (ownerError) {
-      console.error('request-peptide owner notification error:', ownerError);
+    // Owner notification, once per new request (non-fatal if it fails).
+    if (signup.isNew) {
+      try {
+        await sendOwnerNotification({
+          type: isNonPeptide ? 'non-peptide-request' : 'peptide-request',
+          name: parsed.data.name,
+          email: parsed.data.email,
+          detail: parsed.data.requestedPeptide,
+        });
+      } catch (ownerError) {
+        console.error('request-peptide owner notification error:', ownerError);
+      }
     }
 
     return NextResponse.json({ ok: true });
