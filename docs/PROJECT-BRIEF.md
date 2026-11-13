@@ -90,9 +90,9 @@ should block development, a change of direction, or a new project.
 - Tailwind CSS v4
 - next-intl 4 for i18n
 - Supabase (`@supabase/supabase-js`) for Postgres
-- Brevo for transactional email
+- Brevo for transactional email, the newsletter list (id 6) and the welcome automation
 - Vercel hosting, auto-deploy on push to `main`, plus two crons
-- Vercel Analytics + GA (`NEXT_PUBLIC_GA_ID`)
+- Vercel Analytics (pageviews, referrers; Hobby plan keeps 31 days) + GA4 (`NEXT_PUBLIC_GA_ID`, also the conversion-event store; see section 15)
 - Zod v4 at API boundaries
 - Husky + lint-staged pre-commit running `eslint --fix`
 
@@ -309,7 +309,7 @@ a test case for every new branch; never round silently; refuse impossible inputs
 
 - Saved calculation history (needs accounts beyond email capture)
 - Personal tracker (gated on 30 reply requests)
-- Newsletter platform integration
+- ~~Newsletter platform integration~~ Superseded 2026-11-12: Rod's Phase 1 authorization moved newsletter preparation into scope (section 15). Live marketing sends still need his approval.
 - `/shop` affiliate route
 - App Store distribution (Capacitor wrap)
 - Separate SEO content site at buddypept.com
@@ -353,3 +353,116 @@ dd19caa  Move the rest of the reader-facing copy into the catalogs
 
 The `add-locale-column.sql` migration has been run; `d319b24` and everything
 after it is pushed and live. Working tree is clean.
+
+---
+
+## 15. Growth infrastructure (Phase 1, 2026-11-12)
+
+Authorized by Rod on 2026-11-12 (Megamind register entry "BuddyPept: Phase 1").
+
+### Baseline before Phase 1 (verified 2026-11-12)
+
+75 unique visitors and 162 pageviews in 31 days (Vercel). Referrers: 64 none,
+8 l.instagram.com, 3 facebook. Zero from Google, Bing or TikTok. 42 signup rows,
+25 confirmed. Brevo: 2 contacts, no templates, no marketing list.
+sitemap.xml and robots.txt returned 404; hreflang links were relative and every
+page pointed them at the home page; no canonical tags; no conversion events.
+
+### SEO
+
+- `app/sitemap.ts` lists every indexable page in every live locale (78 URLs)
+  with hreflang siblings. `app/robots.ts` blocks `/admin` and `/api/` only.
+- `lib/seo.ts`: `SITE_URL` (www), `INDEXABLE_PATHS`, `pageAlternates()`. Each
+  page's `generateMetadata` sets an absolute canonical plus en-US, pt-BR,
+  es-419 and x-default. `metadataBase` is set in the locale layout.
+- A new public page must be added to `INDEXABLE_PATHS` and call
+  `pageAlternates()`. `/confirm` and `/admin` stay noindex.
+
+### Conversion events (GA4 only)
+
+Vercel custom events need a paid plan, so GA4 is the event store. `lib/analytics.ts`
+`track()`; nothing personal is sent (no names, emails, typed peptide names or doses).
+
+| Event | When | Params |
+|---|---|---|
+| `calculator_start` | leaves the peptide step | `peptide` (curated slug, `other`, `not_listed`) |
+| `calculator_complete` | presses Calculate | `peptide`, `has_result` |
+| `calculator_restart` | starts over | `peptide` |
+| `peptide_request_open` | picks "not listed" | |
+| `popup_shown` | learn pop-up opens | |
+| `sign_up_start` | first focus in a signup form | `form` |
+| `sign_up` | signup accepted | `method`, `form`, `marketing_consent` |
+| `sign_up_error` | signup rejected | `form` |
+| `email_confirmed` | first confirmation only | |
+| `cta_click` | any element with `data-track` | `cta`, `page_path` |
+
+`form` values: `homepage`, `popup`, `library`, `peptide_request`. To measure a new
+link, add `data-track="<name>"`; no client component needed.
+Mark `sign_up` and `email_confirmed` as key events in the GA4 admin.
+
+### UTM convention
+
+All lowercase, words joined with underscores. Every link we place gets UTMs.
+
+| Placement | utm_source | utm_medium | utm_campaign | utm_content |
+|---|---|---|---|---|
+| Instagram bio link | `instagram` | `social` | `bio_en` / `bio_es` / `bio_br` | |
+| Instagram story link | `instagram` | `social` | series or post id | `story` |
+| TikTok bio link | `tiktok` | `social` | `bio_en` | |
+| Facebook post | `facebook` | `social` | post id | |
+| Brevo emails | `brevo` | `email` | `welcome` or newsletter id | link position |
+| Future paid | platform | `paid_social` | campaign name | ad id |
+
+Example: `https://www.buddypept.com/?utm_source=instagram&utm_medium=social&utm_campaign=bio_en`.
+First touch (UTMs, else referrer host, plus landing path) is kept in the
+browser's localStorage (`bp_first_touch`) and saved on the signup row, so
+subscribers can be counted by the post that brought them.
+
+### Marketing consent
+
+- Separate, unchecked box on all four signup forms (`components/marketing-consent.tsx`,
+  copy key `consent.label`). Nothing depends on it.
+- Evidence on `peptide_requests`: `marketing_consent`, `_at`, `_source`, `_text`
+  (exact wording shown, with locale), `_version` (`CONSENT_VERSION` in
+  `lib/consent.ts`; bump it when the wording changes). Migration
+  `supabase/add-marketing-consent-columns.sql`, run 2026-11-12.
+- Consent is only ever added by a form. Withdrawal is Brevo's unsubscribe link,
+  mirrored back by `/api/brevo-webhook` into `marketing_unsubscribed_at`.
+- The 42 rows from before Phase 1 have `marketing_consent = false`. They are not
+  subscribers and are never added to the list without evidence.
+
+### Brevo
+
+- List **BuddyPept Newsletter (id 6)**, folder BuddyPept. A contact joins only
+  when consent is given AND the email is confirmed (`lib/brevo-contacts.ts`).
+- Attributes: LANGUAGE, SIGNUP_SOURCE, CONFIRMED, CONFIRMED_AT,
+  MARKETING_CONSENT, CONSENT_AT, CONSENT_SOURCE, UTM_SOURCE, UTM_CAMPAIGN.
+  `scripts/brevo-setup.ts` recreates attributes, folder, list and sender.
+- Templates: 1 to 3 welcome EN/ES/PT (reference), 5 combined welcome that
+  switches on LANGUAGE (used by the automation). All inactive. Sender
+  hello@buddypept.com, reply-to buddypept@gmail.com, links tagged
+  `utm_source=brevo&utm_medium=email&utm_campaign=welcome`.
+- Automation **"Welcome message" (id 1)**: contact added to list 6, wait 5
+  minutes, send template 5. Re-entry off (one welcome per contact). INACTIVE.
+- Webhook 2677380 (marketing, `unsubscribed`) to `/api/brevo-webhook`, bearer
+  token = HMAC-SHA256 of "brevo-webhook" keyed with CRON_SECRET
+  (`scripts/brevo-webhook-setup.ts`). Rotating CRON_SECRET means re-running it.
+- Free plan: 300 emails/day.
+
+### Reporting
+
+- Traffic and referrers: Vercel Web Analytics (31-day window on Hobby).
+- Events and funnels: GA4.
+- Delivery, opens, clicks, unsubscribes: Brevo (transactional and automation logs).
+- Signups, confirmations, consent, first-touch source: `peptide_requests`.
+
+### Waiting on Rod
+
+1. Approve the consent wording (EN/ES/PT), then merge branch `consent-ui` to
+   ship the checkbox.
+2. Approve the welcome email content, eligibility (list 6 only) and send setup,
+   then activate template 5 and automation 1.
+3. Footer postal line: drafts show "Murray, UT, United States"; decide whether a
+   full postal address or PO box goes there.
+4. The library gate's privacy line says emails share "occasional updates";
+   decide whether to reword it now that updates are opt-in.

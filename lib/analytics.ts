@@ -10,7 +10,7 @@ import { sendGAEvent } from '@next/third-parties/google';
  * browser.
  *
  * Event names follow GA4's recommended set where one exists (`sign_up`).
- * See docs/ANALYTICS.md for the full list and the UTM convention.
+ * See docs/PROJECT-BRIEF.md section 15 for the event list and UTM convention.
  */
 export type AnalyticsEvent =
   | 'calculator_start'
