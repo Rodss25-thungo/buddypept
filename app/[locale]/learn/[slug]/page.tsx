@@ -102,7 +102,7 @@ export default async function LearnEntryPage({
             </div>
 
             <div className="text-center">
-              <Link
+              <Link data-track="learn_entry_calculator"
                 href="/calculator"
                 className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
               >

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { getAttribution, track } from '@/lib/analytics';
 import { Buddy } from './buddy';
 
 /**
@@ -39,7 +40,10 @@ export function LearnPopup() {
       // ignore storage errors
     }
     if (seen || unlocked) return;
-    const t = setTimeout(() => setOpen(true), 4000);
+    const t = setTimeout(() => {
+      setOpen(true);
+      track('popup_shown');
+    }, 4000);
     return () => clearTimeout(t);
   }, []);
 
@@ -52,6 +56,13 @@ export function LearnPopup() {
     setOpen(false);
   }
 
+  const [started, setStarted] = useState(false);
+  function onFormFocus() {
+    if (started) return;
+    setStarted(true);
+    track('sign_up_start', { form: 'popup' });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('submitting');
@@ -60,10 +71,11 @@ export function LearnPopup() {
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source: 'popup', locale }),
+        body: JSON.stringify({ name, email, source: 'popup', locale, attribution: getAttribution() }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
+        track('sign_up_error', { form: 'popup' });
         setStatus('error');
         setErrorMsg(data.error ?? tr('genericError'));
         return;
@@ -73,6 +85,7 @@ export function LearnPopup() {
       } catch {
         // ignore
       }
+      track('sign_up', { method: 'email', form: 'popup' });
       setStatus('sent');
     } catch {
       setStatus('error');
@@ -136,7 +149,7 @@ export function LearnPopup() {
               {tr('body2')}
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+            <form onSubmit={handleSubmit} onFocus={onFormFocus} className="mt-4 space-y-3">
               <input
                 type="text"
                 value={name}

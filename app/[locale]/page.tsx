@@ -52,7 +52,7 @@ export default function HomePage({
             className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400"
           />
           <div className="mt-8">
-            <Link
+            <Link data-track="home_hero_calculator"
               href="/calculator"
               className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700"
             >
@@ -111,7 +111,7 @@ export default function HomePage({
               {t('closingTitle')}
             </h2>
             <div className="mt-8">
-              <Link
+              <Link data-track="home_bottom_calculator"
                 href="/calculator"
                 className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand-700"
               >

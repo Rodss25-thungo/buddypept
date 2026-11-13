@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { getAttribution, track } from '@/lib/analytics';
 import { Link } from '@/i18n/navigation';
 import { suggestPeptide } from '@/lib/peptide-matching';
 import { isInCalculator } from '@/data/calculator-peptides';
@@ -78,6 +79,13 @@ export function RequestPeptideForm({
     isInCalculator(suggestion.slug) &&
     dismissed !== typed;
 
+  const [started, setStarted] = useState(false);
+  function onFormFocus() {
+    if (started) return;
+    setStarted(true);
+    track('sign_up_start', { form: 'peptide_request' });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('submitting');
@@ -92,14 +100,21 @@ export function RequestPeptideForm({
           requestedPeptide: peptide,
           locale,
           confirmedSlug,
+          attribution: getAttribution(),
         }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
+        track('sign_up_error', { form: 'peptide_request' });
         setStatus('error');
         setErrorMsg(data.error ?? t('genericError'));
         return;
       }
+      track('sign_up', {
+        method: 'email',
+        form: 'peptide_request',
+        peptide: confirmedSlug ?? 'uncurated',
+      });
       setStatus('success');
     } catch {
       setStatus('error');
@@ -136,7 +151,7 @@ export function RequestPeptideForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} onFocus={onFormFocus} className="space-y-3">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
           <label htmlFor="rp-name" className="mb-1 block text-xs font-medium">

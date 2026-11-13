@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { track } from '@/lib/analytics';
 
 /**
  * Tiny client component that runs once on the confirm success / already pages
@@ -11,13 +12,14 @@ import { useEffect } from 'react';
 
 const UNLOCK_KEY = 'bp_learn_unlocked';
 
-export function UnlockLibrary() {
+export function UnlockLibrary({ justConfirmed = false }: { justConfirmed?: boolean }) {
   useEffect(() => {
+    if (justConfirmed) track('email_confirmed');
     try {
       localStorage.setItem(UNLOCK_KEY, '1');
     } catch {
       // ignore storage errors
     }
-  }, []);
+  }, [justConfirmed]);
   return null;
 }

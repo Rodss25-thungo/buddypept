@@ -6,6 +6,7 @@ import "../globals.css";
 import { fontClass } from "../fonts";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { AnalyticsListener } from "@/components/analytics-listener";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SITE_URL } from "@/lib/seo";
@@ -84,6 +85,7 @@ export default async function LocaleLayout({
           <div className="flex flex-1 flex-col">{children}</div>
           <SiteFooter />
         </NextIntlClientProvider>
+        <AnalyticsListener />
         <Analytics />
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
       </body>

@@ -53,7 +53,7 @@ export default function LearnIndexPage({
           <ul className="space-y-3">
             {entries.map(({ slug, peptide }) => (
               <li key={slug}>
-                <Link
+                <Link data-track="learn_index_entry"
                   href={`/learn/${slug}`}
                   className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-4 py-4 transition hover:border-brand-300 hover:bg-brand-50/40 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-brand-800"
                 >
@@ -78,7 +78,7 @@ export default function LearnIndexPage({
         <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
           {t('mathBody')}
         </p>
-        <Link
+        <Link data-track="learn_index_calculator"
           href="/calculator"
           className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
         >

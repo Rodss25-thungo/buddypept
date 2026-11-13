@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { getAttribution, track } from '@/lib/analytics';
 import { Buddy } from './buddy';
 
 /**
@@ -29,6 +30,13 @@ export function CommunityCTA() {
     setOpen(false);
   }
 
+  const [started, setStarted] = useState(false);
+  function onFormFocus() {
+    if (started) return;
+    setStarted(true);
+    track('sign_up_start', { form: 'homepage' });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('submitting');
@@ -37,14 +45,16 @@ export function CommunityCTA() {
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source: 'homepage', locale }),
+        body: JSON.stringify({ name, email, source: 'homepage', locale, attribution: getAttribution() }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
+        track('sign_up_error', { form: 'homepage' });
         setStatus('error');
         setErrorMsg(data.error ?? t('genericError'));
         return;
       }
+      track('sign_up', { method: 'email', form: 'homepage' });
       setStatus('sent');
     } catch {
       setStatus('error');
@@ -126,7 +136,7 @@ export function CommunityCTA() {
                   {t('modalBody')}
                 </p>
 
-                <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+                <form onSubmit={handleSubmit} onFocus={onFormFocus} className="mt-4 space-y-3">
                   <input
                     type="text"
                     value={name}

@@ -22,7 +22,7 @@ export function SiteHeader() {
         </Link>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <Link
+          <Link data-track="header_calculator"
             href="/calculator"
             className="rounded-lg bg-brand-600 px-3.5 py-1.5 text-sm font-semibold text-white transition hover:bg-brand-700"
           >

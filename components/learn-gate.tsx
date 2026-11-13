@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { getAttribution, track } from '@/lib/analytics';
 
 /**
  * Soft email gate for the "Learn about peptides" library with double opt-in.
@@ -43,6 +44,13 @@ export function LearnGate({
     setGate({ checked: true, unlocked: isUnlocked });
   }, []);
 
+  const [started, setStarted] = useState(false);
+  function onFormFocus() {
+    if (started) return;
+    setStarted(true);
+    track('sign_up_start', { form: source });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('submitting');
@@ -51,16 +59,18 @@ export function LearnGate({
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source, locale }),
+        body: JSON.stringify({ name, email, source, locale, attribution: getAttribution() }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
+        track('sign_up_error', { form: source });
         setStatus('error');
         // The API's own message is English-only. Show it when it is the
         // only detail available, otherwise fall back to translated wording.
         setErrorMsg(data.error ?? t('genericError'));
         return;
       }
+      track('sign_up', { method: 'email', form: source });
       setStatus('sent');
     } catch {
       setStatus('error');
@@ -94,6 +104,7 @@ export function LearnGate({
   return (
     <form
       onSubmit={handleSubmit}
+      onFocus={onFormFocus}
       className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
     >
       <h2 className="text-lg font-semibold">{t('title')}</h2>

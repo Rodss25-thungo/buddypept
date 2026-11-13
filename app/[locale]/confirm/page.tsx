@@ -50,7 +50,7 @@ export default async function ConfirmPage({
     <main className="mx-auto max-w-md px-4 py-16">
       <div className="rounded-2xl border border-zinc-200 bg-white p-8 text-center shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
         <Buddy variant="mail" className="mx-auto h-16 w-auto drop-shadow-sm" />
-        {state.unlock && <UnlockLibrary />}
+        {state.unlock && <UnlockLibrary justConfirmed={status === 'success'} />}
         <p className={`mt-4 text-sm font-medium uppercase tracking-wide ${state.kickerClass}`}>
           {t(`${status}Kicker`)}
         </p>

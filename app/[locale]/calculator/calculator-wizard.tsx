@@ -30,6 +30,7 @@ import {
   type DoseResult,
 } from '@/lib/calculator';
 import { formatNum as fmt } from '@/lib/format';
+import { track } from '@/lib/analytics';
 import { Link } from '@/i18n/navigation';
 import { RequestPeptideForm } from './request-peptide-form';
 import { Buddy } from '@/components/buddy';
@@ -229,11 +230,24 @@ export function CalculatorWizard({
     setDoseEntryUnit(p?.vialUnit === 'IU' ? 'native' : 'mg');
   }
 
+  /** Curated slug, or a bucket. A typed custom name never leaves the browser. */
+  const peptideForAnalytics = isNotListed ? 'not_listed' : isOther ? 'other' : peptideSlug;
+
   function next() {
     if (!canContinue) return;
     if (STEPS[stepIndex] === 'peptide' && isNotListed) {
+      track('peptide_request_open');
       setShowRequest(true);
       return;
+    }
+    if (stepIndex === 0) {
+      track('calculator_start', { peptide: peptideForAnalytics });
+    }
+    if (isLastInput) {
+      track('calculator_complete', {
+        peptide: peptideForAnalytics,
+        has_result: Boolean(computation.result),
+      });
     }
     setStepIndex((s) => s + 1);
   }
@@ -241,6 +255,7 @@ export function CalculatorWizard({
     setStepIndex((s) => Math.max(0, s - 1));
   }
   function restart() {
+    track('calculator_restart', { peptide: peptideForAnalytics });
     setStepIndex(0);
     setShowRequest(false);
     setPeptideSlug('');
