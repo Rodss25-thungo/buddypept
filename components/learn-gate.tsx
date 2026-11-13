@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { getAttribution, track } from '@/lib/analytics';
+import { MarketingConsent } from '@/components/marketing-consent';
 
 /**
  * Soft email gate for the "Learn about peptides" library with double opt-in.
@@ -44,6 +45,7 @@ export function LearnGate({
     setGate({ checked: true, unlocked: isUnlocked });
   }, []);
 
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [started, setStarted] = useState(false);
   function onFormFocus() {
     if (started) return;
@@ -59,7 +61,7 @@ export function LearnGate({
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source, locale, attribution: getAttribution() }),
+        body: JSON.stringify({ name, email, source, locale, marketingConsent, attribution: getAttribution() }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
@@ -70,7 +72,7 @@ export function LearnGate({
         setErrorMsg(data.error ?? t('genericError'));
         return;
       }
-      track('sign_up', { method: 'email', form: source });
+      track('sign_up', { method: 'email', form: source, marketing_consent: marketingConsent });
       setStatus('sent');
     } catch {
       setStatus('error');
@@ -128,6 +130,9 @@ export function LearnGate({
           placeholder={t('emailPlaceholder')}
           className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
         />
+      </div>
+      <div className="mt-3">
+        <MarketingConsent checked={marketingConsent} onChange={setMarketingConsent} />
       </div>
       {status === 'error' && (
         <p className="mt-2 text-sm text-red-600 dark:text-red-400">{errorMsg}</p>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { getAttribution, track } from '@/lib/analytics';
+import { MarketingConsent } from '@/components/marketing-consent';
 import { Buddy } from './buddy';
 
 /**
@@ -56,6 +57,7 @@ export function LearnPopup() {
     setOpen(false);
   }
 
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [started, setStarted] = useState(false);
   function onFormFocus() {
     if (started) return;
@@ -71,7 +73,7 @@ export function LearnPopup() {
       const res = await fetch('/api/learn-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, source: 'popup', locale, attribution: getAttribution() }),
+        body: JSON.stringify({ name, email, source: 'popup', locale, marketingConsent, attribution: getAttribution() }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string };
       if (!res.ok) {
@@ -85,7 +87,7 @@ export function LearnPopup() {
       } catch {
         // ignore
       }
-      track('sign_up', { method: 'email', form: 'popup' });
+      track('sign_up', { method: 'email', form: 'popup', marketing_consent: marketingConsent });
       setStatus('sent');
     } catch {
       setStatus('error');
@@ -166,6 +168,7 @@ export function LearnPopup() {
                 placeholder={tr('emailPlaceholder')}
                 className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-base dark:border-zinc-700 dark:bg-zinc-800"
               />
+              <MarketingConsent checked={marketingConsent} onChange={setMarketingConsent} compact />
               {status === 'error' && (
                 <p className="text-sm text-red-600 dark:text-red-400">
                   {errorMsg}

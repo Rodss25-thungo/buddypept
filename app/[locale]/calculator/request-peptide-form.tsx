@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { getAttribution, track } from '@/lib/analytics';
+import { MarketingConsent } from '@/components/marketing-consent';
 import { Link } from '@/i18n/navigation';
 import { suggestPeptide } from '@/lib/peptide-matching';
 import { isInCalculator } from '@/data/calculator-peptides';
@@ -79,6 +80,7 @@ export function RequestPeptideForm({
     isInCalculator(suggestion.slug) &&
     dismissed !== typed;
 
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [started, setStarted] = useState(false);
   function onFormFocus() {
     if (started) return;
@@ -100,6 +102,7 @@ export function RequestPeptideForm({
           requestedPeptide: peptide,
           locale,
           confirmedSlug,
+          marketingConsent,
           attribution: getAttribution(),
         }),
       });
@@ -113,6 +116,7 @@ export function RequestPeptideForm({
       track('sign_up', {
         method: 'email',
         form: 'peptide_request',
+        marketing_consent: marketingConsent,
         peptide: confirmedSlug ?? 'uncurated',
       });
       setStatus('success');
@@ -253,6 +257,7 @@ export function RequestPeptideForm({
           </div>
         )}
       </div>
+      <MarketingConsent checked={marketingConsent} onChange={setMarketingConsent} compact />
       {status === 'error' && (
         <p className="text-xs text-red-600 dark:text-red-400">{errorMsg}</p>
       )}
