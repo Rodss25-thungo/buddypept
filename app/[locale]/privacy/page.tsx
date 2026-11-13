@@ -1,3 +1,4 @@
+import { pageAlternates } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { use } from 'react';
@@ -10,7 +11,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta' });
-  return { title: t('privacyTitle'), description: t('privacyDescription') };
+  return {
+    title: t('privacyTitle'),
+    description: t('privacyDescription'),
+    alternates: pageAlternates(locale, '/privacy'),
+  };
 }
 
 /**

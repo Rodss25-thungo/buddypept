@@ -8,10 +8,10 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { SITE_URL } from "@/lib/seo";
 import {
   routing,
   localeLang,
-  liveLocales,
   isLocaleLive,
   type Locale,
 } from "@/i18n/routing";
@@ -37,23 +37,13 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: t("siteTitle"),
     description: t("siteDescription"),
     appleWebApp: {
       capable: true,
       title: "BuddyPept",
       statusBarStyle: "default",
-    },
-    alternates: {
-      // Only translated locales are advertised to search engines. A locale
-      // still holding English placeholder copy would otherwise be indexed as
-      // duplicate English content under a Portuguese URL.
-      languages: Object.fromEntries(
-        liveLocales.map((l) => [
-          localeLang[l],
-          l === routing.defaultLocale ? "/" : `/${l}`,
-        ])
-      ),
     },
     // Keep draft locales out of the index entirely until their copy is real.
     ...(isLocaleLive(locale as Locale)

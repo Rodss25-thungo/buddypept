@@ -5,6 +5,8 @@ import { Link } from '@/i18n/navigation';
 import { Buddy } from '@/components/buddy';
 import { CommunityCTA } from '@/components/community-cta';
 import { Prose } from '@/components/prose';
+import { pageAlternates } from '@/lib/seo';
+import type { Metadata } from 'next';
 
 /**
  * BuddyPept homepage.
@@ -16,6 +18,15 @@ import { Prose } from '@/components/prose';
  *
  * Styling: minimal Tailwind.
  */
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: pageAlternates(locale, '/') };
+}
 
 export default function HomePage({
   params,

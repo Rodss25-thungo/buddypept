@@ -1,3 +1,4 @@
+import { pageAlternates } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale, getFormatter } from 'next-intl/server';
@@ -26,6 +27,7 @@ export async function generateMetadata({
   return {
     title: t('learnEntryTitle', { name: peptide.name }),
     description: t('learnEntryDescription', { name: peptide.name }),
+    alternates: pageAlternates(locale, `/learn/${slug}`),
   };
 }
 

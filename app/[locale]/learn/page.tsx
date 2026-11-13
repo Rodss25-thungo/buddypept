@@ -1,3 +1,4 @@
+import { pageAlternates } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
@@ -14,7 +15,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta' });
-  return { title: t('learnTitle'), description: t('learnDescription') };
+  return {
+    title: t('learnTitle'),
+    description: t('learnDescription'),
+    alternates: pageAlternates(locale, '/learn'),
+  };
 }
 
 export default function LearnIndexPage({

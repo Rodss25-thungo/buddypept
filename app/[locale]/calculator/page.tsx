@@ -1,3 +1,4 @@
+import { pageAlternates } from '@/lib/seo';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CalculatorWizard } from './calculator-wizard';
@@ -12,6 +13,7 @@ export async function generateMetadata({
   return {
     title: t('calculatorTitle'),
     description: t('calculatorDescription'),
+    alternates: pageAlternates(locale, '/calculator'),
   };
 }
 
