@@ -77,7 +77,9 @@ async function confirmToken(token?: string): Promise<ConfirmStatus> {
     const supabase = getSupabaseAdmin();
     const { data, error } = await supabase
       .from('peptide_requests')
-      .select('id, confirmed_at, name, email, locale, requested_peptide')
+      .select(
+        'id, confirmed_at, name, email, locale, requested_peptide, marketing_consent, marketing_consent_at, marketing_consent_source, utm_source, utm_campaign'
+      )
       .eq('confirmation_token', token)
       .maybeSingle();
     if (error) {
@@ -102,6 +104,11 @@ async function confirmToken(token?: string): Promise<ConfirmStatus> {
       locale: data.locale,
       requestedPeptide: data.requested_peptide,
       confirmedAt,
+      marketingConsent: Boolean(data.marketing_consent),
+      marketingConsentAt: data.marketing_consent_at,
+      consentSource: data.marketing_consent_source,
+      utmSource: data.utm_source,
+      utmCampaign: data.utm_campaign,
     });
     return 'success';
   } catch (e) {

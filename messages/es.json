@@ -288,6 +288,9 @@
     "genericError": "Algo salió mal. Inténtalo de nuevo.",
     "networkError": "Error de conexión. Inténtalo de nuevo."
   },
+  "consent": {
+    "label": "Quiero recibir también los correos educativos de BuddyPept: nuevas guías de péptidos y novedades de la calculadora. Opcional. Se puede cancelar en cualquier momento."
+  },
   "legal": {
     "disclaimer": {
       "title": "Aviso médico",

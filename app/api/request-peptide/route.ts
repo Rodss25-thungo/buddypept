@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { saveSignup, recordEmailSent, recordEmailFailed } from '@/lib/signups';
-import { syncBrevoContact } from '@/lib/brevo-contacts';
+import { syncBrevoContact, signupSource } from '@/lib/brevo-contacts';
+import { AttributionSchema, buildConsentRecord } from '@/lib/consent';
 import { PEPTIDES } from '@/data/peptides';
 import { apiErrors, validationMessage } from '@/lib/api-messages';
 import {
@@ -34,6 +35,9 @@ const RequestSchema = z.object({
    * confirmation email, and any later email, goes out in the same language.
    */
   locale: z.enum(['en', 'pt', 'es']).optional(),
+  /** The separate, unchecked marketing-email box. Absent means not given. */
+  marketingConsent: z.boolean().optional(),
+  attribution: AttributionSchema,
   /**
    * Slug the visitor explicitly agreed to after a "did you mean" prompt.
    *
@@ -86,11 +90,18 @@ export async function POST(request: Request) {
     // submission reuses it instead of creating a duplicate.
     let signup;
     try {
+      const consent = await buildConsentRecord(
+        parsed.data.marketingConsent,
+        parsed.data.locale ?? 'en',
+        'peptide-request'
+      );
       signup = await saveSignup({
         name: parsed.data.name,
         email: parsed.data.email,
         requestedPeptide: parsed.data.requestedPeptide,
         locale: parsed.data.locale ?? 'en',
+        consent,
+        attribution: parsed.data.attribution,
         matchedSlug: confirmedSlug,
       });
     } catch (saveError) {
@@ -109,6 +120,11 @@ export async function POST(request: Request) {
         locale: parsed.data.locale ?? 'en',
         requestedPeptide: parsed.data.requestedPeptide,
         confirmedAt: signup.confirmedAt,
+        marketingConsent: signup.marketingConsent,
+        marketingConsentAt: signup.marketingConsentAt,
+        consentSource: 'peptide-request',
+        utmSource: parsed.data.attribution?.utm_source,
+        utmCampaign: parsed.data.attribution?.utm_campaign,
       });
     }
 

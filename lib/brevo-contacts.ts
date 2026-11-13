@@ -4,17 +4,24 @@
  * Keeps one Brevo contact per signup so the contact list reflects who signed
  * up, in which language, from where, and whether they confirmed.
  *
- * Deliberate limits:
- *   - No list membership is ever set. A contact here is a record, not a
- *     marketing subscriber.
- *   - MARKETING_CONSENT is never written. The attribute exists so a verified
- *     value can be set by hand; an empty value means consent is not recorded.
- *   - Brevo's own unsubscribe and blocklist status is never touched.
+ * Marketing rules:
+ *   - A contact joins the newsletter list (NEWSLETTER_LIST_ID) only when the
+ *     person ticked the separate consent box AND confirmed their email. Every
+ *     other contact is a record, not a marketing subscriber.
+ *   - MARKETING_CONSENT is written as "yes" only on that same evidence. It is
+ *     never written as "no" and list membership is never removed here: a
+ *     later form submission without the box ticked does not withdraw
+ *     consent. Withdrawal is Brevo's unsubscribe link.
+ *   - Brevo's own unsubscribe and blocklist status is never touched, so an
+ *     unsubscribed person stays unsubscribed even if they sign up again.
  *   - Failures are logged and swallowed. A Brevo outage must never block a
  *     signup or a confirmation.
  */
 
 const BREVO_CONTACTS_URL = 'https://api.brevo.com/v3/contacts';
+
+/** "BuddyPept Newsletter" list, created by scripts/brevo-setup.ts. */
+export const NEWSLETTER_LIST_ID = 6;
 
 export interface ContactSyncInput {
   email: string;
@@ -23,6 +30,12 @@ export interface ContactSyncInput {
   requestedPeptide: string;
   /** ISO timestamp, set once the person has confirmed their email. */
   confirmedAt?: string | null;
+  /** True when this signup, or an earlier one, ticked the consent box. */
+  marketingConsent?: boolean;
+  marketingConsentAt?: string | null;
+  consentSource?: string | null;
+  utmSource?: string | null;
+  utmCampaign?: string | null;
 }
 
 /** "library:homepage" for Learn signups, "peptide-request" for requests. */
@@ -58,6 +71,17 @@ export async function syncBrevoContact(
   if (input.confirmedAt) {
     attributes.CONFIRMED_AT = input.confirmedAt.slice(0, 10);
   }
+  if (input.utmSource) attributes.UTM_SOURCE = input.utmSource;
+  if (input.utmCampaign) attributes.UTM_CAMPAIGN = input.utmCampaign;
+
+  const subscribes = Boolean(input.marketingConsent) && confirmed;
+  if (subscribes) {
+    attributes.MARKETING_CONSENT = 'yes';
+    if (input.marketingConsentAt) {
+      attributes.CONSENT_AT = input.marketingConsentAt.slice(0, 10);
+    }
+    if (input.consentSource) attributes.CONSENT_SOURCE = input.consentSource;
+  }
 
   try {
     const res = await fetch(BREVO_CONTACTS_URL, {
@@ -70,6 +94,7 @@ export async function syncBrevoContact(
       body: JSON.stringify({
         email: input.email,
         attributes,
+        ...(subscribes ? { listIds: [NEWSLETTER_LIST_ID] } : {}),
         updateEnabled: true,
       }),
       signal: AbortSignal.timeout(5000),

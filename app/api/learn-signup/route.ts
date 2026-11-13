@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { saveSignup, recordEmailSent, recordEmailFailed } from '@/lib/signups';
-import { syncBrevoContact } from '@/lib/brevo-contacts';
+import { syncBrevoContact, signupSource } from '@/lib/brevo-contacts';
+import { AttributionSchema, buildConsentRecord } from '@/lib/consent';
 import { apiErrors, validationMessage } from '@/lib/api-messages';
 import { sendConfirmationEmail, sendOwnerNotification } from '@/lib/email';
 
@@ -22,6 +23,9 @@ const SignupSchema = z.object({
    * confirmation email, and any later email, goes out in the same language.
    */
   locale: z.enum(['en', 'pt', 'es']).optional(),
+  /** The separate, unchecked marketing-email box. Absent means not given. */
+  marketingConsent: z.boolean().optional(),
+  attribution: AttributionSchema,
 });
 
 const SITE_URL = 'https://buddypept.com';
@@ -54,11 +58,18 @@ export async function POST(request: Request) {
     // submission reuses it instead of creating a duplicate.
     let signup;
     try {
+      const consent = await buildConsentRecord(
+        parsed.data.marketingConsent,
+        parsed.data.locale ?? 'en',
+        signupSource(`Learn: ${parsed.data.source ?? 'library'}`)
+      );
       signup = await saveSignup({
         name: parsed.data.name,
         email: parsed.data.email,
         requestedPeptide: `Learn: ${parsed.data.source ?? 'library'}`,
         locale: parsed.data.locale ?? 'en',
+        consent,
+        attribution: parsed.data.attribution,
       });
     } catch (saveError) {
       console.error('learn-signup save error:', saveError);
@@ -74,6 +85,11 @@ export async function POST(request: Request) {
       locale: parsed.data.locale ?? 'en',
       requestedPeptide: `Learn: ${parsed.data.source ?? 'library'}`,
       confirmedAt: signup.confirmedAt,
+      marketingConsent: signup.marketingConsent,
+      marketingConsentAt: signup.marketingConsentAt,
+      consentSource: signupSource(`Learn: ${parsed.data.source ?? 'library'}`),
+      utmSource: parsed.data.attribution?.utm_source,
+      utmCampaign: parsed.data.attribution?.utm_campaign,
     });
 
     try {

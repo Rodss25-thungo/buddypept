@@ -288,6 +288,9 @@
     "genericError": "Something went wrong. Please try again.",
     "networkError": "Network error. Please try again."
   },
+  "consent": {
+    "label": "Also send me BuddyPept's educational emails: new peptide guides and calculator updates. Optional. Unsubscribe anytime."
+  },
   "legal": {
     "disclaimer": {
       "title": "Medical Disclaimer",
